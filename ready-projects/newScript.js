@@ -1,3 +1,33 @@
+const KEY_LIST = [
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '.',
+    '-',
+    '=',
+    '+',
+    '/',
+    '*',
+    'Backspace',
+    'Escape',
+    'Enter',
+    'Delete'
+];
+
+
+const KEYCODE_BACKSPACE = 8;
+const KEYCODE_ESCAPE = 27;
+const KEYCODE_ENTER = 13;
+const KEYCODE_DELETE = 46;
+
+
 class Calc{
     constructor(previousValueTextElem, currentValueTextElem){
         this.previousValueTextElem = previousValueTextElem;
@@ -9,57 +39,89 @@ class Calc{
     clear(){
         this.previousValue = '';
         this.currentValue = '';
+        this.canEdit = true;
         this.operation = undefined;
     }
+    
+    calc(action){
+        let cur = parseFloat(this.currentValue);
+        let prev = parseFloat(this.previousValue);
 
-    calc(){
-        switch (this.operation) {
+        if (isNaN(cur) && isNaN(prev)) return;
+    
+
+        switch (action) {
             case '*':
-                this.previousValue = parseFloat(this.previousValue) * parseFloat(this.currentValue);
+                this.previousValue = ((prev * 10) * (cur * 10)) / 100 ;
                 break;
             case '+':
-                this.previousValue = parseFloat(this.previousValue) + parseFloat(this.currentValue);
+                this.previousValue = (prev * 10+ cur * 10) / 10;
                 break;
             case '÷':
-                this.previousValue = parseFloat(this.previousValue) / parseFloat(this.currentValue);
+                this.previousValue = ((prev * 10) / (cur * 10));
                 break;
             case '-':
-                this.previousValue = parseFloat(this.previousValue) - parseFloat(this.currentValue);
-                break
+                this.previousValue = (prev * 10 - cur * 10) / 10;
+                break;
+            case 'root':
+                if(this.currentValue){
+                    if (cur < 0){
+                        this.currentValue = 'Error';
+                        this.operation = null;
+                    }else{
+                        this.currentValue = Math.sqrt(cur);
+                        if (this.operation===undefined) this.operation = null;
+                    }
+                    this.canEdit = false;
+                } 
+                break;
+            case 'sqr':
+                this.currentValue = cur ** 2;
+                if (this.operation===undefined) this.operation = null;
+                this.canEdit = false;
+                break;
             default:
                 this.previousValue = this.currentValue;
                 break;
         }
-        this.operation = undefined;
-        this.currentValue = '';
+       
+        
 
     }
 
     execOperation(oper){
-        if (!this.currentValue) return;
-        if (!oper && this.operation === undefined) return;
+        if (this.currentValue && this.currentValue!= '-'){
+            if (!oper && this.operation === undefined) return;
+        
+            this.calc(this.operation);
+            this.currentValue = '';
+            this.canEdit = true;
 
-        this.calc();
-
-        this.operation = oper;
-        if (!oper){
-            this.currentValue = this.previousValue;
-            this.previousValue = '';
+            this.operation = oper;
+            if (!oper){
+                this.currentValue = this.previousValue;
+                this.previousValue = '';
+            }
+        }else{
+            if (oper=='-'){
+                this.currentValue = '-';
+            }
         }
-
+         
     }
 
 
     addNumber(number){
+        
+        if (number == '.' && this.currentValue.toString().indexOf(number) > -1) return;
 
-        if (number == '.' && this.currentValue.indexOf(number) > -1) return;
-
-        if (this.operation === null) {
+        if (this.operation === null ||  this.canEdit== false ) {
             this.currentValue = '';
-            this.operation = undefined;
+            this.operation = (this.canEdit) ? undefined : this.operation;
+            this.canEdit = true;
         }
 
-        let curNum = this.currentValue;
+        let curNum = (this.currentValue)?this.currentValue:0;
 
         if (number != '.'){
             curNum = parseFloat(curNum + number).toString();
@@ -67,22 +129,51 @@ class Calc{
             curNum = curNum + number;
         }
         this.currentValue = curNum;
-
+        
     }
 
     delete(){
-        this.currentValue = this.currentValue.substring(0, this.currentValue.length - 1);
+        let strVal = this.currentValue.toString()
+        
+        if (this.canEdit){
+            this.currentValue = parseFloat(strVal.substring(0, strVal.length - 1));
+        }
     }
 
+
+    getDisplayNumber(num) {
+        const stringNumber = (typeof num=='string')? num : num.toString() ;
+        const integerDigits = parseFloat(stringNumber.split('.')[0]);
+        const decimalDigits = stringNumber.split('.')[1];
+        let integerDisplay;
+        if (isNaN(integerDigits)) {
+          integerDisplay = '';
+        } else {
+          integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 });
+        }
+        if (decimalDigits != null) {
+          return `${integerDisplay}.${decimalDigits}`;
+        } else {
+          return integerDisplay;
+        }
+      }
+
     showExpression(){
-        this.currentValueTextElem.textContent = this.currentValue.toString();
-        this.previousValueTextElem.textContent = this.previousValue.toString();
+       
+        if (this.currentValue =='Error'|| this.currentValue == '-' ){
+            this.currentValueTextElem.textContent = this.currentValue;
+        }else{
+            this.currentValueTextElem.textContent = this.getDisplayNumber(this.currentValue);
+        }
+
+        
+        this.previousValueTextElem.textContent = this.getDisplayNumber(this.previousValue);
         if (this.operation){
             this.previousValueTextElem.textContent += ' ' + this.operation;
         }
 
     }
-
+     
 }
 
 const   clearBtn    = document.querySelector('[data-all-clear]'),
@@ -92,7 +183,9 @@ const   clearBtn    = document.querySelector('[data-all-clear]'),
         equalsBtn   = document.querySelector('[data-equals]'),
         prevOp      = document.querySelector('[data-previous-operand]'),   
         curOp       = document.querySelector('[data-current-operand]'),
-        calcGrid    = document.querySelector('.calculator-grid');   
+        calcGrid    = document.querySelector('.calculator-grid'),
+        rootBtn     = document.querySelector('[data-sqrt]'),
+        sqrBtn      = document.querySelector('[data-sqr]');   
 
 const calc = new Calc(prevOp, curOp);
 
@@ -106,37 +199,69 @@ const dataOperationHandler = function(oper){
     calc.showExpression();
 }
 
-calcGrid.addEventListener('click', (ev) => {
-    if (ev.target.matches('[data-number]')){
-        dataNumberHandler(ev.target.textContent);
-    } else if(ev.target.matches('[data-operation]')){
-        dataOperationHandler(ev.target.textContent)
+
+calcGrid.addEventListener('click', (evt) => {
+    if (evt.target.matches('[data-number]')){
+        dataNumberHandler(evt.target.textContent);
+    } else if(evt.target.matches('[data-operation]')){
+        dataOperationHandler(evt.target.textContent);
     }
 });
 
 
-const clearHandler = function(){
+const clearButtonHandler = function(){
     calc.clear();
     calc.showExpression();
 }
-clearBtn.addEventListener('click', (ev) => {
-    clearHandler();
-})
+clearBtn.addEventListener('click', clearButtonHandler)
 
 
-const deleteHandler = function(){
+const deleteButtonHandler = function(){
     calc.delete();
     calc.showExpression();
 }
-delBtn.addEventListener('click', (ev) => {
-    deleteHandler();
-})
+delBtn.addEventListener('click', deleteButtonHandler)
 
 
-const equalsHandler = function(){
+const equalsButtonHandler = function(){
     calc.execOperation(null);
     calc.showExpression();
 }
-equalsBtn.addEventListener('click', (ev) => {
-    equalsHandler();
-})
+equalsBtn.addEventListener('click', equalsButtonHandler)
+
+
+const rootButtonHandler = function(){
+    calc.calc('root');
+    calc.showExpression();
+}
+rootBtn.addEventListener('click', rootButtonHandler)
+
+const sqrButtonHandler = function(){
+    calc.calc('sqr');
+    calc.showExpression();
+}
+sqrBtn.addEventListener('click', sqrButtonHandler)
+
+
+ 
+
+const keyDownHandler = function(evt){
+    let key = evt.key;
+    const keyCode = evt.keyCode;
+
+    if (KEY_LIST.indexOf(key) < 0) return;
+
+    if (KEY_LIST.indexOf(key) < 11){
+        dataNumberHandler(key);
+    }else if ('-+*/'.indexOf(key) > -1){
+        key = (key == '/') ? '÷' : key;
+        dataOperationHandler(key);
+    }else if (key == 'Backspace' || keyCode == KEYCODE_BACKSPACE){
+        deleteButtonHandler();
+    }else if (key == 'Escape'|| key == 'Delete' || keyCode == KEYCODE_ESCAPE || keyCode == KEYCODE_DELETE ){
+        clearButtonHandler();
+    }else if (key == 'Enter'|| keyCode == KEYCODE_ENTER || key == '='){
+        equalsButtonHandler();
+    }
+}
+document.addEventListener('keyup', keyDownHandler);
