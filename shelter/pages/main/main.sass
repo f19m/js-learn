@@ -1,77 +1,144 @@
-/*Обнуление*/
-*
-    padding: 0
-    margin: 0
-    border: 0
+$color-primary: #F1CDB3
+$color-primary-light: #FDDCC4
 
-*, *:before, *:after
-    -moz-box-sizing: border-box
-    -webkit-box-sizing: border-box
-    box-sizing: border-box
+$color-light-s: #FAFAFA
+$color-light-l: #F6F6F6
+$color-light-xl: #FFFFFF
 
-:focus, :active 
-    outline: none
-  
-a:focus,  a:active
-    outline: none
+$color-dark-s: #CDCDCD
+$color-dark-m: #B2B2B2
+$color-dark-l: #545454
+$color-dark-xl: #4C4C4C
+$color-dark-2xl: #444444
+$color-dark-3xl: #292929
 
-nav,
-footer,
-header,
-aside 
-    display: block
-  
-html,
-body 
-    height: 100%
-    width: 100%
-    font-size: 100%
-    line-height: 1
-    font-size: 14px
-    -ms-text-size-adjust: 100%
-    -moz-text-size-adjust: 100%
-    -webkit-text-size-adjust: 100%
 
-input,
-button,
-textarea 
-    font-family: inherit
-  
-input::-ms-clear 
-    display: none
-  
-button 
-    cursor: pointer
-  
-button::-moz-focus-inner
-    padding: 0
-    border: 0
+=width100
+    width: 100vw
 
-a,
-a:visited 
-    text-decoration: none
+=flex
+    display: flex
 
-a:hover
-    text-decoration: none
+=flex-direction($direction) 
+    +flex
+    flex-direction: $direction
 
-ul li 
-    list-style: none
-  
-img 
-    vertical-align: top
-  
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 
-    font-size: inherit
-    font-weight: 400
-  
-/*--------------------------------------------------*/
+=flex-justify($justify-content) 
+    +flex
+    justify-content: $justify-content
 
-  
+=flex-algin-justify($align-items, $justify-content) 
+    +flex
+    align-items: $align-items
+    justify-content: $justify-content
+
+=flex-direction-justify($direction, $justify-content) 
+    +flex
+    flex-direction: $direction
+    justify-content: $justify-content
+
+=flex-direction-algin-justify($direction, $align-items, $justify-content) 
+    +flex-direction-justify($direction, $justify-content) 
+    align-items: $align-items
+
+
+//$start-screen-gradient-background: 
+
+body
+    font-family: Georgia
+   
+
 .header
-    widows: 100vw
+    width: 100vw
+    position: absolute
+    top: 60px
+
+.wrapper
+    width: 75rem
+    margin: 0 auto
+    +flex-algin-justify(center, space-between)
+
+
+.logo__title
+    font-size: 2rem
+    line-height: 110%
+    letter-spacing: 0.06rem
+    color: $color-primary
+
+.logo__subtitle
+    font-family: Arial;
+    font-size: 0.8125rem
+    line-height: 110%
+    letter-spacing: 0.1rem
+    margin-top: 0.625rem
+    color: $color-light-xl
+
+
+.menu
+    display: flex
+    width: 443px
+
+
+.list
+    width: 100%
+    +flex-direction-justify(row, space-between)
+
+.list__item
+    +flex-justify(center)
+
+.list__link
+    color: $color-dark-s
+    font: Arial
+    font-size: 0.94rem
+    line-height: 160%
+
+
+.list__item_selected, .list__item:hover, 
+    border-bottom: 3px solid $color-primary
+    .list__link
+        color: $color-light-s
+
+
+
+.main
+    +flex-direction(column)
+
+.hero
+    padding-top: 180px
+    background: url('../../assets/images/noise_transparent.png'), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20
+
+.hero__content
+    +flex-direction-justify(row, center)
+
+    
+.content-section
+    +flex-direction-justify(column, center)
+    max-width: 460px
+
+.content-section__title
+    max-width: 19.375rem
+    font-size: 2.75rem
+    line-height: 130%
+    color: $color-light-xl
+    
+.content-section__subtitle
+    margin-top: 2.625rem
+    font-family: Arial
+    font-size: 0.94rem
+    line-height: 160%
+    color: $color-dark-s
+
+.content-section_button
+    margin-top: 2.5625rem
+
+.button
+    background-color: $color-primary
+    font-size: 1.0625rem
+    line-height: 130%
+    letter-spacing: 0.06rem;
+    color: $color-dark-xl
+    border-radius: 6.25rem
+
+    padding: 0.9375rem 2.8125rem
+    width: 12.93rem
 
