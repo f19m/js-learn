@@ -12,6 +12,9 @@ $color-dark-xl: #4C4C4C
 $color-dark-2xl: #444444
 $color-dark-3xl: #292929
 
+$Georgia : Georgia
+$Arial : Arial
+
 
 =width100
     width: 100vw
@@ -45,7 +48,7 @@ $color-dark-3xl: #292929
 //$start-screen-gradient-background: 
 
 body
-    font-family: Georgia
+    font-family: $Georgia
    
 
 .header
@@ -62,16 +65,17 @@ body
 .logo__title
     font-size: 2rem
     line-height: 110%
-    letter-spacing: 0.06rem
+    letter-spacing: 0.12rem
     color: $color-primary
 
 .logo__subtitle
-    font-family: Arial;
+    font-family: $Arial;
     font-size: 0.8125rem
     line-height: 110%
     letter-spacing: 0.1rem
-    margin-top: 0.625rem
+    margin-top: 10px
     color: $color-light-xl
+    text-align: center
 
 
 .menu
@@ -88,7 +92,7 @@ body
 
 .list__link
     color: $color-dark-s
-    font: Arial
+    font-family: $Arial
     font-size: 0.94rem
     line-height: 160%
 
@@ -100,6 +104,7 @@ body
 
 
 
+
 .main
     +flex-direction(column)
 
@@ -108,12 +113,12 @@ body
     background: url('../../assets/images/noise_transparent.png'), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20
 
 .hero__content
-    +flex-direction-justify(row, center)
+    +flex
 
     
 .content-section
     +flex-direction-justify(column, center)
-    max-width: 460px
+    padding-bottom: 81px;
 
 .content-section__title
     max-width: 19.375rem
@@ -122,13 +127,14 @@ body
     color: $color-light-xl
     
 .content-section__subtitle
-    margin-top: 2.625rem
-    font-family: Arial
+    max-width: 28.75rem
+    font-family: $Arial
     font-size: 0.94rem
     line-height: 160%
     color: $color-dark-s
+    margin-top: 2.625rem
 
-.content-section_button
+.content-section__button
     margin-top: 2.5625rem
 
 .button
