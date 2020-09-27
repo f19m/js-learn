@@ -152,6 +152,7 @@ body
 .button
     padding: 0.9375rem 2.8125rem
     width: 12.93rem
+    height: 3.25rem
     background-color: $color-primary
     font-size: 1.0625rem
     line-height: 130%
@@ -207,6 +208,7 @@ body
     +h3
     width: 25rem
     text-align: center
+    height: 5.625rem
 
     
 .pets__slider
@@ -241,8 +243,9 @@ body
 
 
 .arrowed-list__content
-    +flex-direction-justify(row, space-around)
-    width: 100%;
+    +flex-direction-justify(row, space-between)
+    width: 100%
+    padding: 0 57px
 
 .list___item
     +flex-direction-algin(column, center)
@@ -254,6 +257,7 @@ body
         background: $color-white
 
 .list-item__title
+    height: 1.4375rem
     font-size: 1.25rem
     line-height: 1.4375rem
     letter-spacing: 0.06rem
@@ -275,6 +279,7 @@ body
     font-size: 1.0625rem
     line-height: 130%
     letter-spacing: 0.06rem
+    white-space: nowrap
     color: $color-dark-xl
 
 .pets__button
