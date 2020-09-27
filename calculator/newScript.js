@@ -15,6 +15,7 @@ const KEY_LIST = [
     '+',
     '/',
     '*',
+    '^',
     'Backspace',
     'Escape',
     'Enter',
@@ -75,10 +76,11 @@ class Calc{
                     this.canEdit = false;
                 } 
                 break;
-            case 'sqr':
-                this.currentValue = cur ** 2;
-                if (this.operation===undefined) this.operation = null;
-                this.canEdit = false;
+            case '^':
+                // this.currentValue = cur ** 2;
+                // if (this.operation===undefined) this.operation = null;
+                // this.canEdit = false;
+                this.previousValue = prev ** cur ;
                 break;
             default:
                 this.previousValue = this.currentValue;
@@ -123,11 +125,8 @@ class Calc{
 
         let curNum = (this.currentValue)?this.currentValue:0;
 
-        if (number != '.'){
-            curNum = parseFloat(curNum + number).toString();
-        } else{
-            curNum = curNum + number;
-        }
+        curNum = curNum + number;
+        
         this.currentValue = curNum;
         
     }
@@ -237,7 +236,7 @@ const rootButtonHandler = function(){
 rootBtn.addEventListener('click', rootButtonHandler)
 
 const sqrButtonHandler = function(){
-    calc.calc('sqr');
+    calc.execOperation('^');
     calc.showExpression();
 }
 sqrBtn.addEventListener('click', sqrButtonHandler)
@@ -262,6 +261,8 @@ const keyDownHandler = function(evt){
         clearButtonHandler();
     }else if (key == 'Enter'|| keyCode == KEYCODE_ENTER || key == '='){
         equalsButtonHandler();
+    }else if (key == '^'){
+        sqrButtonHandler();
     }
 }
 document.addEventListener('keyup', keyDownHandler);
