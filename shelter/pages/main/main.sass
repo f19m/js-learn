@@ -1,3 +1,4 @@
+$color-white: #FFFFFF
 $color-primary: #F1CDB3
 $color-primary-light: #FDDCC4
 
@@ -44,8 +45,16 @@ $Arial : Arial
     +flex-direction-justify($direction, $justify-content) 
     align-items: $align-items
 
+=flex-direction-algin($direction, $align-items)    
+    +flex-direction($direction) 
+    align-items: $align-items
 
-//$start-screen-gradient-background: 
+=h3
+    font-size: 2.1875rem
+    line-height: 130%
+    letter-spacing: 0.06em
+    color: $color-dark-l
+     
 
 body
     font-family: $Georgia
@@ -141,15 +150,19 @@ body
     margin-top: 2.5625rem
 
 .button
+    padding: 0.9375rem 2.8125rem
+    width: 12.93rem
     background-color: $color-primary
     font-size: 1.0625rem
     line-height: 130%
     letter-spacing: 0.06rem;
     color: $color-dark-xl
     border-radius: 6.25rem
-
-    padding: 0.9375rem 2.8125rem
-    width: 12.93rem
+    cursor: pointer
+    &:hover
+        background-color: $color-primary-light
+        
+   
 
 
 
@@ -169,10 +182,7 @@ body
 
 
 .content-section__title_about
-    font-size: 2.1875rem
-    line-height: 130%
-    letter-spacing: 0.06em
-    color: $color-dark-l
+    +h3
     //padding-top: 0.875rem
 
 .content-section__subtitle_about
@@ -187,3 +197,85 @@ body
 
 .pets
     background: $color-light-l
+
+.pets-content
+    +flex-direction-algin(column, center)
+    width: 100%
+    position: relative
+
+.pets__title
+    +h3
+    width: 25rem
+    text-align: center
+
+    
+.pets__slider
+    margin: 60px 0
+
+.arrowed-list
+     +flex-direction-algin(row, center)
+     width: inherit
+
+.arrowed-list__arrow
+    border: 2px solid $color-primary
+    border-radius: 100px;
+    width: 52px
+    height: 52px
+    cursor: pointer 
+    background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23292929%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsvg%3E")
+    &:hover
+        border: 2px solid $color-primary-light
+        background-color: $color-primary-light
+
+
+.arrowed-list__arrow_inactive
+     border: 2px solid $color-dark-s
+     background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23CDCDCD%22%2F%3E%0A%3C%2Fsvg%3E")
+     &:hover
+        border: 2px solid $color-dark-s
+        background-color: inherit
+         
+
+.arrowed-list__arrow_right
+    transform: rotate(180deg)
+
+
+.arrowed-list__content
+    +flex-direction-justify(row, space-around)
+    width: 100%;
+
+.list___item
+    +flex-direction-algin(column, center)
+    background: $color-light-s
+    border-radius: 9px
+    padding: 30px 35px
+    &:hover
+        box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
+        background: $color-white
+
+.list-item__title
+    font-size: 1.25rem
+    line-height: 1.4375rem
+    letter-spacing: 0.06rem
+    color: $color-dark-l
+    margin: 30px 0
+
+.list-item__button
+    width: 187px
+    background-color: inherit
+    border: 2px solid $color-primary
+    border-radius: 6.25rem
+    cursor: pointer
+    &:hover
+        border: 2px solid $color-primary-light
+
+
+.button__link
+    font-family: Georgia
+    font-size: 1.0625rem
+    line-height: 130%
+    letter-spacing: 0.06rem
+    color: $color-dark-xl
+
+.pets__button
+    width: auto
