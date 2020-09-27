@@ -45,8 +45,8 @@ class Calc{
     }
     
     calc(action){
-        let cur = parseFloat(this.currentValue);
-        let prev = parseFloat(this.previousValue);
+        let cur = parseFloat(this.getDisplayNumber(this.currentValue));
+        let prev = parseFloat(this.getDisplayNumber(this.previousValue));
 
         if (isNaN(cur) && isNaN(prev)) return;
     
@@ -142,7 +142,10 @@ class Calc{
 
     getDisplayNumber(num) {
         const stringNumber = (typeof num=='string')? num : num.toString() ;
-        const integerDigits = parseFloat(stringNumber.split('.')[0]);
+        const int = stringNumber.split('.')[0];
+
+        const integerDigits = parseFloat((int == '-' && int.length == 1) ? '-0' : int);
+
         const decimalDigits = stringNumber.split('.')[1];
         let integerDisplay;
         if (isNaN(integerDigits)) {
@@ -151,7 +154,7 @@ class Calc{
           integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 });
         }
         if (decimalDigits != null) {
-          return `${integerDisplay}.${decimalDigits}`;
+            return `${integerDisplay}.${decimalDigits}`;
         } else {
           return integerDisplay;
         }
@@ -165,8 +168,8 @@ class Calc{
             this.currentValueTextElem.textContent = this.getDisplayNumber(this.currentValue);
         }
 
-        
-        this.previousValueTextElem.textContent = this.getDisplayNumber(this.previousValue);
+        const prev = this.getDisplayNumber(this.previousValue);       
+        this.previousValueTextElem.textContent =  (prev.split('.')[1]==='')? prev.split('.')[0] : prev ;
         if (this.operation){
             this.previousValueTextElem.textContent += ' ' + this.operation;
         }
