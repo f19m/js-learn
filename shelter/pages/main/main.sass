@@ -78,7 +78,7 @@ body
     color: $color-primary
 
 .logo__subtitle
-    font-family: $Arial;
+    font-family: $Arial
     font-size: 0.8125rem
     line-height: 110%
     letter-spacing: 0.1rem
@@ -127,8 +127,8 @@ body
     
 .content-section
     +flex-direction-justify(column, center)
-    padding-bottom: 81px;
-    padding-right: 42px;
+    padding-bottom: 81px
+    padding-right: 42px
 
 .content-section__title
     max-width: 19.375rem
@@ -156,7 +156,7 @@ body
     background-color: $color-primary
     font-size: 1.0625rem
     line-height: 130%
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.06rem
     color: $color-dark-xl
     border-radius: 6.25rem
     cursor: pointer
@@ -169,7 +169,7 @@ body
 
 .wrapper-section
     padding: 80px 0 100px
-    justify-content: center;
+    justify-content: center
 
 .about__content
     +flex
@@ -220,7 +220,7 @@ body
 
 .arrowed-list__arrow
     border: 2px solid $color-primary
-    border-radius: 100px;
+    border-radius: 100px
     width: 52px
     height: 52px
     cursor: pointer 
@@ -284,3 +284,65 @@ body
 
 .pets__button
     width: auto
+
+.help
+
+
+.help-content
+    +flex-direction-algin(column, center)
+    &__header
+        +h3
+        width: 19.45rem
+        height: 90px
+        text-align: center
+    &__list
+        margin-top: 60px
+        height: 281px
+        +flex-direction-justify($direction: row, $justify-content: center)
+        flex-wrap: wrap
+
+    
+
+.help__item
+    +flex-direction-algin(column,center)   
+    &:first-child
+        margin: 0 60px 55px 60px;
+
+.help__item + .help__item
+    margin: 0 60px 55px
+
+
+.help-item__image
+    height: 3.75rem
+    width: 3.75rem
+
+=help-item-image($image)
+    background: no-repeat 50% 50% url("../../assets/icons/help/" + $image)
+    background-size: 3.75rem 3.75rem
+.item__image-food
+    +help-item-image("pet-food.svg")
+
+.item__image-transp
+    +help-item-image("transportation.svg")
+.item__image-toys
+    +help-item-image("toys.svg")
+.item__image-bowl
+    +help-item-image("bowl.svg")
+.item__image-shamp
+    +help-item-image("shampoo.svg")
+.item__image-vitamins
+    +help-item-image("vitamins.svg")
+.item__image-med
+    +help-item-image("medicines.svg")
+.item__image-collars
+    +help-item-image("collars.svg")
+.item__image-area
+    +help-item-image("sleeping-area.svg")
+    
+.help-item__text
+    margin-top: 30px
+    font-size: 1.25rem
+    line-height: 115%
+    letter-spacing: 0.06rem
+    color: $color-dark-l
+    white-space: nowrap
