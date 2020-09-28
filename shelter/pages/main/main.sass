@@ -293,11 +293,11 @@ body
     &__header
         +h3
         width: 19.45rem
-        height: 90px
+        height: 5.625rem
         text-align: center
     &__list
         margin-top: 60px
-        height: 281px
+        height: 17.5625rem
         +flex-direction-justify($direction: row, $justify-content: center)
         flex-wrap: wrap
 
@@ -306,7 +306,7 @@ body
 .help__item
     +flex-direction-algin(column,center)   
     &:first-child
-        margin: 0 60px 55px 60px;
+        margin: 0 60px 55px 60px
 
 .help__item + .help__item
     margin: 0 60px 55px
@@ -346,3 +346,55 @@ body
     letter-spacing: 0.06rem
     color: $color-dark-l
     white-space: nowrap
+
+
+
+.donation
+    background-color: $color-light-l
+
+.donation-content
+    +flex-direction-algin-justify(row, end, center)
+    width: 100%
+    &__info 
+        width: 23.75rem
+    &__image
+        margin: 11px 30px 0 0
+    
+.donation-info
+
+    &__title
+        +h3
+        width: 18.75rem
+        height: 5.625rem
+        margin: 1px 0 10px 0
+    &__text
+        padding: 11px 0
+        font-size: 0.9375rem
+        letter-spacing: 0.06rem
+        color: $color-dark-l
+    &__card
+        margin: 11px 0
+        padding: 10px 15px
+        background-color: $color-primary
+        width: 21.8125rem
+        height: 2.6875rem
+        +flex-direction-algin-justify(row, center, center)
+        .card__logo
+            background: no-repeat 50% 50% url("../../assets/icons/credit-card.svg")
+            background-size: 1.875rem 1.875rem
+            width: 1.875rem
+            height: 1.875rem
+            margin-right: 15px
+
+        .card__phone
+            font-size: 1.25rem
+            line-height: 115%
+            letter-spacing: 0.06rem
+            color: $color-dark-l
+    &__legal
+        padding-top: 10px
+        font-family: Arial
+        font-style: italic
+        font-size: 0.75rem
+        line-height: 150%
+        color: $color-dark-m

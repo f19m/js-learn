@@ -360,13 +360,13 @@ body {
   letter-spacing: 0.06em;
   color: #545454;
   width: 19.45rem;
-  height: 90px;
+  height: 5.625rem;
   text-align: center;
 }
 
 .help-content__list {
   margin-top: 60px;
-  height: 281px;
+  height: 17.5625rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -459,5 +459,96 @@ body {
   letter-spacing: 0.06rem;
   color: #545454;
   white-space: nowrap;
+}
+
+.donation {
+  background-color: #F6F6F6;
+}
+
+.donation-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: end;
+  width: 100%;
+}
+
+.donation-content__info {
+  width: 23.75rem;
+}
+
+.donation-content__image {
+  margin: 11px 30px 0 0;
+}
+
+.donation-info__title {
+  font-size: 2.1875rem;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: #545454;
+  width: 18.75rem;
+  height: 5.625rem;
+  margin: 1px 0 10px 0;
+}
+
+.donation-info__text {
+  padding: 11px 0;
+  font-size: 0.9375rem;
+  letter-spacing: 0.06rem;
+  color: #545454;
+}
+
+.donation-info__card {
+  margin: 11px 0;
+  padding: 10px 15px;
+  background-color: #F1CDB3;
+  width: 21.8125rem;
+  height: 2.6875rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.donation-info__card .card__logo {
+  background: no-repeat 50% 50% url("../../assets/icons/credit-card.svg");
+  background-size: 1.875rem 1.875rem;
+  width: 1.875rem;
+  height: 1.875rem;
+  margin-right: 15px;
+}
+
+.donation-info__card .card__phone {
+  font-size: 1.25rem;
+  line-height: 115%;
+  letter-spacing: 0.06rem;
+  color: #545454;
+}
+
+.donation-info__legal {
+  padding-top: 10px;
+  font-family: Arial;
+  font-style: italic;
+  font-size: 0.75rem;
+  line-height: 150%;
+  color: #B2B2B2;
 }
 /*# sourceMappingURL=main.css.map */
