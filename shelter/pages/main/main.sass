@@ -96,20 +96,30 @@ body
     width: 100%
     +flex-direction-justify(row, space-between)
 
+
+
 .list__item
     +flex-justify(center)
-
-.list__link
-    color: $color-dark-s
-    font-family: $Arial
-    font-size: 0.94rem
-    line-height: 160%
-
-
-.list__item_selected, .list__item:hover, 
-    border-bottom: 3px solid $color-primary
     .list__link
-        color: $color-light-s
+        color: $color-dark-s
+        font-family: $Arial
+        font-size: 0.94rem
+        line-height: 160%
+    &-selected
+        border-bottom: 3px solid $color-primary
+        .list__link
+            color: $color-light-s
+    &:hover
+        .list__link
+            color: $color-light-s
+
+
+
+
+// .list__item-selected, .list__item:hover, 
+//     border-bottom: 3px solid $color-primary
+//     .list__link
+//         color: $color-light-s
 
 
 
@@ -391,6 +401,10 @@ body
             line-height: 115%
             letter-spacing: 0.06rem
             color: $color-dark-l
+        &:hover
+            .card__phone
+                color: $color-dark-xl
+
     &__legal
         padding-top: 10px
         font-family: Arial

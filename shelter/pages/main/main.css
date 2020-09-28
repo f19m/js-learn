@@ -69,18 +69,22 @@ body {
           justify-content: center;
 }
 
-.list__link {
+.list__item .list__link {
   color: #CDCDCD;
   font-family: Arial;
   font-size: 0.94rem;
   line-height: 160%;
 }
 
-.list__item_selected, .list__item:hover {
+.list__item-selected {
   border-bottom: 3px solid #F1CDB3;
 }
 
-.list__item_selected .list__link, .list__item:hover .list__link {
+.list__item-selected .list__link {
+  color: #FAFAFA;
+}
+
+.list__item:hover .list__link {
   color: #FAFAFA;
 }
 
@@ -541,6 +545,10 @@ body {
   line-height: 115%;
   letter-spacing: 0.06rem;
   color: #545454;
+}
+
+.donation-info__card:hover .card__phone {
+  color: #4C4C4C;
 }
 
 .donation-info__legal {
