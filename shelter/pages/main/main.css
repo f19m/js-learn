@@ -505,14 +505,15 @@ body {
 }
 
 .donation-info__text {
-  padding: 11px 0;
+  height: 1.0625rem;
+  margin: 21px 0 20px 0;
   font-size: 0.9375rem;
   letter-spacing: 0.06rem;
   color: #545454;
 }
 
 .donation-info__card {
-  margin: 11px 0;
+  margin: 11px 0 20px 0;
   padding: 10px 15px;
   background-color: #F1CDB3;
   width: 21.8125rem;
@@ -552,11 +553,116 @@ body {
 }
 
 .donation-info__legal {
-  padding-top: 10px;
   font-family: Arial;
   font-style: italic;
   font-size: 0.75rem;
   line-height: 150%;
   color: #B2B2B2;
+  height: 4.5rem;
+}
+
+.footer-background {
+  background: url("../../assets/images/noise_transparent.png"), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+}
+
+.wrapper-footer {
+  padding-top: 40px;
+}
+
+.footer-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.footer-content__info {
+  padding: 20px 0 60px 0;
+}
+
+.footer-content__info-contact {
+  width: 279px;
+}
+
+.footer-content__info-location {
+  width: 302px;
+}
+
+.footer-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.footer-info__title {
+  font-size: 2.1875rem;
+  line-height: 130%;
+  letter-spacing: 0.06em;
+  color: #545454;
+  color: #FFFFFF;
+}
+
+.info-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.info-link__logo-email {
+  background: no-repeat 50% 50% url("../../assets/icons/mail.svg");
+  padding-left: 2.5rem;
+  background-size: 2.5rem 2rem;
+  width: 2.5rem;
+  height: 2rem;
+}
+
+.info-link__logo-phone {
+  background: no-repeat 50% 50% url("../../assets/icons/telephone.svg");
+  padding-left: 2.5rem;
+  background-size: 2.5rem 2rem;
+  width: 2.5rem;
+  height: 2rem;
+}
+
+.info-link__logo-location {
+  background: no-repeat 50% 50% url("../../assets/icons/pin.svg");
+  padding-left: 1.375rem;
+  background-size: 2rem 2rem;
+  width: 1.375rem;
+  height: 2rem;
+}
+
+.info-link__text {
+  color: #F1CDB3;
+  padding-left: 1.25rem;
+  font-size: 1.25rem;
+  line-height: 115%;
+  letter-spacing: 0.06rem;
+  white-space: normal;
+}
+
+.info-link__text:hover {
+  color: #FDDCC4;
 }
 /*# sourceMappingURL=main.css.map */

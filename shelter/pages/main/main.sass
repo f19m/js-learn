@@ -1,4 +1,3 @@
-$color-white: #FFFFFF
 $color-primary: #F1CDB3
 $color-primary-light: #FDDCC4
 
@@ -264,7 +263,7 @@ body
     padding: 30px 35px
     &:hover
         box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
-        background: $color-white
+        background: $color-light-xl
 
 .list-item__title
     height: 1.4375rem
@@ -371,19 +370,19 @@ body
         margin: 11px 30px 0 0
     
 .donation-info
-
     &__title
         +h3
         width: 18.75rem
         height: 5.625rem
         margin: 1px 0 10px 0
     &__text
-        padding: 11px 0
+        height: 1.0625rem
+        margin: 21px 0 20px 0   
         font-size: 0.9375rem
         letter-spacing: 0.06rem
         color: $color-dark-l
     &__card
-        margin: 11px 0
+        margin: 11px 0 20px 0
         padding: 10px 15px
         background-color: $color-primary
         width: 21.8125rem
@@ -406,9 +405,70 @@ body
                 color: $color-dark-xl
 
     &__legal
-        padding-top: 10px
         font-family: Arial
         font-style: italic
         font-size: 0.75rem
         line-height: 150%
         color: $color-dark-m
+        height: 4.5rem
+
+
+.footer-background
+    background: url('../../assets/images/noise_transparent.png'), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20
+
+.wrapper-footer
+    padding-top: 40px
+
+.footer-content
+    +flex-direction-justify(row, space-between)
+    width: 100%
+    &__info
+        padding: 20px 0 60px 0
+    &__info-contact
+        width: 279px
+    &__info-location
+        width: 302px
+
+.footer-info
+    +flex-direction-justify(column, space-between)
+
+    &__title
+        +h3
+        color: $color-light-xl
+    &__link
+        //padding: 15px 0
+
+=footer-logo($image)
+    background: no-repeat 50% 50% url("../../assets/icons/" + $image)
+
+.info-link
+    +flex-direction-algin(row, center)
+    &__logo       
+    &__logo-email
+        +footer-logo("mail.svg")
+        padding-left: 2.5rem
+        background-size: 2.5rem 2rem
+        width: 2.5rem
+        height: 2rem
+    &__logo-phone
+        +footer-logo("telephone.svg")
+        padding-left: 2.5rem
+        background-size: 2.5rem 2rem
+        width: 2.5rem
+        height: 2rem
+    &__logo-location
+        +footer-logo("pin.svg")
+        padding-left: 1.375rem
+        background-size: 2rem 2rem
+        width: 1.375rem
+        height: 2rem
+    &__text
+        color: $color-primary
+        padding-left: 1.25rem
+        font-size: 1.25rem
+        line-height: 115%
+        letter-spacing: 0.06rem
+        white-space: normal
+        &:hover
+            color: $color-primary-light
+    
