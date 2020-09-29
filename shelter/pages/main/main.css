@@ -1,5 +1,6 @@
 body {
   font-family: Georgia;
+  width: 100vw;
 }
 
 .header {
@@ -210,11 +211,15 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
   position: relative;
+  height: 697px;
 }
 
 .pets__title {
@@ -302,7 +307,6 @@ body {
           align-items: center;
   background: #FAFAFA;
   border-radius: 0.5625rem;
-  padding: 1.875rem 2.1875rem;
 }
 
 .list___item:hover {
@@ -322,6 +326,7 @@ body {
 
 .list-item__button {
   width: 11.6875rem;
+  margin-bottom: 30px;
   background-color: inherit;
   border: 2px solid #F1CDB3;
   border-radius: 6.25rem;

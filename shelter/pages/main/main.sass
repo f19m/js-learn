@@ -57,7 +57,7 @@ $Arial : Arial
 
 body
     font-family: $Georgia
-   
+    width: 100vw
 
 .header
     width: 100vw
@@ -209,9 +209,10 @@ body
     background: $color-light-l
 
 .pets-content
-    +flex-direction-algin(column, center)
+    +flex-direction-algin-justify(column, center, space-between)
     width: 100%
     position: relative
+    height: 697px
 
 .pets__title
     +h3
@@ -260,7 +261,6 @@ body
     +flex-direction-algin(column, center)
     background: $color-light-s
     border-radius: 0.5625rem
-    padding: 1.875rem 2.1875rem
     &:hover
         box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
         background: $color-light-xl
@@ -275,6 +275,7 @@ body
 
 .list-item__button
     width: 11.6875rem
+    margin-bottom: 30px
     background-color: inherit
     border: 2px solid $color-primary
     border-radius: 6.25rem
