@@ -769,4 +769,37 @@ body {
 .footer-info__link svg {
   margin-right: 1.28rem;
 }
-/*# sourceMappingURL=main.css.map */
+
+.header-dark {
+  position: relative;
+  top: 0;
+}
+
+.header__content-p30 {
+  padding: 3rem 0;
+}
+
+.header__title-dark {
+  color: #545454;
+}
+
+.header__subtitle-dark {
+  color: #292929;
+}
+
+.list__item-dark .list__link-dark {
+  color: #545454;
+}
+
+.list__item-dark .list__link-dark:hover {
+  color: #292929;
+}
+
+.list-dark .list__item-dark-selected {
+  border-bottom: 3px solid #F1CDB3;
+}
+
+.list__item-dark:hover .list__link-dark {
+  color: #292929;
+}
+/*# sourceMappingURL=style.css.map */

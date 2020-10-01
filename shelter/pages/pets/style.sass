@@ -1,0 +1,228 @@
+// html 
+//     font-size: 10px
+    
+// $color-primary: #F1CDB3
+// $color-primary-light: #FDDCC4
+
+// $color-light-s: #FAFAFA
+// $color-light-l: #F6F6F6
+// $color-light-xl: #FFFFFF
+
+// $color-dark-s: #CDCDCD
+// $color-dark-m: #B2B2B2
+// $color-dark-l: #545454
+// $color-dark-xl: #4C4C4C
+// $color-dark-2xl: #444444
+// $color-dark-3xl: #292929
+
+// $Georgia : Georgia
+// $Arial : Arial
+
+
+// =width100
+//     width: 100vw
+
+// =flex
+//     display: flex
+
+// =flex-direction($direction) 
+//     +flex
+//     flex-direction: $direction
+
+// =flex-justify($justify-content) 
+//     +flex
+//     justify-content: $justify-content
+
+// =flex-algin-justify($align-items, $justify-content) 
+//     +flex
+//     align-items: $align-items
+//     justify-content: $justify-content
+
+// =flex-direction-justify($direction, $justify-content) 
+//     +flex
+//     flex-direction: $direction
+//     justify-content: $justify-content
+
+// =flex-direction-algin-justify($direction, $align-items, $justify-content) 
+//     +flex-direction-justify($direction, $justify-content) 
+//     align-items: $align-items
+
+// =flex-direction-algin($direction, $align-items)    
+//     +flex-direction($direction) 
+//     align-items: $align-items
+
+
+// =h2
+//     font:
+//         family: Georgia
+//         style: normal
+//         weight: normal    
+//         size: 4.4rem        
+//     line-height: 130%
+
+// =h3
+//     font:
+//         family: Georgia
+//         style: normal
+//         weight: normal    
+//         size: 3.5rem
+//     line-height: 130%
+//     letter-spacing: 0.2rem
+
+// =h3-mobile
+//     font: 
+//         family: Georgia
+//         style: normal
+//         weight: normal    
+//         size: 2.5rem
+//     line-height: 130%
+//     letter-spacing: 0.06rem  
+ 
+// =h4
+//     font: 
+//         family: Georgia
+//         style: normal
+//         weight: normal    
+//         size: 2rem
+//     line-height: 115%
+//     letter-spacing: 0.12rem
+
+// =h5
+//     font: 
+//         family: Georgia
+//         style: normal
+//         weight: normal    
+//         size: 1.5rem
+//     line-height: 110%
+//     letter-spacing: 0.09rem
+
+// =paragraph-l
+//     font: 
+//         family: Arial
+//         style: normal
+//         weight: normal
+//         size: 1.5rem
+//     line-height: 160%
+
+// =paragraph-s
+//     font: 
+//         family: Arial
+//         style: italic
+//         weight: normal
+//         size: 1.2rem
+//     line-height: 150%
+
+// =logo_title
+//     font: 
+//         family: Georgia
+//         style: normal
+//         weight: normal
+//         size: 3.2rem
+//     line-height: 110%
+//     letter-spacing: 0.2rem
+
+// =logo_subtitle
+//     font: 
+//         family: Arial
+//         style: normal
+//         weight: normal
+//         size: 1.3rem
+//     line-height: 110%
+//     letter-spacing: 0.13rem
+
+// =button($bg-color, $bg-color-hover)
+//     padding: 1.5rem 4.5rem
+//     border-radius: 6.28rem
+//     background-color: $bg-color
+//     cursor: pointer
+//     &:hover
+//         background-color: $bg-color-hover
+
+// =button-link($color)
+//     font-family: Georgia
+//     font-size: 1.7rem
+//     line-height: 130%
+//     letter-spacing: 0.06rem
+//     color: $color
+        
+   
+
+
+// body
+//     font-family: $Georgia
+//     width: 100vw
+    
+// .wrapper
+//     max-width: 120rem
+//     margin: 0 auto
+
+// .header
+//     width: 100vw
+//     position: absolute
+//     &__content
+//         width: 100%
+//         +flex-algin-justify(center, space-between)
+//         padding: 3rem 0
+//     &__title
+//         +logo_title
+//         color: $color-dark-l
+//     &__subtitle
+//         +logo_subtitle
+//         color: $color-dark-3xl
+//         margin-top: 1rem
+//         text-align: center
+//     &__menu
+//         width: 44.3rem
+
+
+// .menu
+//     display: flex
+    
+// .list
+//     width: 100%
+//     +flex-direction-justify(row, space-between)
+
+// .list__item
+//     +flex-justify(center)
+//     .list__link
+//         +paragraph-l
+//         color: $color-dark-l
+//     &-selected
+//         border-bottom: 3px solid $color-primary
+//         .list__link
+//             color: $color-dark-l
+//     &:hover
+//         .list__link
+//             color: $color-dark-3xl
+
+
+@import "../main/main.sass"
+
+
+.header-dark
+    position: relative
+    top: 0
+
+    
+.header
+    &__content-p30
+        padding: 3rem 0
+    &__title-dark
+        color: $color-dark-l
+    &__subtitle-dark
+        color: $color-dark-3xl
+
+
+.list__item-dark
+    .list__link-dark
+        color: $color-dark-l
+        &:hover
+            color: $color-dark-3xl
+
+.list-dark
+    .list__item-dark-selected
+        border-bottom: 3px solid $color-primary
+
+.list__item-dark:hover
+    .list__link-dark
+        color: $color-dark-3xl

@@ -157,47 +157,43 @@ body
     width: 100vw
     position: absolute
     top: 60px
+    &__content
+        width: 100%
+        +flex-algin-justify(center, space-between)
+    &__title
+        +logo_title
+        color: $color-primary
+    &__subtitle
+        +logo_subtitle
+        color: $color-light-xl
+        margin-top: 1rem
+        text-align: center
+    &__menu
+        width: 44.3rem
 
 .wrapper
     max-width: 120rem
     margin: 0 auto
     +flex-algin-justify(center, space-between)
 
-
-.logo__title
-    +logo_title
-    color: $color-primary
-
-.logo__subtitle
-    +logo_subtitle
-    color: $color-light-xl
-    margin-top: 1rem
-    text-align: center
-
-
 .menu
     display: flex
-    width: 44.3rem
-
 
 .list
     width: 100%
     +flex-direction-justify(row, space-between)
-
-
-
-.list__item
-    +flex-justify(center)
-    .list__link
-        +paragraph-l
-        color: $color-dark-s
-    &-selected
-        border-bottom: 3px solid $color-primary
+    &__item
+        +flex-justify(center)
         .list__link
-            color: $color-light-s
-    &:hover
-        .list__link
-            color: $color-light-s
+            +paragraph-l
+            color: $color-dark-s
+        &-selected
+            border-bottom: 3px solid $color-primary
+            .list__link
+                color: $color-light-s
+        &:hover
+            .list__link
+                color: $color-light-s
 
 
 
