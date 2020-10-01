@@ -184,6 +184,7 @@ body {
   line-height: 130%;
   letter-spacing: 0.06rem;
   color: #4C4C4C;
+  max-height: 5.2rem;
 }
 
 .button:hover {
@@ -251,15 +252,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   width: 100%;
   position: relative;
-  height: 697px;
+  min-height: 69.7rem;
 }
 
 .pets__title {
@@ -272,6 +267,7 @@ body {
   letter-spacing: 0.2rem;
   color: #545454;
   text-align: center;
+  margin: 0 auto;
 }
 
 .pets__title span {
@@ -287,7 +283,9 @@ body {
   border-radius: 6.28rem;
   background-color: #F1CDB3;
   cursor: pointer;
-  min-width: 26.1rem;
+  max-width: 26.1rem;
+  max-height: 5.2rem;
+  margin: 0 auto;
 }
 
 .pets__button:hover {
@@ -300,10 +298,12 @@ body {
   line-height: 130%;
   letter-spacing: 0.06rem;
   color: #4C4C4C;
+  max-height: 5.2rem;
   white-space: nowrap;
+  letter-spacing: 0.1rem;
 }
 
-.arrowed-list {
+.slider {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -317,36 +317,56 @@ body {
   width: inherit;
 }
 
-.arrowed-list__arrow {
+.slider__control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: 2px solid #F1CDB3;
   border-radius: 6.28rem;
   width: 5.2rem;
   height: 5.2rem;
   cursor: pointer;
-  background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23292929%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsvg%3E");
 }
 
-.arrowed-list__arrow:hover {
+.slider__control:hover {
   border: 2px solid #FDDCC4;
   background-color: #FDDCC4;
 }
 
-.arrowed-list__arrow_inactive {
-  border: 2px solid #CDCDCD;
-  background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23CDCDCD%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-
-.arrowed-list__arrow_inactive:hover {
-  border: 2px solid #CDCDCD;
-  background-color: inherit;
-}
-
-.arrowed-list__arrow_right {
+.slider__control-right {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
 
-.arrowed-list__content {
+.slider__control svg {
+  fill: #292929;
+  cursor: pointer;
+}
+
+.slider__control_inactive {
+  border: 2px solid #CDCDCD;
+}
+
+.slider__control_inactive:hover {
+  border: 2px solid #CDCDCD;
+  background-color: inherit;
+}
+
+.slider__control_inactive svg {
+  fill: #CDCDCD;
+}
+
+.slider__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -361,7 +381,7 @@ body {
   padding: 0 5.7rem;
 }
 
-.arrowed-list__item {
+.list-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -376,7 +396,7 @@ body {
   border-radius: 0.9rem;
 }
 
-.arrowed-list__item:hover {
+.list-item:hover {
   -webkit-box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
           box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
   background: #FFFFFF;
@@ -416,6 +436,7 @@ body {
   line-height: 130%;
   letter-spacing: 0.06rem;
   color: #4C4C4C;
+  max-height: 5.2rem;
 }
 
 .help__content {

@@ -144,6 +144,7 @@ $Arial : Arial
     line-height: 130%
     letter-spacing: 0.06rem
     color: $color
+    max-height: 5.2rem
         
    
 
@@ -258,65 +259,73 @@ body
 
 
  
-
-
 .pets
     background: $color-light-l
     &__content
-        +flex-direction-algin-justify(column, center, space-between)
+        //+flex-direction-algin-justify(column, center, space-between)
+        +flex-direction(column)
         width: 100%
         position: relative
-        height: 697px
+        min-height: 69.7rem
     &__title
         max-width: 40rem
         +h3
         color: $color-dark-l
         text-align: center
+        margin: 0 auto
         span
             display: block
     &__slider
         margin: 6rem 0
     &__button
         +button($color-primary, $color-primary-light)
-        min-width: 26.1rem
+        max-width: 26.1rem
+        max-height: 5.2rem
+        margin: 0 auto
     &__link
         +button-link($color-dark-xl)
         white-space: nowrap
+        letter-spacing: 0.1rem
 
-.arrowed-list
+.slider
     +flex-direction-algin(row, center)
     width: inherit
-    &__arrow
+    &__control
+        +flex-direction-algin-justify(row, center, center)
         border: 2px solid $color-primary
         border-radius: 6.28rem
         width: 5.2rem
         height: 5.2rem
         cursor: pointer 
-        background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23292929%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2Fsvg%3E")
         &:hover
-            border: 2px solid $color-primary-light
-            background-color: $color-primary-light
-    &__arrow_inactive
-        border: 2px solid $color-dark-s
-        background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23CDCDCD%22%2F%3E%0A%3C%2Fsvg%3E")
-        &:hover
+            border: 2px solid $color-primary-light   
+            background-color:   $color-primary-light    
+        &-right
+            transform: rotate(180deg)
+        svg
+            fill: $color-dark-3xl
+            cursor: pointer 
+        &_inactive
             border: 2px solid $color-dark-s
-            background-color: inherit
-    &__arrow_right
-        transform: rotate(180deg)
+            &:hover
+                border: 2px solid $color-dark-s
+                background-color: inherit
+            svg
+                fill: $color-dark-s
+        //background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23CDCDCD%22%2F%3E%0A%3C%2Fsvg%3E")
     &__content
         +flex-direction-justify(row, space-between)
         width: 100%
         padding: 0 5.7rem
-    &__item
-        +flex-direction-algin(column, center)
-        background: $color-light-s
-        border-radius: 0.9rem
-        &:hover
-            box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
-            background: $color-light-xl
+
 
 .list-item
+    +flex-direction-algin(column, center)
+    background: $color-light-s
+    border-radius: 0.9rem
+    &:hover
+        box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
+        background: $color-light-xl
     &__title
         font:
             size: 2rem
