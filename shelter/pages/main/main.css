@@ -343,7 +343,7 @@ body {
   background-color: #FDDCC4;
 }
 
-.slider__control-right {
+.slider__control-revers {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
@@ -379,6 +379,15 @@ body {
           justify-content: space-between;
   width: 100%;
   padding: 0 5.7rem;
+}
+
+.slider__page-num {
+  background-color: #F1CDB3;
+}
+
+.slider__page-num:hover {
+  background-color: #F1CDB3;
+  border: 2px solid #F1CDB3;
 }
 
 .list-item {
