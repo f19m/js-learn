@@ -885,4 +885,9 @@ body {
           align-items: center;
   margin-top: 3.2rem;
 }
+
+.pets__slider {
+  margin: 0;
+  padding-top: 6rem;
+}
 /*# sourceMappingURL=style.css.map */
