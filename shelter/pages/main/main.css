@@ -53,7 +53,6 @@ body {
 }
 
 .wrapper {
-  max-width: 120rem;
   margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,6 +63,24 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+@media (max-width: 1280px) {
+  .wrapper {
+    max-width: 120rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 70.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .wrapper {
+    max-width: 30rem;
+  }
 }
 
 .menu {
@@ -192,10 +209,27 @@ body {
 }
 
 .wrapper-section {
-  padding: 8rem 0 10rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+@media (max-width: 1280px) {
+  .wrapper-section {
+    padding: 8rem 0 10rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper-section {
+    padding: 6rem 0 7rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .wrapper-section {
+    padding: 4rem 0 3rem;
+  }
 }
 
 .about__wrapper {
@@ -259,15 +293,37 @@ body {
 
 .pets__title {
   max-width: 40rem;
-  font-family: Georgia;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 3.5rem;
-  line-height: 130%;
-  letter-spacing: 0.2rem;
   color: #545454;
   text-align: center;
   margin: 0 auto;
+}
+
+@media (max-width: 1280px) {
+  .pets__title {
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 3.5rem;
+    line-height: 130%;
+    letter-spacing: 0.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pets__title {
+    margin-top: 0.9rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .pets__title {
+    font-family: Georgia;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.5rem;
+    line-height: 130%;
+    letter-spacing: 0.06rem;
+  }
 }
 
 .pets__title span {
@@ -314,7 +370,24 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: inherit;
+}
+
+@media (max-width: 1280px) {
+  .slider {
+    width: inherit;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider {
+    max-width: 58rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .slider {
+    max-width: 58rem;
+  }
 }
 
 .slider__control {
@@ -693,26 +766,70 @@ body {
   background: url("../../assets/images/noise_transparent.png"), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
 }
 
-.wrapper-footer {
-  padding-top: 4rem;
+@media (max-width: 1280px) {
+  .wrapper-footer {
+    padding-top: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper-footer {
+    padding-top: 0rem;
+  }
 }
 
 .footer-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   width: 100%;
 }
 
-.footer-content__info {
-  padding: 1.6rem 0 6rem 0;
+@media (max-width: 1280px) {
+  .footer-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    min-height: 60.9rem;
+  }
+}
+
+.footer-content__info + .footer-content__info {
+  margin-left: 6rem;
+}
+
+@media (max-width: 1280px) {
+  .footer-content__info {
+    padding: 1.6rem 0 6rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content__info {
+    padding: 3rem 0 0rem 0;
+    min-height: 26.4rem;
+  }
 }
 
 .footer-content__info-contact {
@@ -721,6 +838,17 @@ body {
 
 .footer-content__info-location {
   max-width: 30.2rem;
+}
+
+.footer-content__image {
+  width: 30rem;
+  height: 31rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content__image {
+    margin-top: 6rem;
+  }
 }
 
 .footer-info {

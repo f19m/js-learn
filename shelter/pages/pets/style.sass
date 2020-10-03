@@ -8,7 +8,10 @@
     
 .header
     &__content-p30
-        padding: 3rem 0
+        @media(max-width: $standart)
+            padding: 3rem 0
+        @media(max-width: $medium)
+              padding: 3rem 0 3.1rem 0
     &__title-dark
         color: $color-dark-l
     &__subtitle-dark
@@ -32,13 +35,19 @@
 .paging-list
     +flex-direction(column)
     &__wrapper
-        max-height: 93rem
+        @media(max-width: $standart)
+            max-height: 93rem
+        @media(max-width: $medium)
+            max-height: 136.5rem
         overflow: hidden
     &__content
         +flex-justify(start)
         flex-wrap: wrap
         min-height: 93rem
-        margin: -1.5rem -2rem 0
+        @media(max-width: $standart)
+            margin: -1.5rem -2rem 0
+        @media(max-width: $medium)
+            margin: -3.4rem -2rem 0
     &__item
         margin: 1.5rem 2rem
     &__menu
@@ -46,8 +55,11 @@
 
 .paging-menu
     +flex-direction-algin-justify(row, center, space-between)
-    margin-top: 3.2rem
-
+    @media(max-width: $standart)
+        margin-top: 3rem
+    @media(max-width: $medium)
+        margin-top: 2.1rem
+        margin-bottom: 0.6rem
 
 .list-item + .list-item
     //margin: 0 2rem 3rem 2rem
@@ -56,5 +68,8 @@
     //margin: 0 2rem 3rem 0
 
 .pets__slider
-    margin: 0
-    padding-top: 6rem
+    @media(max-width: $standart)
+        margin: 0 auto
+    @media(max-width: $medium)
+        margin: 0 auto
+        padding-top: 6rem
