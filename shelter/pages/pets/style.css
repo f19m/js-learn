@@ -124,6 +124,19 @@ body {
   opacity: 0;
 }
 
+@media (max-width: 1280px) {
+  .menu__toggle {
+    visibility: hidden;
+    position: absolute;
+  }
+}
+
+@media (max-width: 320px) {
+  .menu__toggle {
+    visibility: visible;
+  }
+}
+
 .menu__toggle:checked ~ .menu__btn > span {
   top: 0;
   -webkit-transform: rotate(45deg);
@@ -161,7 +174,6 @@ body {
           align-items: center;
   position: absolute;
   width: 30px;
-  height: 22px;
   cursor: pointer;
   z-index: 1;
 }
@@ -475,7 +487,7 @@ body {
 
 @media (max-width: 768px) {
   .pets__title {
-    margin-top: 0.9rem;
+    margin-top: 1.2rem;
   }
 }
 
@@ -496,7 +508,27 @@ body {
 }
 
 .pets__slider {
-  margin: 6rem 0;
+  margin: 6rem 0 0 0;
+}
+
+@media (max-width: 1280px) {
+  .pets__slider {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .pets__slider {
+    margin: 0 auto;
+    padding-top: 5.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .pets__slider {
+    padding-top: 3.3rem;
+  }
 }
 
 .pets__button {
@@ -980,8 +1012,10 @@ body {
   }
 }
 
-.footer-content__info + .footer-content__info {
-  margin-left: 6rem;
+@media (max-width: 768px) {
+  .footer-content__info + .footer-content__info {
+    margin-left: 6rem;
+  }
 }
 
 @media (max-width: 320px) {
@@ -998,7 +1032,7 @@ body {
 
 @media (max-width: 768px) {
   .footer-content__info {
-    padding: 3rem 0 0rem 0;
+    padding: 3.1rem 0 0rem 0;
     min-height: 26.4rem;
   }
 }
@@ -1124,13 +1158,7 @@ body {
 
 @media (max-width: 1280px) {
   .header__content-p30 {
-    padding: 3rem 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .header__content-p30 {
-    padding: 3rem 0 3rem 0;
+    padding: 3rem 0 3.1rem 0;
   }
 }
 
@@ -1247,7 +1275,7 @@ body {
 @media (max-width: 768px) {
   .paging-menu {
     margin-top: 2.1rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -1255,25 +1283,6 @@ body {
   .paging-menu {
     margin: 4.5rem 0 0 0;
     min-width: 30rem;
-  }
-}
-
-@media (max-width: 1280px) {
-  .pets__slider {
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .pets__slider {
-    margin: 0 auto;
-    padding-top: 6rem;
-  }
-}
-
-@media (max-width: 320px) {
-  .pets__slider {
-    padding-top: 3.3rem;
   }
 }
 /*# sourceMappingURL=style.css.map */

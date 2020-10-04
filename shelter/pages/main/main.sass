@@ -200,6 +200,11 @@ body
     display: flex
     /* скрываем чекбокс */
     &__toggle
+        @media(max-width: $standart)
+            visibility: hidden;
+            position: absolute
+        @media(max-width: $small)
+            visibility: visible;
         opacity: 0
         &:checked ~ .menu__btn > span 
             top: 0
@@ -227,7 +232,7 @@ body
         // top: 20px;
         // left: 20px;
         width: 30px
-        height: 22px
+        //height: 22px
         cursor: pointer
         z-index: 1
         span, span::before, span::after
@@ -372,7 +377,7 @@ body
         @media(max-width: $standart)
             +h3
         @media(max-width: $medium)
-            margin-top: 0.9rem
+            margin-top: 1.2rem
         @media(max-width: $small)
             +h3-mobile
             margin: 0
@@ -382,12 +387,22 @@ body
         span
             display: block
     &__slider
-        margin: 6rem 0
+        margin: 6rem 0 0 0
+        @media(max-width: $standart)
+            margin-right: auto
+            margin-left: auto
+        @media(max-width: $medium)
+            margin: 0 auto
+            padding-top: 5.8rem
+        @media(max-width: $small)
+            padding-top: 3.3rem   
     &__button
         +button($color-primary, $color-primary-light)
         max-width: 26.1rem
         max-height: 5.2rem
         margin: 0 auto
+    &__button-mt6
+        margin-top: 6rem
     &__link
         +button-link($color-dark-xl)
         white-space: nowrap
@@ -395,7 +410,6 @@ body
 
 .slider
     +flex-direction-algin(row, center)
-    
     @media(max-width: $standart)
         width: inherit
     @media(max-width: $medium)
@@ -603,14 +617,15 @@ body
         min-height: 60.9rem
     width: 100%
     &__info + &__info
-        margin-left: 6rem
+        @media(max-width: $medium)
+            margin-left: 6rem
         @media(max-width: $small)
             margin: 0
     &__info
         @media(max-width: $standart)
             padding: 1.6rem 0 6rem 0
         @media(max-width: $medium)
-            padding: 3rem 0 0rem 0
+            padding: 3.1rem 0 0rem 0
             min-height: 26.4rem
         @media(max-width: $small)
             margin-bottom: 1rem
