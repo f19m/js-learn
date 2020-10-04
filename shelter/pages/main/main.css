@@ -145,6 +145,7 @@ body {
 .menu__toggle:checked ~ .menu__list {
   visibility: visible;
   left: 0;
+  position: absolute;
 }
 
 .menu__btn {
@@ -158,7 +159,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: fixed;
+  position: absolute;
   width: 30px;
   height: 22px;
   cursor: pointer;
@@ -200,6 +201,7 @@ body {
 @media (max-width: 320px) {
   .menu__list {
     visibility: hidden;
+    position: absolute;
     top: 0;
     left: -100%;
     width: 300px;
@@ -219,11 +221,7 @@ body {
 @media (max-width: 320px) {
   .menu__item {
     display: block;
-    padding: 12px 24px;
     color: #333;
-    font-size: 20px;
-    font-weight: 600;
-    text-decoration: none;
     -webkit-transition-duration: .25s;
             transition-duration: .25s;
   }
@@ -488,7 +486,8 @@ body {
     font-weight: normal;
     font-size: 2.5rem;
     line-height: 130%;
-    letter-spacing: 0.06rem;
+    letter-spacing: 0.15rem;
+    margin: 0;
   }
 }
 
@@ -985,6 +984,12 @@ body {
   margin-left: 6rem;
 }
 
+@media (max-width: 320px) {
+  .footer-content__info + .footer-content__info {
+    margin: 0;
+  }
+}
+
 @media (max-width: 1280px) {
   .footer-content__info {
     padding: 1.6rem 0 6rem 0;
@@ -995,6 +1000,12 @@ body {
   .footer-content__info {
     padding: 3rem 0 0rem 0;
     min-height: 26.4rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .footer-content__info {
+    margin-bottom: 1rem;
   }
 }
 
@@ -1014,6 +1025,12 @@ body {
 @media (max-width: 768px) {
   .footer-content__image {
     margin-top: 6rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .footer-content__image {
+    margin-top: 9.2rem;
   }
 }
 
@@ -1038,6 +1055,12 @@ body {
   line-height: 130%;
   letter-spacing: 0.2rem;
   color: #FFFFFF;
+}
+
+@media (max-width: 320px) {
+  .footer-info__title {
+    text-align: center;
+  }
 }
 
 .footer-info__link {

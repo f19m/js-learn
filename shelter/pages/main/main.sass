@@ -80,7 +80,7 @@ $Arial : Arial
         weight: normal    
         size: 2.5rem
     line-height: 130%
-    letter-spacing: 0.06rem  
+    letter-spacing: 0.15rem  
  
 =h4
     font: 
@@ -214,6 +214,7 @@ body
             visibility: visible
             left: 0
             position: absolute
+
     /* стилизуем кнопку */
     // to-do: поправить в соответсвии с макетом
     &__btn
@@ -222,7 +223,7 @@ body
         @media(max-width: $small)
             visibility: visible
         +flex-direction-algin(row, center)
-        position: fixed
+        position: absolute
         // top: 20px;
         // left: 20px;
         width: 30px
@@ -246,6 +247,7 @@ body
     &__list
         @media(max-width: $small)
             visibility: hidden
+            position: absolute
             top: 0
             left: -100%
             width: 300px
@@ -260,11 +262,8 @@ body
     &__item
         @media(max-width: $small)
             display: block
-            padding: 12px 24px
+            //padding: 12px 24px
             color: #333
-            font-size: 20px
-            font-weight: 600
-            text-decoration: none
             transition-duration: .25s
     &__item:hover
         @media(max-width: $small)
@@ -376,6 +375,7 @@ body
             margin-top: 0.9rem
         @media(max-width: $small)
             +h3-mobile
+            margin: 0
         color: $color-dark-l
         text-align: center
         margin: 0 auto
@@ -604,12 +604,16 @@ body
     width: 100%
     &__info + &__info
         margin-left: 6rem
+        @media(max-width: $small)
+            margin: 0
     &__info
         @media(max-width: $standart)
             padding: 1.6rem 0 6rem 0
         @media(max-width: $medium)
             padding: 3rem 0 0rem 0
             min-height: 26.4rem
+        @media(max-width: $small)
+            margin-bottom: 1rem
     &__info-contact
         max-width: 27.9rem
     &__info-location
@@ -619,6 +623,8 @@ body
         height: 31rem
         @media(max-width: $medium)
             margin-top:  6rem
+        @media(max-width: $small)
+            margin-top:  9.2rem
 
 .footer-info
     +flex-direction-justify(column, space-between)
@@ -626,6 +632,8 @@ body
     &__title
         +h3
         color: $color-light-xl
+        @media(max-width: $small)
+            text-align: center
     &__link
         +flex-direction-algin(row, center)
         color: $color-primary
