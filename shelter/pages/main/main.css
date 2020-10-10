@@ -827,11 +827,10 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  min-height: 28.4rem;
 }
 
 .donation__image {
-  padding: 1.2rem 3rem 0 0;
+  padding: 1.1rem 3rem 1rem 0;
 }
 
 .donation__info {
@@ -849,7 +848,7 @@ body {
 }
 
 .donation__text {
-  margin: 2.2rem 0 2rem 0;
+  margin: 2rem 0 2.1rem 0;
   font-family: Georgia;
   font-style: normal;
   font-weight: normal;
@@ -920,7 +919,7 @@ body {
 }
 
 .donation__description {
-  margin-top: 2.1rem;
+  margin-top: 2rem;
   font-family: Arial;
   font-style: italic;
   font-size: 1.2rem;
