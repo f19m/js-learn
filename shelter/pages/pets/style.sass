@@ -48,6 +48,21 @@
     &__menu
         min-width: 34rem
 
+
+
+.pets
+    &__content
+        @media(max-width: $medium)
+            padding-top:  2rem
+        @media(max-width: $small)
+            padding-top:  0rem    
+
+.slider
+    @media(max-width: $medium)
+        max-width: 58rem
+    @media(max-width: $small)
+        max-width: 27rem
+
 .paging-menu
     +flex-direction-algin-justify(row, center, space-between)
     margin-top: 3rem
@@ -63,4 +78,11 @@
 .list-item:first-child
     //margin: 0 2rem 3rem 0
 
- 
+
+.wrapper-section
+    padding: 8rem 0 10rem
+    @media(max-width: $medium)
+        padding: 6rem 0 7rem
+    @media(max-width: $small)
+        padding: 4.2rem 0 3rem
+    justify-content: center

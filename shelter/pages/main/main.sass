@@ -163,6 +163,8 @@ body
     width: 100vw
     position: absolute
     top: 60px
+    @media(max-width: $medium)
+        top: 30px
     &__content
         width: 100%
         +flex-algin-justify(center, space-between)
@@ -186,12 +188,13 @@ body
 
 .wrapper
     max-width: 120rem
+    margin: 0 auto
+    +flex-algin-justify(center, space-between)
     @media(max-width: $medium)
+        justify-content: center;
         max-width: 70.8rem 
     @media(max-width: $small)
         max-width: 30rem    
-    margin: 0 auto
-    +flex-algin-justify(center, space-between)
 
 
 .menu
@@ -297,26 +300,39 @@ body
 
 .hero
     padding-top: 18rem
+    @media(max-width: $medium)
+        padding-top: 15rem
     background: url('../../assets/images/noise_transparent.png'), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20
-
-.hero__content
-    +flex
+    &__content
+        +flex
+        @media(max-width: $medium)
+            +flex-direction-algin(column, center)
+    &__img
+        @media(max-width: $medium)
+            width: 56.9rem
+            height: 59.3rem
+            margin-left: 14rem
 
     
 .content-section
     +flex-direction-justify(column, center)
     padding-bottom: 7.8rem;
     padding-right: 4.2rem
+    @media(max-width: $medium)
+        padding-right: 0
+        padding-bottom: 10rem;
     &__title
         max-width: 31rem
         +h2
         color: $color-light-xl
     &__subtitle
         max-width: 46rem
-        padding: 4.2rem 0 4.1rem    ;
+        padding: 4.2rem 0 4.2rem    
         +paragraph-l
         color: $color-dark-s
     &__button
+        @media(max-width: $medium)
+            margin: 0 auto
 
 
 .button
@@ -330,26 +346,32 @@ body
 
 .wrapper-section
     padding: 8rem 0 10rem
-    @media(max-width: $medium)
-        padding: 6rem 0 7rem
     @media(max-width: $small)
         padding: 4.2rem 0 3rem
-    
     justify-content: center
 
 .about
     &__wrapper
         +flex-direction-algin(row, center)
+        @media(max-width: $medium)
+            flex-direction: column
     &__img
         padding-right: 12.1rem  
+        @media(max-width: $medium)
+            order: 2
+            padding-right: 0
+            margin-top: 8rem
     &__content
-
+        @media(max-width: $medium)
+            order: 1
     &__title
         +h3
         color: $color-dark-l
         max-width: 37rem
     &__info
         max-width: 43rem
+        @media(max-width: $medium)
+            max-width: 43.6rem
         +paragraph-l
         color: $color-dark-xl
         p
@@ -363,10 +385,6 @@ body
     &__content
         //+flex-direction-algin-justify(column, center, space-between)
         +flex-direction-algin(column, center)
-        @media(max-width: $medium)
-            padding-top:  2rem
-        @media(max-width: $small)
-            padding-top:  0rem
         width: 100%
         position: relative
         min-height: 69.7rem
@@ -406,10 +424,11 @@ body
 .slider
     +flex-direction-algin(row, center)
     width: inherit
-    @media(max-width: $medium)
-        max-width: 58rem
-    @media(max-width: $small)
-        max-width: 58rem
+    &__wrapper
+        min-width: 99rem
+        overflow: hidden
+        @media(max-width: $medium)
+            max-width: 58rem
     &__control
         +flex-direction-algin-justify(row, center, center)
         border: 2px solid $color-primary
@@ -437,6 +456,8 @@ body
         +flex-direction-justify(row, space-between)
         width: 100%
         padding: 0 5.7rem
+        @media(max-width: $medium)
+            padding: 0 5.7rem
     &__page-num
         background-color: $color-primary
         &:hover
