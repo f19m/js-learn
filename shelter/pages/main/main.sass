@@ -390,7 +390,7 @@ body
         max-width: 40rem
         +h3
         @media(max-width: $medium)
-            margin-bottom: 3rem
+            margin-bottom: 6rem
         @media(max-width: $small)
             +h3-mobile
             margin: 0
@@ -427,7 +427,7 @@ body
         max-width: 106.9rem
         overflow: hidden
         @media(max-width: $medium)
-            max-width: 58rem
+            max-width: 60.4rem
     &__control
         +flex-direction-algin-justify(row, center, center)
         border: 2px solid $color-primary
@@ -462,7 +462,7 @@ body
         width: 100%
         padding: 0 6rem
         @media(max-width: $medium)
-            padding: 0 5.7rem
+            padding: 0px 4.4rem
 
 
 
@@ -472,6 +472,8 @@ body
     background: $color-light-s
     border-radius: 0.9rem
     margin: 0 4.5rem
+    @media(max-width: $medium)
+        margin: 0 2rem
     &:hover
         box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
         background: $color-light-xl
@@ -500,7 +502,9 @@ body
 
 .help
     &__content
-        max-height: 43.1rem;
+        min-height: 43.1rem;
+        @media(max-width: $medium)
+            min-height: 44.8rem
         +flex-direction-algin(column, center)
     &__header
         +h3
@@ -511,13 +515,25 @@ body
         margin-top: 6rem      
         +flex-direction-justify($direction: row, $justify-content: center)
         flex-wrap: wrap
+        @media(max-width: $medium)
+            margin-bottom: -5.5rem
     &__item
         +flex-direction-algin(column,center)   
+        @media(max-width: $medium)
+            width: 17rem
         &:first-child
             padding: 0 6rem 5.5rem 6rem
+            @media(max-width: $medium)
+                margin: 0 3rem 5.5rem 3rem
+                padding: 0
+            
+           
     
 .help__item + .help__item
     padding: 0 6rem 5.5rem
+    @media(max-width: $medium)
+        margin: 0 3rem 5.5rem 3rem
+        padding: 0
 
 =help-item-image($image)
     background: no-repeat 50% 50% url("../../assets/icons/help/" + $image)
@@ -562,11 +578,18 @@ body
     &__content
         width: 100%
         +flex-direction-justify(row, center)
+        @media(max-width: $medium)
+            +flex-direction-algin-justify(column, center, center)
         //min-height: 28.2rem
     &__image
         padding: 1.1rem 3rem 1rem 0
+        @media(max-width: $medium)
+            padding: 6rem 0 0 0
+            order: 2
     &__info 
         max-width: 38rem
+        @media(max-width: $medium)
+            order: 1
     &__title
         +h3
         max-width: 30rem

@@ -57,6 +57,12 @@
             padding-top:  2rem
         @media(max-width: $small)
             padding-top:  0rem    
+      &__title
+        @media(max-width: $medium)
+            margin-bottom: 3rem
+        @media(max-width: $small)
+            +h3-mobile
+            margin: 0
 
 .slider
     @media(max-width: $medium)
@@ -69,6 +75,9 @@
         &:hover
             background-color: $color-primary
             border: 2px solid $color-primary
+    &__content
+        @media(max-width: $medium)
+            padding: 0 5.7rem
 
 .paging-menu
     +flex-direction-algin-justify(row, center, space-between)
