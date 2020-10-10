@@ -156,6 +156,7 @@ $Arial : Arial
 body
     font-family: $Georgia
     width: 100vw
+    overflow-x: hidden
     
 
 .header
@@ -164,8 +165,7 @@ body
     top: 60px
     &__content
         width: 100%
-        @media(max-width: $standart)
-            +flex-algin-justify(center, space-between)
+        +flex-algin-justify(center, space-between)
         @media(max-width: $small)
             +flex-algin-justify(baseline, space-between)
     &__title
@@ -177,8 +177,7 @@ body
         margin-top: 1rem
         text-align: center
     &__menu
-        @media(max-width: $standart)
-            width: 44.3rem
+        width: 44.3rem
         @media(max-width: $small)
             width: 26px
             margin: 1.7rem 4.4rem 0 0
@@ -186,8 +185,7 @@ body
 
 
 .wrapper
-    @media(max-width: $standart)
-        max-width: 120rem
+    max-width: 120rem
     @media(max-width: $medium)
         max-width: 70.8rem 
     @media(max-width: $small)
@@ -200,9 +198,8 @@ body
     display: flex
     /* скрываем чекбокс */
     &__toggle
-        @media(max-width: $standart)
-            visibility: hidden;
-            position: absolute
+        visibility: hidden;
+        position: absolute
         @media(max-width: $small)
             visibility: visible;
         opacity: 0
@@ -223,8 +220,7 @@ body
     /* стилизуем кнопку */
     // to-do: поправить в соответсвии с макетом
     &__btn
-        @media(max-width: $standart)
-            visibility: hidden;
+        visibility: hidden;
         @media(max-width: $small)
             visibility: visible
         +flex-direction-algin(row, center)
@@ -278,8 +274,7 @@ body
 
 .list
     width: 100%
-    @media(max-width: $standart)
-        +flex-direction-justify(row, space-between)
+    +flex-direction-justify(row, space-between)
     @media(max-width: $small)
         +flex-direction-justify(column, space-between)
     &__item
@@ -334,12 +329,11 @@ body
 
 
 .wrapper-section
-    @media(max-width: $standart)
-        padding: 8rem 0 10rem
+    padding: 8rem 0 10rem
     @media(max-width: $medium)
         padding: 6rem 0 7rem
     @media(max-width: $small)
-        padding: 4rem 0 3rem
+        padding: 4.2rem 0 3rem
     
     justify-content: center
 
@@ -368,34 +362,35 @@ body
     background: $color-light-l
     &__content
         //+flex-direction-algin-justify(column, center, space-between)
-        +flex-direction(column)
+        +flex-direction-algin(column, center)
+        @media(max-width: $medium)
+            padding-top:  2rem
+        @media(max-width: $small)
+            padding-top:  0rem
         width: 100%
         position: relative
         min-height: 69.7rem
     &__title
         max-width: 40rem
-        @media(max-width: $standart)
-            +h3
+        +h3
         @media(max-width: $medium)
-            margin-top: 1.2rem
+            margin-bottom: 3rem
         @media(max-width: $small)
             +h3-mobile
             margin: 0
         color: $color-dark-l
         text-align: center
-        margin: 0 auto
+        // margin: 0 auto
         span
             display: block
     &__slider
         margin: 6rem 0 0 0
-        @media(max-width: $standart)
-            margin-right: auto
-            margin-left: auto
         @media(max-width: $medium)
-            margin: 0 auto
-            padding-top: 5.8rem
+            margin: 0
         @media(max-width: $small)
-            padding-top: 3.3rem   
+            margin-top: 4.2rem
+        // margin-right: auto
+        // margin-left: auto
     &__button
         +button($color-primary, $color-primary-light)
         max-width: 26.1rem
@@ -410,8 +405,7 @@ body
 
 .slider
     +flex-direction-algin(row, center)
-    @media(max-width: $standart)
-        width: inherit
+    width: inherit
     @media(max-width: $medium)
         max-width: 58rem
     @media(max-width: $small)
@@ -603,14 +597,12 @@ body
     background: url('../../assets/images/noise_transparent.png'), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20
 
 .wrapper-footer
-    @media(max-width: $standart)
-        padding-top: 4rem
+    padding-top: 4rem
     @media(max-width: $medium)
         padding-top: 0rem
 
 .footer-content
-    @media(max-width: $standart)
-        +flex-direction-justify(row, space-between)
+    +flex-direction-justify(row, space-between)
     @media(max-width: $medium)
         +flex-direction-justify(row, center)
         flex-wrap: wrap;
@@ -622,8 +614,7 @@ body
         @media(max-width: $small)
             margin: 0
     &__info
-        @media(max-width: $standart)
-            padding: 1.6rem 0 6rem 0
+        padding: 1.6rem 0 6rem 0
         @media(max-width: $medium)
             padding: 3.1rem 0 0rem 0
             min-height: 26.4rem
@@ -637,9 +628,12 @@ body
         width: 30rem
         height: 31rem
         @media(max-width: $medium)
-            margin-top:  6rem
+            margin-top:  6.5rem
         @media(max-width: $small)
             margin-top:  9.2rem
+            width: 26rem
+            height: 26.9rem
+
 
 .footer-info
     +flex-direction-justify(column, space-between)

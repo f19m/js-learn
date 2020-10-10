@@ -8,8 +8,7 @@
     
 .header
     &__content-p30
-        @media(max-width: $standart)
-            padding: 3rem 0 3.1rem 0
+        padding: 3rem 0 3.1rem 0
     &__title-dark
         color: $color-dark-l
     &__subtitle-dark
@@ -33,8 +32,7 @@
 .paging-list
     +flex-direction(column)
     &__wrapper
-        @media(max-width: $standart)
-            max-height: 93rem
+        max-height: 93rem
         @media(max-width: $medium)
             max-height: 136.5rem
         overflow: hidden
@@ -42,12 +40,9 @@
         +flex-justify(start)
         flex-wrap: wrap
         min-height: 93rem
-        @media(max-width: $standart)
-            margin: -1.5rem -2rem 0
-        @media(max-width: $medium)
-            margin: -3.4rem -2rem 0
+        margin: -1.5rem -2rem 0
         @media(max-width: $small)
-            margin: 0
+              margin: -1.5rem 0 0
     &__item
         margin: 1.5rem 2rem
     &__menu
@@ -55,13 +50,11 @@
 
 .paging-menu
     +flex-direction-algin-justify(row, center, space-between)
-    @media(max-width: $standart)
-        margin-top: 3rem
+    margin-top: 3rem
     @media(max-width: $medium)
-        margin-top: 2.1rem
-        margin-bottom: 0.5rem
+        margin: 4rem 0 0.6rem 0
     @media(max-width: $small)
-        margin: 4.5rem 0 0 0
+        margin: 4.2rem 0 12px 0;
         min-width: 30rem
 
 .list-item + .list-item
