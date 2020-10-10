@@ -597,6 +597,11 @@ body {
 }
 
 .slider {
+  width: inherit;
+  position: relative;
+}
+
+.slider__wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -607,11 +612,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: inherit;
-}
-
-.slider__wrapper {
-  max-width: 99rem;
+  max-width: 106.9rem;
   overflow: hidden;
 }
 
@@ -642,14 +643,25 @@ body {
   cursor: pointer;
 }
 
+.slider__control-arrow {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
 .slider__control:hover {
   border: 2px solid #FDDCC4;
   background-color: #FDDCC4;
 }
 
 .slider__control-revers {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  -webkit-transform: translateY(-50%) rotate(180deg);
+          transform: translateY(-50%) rotate(180deg);
+}
+
+.slider__control-right {
+  right: 0;
 }
 
 .slider__control svg {
@@ -682,16 +694,13 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
-  padding: 0 5.7rem;
+  padding: 0 6rem;
 }
 
-.slider__page-num {
-  background-color: #F1CDB3;
-}
-
-.slider__page-num:hover {
-  background-color: #F1CDB3;
-  border: 2px solid #F1CDB3;
+@media (max-width: 768px) {
+  .slider__content {
+    padding: 0 5.7rem;
+  }
 }
 
 .list-item {
@@ -707,6 +716,7 @@ body {
           align-items: center;
   background: #FAFAFA;
   border-radius: 0.9rem;
+  margin: 0 4.5rem;
 }
 
 .list-item:hover {
@@ -1218,6 +1228,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .paging-list__wrapper {
@@ -1282,6 +1295,16 @@ body {
   }
 }
 
+.slider__page-num {
+  position: relative;
+  background-color: #F1CDB3;
+}
+
+.slider__page-num:hover {
+  background-color: #F1CDB3;
+  border: 2px solid #F1CDB3;
+}
+
 .paging-menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1310,6 +1333,15 @@ body {
     margin: 4.2rem 0 12px 0;
     min-width: 30rem;
   }
+}
+
+.paging-menu__item {
+  position: relative;
+}
+
+.paging-menu__item > .slider__control-revers {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 .wrapper-section {

@@ -31,6 +31,7 @@
 
 .paging-list
     +flex-direction(column)
+    align-items: center
     &__wrapper
         max-height: 93rem
         @media(max-width: $medium)
@@ -62,6 +63,12 @@
         max-width: 58rem
     @media(max-width: $small)
         max-width: 27rem
+    &__page-num
+        position: relative
+        background-color: $color-primary
+        &:hover
+            background-color: $color-primary
+            border: 2px solid $color-primary
 
 .paging-menu
     +flex-direction-algin-justify(row, center, space-between)
@@ -71,6 +78,10 @@
     @media(max-width: $small)
         margin: 4.2rem 0 12px 0;
         min-width: 30rem
+    &__item
+        position: relative
+        > .slider__control-revers
+            transform: rotate(180deg)
 
 .list-item + .list-item
     //margin: 0 2rem 3rem 2rem
