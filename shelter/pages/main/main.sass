@@ -304,6 +304,7 @@ body
         padding-top: 15rem
     background: url('../../assets/images/noise_transparent.png'), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20
     &__content
+        width: 100%
         +flex
         @media(max-width: $medium)
             +flex-direction-algin(column, center)
@@ -312,6 +313,10 @@ body
             width: 56.9rem
             height: 59.3rem
             margin-left: 14rem
+        @media(max-width: $small)
+            width: 26rem
+            height: 27.2rem
+            margin-left: 4rem
 
     
 .content-section
@@ -320,16 +325,23 @@ body
     padding-right: 4.2rem
     @media(max-width: $medium)
         padding-right: 0
-        padding-bottom: 10rem;
+        padding-bottom: 10rem
+    @media(max-width: $small)
+        padding-bottom: 10.5rem
     &__title
         max-width: 31rem
         +h2
         color: $color-light-xl
+        @media(max-width: $small)
+            +h3-mobile
+            text-align: center
     &__subtitle
         max-width: 46rem
         padding: 4.2rem 0 4.2rem    
         +paragraph-l
         color: $color-dark-s
+        @media(max-width: $small)
+            text-align: center
     &__button
         @media(max-width: $medium)
             margin: 0 auto
@@ -345,36 +357,53 @@ body
 .wrapper-section
     padding: 8rem 0 10rem
     @media(max-width: $small)
-        padding: 4.2rem 0 3rem
+        padding: 4.2rem 0
     justify-content: center
 
 .about
     &__wrapper
         +flex-direction-algin(row, center)
         @media(max-width: $medium)
+            min-height: 86.8rem
             flex-direction: column
+        @media(max-width: $small)
+            min-height: 89rem
+            justify-content: space-between;
     &__img
         padding-right: 12.1rem  
         @media(max-width: $medium)
             order: 2
             padding-right: 0
             margin-top: 8rem
+        @media(max-width: $small)
+            height: 35.3rem
+            margin-top: 0rem
     &__content
+        +flex-direction-justify(column, space-between)
+        min-height: 38rem
         @media(max-width: $medium)
             order: 1
+        @media(max-width: $small)
+            min-height: 49.4rem 
     &__title
         +h3
         color: $color-dark-l
         max-width: 37rem
+        @media(max-width: $small)
+            +h3-mobile
+            margin-left: 0.5rem
+            text-align: center
+            width: 29rem
     &__info
         max-width: 43rem
-        @media(max-width: $medium)
-            max-width: 43.6rem
         +paragraph-l
         color: $color-dark-xl
-        p
-            &:first-child
-                padding: 2.5rem 0
+        @media(max-width: $medium)
+            max-width: 43.6rem
+        @media(max-width: $small)
+            text-align: justify
+            padding: 0 1.5rem
+
 
 
  
@@ -404,6 +433,7 @@ body
         @media(max-width: $medium)
             margin: 0
         @media(max-width: $small)
+            min-height: 50.7rem
             margin-top: 4.2rem
         // margin-right: auto
         // margin-left: auto
@@ -414,6 +444,8 @@ body
         margin: 0 auto
     &__button-mt6
         margin-top: 6rem
+        @media(max-width: $small)
+            margin-top: 4.2rem
     &__link
         +button-link($color-dark-xl)
         white-space: nowrap
@@ -438,14 +470,20 @@ body
         &-arrow
             position: absolute
             top: 50%
+            @media(max-width: $medium)
+                top: 95%
             transform: translateY(-50%)
         &:hover
             border: 2px solid $color-primary-light   
             background-color:   $color-primary-light    
         &-revers
             transform: translateY(-50%) rotate(180deg)
+        &-left
+            left: 6rem
         &-right
             right: 0
+            @media(max-width: $small)
+                 right: 6rem
         svg
             fill: $color-dark-3xl
             cursor: pointer 
@@ -463,6 +501,8 @@ body
         padding: 0 6rem
         @media(max-width: $medium)
             padding: 0px 4.4rem
+        @media(max-width: $small)
+            padding: 0
 
 
 
@@ -474,6 +514,8 @@ body
     margin: 0 4.5rem
     @media(max-width: $medium)
         margin: 0 2rem
+    @media(max-width: $small)
+        margin: 0 1.5rem
     &:hover
         box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
         background: $color-light-xl
@@ -499,17 +541,21 @@ body
 
 
 
-
 .help
     &__content
-        min-height: 43.1rem;
-        @media(max-width: $medium)
-            min-height: 44.8rem
+        max-height: 43.1rem
         +flex-direction-algin(column, center)
+        @media(max-width: $medium)
+            max-height: 59.9rem
+        @media(max-width: $small)
+            max-height: 66.1rem
     &__header
         +h3
         max-width: 31.12rem
         text-align: center
+        @media(max-width: $small)
+            +h3-mobile
+            width: 25rem
     &__list
         //max-height: 28.1rem
         margin-top: 6rem      
@@ -517,14 +563,22 @@ body
         flex-wrap: wrap
         @media(max-width: $medium)
             margin-bottom: -5.5rem
+        @media(max-width: $small)
+            justify-content: start;
+            margin: 3rem -1rem
     &__item
         +flex-direction-algin(column,center)   
         @media(max-width: $medium)
             width: 17rem
+        @media(max-width: $small)
+            width: 13rem
         &:first-child
             padding: 0 6rem 5.5rem 6rem
             @media(max-width: $medium)
                 margin: 0 3rem 5.5rem 3rem
+                padding: 0
+            @media(max-width: $small)
+                margin: 1.5rem
                 padding: 0
             
            
@@ -534,20 +588,31 @@ body
     @media(max-width: $medium)
         margin: 0 3rem 5.5rem 3rem
         padding: 0
+    @media(max-width: $medium)
+        margin: 1.5rem
+        padding: 0
 
 =help-item-image($image)
     background: no-repeat 50% 50% url("../../assets/icons/help/" + $image)
     background-size: 6rem 6rem
+    @media(max-width: $small)
+        background-size: 5rem 5rem
 
 .help-item
     &__text
-        margin-top: 3rem
         +h4
+        margin-top: 3rem
         color: $color-dark-l
         white-space: nowrap
+        @media(max-width: $small)
+            +h5
+            margin-top: 2rem
     &__image
         height: 6rem
         width: 6rem
+        @media(max-width: $small)
+            height: 5rem
+            width: 5rem
 
 .item__image
     &-food
@@ -586,6 +651,12 @@ body
         @media(max-width: $medium)
             padding: 6rem 0 0 0
             order: 2
+        @media(max-width: $medium)
+            padding: 4.2rem 0 0 0 
+        &-dog
+            @media(max-width: $small)
+                width: 26rem
+                height: 13.5rem
     &__info 
         max-width: 38rem
         @media(max-width: $medium)
@@ -593,16 +664,26 @@ body
     &__title
         +h3
         max-width: 30rem
+        @media(max-width: $small)
+            +h3-mobile
+            text-align: center
     &__text
-        margin: 2rem 0 2.1rem 0
         +h5
+        margin: 2rem 0 2.1rem 0
         color: $color-dark-l
+        @media(max-width: $small)
+            +paragraph-l
+            letter-spacing: 0
+            text-align: center
     &__card
         padding: 1rem 1.5rem
         border-radius: 0.9rem
         background-color: $color-primary
         max-width: 34.9rem
         max-height: 4.3rem
+        @media(max-width: $small)
+             max-width: 28.1rem
+             margin: 0 auto
         &:hover
             color: $color-dark-xl
             background-color: $color-primary-light
@@ -619,6 +700,8 @@ body
                 white-space: nowrap 
                 width: 100%
                 +flex-direction-algin-justify(row, center, space-between)
+                @media(max-width: $small)
+                    +h5
                 &:before
                     content: url("../../assets/icons/credit-card.svg")
                     background-position: center           
@@ -636,6 +719,11 @@ body
         font-size: 1.2rem
         line-height: 150%
         color: $color-dark-m
+        @media(max-width: $small)
+            max-width: 28rem
+            margin-left: auto
+            margin-right: auto
+            text-align: justify
         
 
 
