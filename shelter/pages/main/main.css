@@ -744,7 +744,7 @@ body {
           transform: translateY(-50%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 320px) {
   .slider__control-arrow {
     top: 95%;
   }
@@ -760,8 +760,10 @@ body {
           transform: translateY(-50%) rotate(180deg);
 }
 
-.slider__control-left {
-  left: 6rem;
+@media (max-width: 320px) {
+  .slider__control-left {
+    left: 6rem;
+  }
 }
 
 .slider__control-right {
@@ -1024,7 +1026,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 320px) {
   .help__item + .help__item {
     margin: 1.5rem;
     padding: 0;
@@ -1215,7 +1217,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 320px) {
   .donation__image {
     padding: 4.2rem 0 0 0;
   }

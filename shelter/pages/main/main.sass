@@ -470,7 +470,7 @@ body
         &-arrow
             position: absolute
             top: 50%
-            @media(max-width: $medium)
+            @media(max-width: $small)
                 top: 95%
             transform: translateY(-50%)
         &:hover
@@ -479,7 +479,8 @@ body
         &-revers
             transform: translateY(-50%) rotate(180deg)
         &-left
-            left: 6rem
+            @media(max-width: $small)
+                left: 6rem
         &-right
             right: 0
             @media(max-width: $small)
@@ -588,7 +589,7 @@ body
     @media(max-width: $medium)
         margin: 0 3rem 5.5rem 3rem
         padding: 0
-    @media(max-width: $medium)
+    @media(max-width: $small)
         margin: 1.5rem
         padding: 0
 
@@ -651,7 +652,7 @@ body
         @media(max-width: $medium)
             padding: 6rem 0 0 0
             order: 2
-        @media(max-width: $medium)
+        @media(max-width: $small)
             padding: 4.2rem 0 0 0 
         &-dog
             @media(max-width: $small)
