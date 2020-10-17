@@ -175,6 +175,7 @@ body
         top: 30px
     &__content
         width: 100%
+        min-height: 12rem
         +flex-algin-justify(center, space-between)
         @media(max-width: $small)
             +flex-algin-justify(flex-start, space-between)
@@ -289,7 +290,6 @@ body
         max-width: 70.8rem 
     @media(max-width: $small)
         max-width: 30rem    
-
 
 .menu
     display: flex
@@ -642,13 +642,14 @@ body
             margin-bottom: -5.5rem
         @media(max-width: $small)
             justify-content: start
-            margin: 3rem -1rem
+            margin: 2.7rem -1rem
     &__item
         +flex-direction-algin(column,center)   
         @media(max-width: $medium)
             width: 17rem
         @media(max-width: $small)
             width: 13rem
+            height: 8.7rem
         &:first-child
             padding: 0 6rem 5.5rem 6rem
             @media(max-width: $medium)
@@ -733,7 +734,7 @@ body
         &-dog
             @media(max-width: $small)
                 width: 26rem
-                height: 13.5rem
+                height: 13.4rem
     &__info 
         max-width: 38rem
         @media(max-width: $medium)
