@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="data.json"></script>
+    <script src="script.js"></script>
     <title>shelter</title>
 </head>
 
 <body>
+    <a class="anchor__home anchor" id="home"></a>
     <header class='header header-dark'>
         <div class="wrapper">
             <div class="header__content header__content-p30">
@@ -22,13 +25,28 @@
                     </div>
                 </div>
 
-               
-                <nav class="header__menu menu">
-                    <input id="menu__toggle" class="menu__toggle" type="checkbox" />
-                    <label class="menu__btn" for="menu__toggle">
-                        <span></span>
-                    </label>
+                <div class="header__burger">
+                    <svg class="header__burger-icon" width="30" height="22" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <line y1="21" x2="30" y2="21" stroke="#F1CDB3" stroke-width="2"/>
+                        <line y1="11" x2="30" y2="11" stroke="#F1CDB3" stroke-width="2"/>
+                        <line y1="1" x2="30" y2="1" stroke="#F1CDB3" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="burger__menu unvisible">
+                    <div class="burger__wrapper">
+                        <nav class="burger__nav">
+                            <ul class="burger__ul">
+                                <li class="list__item"><a class="burger__link" href="../main/main.html">About the shelter</a></li>
+                                <li class="list__item list__item-selected"><a class="burger__link burger__link-active" href="#home">Our pets</a></li>
+                                <li class="list__item"><a class="burger__link" href="javascript:void(0)">Help the shelter</a></li>
+                                <li class="list__item"><a class="burger__link" href="javascript:void(0)">Contacts</a></li>
+                            </ul> 
+                        </nav>
+                    </div>
+                </div>
+                <div class="burger__overlay unvisible"></div>
 
+                <nav class="header__menu menu">
                     <ul class="menu__list list list-dark">
                         <li class="list__item list__item-dark">
                             <a href="../main/main.html" class="list__link list__link-dark">
@@ -36,17 +54,17 @@
                             </a>
                         </li>
                         <li class="list__item list__item-dark list__item-dark-selected">
-                            <a href="#" class="list__link list__link-dark">
+                            <a href="#home" class="list__link list__link-dark">
                                 Our pets
                             </a>
                         </li>
                         <li class="list__item list__item-dark">
-                            <a href="#" class="list__link list__link-dark">
+                            <a href="javascript:void(0)" class="list__link list__link-dark">
                                 Help the shelter
                             </a>
                         </li>
                         <li class="list__item list__item-dark">
-                            <a href="#" class="list__link list__link-dark">
+                            <a href="javascript:void(0)" class="list__link list__link-dark">
                                 Contacts
                             </a>
                         </li>

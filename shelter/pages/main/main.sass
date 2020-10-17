@@ -115,6 +115,14 @@ $Arial : Arial
         weight: normal
         size: 1.2rem
     line-height: 150%
+    
+=paragraph-mobile-menu
+    font: 
+        family: Arial
+        style: normal
+        weight: normal
+        size: 3.2rem
+    line-height: 160%
 
 =logo_title
     font: 
@@ -169,7 +177,7 @@ body
         width: 100%
         +flex-algin-justify(center, space-between)
         @media(max-width: $small)
-            +flex-algin-justify(baseline, space-between)
+            +flex-algin-justify(flex-start, space-between)
     &__title
         +logo_title
         color: $color-primary
@@ -180,10 +188,96 @@ body
         text-align: center
     &__menu
         width: 44.3rem
+        @media(max-width: $medium)
+            visibility: hidden
+            display: none
+            opacity: 1
         @media(max-width: $small)
             width: 26px
             margin: 1.7rem 4.4rem 0 0
+     
 
+.list
+    width: 100%
+    +flex-direction-justify(row, space-between)
+    // @media(max-width: $small)
+    //     +flex-direction-justify(column, space-between)
+    &__item
+        +flex-justify(center)
+        .list__link
+            +paragraph-l
+            color: $color-dark-s
+        &-selected
+            border-bottom: 3px solid $color-primary
+            .list__link, .burger__link
+                color: $color-light-s
+        &:hover
+            .list__link, .burger__link
+                color: $color-light-s
+
+
+.header__burger
+    width: 3rem
+    height: 3rem
+    position: absolute
+    right: 5.3rem
+    top: 1.6rem
+    z-index: 4
+    visibility: hidden
+    opacity: 0
+    transition: all 0.4s;
+    &-icon 
+       pointer-events: none
+    @media all and (max-width: 767px) 
+        visibility: visible
+        display: flex;
+        align-items: center;
+        opacity: 1
+
+.rotate
+    transform: rotate(90deg)
+
+.logo-burger-opened
+    z-index:  5
+.burger
+    &__menu
+        width: 100%
+        height: 100%
+        position: fixed
+        top: 0
+        left: calc(100vw - 320px)
+        z-index: 3
+        transition: all 0.6s
+    &__wrapper
+        width: 32rem
+        height: 100vh
+        min-height: 82.3rem
+        background-color: $color-dark-3xl
+        +flex-direction-justify(column,center)
+    &__ul 
+        height: 32.7rem
+        +flex-direction-algin-justify(column,center,space-between)
+    &__overlay 
+        width: 100%
+        height: 100%
+        position: fixed
+        top: 0
+        right: 0
+        background-color: rgba(0, 0, 0, .3)
+        transition: .3s all
+        z-index: 2
+    &__link 
+        +paragraph-mobile-menu
+        color: $color-dark-s
+        &_:hover 
+            color: $color-light-s
+        &-active, &:active 
+            color: $color-light-s
+
+
+.unvisible
+    opacity: 0
+    left: 100%
 
 
 .wrapper
@@ -191,7 +285,7 @@ body
     margin: 0 auto
     +flex-algin-justify(center, space-between)
     @media(max-width: $medium)
-        justify-content: center;
+        justify-content: center
         max-width: 70.8rem 
     @media(max-width: $small)
         max-width: 30rem    
@@ -200,98 +294,80 @@ body
 .menu
     display: flex
     /* скрываем чекбокс */
-    &__toggle
-        visibility: hidden;
-        position: absolute
-        @media(max-width: $small)
-            visibility: visible;
-        opacity: 0
-        &:checked ~ .menu__btn > span 
-            top: 0
-            transform: rotate(45deg)
-        &:checked ~ .menu__btn > span::before
-            top: 0
-            transform: rotate(0) 
-        &:checked ~ .menu__btn > span::after
-            top: 0
-            transform: rotate(90deg)  
-        &:checked ~ .menu__list
-            visibility: visible
-            left: 0
-            position: absolute
+    // &__toggle
+    //     visibility: hidden
+    //     position: absolute
+    //     @media(max-width: $small)
+    //         visibility: visible
+    //     opacity: 0
+    //     &:checked ~ .menu__btn > span 
+    //         top: 0
+    //         transform: rotate(45deg)
+    //     &:checked ~ .menu__btn > span::before
+    //         top: 0
+    //         transform: rotate(0) 
+    //     &:checked ~ .menu__btn > span::after
+    //         top: 0
+    //         transform: rotate(90deg)  
+    //     &:checked ~ .menu__list
+    //         visibility: visible
+    //         left: 0
+    //         position: absolute
 
     /* стилизуем кнопку */
     // to-do: поправить в соответсвии с макетом
-    &__btn
-        visibility: hidden;
-        @media(max-width: $small)
-            visibility: visible
-        +flex-direction-algin(row, center)
-        position: absolute
-        // top: 20px;
-        // left: 20px;
-        width: 30px
-        //height: 22px
-        cursor: pointer
-        z-index: 1
-        span, span::before, span::after
-            display: block
-            position: absolute
-            width: 100%
-            height: 2px
-            background-color: #616161
-            transition-duration: .25s
-        span::before 
-            content: ''
-            top: -1rem
-        span::after
-            content: ''
-            top: 1rem
+    // &__btn
+    //     visibility: hidden
+    //     @media(max-width: $small)
+    //         visibility: visible
+    //     +flex-direction-algin(row, center)
+    //     position: absolute
+    //     // top: 20px
+    //     // left: 20px
+    //     width: 30px
+    //     //height: 22px
+    //     cursor: pointer
+    //     z-index: 1
+    //     span, span::before, span::after
+    //         display: block
+    //         position: absolute
+    //         width: 100%
+    //         height: 2px
+    //         background-color: #616161
+    //         transition-duration: .25s
+    //     span::before 
+    //         content: ''
+    //         top: -1rem
+    //     span::after
+    //         content: ''
+    //         top: 1rem
     // to-do: поправить в соответсвии с макетом
-    &__list
-        @media(max-width: $small)
-            visibility: hidden
-            position: absolute
-            top: 0
-            left: -100%
-            width: 300px
-            height: 100%
-            margin: 0;
-            padding: 80px 0
-            list-style: none
-            text-align: center
-            background-color: #ECEFF1
-            box-shadow: 1px 0px 6px rgba(0, 0, 0, .2)
-            transition-duration: .25s
-    &__item
-        @media(max-width: $small)
-            display: block
-            //padding: 12px 24px
-            color: #333
-            transition-duration: .25s
-    &__item:hover
-        @media(max-width: $small)
-            background-color: #CFD8DC
+    //&__list
+        // @media(max-width: $small)
+        //     visibility: hidden
+        //     position: absolute
+        //     top: 0
+        //     left: -100%
+        //     width: 300px
+        //     height: 100%
+        //     margin: 0
+        //     padding: 80px 0
+        //     list-style: none
+        //     text-align: center
+        //     background-color: #ECEFF1
+        //     box-shadow: 1px 0px 6px rgba(0, 0, 0, .2)
+        //     transition-duration: .25s
+    // &__item
+    //     @media(max-width: $small)
+    //         display: block
+    //         //padding: 12px 24px
+    //         color: #333
+    //         transition-duration: .25s
+    // &__item:hover
+    //     @media(max-width: $small)
+    //         background-color: #CFD8DC
 
         
-
-.list
-    width: 100%
-    +flex-direction-justify(row, space-between)
-    @media(max-width: $small)
-        +flex-direction-justify(column, space-between)
-    &__item
-        +flex-justify(center)
-        .list__link
-            +paragraph-l
-            color: $color-dark-s
-        &-selected
-            border-bottom: 3px solid $color-primary
-            .list__link
-                color: $color-light-s
-        &:hover
-            .list__link
-                color: $color-light-s
 
 
 
@@ -321,7 +397,7 @@ body
     
 .content-section
     +flex-direction-justify(column, center)
-    padding-bottom: 7.8rem;
+    padding-bottom: 7.8rem
     padding-right: 4.2rem
     @media(max-width: $medium)
         padding-right: 0
@@ -368,7 +444,7 @@ body
             flex-direction: column
         @media(max-width: $small)
             min-height: 89rem
-            justify-content: space-between;
+            justify-content: space-between
     &__img
         padding-right: 12.1rem  
         @media(max-width: $medium)
@@ -523,9 +599,9 @@ body
     &__title
         font:
             size: 2rem
-            family: Georgia;
-            style: normal;
-            weight: normal;
+            family: Georgia
+            style: normal
+            weight: normal
         line-height: 2.3rem
         letter-spacing: 0.06rem
         color: $color-dark-l
@@ -565,7 +641,7 @@ body
         @media(max-width: $medium)
             margin-bottom: -5.5rem
         @media(max-width: $small)
-            justify-content: start;
+            justify-content: start
             margin: 3rem -1rem
     &__item
         +flex-direction-algin(column,center)   
@@ -740,7 +816,7 @@ body
     +flex-direction-justify(row, space-between)
     @media(max-width: $medium)
         +flex-direction-justify(row, center)
-        flex-wrap: wrap;
+        flex-wrap: wrap
         min-height: 60.9rem
     width: 100%
     &__info + &__info
@@ -825,3 +901,4 @@ body
 //             background-size: 40px 26px
 //             background-repeat: no-repeat
 //             display: block
+
