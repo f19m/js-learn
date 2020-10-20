@@ -75,8 +75,7 @@ body {
   font-style: normal;
   font-weight: normal;
   font-size: 2rem;
-  line-height: 115%;
-  letter-spacing: 0.12rem;
+  margin: 0;
 }
 
 .momentum {
@@ -98,8 +97,23 @@ body {
   color: black;
 }
 
+.momentum-white {
+  color: white;
+}
+
+.momentum-white svg {
+  fill: white;
+}
+
 .momentum__time {
   font-size: 8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 @media (max-width: 700px) {
@@ -108,13 +122,66 @@ body {
   }
 }
 
+.momentum__time p, .momentum__time span {
+  display: block;
+}
+
 .momentum__title {
-  margin-top: 4rem;
   margin-bottom: 3rem;
 }
 
 .momentum__what_focus, .momentum__focus {
   margin-bottom: 0.5rem;
-  opacity: 0.6;
+  opacity: 0.7;
+}
+
+.momentum__reload, .momentum__phrase {
+  cursor: pointer;
+  opacity: 0.7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+}
+
+.momentum__reload > svg, .momentum__phrase > svg {
+  margin-right: 1rem;
+}
+
+.momentum__reload {
+  bottom: 2rem;
+  left: 2rem;
+}
+
+.momentum__phrase {
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.momentum__phrase span {
+  margin-right: 1rem;
+}
+
+svg {
+  fill: white;
+  cursor: pointer;
+  opacity: 0.7;
+  fill: black;
+}
+
+.animate {
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+.rotate {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
 }
 /*# sourceMappingURL=style.css.map */
