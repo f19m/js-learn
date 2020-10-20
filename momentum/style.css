@@ -76,9 +76,12 @@ body {
   font-weight: normal;
   font-size: 2rem;
   margin: 0;
+  min-width: 32rem;
+  min-height: 52rem;
 }
 
 .momentum {
+  min-height: 52rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,12 +92,18 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   text-align: center;
   height: 100vh;
+  width: 100vw;
   color: black;
+  padding: 2rem;
+  background-size: cover;
+  background-position: center center;
+  -webkit-transition: background-image 1s ease-in-out;
+  transition: background-image 1s ease-in-out;
 }
 
 .momentum-white {
@@ -135,9 +144,25 @@ body {
   opacity: 0.7;
 }
 
+.momentum .bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
 .momentum__reload, .momentum__phrase {
-  cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -147,7 +172,6 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  position: absolute;
 }
 
 .momentum__reload > svg, .momentum__phrase > svg {
@@ -155,17 +179,120 @@ body {
 }
 
 .momentum__reload {
-  bottom: 2rem;
-  left: 2rem;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width: 700px) {
+  .momentum__reload {
+    font-size: 1rem;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 
 .momentum__phrase {
-  bottom: 2rem;
-  right: 2rem;
+  opacity: 0.9;
+  max-width: 80vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
 }
 
-.momentum__phrase span {
-  margin-right: 1rem;
+@media (max-width: 700px) {
+  .momentum__phrase {
+    font-size: 1rem;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+.momentum__phrase .quote {
+  margin: 0 1rem 0 0;
+  opacity: 0.9;
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  .momentum__phrase .quote {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+}
+
+.momentum__phrase .quote > blockquote {
+  margin: 0 0 1rem 0;
+  opacity: 0.7;
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+.momentum__phrase .quote > blockquote:hover {
+  opacity: 0.9;
+}
+
+.momentum__weather {
+  opacity: 0.8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  width: 100%;
+}
+
+.momentum__weather .city {
+  font-size: 4rem;
+  letter-spacing: 1rem;
+}
+
+.momentum__weather .metric-stat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.momentum__weather .metric-stat .temperature {
+  font-size: 4rem;
+}
+
+@media (max-width: 700px) {
+  .momentum__weather .metric-stat .temperature {
+    font-size: 2rem;
+  }
+}
+
+.momentum__weather .metric-stat .weather-description {
+  max-width: 13rem;
+  text-align: right;
+}
+
+.momentum__weather .metric-stat i {
+  margin: 0 1rem;
 }
 
 svg {

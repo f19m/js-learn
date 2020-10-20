@@ -6,37 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/css/owfont-regular.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="style.css">
     <title>momentum</title>
 </head>
 
 <body>
     <section class="momentum">
-        <div class="momentum__time">12:17:04 PM</div>
-        <div class="momentum__weather_box">
-            <div class="momentum__weather">
+        <div class="momentum__weather">
+            <div class="city" contenteditable="true">Пермь</div>
 
+            <div class="metric-stat">
+                <div class="temperature"></div>
+                <i class="owf weather-icon owf-3x owf-802"></i>
+                <div class="weather-description"></div>
             </div>
-        </div>
-        <h1 class='momentum__title'>
-            <span class="momentum__greeting">Good Afternoon</span>
-            <span class="momentum__name" contenteditable="true">Brad</span>
-        </h1>
 
-        <h2 class="momentum__what_focus">What is your focus tooday?</h2>
-        <h2 class="momentum__focus" contenteditable="true">Make Cool Videos</h2>
+            <div class="wind-speed">
+                <i class="owf owf-956"></i>
+                <span></span>
+            </div>
 
-        <div class="momentum__reload">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
-            </svg>
-            reload image
         </div>
 
-        <div class='momentum__phrase'>
-            <span>TEST</span>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
-            </svg>
-          
+        <div class="body">
+            <div class="momentum__time">12:17:04 PM</div>
+            <div class="momentum__weather_box">
+                <div class="momentum__weather">
+
+                </div>
+            </div>
+            <h1 class='momentum__title'>
+                <span class="momentum__greeting">Good Afternoon</span>
+                <span class="momentum__name" contenteditable="true">Brad</span>
+            </h1>
+
+            <h2 class="momentum__what_focus">What is your focus tooday?</h2>
+            <h2 class="momentum__focus" contenteditable="true">Make Cool Videos</h2>
+        </div>
+
+        <div class="bottom">
+            <div class="momentum__reload">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+                </svg>
+                reload image
+            </div>
+
+            <div class='momentum__phrase'>
+                <figure class="quote">
+                    <blockquote>
+                    You were not born a winner, and you were not born a loser. You are what you make yourself be.
+                    </blockquote>
+                    <figcaption> 
+                    Lou Holtz
+                    </figcaption>
+                </figure>
+            </div>
         </div>
 
     </section>

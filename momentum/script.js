@@ -142,7 +142,8 @@ const Momentum = {
         curTimeName: null,
         bgImgae: null,
         userName: null,
-        focus: null
+        focus: null,
+        city: null
     },
 
     
@@ -175,14 +176,25 @@ const Momentum = {
         this.elements.greeting.textContent = `Good ${this.properties.curTimeName}`;
 
         const url = `./assets/images/${this.properties.curTimeName.toLowerCase()}/${this.addZero(this.counters.current.num)}.jpg`
-        this.elements.momentum.style.background = `url('${url}')`
+       
+        this.elements.momentum.classList.add('momentum-white')
+
+        const src = url;
+        const img = document.createElement('img');
+        img.src = src;
+        img.onload = () => {      
+          //body.style.backgroundImage = `url(${src})`;
+          this.elements.momentum.style.backgroundImage = `url(${src})`
+        };   
+
+
         // if (this.properties.currHour >= 18 || this.properties.currHour < 12){
         //     //this.elements.momentum.style.color = 'white'
         //     this.elements.momentum.classList.add('momentum-white');
         // }else{
         //     this.elements.momentum.classList.remove('momentum-white');
         // }   
-        this.elements.momentum.classList.add('momentum-white');
+        
     },
 
 
@@ -233,7 +245,9 @@ const Momentum = {
             this.properties.curTimeName = momentum.properties.curTimeName
             this.properties.userName = momentum.properties.userName 
             this.properties.focus = momentum.properties.focus 
+            this.properties.city = momentum.properties.city
         } 
+        
         if (this.properties.userName){
             this.elements.userName.textContent = this.properties.userName
         }else{
@@ -245,46 +259,39 @@ const Momentum = {
         }else{
             this.elements.focus.textContent = '[Enter Focus]'
         }
-    },
 
-    getPhrase: ()=>{
-        const httpGet = function(url) {
-
-            return new Promise(function(resolve, reject) {
-          
-              var xhr = new XMLHttpRequest();
-             
-          
-              xhr.onload = function() {
-                if (this.status == 200) {
-                  resolve(this.response);
-                } else {
-                  var error = new Error(this.statusText);
-                  error.code = this.status;
-                  reject(error);
-                }
-              };
-          
-              xhr.onerror = function() {
-                reject(new Error("Network Error"));
-              };
-              
-              xhr.open('post', 'http://api.forismatic.com/api/1.0/', true);
-              xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
-              xhr.send('method=getQuote&key=457653&format=json&lang=ru');
-            });
-          
+        if (this.properties.city){
+            this.elements.city.textContent = this.properties.city
+        }else{
+            this.elements.city.textContent = '[Enter City]'
         }
-        const url = 'http://api.forismatic.com/api/1.0/?method=getQuote&key=457653&format=json&lang=ru';
-        httpGet().then(
-            response  => {
-                let res = JSON.parse(response);
-                console.log(res)
-            }
-        )
+    },
+     
+    getWheather: async function(){
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.elements.city.textContent}&lang=ru&appid=52fcc881bac63c3dd265c01f6bbad8d3&units=metric`
 
+        const res = await fetch(url);
+        const data = await res.json(); 
+        //console.log(data.weather[0].id, data.weather[0].description, data.main.temp);
 
+        this.elements.weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+        this.elements.temperature.textContent = `${data.main.temp}°C`;
+        this.elements.weatherDescription.textContent = data.weather[0].description;
+        this.elements.windSpeed.querySelector('span').textContent = `${data.wind.speed} м/с`
+
+    },
+    
+    getPhrase: async function(){
+        const req = await fetch('https://api.forismatic.com/api/1.0/',
+        {
+            "headers":{"content-type":"application/x-www-form-urlencoded"},
+            "body":"method=getQuote&key=457653&format=json&lang=ru",
+            "method":"POST"
+        })
+
+        const resp = await req.json();
+        this.elements.phrase.querySelector('blockquote').innerText = resp.quoteText
+        this.elements.phrase.querySelector('figcaption').innerText = resp.quoteAuthor
     },
 
     init(time, greeting, name, focus, weather,momentSection) {
@@ -295,7 +302,14 @@ const Momentum = {
         this.elements.wheather = weather
         this.elements.momentum = momentSection
         this.elements.phrase = document.querySelector('.momentum__phrase')
-        
+        this.elements.wheather = document.querySelector('.momentum__weather')
+    
+        this.elements.weatherIcon = this.elements.wheather.querySelector('.weather-icon');
+        this.elements.temperature = this.elements.wheather.querySelector('.temperature');
+        this.elements.weatherDescription = this.elements.wheather.querySelector('.weather-description');
+        this.elements.windSpeed = this.elements.wheather.querySelector('.wind-speed');
+        this.elements.city =  this.elements.wheather.querySelector('.city');
+
         Date.prototype.getWeekDay = function() {
             let days = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
           
@@ -321,12 +335,13 @@ const Momentum = {
             this.eventHandlers.imgReloadHandler.call(this);
         })
 
+        // USER_NAME
         const setName = function(evt){
           
             if (evt.type==='keypress'){
                 if(evt.which == 13 || evt.keyCode == 13){
                     this.properties.userName = evt.target.innerText
-                    this.elements.userName.blur();
+                    evt.target.blur()
                     this.saveMomentum()
                     if (evt.target.innerText == ''){
                         evt.target.innerText = '[Enter Name]'
@@ -350,13 +365,12 @@ const Momentum = {
         this.elements.userName.addEventListener('blur',  setName.bind(this))
 
 
-
+        // FOCUS
         const setFocus = function(evt){
-          
             if (evt.type==='keypress'){
                 if(evt.which == 13 || evt.keyCode == 13){
                     this.properties.focus = evt.target.innerText
-                    this.elements.focus.blur();
+                    evt.target.blur()
                     this.saveMomentum()
                     if (evt.target.innerText == ''){
                         evt.target.innerText = '[Enter Focus]'
@@ -380,11 +394,54 @@ const Momentum = {
         this.elements.focus.addEventListener('blur',  setFocus.bind(this))
 
 
+        //CITY WEATHER
+        const setCity = function(evt){
+            if (evt.type==='keypress'){
+                if(evt.which == 13 || evt.keyCode == 13){
+                    this.properties.city = evt.target.innerText
+                    evt.target.blur()
+                    this.saveMomentum()
+                    this.getWheather()
+                    if (evt.target.innerText == ''){
+                        evt.target.innerText = '[Enter City]'
+                    }
+                }
+            }else{
+                this.properties.city = evt.target.innerText
+                this.saveMomentum()
+                this.getWheather()
+                if (evt.target.innerText == ''){
+                    evt.target.innerText = '[Enter City]'
+                }
+            }
+        }
+        
+        this.elements.city.addEventListener('click',  (evt)=>{
+            if (evt.target.innerText == '[Enter City]'){
+                evt.target.innerText = ''
+            }
+        })
+        this.elements.city.addEventListener('keypress',  setCity.bind(this))
+        this.elements.city.addEventListener('blur',  setCity.bind(this))
+
+
+
+
+
+
+        
+        // IMG ERLOAD
+        
+        this.elements.phrase.addEventListener('click', () => {
+            this.getPhrase.call(this);
+        })
+
 
         this.loadMomentum()
         this.showtime()
         this.setBgGreet()
         this.getPhrase()
+        this.getWheather()
        
 
     
