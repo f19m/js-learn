@@ -32,9 +32,12 @@ const burgerMenuInit = () => {
         burgherClickHandler();
     });
 
-    const burgerLinks = document.querySelectorAll('.burger__link');
-    burgerLinks.forEach(element => element.addEventListener('click', event => {
-      burgerMenuIcon.click();
-    }));
+    // const burgerLinks = document.querySelectorAll('.burger__link');
+    // burgerLinks.forEach(element => element.addEventListener('click', event => {
+    //   burgerMenuIcon.click();
+    // }));
   }
+  
+
+
   

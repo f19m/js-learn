@@ -157,6 +157,7 @@ $Arial : Arial
     letter-spacing: 0.06rem
     color: $color
     max-height: 5.2rem
+    +flex-algin-justify(center, center)
         
    
 
@@ -172,7 +173,7 @@ body
     position: absolute
     top: 60px
     @media(max-width: $medium)
-        top: 30px
+        top: 0
     &__content
         width: 100%
         min-height: 12rem
@@ -396,7 +397,7 @@ body
         +paragraph-l
         color: $color-dark-xl
         @media(max-width: $medium)
-            max-width: 43.6rem
+            max-width: 43rem
         @media(max-width: $small)
             text-align: justify
             padding: 0 1.5rem
