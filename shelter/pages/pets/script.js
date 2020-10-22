@@ -55,7 +55,7 @@ const sliderInit = function(){
     req.open('GET', './data.json');
 
     
-const createPets = function(data){
+    const createPets = function(data){
     const petsList = document.querySelector(".paging-list__content")
     
     const petsItemTemplate = function(name, imgUrl){

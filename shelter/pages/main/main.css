@@ -166,6 +166,13 @@ body {
         -ms-flex-align: center;
             align-items: center;
     opacity: 1;
+    top: 3.6rem;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .header__burger {
+    top: 1.6rem;
   }
 }
 
