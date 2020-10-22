@@ -166,6 +166,13 @@ body {
         -ms-flex-align: center;
             align-items: center;
     opacity: 1;
+    top: 3.6rem;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .header__burger {
+    top: 1.6rem;
   }
 }
 
@@ -1676,6 +1683,8 @@ body {
       flex-wrap: wrap;
   min-height: 93rem;
   margin: -1.5rem -2rem 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 @media (max-width: 320px) {
@@ -1758,6 +1767,11 @@ body {
 .slider__page-num:hover {
   background-color: #F1CDB3;
   border: 2px solid #F1CDB3;
+}
+
+.slider__content {
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 @media (max-width: 768px) {
@@ -1850,6 +1864,8 @@ body {
   position: fixed;
   top: 0px;
   display: none;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 .popup__wrapper {
