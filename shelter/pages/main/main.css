@@ -20,6 +20,12 @@ body {
   }
 }
 
+@media (max-width: 320px) {
+  .header {
+    top: 30px;
+  }
+}
+
 .header__content {
   width: 100%;
   min-height: 12rem;

@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
     burgerMenuInit();
     sliderInit();
     pageMenuInit();
+    popUpInit();
+
+
+    document.querySelector('.header__logo').addEventListener('click', ()=>{
+        document.querySelector('#main-page').click();
+    });
 });
 
 
@@ -58,19 +64,30 @@ const createPets = function(data){
                     alt="${name}">
                 <p class="list-item__title">${name}</p>
                 <div class="list-item__button button">
-                    <a href="#" class="list-item__link">
+                    <a href="javascript:void(0)" class="list-item__link">
                         Learn more
                     </a>
                 </div>`;
     }
 
     let sliderItemsFragment = document.createDocumentFragment();
+    
+    let indx = 0;
     data.forEach(item => {
         let petItem = document.createElement('div');
         petItem.classList.add('paging-list__item')
         petItem.classList.add('list-item')
         petItem.innerHTML = petsItemTemplate(item.name, item.img);
+        petItem.id = indx;
+
+        petItem.querySelector('.list-item__link').addEventListener('click', (evt)=>{
+            console.log(evt.target)
+            console.log('id= ' + petItem.id)
+            popUpShow(item);
+        })
+
         sliderItemsFragment.appendChild(petItem);
+        indx ++
     });
 
     petsList.appendChild(sliderItemsFragment);
@@ -265,5 +282,64 @@ const pageMenuInit = ()=>{
         pageMenuInit();
     })
     
+
+}
+
+
+
+const popUpInit = ()=>{
+    const popUpWrapper = document.querySelector('.popup__wrapper'),
+        popUp = document.querySelector('#about-popup'),
+        popUpClose = document.querySelector('.popup__close');
+    
+    const closePopUpHandler = () =>{
+        popUp.classList.remove('popup-visible');
+    }        
+    popUpClose.addEventListener('click', ()=>{closePopUpHandler();});
+    popUp.addEventListener('click', (evt)=>{
+        if (evt.target == popUp){
+            closePopUpHandler();
+        }
+    });
+
+}
+
+
+const popUpShow = (data)=>{
+    
+    const popUpElem = document.querySelector('#about-popup');
+    let popUp = {
+        img: document.querySelector('.popup__img-image'),
+        title: document.querySelector('.pet-info__title'),
+        subtitle: document.querySelector('.pet-info__subtitle'),
+        descr: document.querySelector('.pet-info__description'),
+        list: {
+            age: document.querySelector('.info_list__item-age > span'),
+            inoculations: document.querySelector('.info_list__item-inoculations > span'),
+            diseases: document.querySelector('.info_list__item-diseases > span'),
+            parasites: document.querySelector('.info_list__item-parasites > span'),
+        }
+    }
+        
+    
+    popUpElem.classList.add('popup-visible');
+    popUp.img.src = data.img;
+    popUp.img.alt = data.name;
+
+    popUp.title.innerHTML = data.name
+    popUp.subtitle.innerHTML = `${data.type} - ${data.name}`;
+    popUp.descr.innerHTML  = data.description;
+
+    for (const key in popUp.list) {
+        if (popUp.list.hasOwnProperty(key)) {
+            if (typeof data[key] === 'string'){
+                popUp.list[key].innerHTML = data[key]
+            }else{
+                popUp.list[key].innerHTML = data[key].join(', ')
+            }
+            
+        }
+    }
+ 
 
 }
