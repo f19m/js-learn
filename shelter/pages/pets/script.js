@@ -193,6 +193,30 @@ const pageMenuInit = ()=>{
             slider.rows = 3;
         }
         slider.maxPage= Math.ceil(fullPetsList.length / (slider.columns * slider.rows)) - 1;    
+        if (slider.curPage > slider.maxPage){
+            slider.curPage = slider.maxPage
+        }
+    }
+
+    const pageMenuInit = ()=>{
+        if (slider.curPage === 0){
+            prevPage.classList.add('slider__control_inactive')
+            firstPage.classList.add('slider__control_inactive')
+            nextPage.classList.remove('slider__control_inactive')
+            lastPage.classList.remove('slider__control_inactive')
+        }else if (slider.curPage === slider.maxPage){
+            prevPage.classList.remove('slider__control_inactive')
+            firstPage.classList.remove('slider__control_inactive')
+            nextPage.classList.add('slider__control_inactive')
+            lastPage.classList.add('slider__control_inactive')
+        }else{
+            prevPage.classList.remove('slider__control_inactive')
+            firstPage.classList.remove('slider__control_inactive')
+            nextPage.classList.remove('slider__control_inactive')
+            lastPage.classList.remove('slider__control_inactive')
+        }
+        pageNum.innerText = (slider.curPage + 1);
+        petsList.style.top = `${ 0 - slider.offset * slider.curPage  }px`
     }
     
 
@@ -213,25 +237,9 @@ const pageMenuInit = ()=>{
             }
         }
         
-        pageNum.innerText = (slider.curPage + 1);
-        petsList.style.top = `${ 0 - slider.offset * slider.curPage  }px`
-
-        if (slider.curPage === 0){
-            prevPage.classList.add('slider__control_inactive')
-            firstPage.classList.add('slider__control_inactive')
-            nextPage.classList.remove('slider__control_inactive')
-            lastPage.classList.remove('slider__control_inactive')
-        }else if (slider.curPage === slider.maxPage){
-            prevPage.classList.remove('slider__control_inactive')
-            firstPage.classList.remove('slider__control_inactive')
-            nextPage.classList.add('slider__control_inactive')
-            lastPage.classList.add('slider__control_inactive')
-        }else{
-            prevPage.classList.remove('slider__control_inactive')
-            firstPage.classList.remove('slider__control_inactive')
-            nextPage.classList.remove('slider__control_inactive')
-            lastPage.classList.remove('slider__control_inactive')
-        }
+       
+        pageMenuInit();
+        
 
     }
 
@@ -251,11 +259,11 @@ const pageMenuInit = ()=>{
         setPageHandler();
     })
 
-
-
-
-
-
+    window.addEventListener('resize',()=>{
+        console.log('resized');
+        sliderInit();
+        pageMenuInit();
+    })
     
 
 }
