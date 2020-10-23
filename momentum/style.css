@@ -78,6 +78,8 @@ body {
   margin: 0;
   min-width: 32rem;
   min-height: 52rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .momentum {
@@ -240,7 +242,7 @@ body {
 }
 
 .momentum__phrase .quote > blockquote:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .momentum__weather {
@@ -310,5 +312,54 @@ svg {
 .rotate {
   -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
+}
+
+.bordered {
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.toolbar {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 16px;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+  bottom: -70px;
+}
+
+@media screen and (max-width: 320) {
+  .toolbar {
+    display: none;
+  }
+}
+
+.toolbar > p {
+  display: block;
+  margin: 0;
+}
+
+.toolbar > p:last-child {
+  margin-top: 5px;
+}
+
+.toolbar-visilbe {
+  bottom: 0px;
 }
 /*# sourceMappingURL=style.css.map */
