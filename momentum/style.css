@@ -163,6 +163,14 @@ body {
   width: 100%;
 }
 
+@media (max-width: 320px) {
+  .momentum .bottom {
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+  }
+}
+
 .momentum__reload, .momentum__phrase {
   opacity: 0.9;
   display: -webkit-box;
@@ -176,8 +184,32 @@ body {
           justify-content: center;
 }
 
+@media screen and (max-width: 320px) {
+  .momentum__reload, .momentum__phrase {
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+  }
+}
+
 .momentum__reload > svg, .momentum__phrase > svg {
   margin-right: 1rem;
+}
+
+@media screen and (max-width: 320px) {
+  .momentum__reload > svg, .momentum__phrase > svg {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .momentum__reload > p, .momentum__phrase > p {
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+  }
 }
 
 .momentum__reload {
@@ -190,7 +222,7 @@ body {
 
 @media (max-width: 700px) {
   .momentum__reload {
-    font-size: 1rem;
+    font-size: 1.4rem;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -209,7 +241,7 @@ body {
 
 @media (max-width: 700px) {
   .momentum__phrase {
-    font-size: 1rem;
+    font-size: 1.4rem;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -323,30 +355,36 @@ svg {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 60px;
+  height: 85px;
   background: rgba(0, 0, 0, 0.4);
   color: white;
-  font-size: 16px;
+  font-size: 1.6rem;
   width: 100%;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: absolute;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   -webkit-transition: all 0.8s;
   transition: all 0.8s;
-  bottom: -70px;
+  bottom: -170px;
 }
 
-@media screen and (max-width: 320) {
+@media (max-width: 320px) {
   .toolbar {
-    display: none;
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .toolbar {
+    height: 30%;
+    bottom: -50%;
   }
 }
 
@@ -361,5 +399,9 @@ svg {
 
 .toolbar-visilbe {
   bottom: 0px;
+}
+
+.toolbar__close {
+  margin-left: 10px;
 }
 /*# sourceMappingURL=style.css.map */

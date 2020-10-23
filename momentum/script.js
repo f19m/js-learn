@@ -339,10 +339,13 @@ const Momentum = {
 document.addEventListener('DOMContentLoaded', function(event) {
 
     Momentum.init(time, greeting, name, focus, weather, momentSection)
+    document.querySelector('.toolbar__close').addEventListener('click',()=>{
+        document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+    })
 
     document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
     setTimeout( ()=>{
-        document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+       // document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
     }
-        , 3000);
+        , 3500);
 });
