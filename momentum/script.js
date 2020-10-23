@@ -78,6 +78,7 @@ const Momentum = {
                 document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
             }
                 , 3500);
+            isLoaded = true;
         }
         };   
         this.elements.reload.title = `${this.counterNum} - ${this.imgSet[this.counterNum]}`;
