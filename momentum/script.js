@@ -94,7 +94,7 @@ const Momentum = {
             dateMonth = today.getDate() + ' ' + today.getMonthStr();
 
         //this.elements.time.innerHTML = `<p>${weekDate}</p> <p>${this.addZero(hour)}</p><span>:</span><p>${this.addZero(min)}</p><span>:</span><p>${this.addZero(sec)}</p>`;
-        this.elements.time.innerHTML = `${weekDate}, ${dateMonth} <br>${this.addZero(hour)}:${this.addZero(min)}:${this.addZero(sec)}`;
+        this.elements.time.innerHTML = `<p>${weekDate}, ${dateMonth}</p> <p>${this.addZero(hour)}:${this.addZero(min)}:${this.addZero(sec)}</p>`;
         if (!(tmp === undefined)){
             hour = tmp;
         }
