@@ -345,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
     setTimeout( ()=>{
-       // document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+         document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
     }
         , 3500);
 });
