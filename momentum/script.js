@@ -74,6 +74,14 @@ const Momentum = {
           this.elements.momentum.style.backgroundImage = `url(${src})`
         };   
         this.elements.reload.title = `${this.counterNum} - ${this.imgSet[this.counterNum]}`;
+
+        if (!(isLoaded)){
+            document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+            setTimeout( ()=>{
+                document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+            }
+                , 3500);
+        }
         
     },
 
@@ -335,6 +343,7 @@ const Momentum = {
 
 
 
+var isLoaded = false;
 
 document.addEventListener('DOMContentLoaded', function(event) {
 
@@ -343,9 +352,5 @@ document.addEventListener('DOMContentLoaded', function(event) {
         document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
     })
 
-    document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
-    setTimeout( ()=>{
-         document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
-    }
-        , 3500);
+  
 });
