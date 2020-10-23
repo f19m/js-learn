@@ -72,17 +72,15 @@ const Momentum = {
         img.onload = () => {      
           //body.style.backgroundImage = `url(${src})`;
           this.elements.momentum.style.backgroundImage = `url(${src})`
-        };   
-        this.elements.reload.title = `${this.counterNum} - ${this.imgSet[this.counterNum]}`;
-
-        if (!(isLoaded)){
+          if (!(isLoaded)){
             document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
             setTimeout( ()=>{
                 document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
             }
                 , 3500);
         }
-        
+        };   
+        this.elements.reload.title = `${this.counterNum} - ${this.imgSet[this.counterNum]}`;
     },
 
 
