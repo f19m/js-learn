@@ -73,9 +73,9 @@ const Momentum = {
           //body.style.backgroundImage = `url(${src})`;
           this.elements.momentum.style.backgroundImage = `url(${src})`
           if (!(isLoaded)){
-            document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+            document.querySelector('.toolbar').classList.add('toolbar-visilbe')
             setTimeout( ()=>{
-                document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+                document.querySelector('.toolbar').classList.remove('toolbar-visilbe')
             }
                 , 3500);
             isLoaded = true;
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     Momentum.init(time, greeting, name, focus, weather, momentSection)
     document.querySelector('.toolbar__close').addEventListener('click',()=>{
-        document.querySelector('.toolbar').classList.toggle('toolbar-visilbe')
+        document.querySelector('.toolbar').classList.remove('toolbar-visilbe')
     })
 
   
