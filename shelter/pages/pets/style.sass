@@ -148,6 +148,10 @@
         min-width: 68.2rem
         max-height: 40.2rem
         position: relative
+        @media screen and ( max-width: $small)  
+            width: 24rem
+            min-width: 24rem
+            max-height: 39.3rem       
     &__close
         width: 5.2rem
         height: 5.2rem
@@ -158,12 +162,18 @@
         top: 0
         cursor: pointer
         +flex-direction-algin-justify(column, center, center)
+        @media screen and ( max-width: $small)  
+            left: 22rem
     &__img
         width: 35rem
         height: 35rem
         > img
             width: 35rem
             height: 35rem
+        @media screen and ( max-width: $small)         
+            display: none
+            width: 0
+            height: 0
     &__content
         +flex-direction-algin-justify(row, center, space-between)
         width: 63rem
@@ -172,6 +182,10 @@
         background: $color-light-s
         border-radius: 9px
         margin-top: 5.2rem
+        @media screen and ( max-width: $small)  
+            width: 24rem
+            min-height: 34.1rem
+
     &__info
         padding: 1rem 0.9rem 0 1.1rem
         height: 100%;
@@ -194,6 +208,7 @@
         line-height: 110%
         letter-spacing: 0.06rem
         margin-bottom: 2rem
+        text-align: justify
     &__info_list
         > li
             font: 
