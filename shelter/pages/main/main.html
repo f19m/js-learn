@@ -140,7 +140,7 @@
                 </h2>
 
                 <div class="pets__slider slider">
-                    <div class="slider__control slider__control-left slider__control-arrow slider__control_inactive">
+                    <div class="slider__control slider__control-left slider__control-arrow ">
                         <svg xmlns="http://www.w3.org/2000/svg" 
                             width="16" height="16" viewBox="0 0 16 16">
                             <path d="M15 7v2H4v2L1 8l3-3v2z"/>
@@ -150,75 +150,9 @@
                     
                     <div class="slider__content">
                         <div class="slider__wrapper">
-                        <div class="slider__item list-item">
-                            <img class="list-item__image" src="../../assets/images/pets-katrine.png" alt="pets-katrine">
-                            <p class="list-item__title">Katrine</p>
-                            <div class="list-item__button button">
-                                <a href="#" class="list-item__link">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div>
 
-                        <div class="slider__item list-item">
-                            <img class="list-item__image" src="../../assets/images/pets-jennifer.png" alt="pets-jennifer">
-                            <p class="list-item__title">Jennifer</p>
-                            <div class="list-item__button button">
-                                <a href="#" class="list-item__link">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div>
+                           
 
-                        <div class="slider__item  list-item">
-                            <img class="list-item__image" src="../../assets/images/pets-woody.png" alt="pets-woody">
-                            <p class="list-item__title">Woody</p>
-                            <div class="list-item__button button">
-                                <a href="#" class="list-item__link">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Удалить после этой строки-->
-                        <div class="slider__item  list-item">
-                            <img class="list-item__image" src="../../assets/images/pets-woody.png" alt="pets-woody">
-                            <p class="list-item__title">Woody</p>
-                            <div class="list-item__button button">
-                                <a href="#" class="list-item__link">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="slider__item  list-item">
-                            <img class="list-item__image" src="../../assets/images/pets-woody.png" alt="pets-woody">
-                            <p class="list-item__title">Woody</p>
-                            <div class="list-item__button button">
-                                <a href="#" class="list-item__link">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div> 
-
-                        <div class="slider__item  list-item">
-                            <img class="list-item__image" src="../../assets/images/pets-woody.png" alt="pets-woody">
-                            <p class="list-item__title">Woody</p>
-                            <div class="list-item__button button">
-                                <a href="#" class="list-item__link">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="slider__item  list-item">
-                            <img class="list-item__image" src="../../assets/images/pets-woody.png" alt="pets-woody">
-                            <p class="list-item__title">Woody</p>
-                            <div class="list-item__button button">
-                                <a href="#" class="list-item__link">
-                                    Learn more
-                                </a>
-                            </div>
-                        </div> 
                         </div>
                     </div>
                
@@ -399,7 +333,56 @@
     </foter>
 
 
+    <div class="popup" id="about-popup">
+        <div class="popup__wrapper">
 
+            <div class="popup__close">
+                <svg class="popup__close_icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.42618 6.00003L11.7046 1.72158C12.0985 1.32775 12.0985 0.689213 11.7046 0.295433C11.3108 -0.0984027 10.6723 -0.0984027 10.2785 0.295433L5.99998 4.57394L1.72148 0.295377C1.32765 -0.098459 0.68917 -0.098459 0.295334 0.295377C-0.0984448 0.689213 -0.0984448 1.32775 0.295334 1.72153L4.57383 5.99997L0.295334 10.2785C-0.0984448 10.6723 -0.0984448 11.3108 0.295334 11.7046C0.68917 12.0985 1.32765 12.0985 1.72148 11.7046L5.99998 7.42612L10.2785 11.7046C10.6723 12.0985 11.3108 12.0985 11.7046 11.7046C12.0985 11.3108 12.0985 10.6723 11.7046 10.2785L7.42618 6.00003Z" fill="#292929"/>
+                </svg>    
+            </div>
+
+            <div class="popup__content">
+                <div class="popup__img">
+                    <img class="popup__img-image" 
+                    src="../../assets/images/pets-jennifer.png"
+                    alt="pets-jennifer">
+
+                </div>
+                <div class="popup__info pet-info">
+                    <h3 class="pet-info__title">TEST</h3>
+                    <h4 class="pet-info__subtitle">DOG PERDOG</h4>
+
+                    <p class="pet-info__description">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                        Nihil illum perferendis nulla! Minima, iste incidunt facilis, 
+                        laborum blanditiis fuga accusamus, enim esse vitae corporis 
+                        assumenda itaque reiciendis quis tempora neque?
+                    </p>
+
+                <ul class="pet-info__info_list info_list">
+                    <li class="info_list__item info_list__item-age">
+                        <p>Age:</p>
+                        <span>2 month</span>
+                    </li>
+                    <li class="info_list__item info_list__item-inoculations">
+                        <p>Inoculations:</p>
+                        <span>none</span>
+                    </li>
+                    <li class="info_list__item info_list__item-diseases">
+                        <p>Diseases:</p>
+                        <span>none</span>
+                    </li>
+                    <li class="info_list__item info_list__item-parasites">
+                        <p>Parasites:</p>
+                        <span>none</span>
+                    </li>
+                </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 

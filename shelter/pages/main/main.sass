@@ -177,7 +177,7 @@ body
     @media(max-width: $small)
         top: 30px
     &__content
-        width: 100%
+        width: 100vw
         min-height: 12rem
         +flex-algin-justify(center, space-between)
         @media(max-width: $small)
@@ -455,12 +455,16 @@ body
         letter-spacing: 0.1rem
 
 .slider
-    width: inherit
     position: relative
+    width: 100%
     &__wrapper
         +flex-direction-algin(row, center)
-        max-width: 106.9rem
+        //max-width: 106.9rem
+        //position: absolute
+        transition: all 0.4s
         overflow: hidden
+        top: 0
+        left: 6rem
         @media(max-width: $medium)
             max-width: 60.4rem
     &__control
@@ -470,6 +474,7 @@ body
         width: 5.2rem
         height: 5.2rem
         cursor: pointer 
+        z-index: 5
         &-arrow
             position: absolute
             top: 50%
@@ -500,13 +505,19 @@ body
                 fill: $color-dark-s
         //background: no-repeat 50% 50% url("data:image/svg+xml,%3Csvg%20width%3D%2214%22%20height%3D%226%22%20viewBox%3D%220%200%2014%206%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M14%202V4H3V6L0%203L3%200V2H14Z%22%20fill%3D%22%23CDCDCD%22%2F%3E%0A%3C%2Fsvg%3E")
     &__content
+        position: relative
         +flex-direction-justify(row, space-between)
-        width: 100%
+        //min-width: 99rem
+        min-height: 43.5rem
         padding: 0 6rem
+        overflow: hidden
         @media(max-width: $medium)
             padding: 0px 4.4rem
         @media(max-width: $small)
             padding: 0
+
+.transition
+    transition: all 0.4s
 
 
 
@@ -817,7 +828,7 @@ body
             margin-right: 1.28rem
             width:inherit
 
-    
+   
     
 
 // .email::before
@@ -830,3 +841,125 @@ body
 //             background-repeat: no-repeat
 //             display: block
 
+
+
+.popup
+    +flex-direction-algin-justify(column, center, center)
+    width: 100vw
+    min-height: 100%
+    background: rgba(41, 41, 41, 0.6)
+    overflow: hidden
+    position: fixed
+    top: 0px
+    display: none
+    transition: all 0.4s
+    z-index: 10
+    &__wrapper
+        +flex-direction-algin-justify(column, baseline, center)
+        min-width: 95.2rem
+        max-height: 55.2rem
+        position: relative
+        @media screen and ( max-width: $medium)  
+            min-width: 68.2rem
+            max-height: 40.2rem 
+        @media screen and ( max-width: $small)  
+            width: 24rem
+            min-width: 24rem
+            max-height: 39.3rem       
+    &__close
+        width: 5.2rem
+        height: 5.2rem
+        border: 2px solid $color-primary
+        border-radius: 100px
+        position: absolute
+        left: 89rem
+        top: 0
+        cursor: pointer
+        +flex-direction-algin-justify(column, center, center)
+        @media screen and ( max-width: $medium)  
+            left: 62.1rem
+        @media screen and ( max-width: $small)  
+            left: 22rem
+    &__img
+        width: 50rem
+        height: 50rem
+        > img
+            width: 50rem
+            height: 50rem
+            border-radius: 9px
+        @media screen and ( max-width: $medium)  
+            width: 35rem
+            height: 35rem
+            > img
+                width: 35rem
+                height: 35rem
+        @media screen and ( max-width: $small)         
+            display: none
+            width: 0
+            height: 0
+    &__content
+        +flex-direction-algin-justify(row, center, space-between)
+        width: 90rem
+        height: 50rem
+        box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04)
+        background: $color-light-s
+        border-radius: 9px
+        margin-top: 5.2rem
+        @media screen and ( max-width: $medium)  
+            width: 63rem
+            height: 35rem 
+        @media screen and ( max-width: $small)  
+            width: 24rem
+            min-height: 34.1rem
+
+    &__info
+        padding: 2rem 2rem 0 3rem
+        @media screen and ( max-width: $medium)  
+            padding: 1rem 0.9rem 0 1.1rem
+        height: 100%;
+    &-visible
+        display: flex
+
+.pet-info
+    &__title
+        +h3
+        margin-top: 5rem
+        margin-bottom: 1rem
+        @media screen and ( max-width: $medium)  
+            margin-top: 1rem
+    &__subtitle
+        +h4
+        margin-bottom: 4rem
+        @media screen and ( max-width: $medium)  
+            margin-bottom: 2rem
+    &__description
+        font: 
+            family: Georgia
+            style: normal
+            weight: normal    
+            size: 1.3rem
+        line-height: 110%
+        letter-spacing: 0.06rem
+        margin-bottom: 2rem
+        text-align: justify
+    &__info_list
+        > li
+            font: 
+                family: Georgia
+                style: normal
+                weight: normal    
+                size: 1.5rem
+            line-height: 110%
+            letter-spacing: 0.06rem
+            margin-bottom: 0.5rem
+            > p
+                font-weight: 700    
+                display: inline
+            > dd
+        > li:before
+            color: $color-primary
+            content: '\2022'
+            padding-right: 1rem
+            
+.scroll-hidden
+    overflow: hidden

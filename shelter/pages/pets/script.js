@@ -81,8 +81,6 @@ const sliderInit = function(){
         petItem.id = indx;
 
         petItem.querySelector('.list-item__link').addEventListener('click', (evt)=>{
-            console.log(evt.target)
-            console.log('id= ' + petItem.id)
             popUpShow(item);
         })
 
@@ -277,7 +275,6 @@ const pageMenuInit = ()=>{
     })
 
     window.addEventListener('resize',()=>{
-        console.log('resized');
         sliderInit();
         pageMenuInit();
     })

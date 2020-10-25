@@ -3,6 +3,8 @@
 document.addEventListener('DOMContentLoaded', function(event) {
     burgerMenuInit();
     sliderInit();
+    sliderButtonInit();
+    popUpInit();
 });
 
 
@@ -44,130 +46,196 @@ const burgerMenuInit = () => {
 
   //slider
 let pets = [];
-let fullPetsList = []; //48 elem
+let slider_pets = []; //48 elem
+let createPets = {};
+let petsList;
 
 const sliderInit = function(){
     const req = new XMLHttpRequest();
     req.open('GET', './data.json');
 
     
-    // const createPets = function(data){
-    //     const petsList = document.querySelector(".paging-list__content")
+    createPets = function(data, isFrontInsert){
+        petsList = document.querySelector(".slider__wrapper")
         
-    //     const petsItemTemplate = function(name, imgUrl){
-    //         return  `<img class="list-item__image"
-    //                     src="${imgUrl}"
-    //                     alt="${name}">
-    //                 <p class="list-item__title">${name}</p>
-    //                 <div class="list-item__button button">
-    //                     <a href="javascript:void(0)" class="list-item__link">
-    //                         Learn more
-    //                     </a>
-    //                 </div>`;
+        const petsItemTemplate = function(name, imgUrl){
+            return  `<img class="list-item__image"
+                        src="${imgUrl}"
+                        alt="${name}">
+                    <p class="list-item__title">${name}</p>
+                    <div class="list-item__button button">
+                        <a href="javascript:void(0)" class="list-item__link">
+                            Learn more
+                        </a>
+                    </div>`;
+        }
+
+        let sliderItemsFragment = document.createDocumentFragment();
+        
+        let indx = 0;
+        data.forEach(item => {
+            let petItem = document.createElement('div');
+            petItem.classList.add('slider__item')
+            petItem.classList.add('list-item')
+            petItem.innerHTML = petsItemTemplate(item.name, item.img);
+  
+            petItem.querySelector('.list-item__link').addEventListener('click', (evt)=>{
+                popUpShow(item);
+            })
+
+            sliderItemsFragment.appendChild(petItem);
+            indx ++;
+        });
+
+    //    if (isFrontInsert){
+    //         petsList.insertBefore(sliderItemsFragment, petsList.children[0])
+    //     }else{
+    //         petsList.appendChild(sliderItemsFragment);
     //     }
-
-    //     let sliderItemsFragment = document.createDocumentFragment();
-        
-    //     let indx = 0;
-    //     data.forEach(item => {
-    //         let petItem = document.createElement('div');
-    //         petItem.classList.add('paging-list__item')
-    //         petItem.classList.add('list-item')
-    //         petItem.innerHTML = petsItemTemplate(item.name, item.img);
-    //         petItem.id = indx;
-
-    //         petItem.querySelector('.list-item__link').addEventListener('click', (evt)=>{
-    //             console.log(evt.target)
-    //             console.log('id= ' + petItem.id)
-    //             popUpShow(item);
-    //         })
-
-    //         sliderItemsFragment.appendChild(petItem);
-    //         indx ++
-    //     });
-
-    //     petsList.appendChild(sliderItemsFragment);
-    // }
-
-    const sort863 = (list) => {
-        let unique8List = [];
-        let length = list.length;
-        for (let i = 0; i < length / 8; i++) {
-        const uniqueStepList = [];
-        for (let j = 0; j < list.length; j++) {
-            if (uniqueStepList.length >= 8) {
-            break;
-            }
-            const isUnique = !uniqueStepList.some((item) => {
-            return item.name === list[j].name;
-            });
-            if (isUnique) {
-            uniqueStepList.push(list[j]);
-            list.splice(j, 1);
-            j--;
-            }
-        }
-        unique8List = [...unique8List, ...uniqueStepList];
-        }
-        list = unique8List;
-    
-    
-        list = sort6recursively(list);
-    
-        return list;
+        petsList.innerHTML = '';
+        petsList.appendChild(sliderItemsFragment);
     }
-    
-    const sort6recursively = (list) => {
-        const length = list.length;
-    
-        for (let i = 0; i < (length / 6); i++) {
-        const stepList = list.slice(i * 6, (i * 6) + 6);
-    
-        for (let j = 0; j < 6; j++) {
-            const duplicatedItem = stepList.find((item, ind) => {
-            return item.name === stepList[j].name && (ind !== j);
-            });
-    
-            if (duplicatedItem !== undefined) {
-            const ind = (i * 6) + j;
-            const which8OfList = Math.trunc(ind / 8);
-    
-            list.splice(which8OfList * 8, 0, list.splice(ind, 1)[0]);
-    
-            sort6recursively(list);
-            }
-        }
-        }
-    
-        return list;
-    } 
+
 
     req.onload = () => {
         pets = JSON.parse(req.response);
-
-        fullPetsList = (() =>{
-            let tmpArr = [];
-            for (let i = 0; i < 6; i++){
-                const newPets = pets;
-                for (let j = pets.length; j > 0; j--) {
-                    let randIdx = Math.floor(Math.random() * j);
-                    const randElem = newPets.splice(randIdx,1)[0]
-                    newPets.push(randElem)
-                    
-                }
-                tmpArr = [...tmpArr, ...newPets]
-
-            }
-
-            return tmpArr;
-
-        })();
-
-        fullPetsList = sort863(fullPetsList);
-
-        //createPets(fullPetsList);
+        
+        for (let index = 0; index < 3; index++) {
+            const element = pets[index];
+            slider_pets.push(pets.splice(Math.floor(Math.random() * pets.length) ,1)[0]);
+        }
+        createPets(slider_pets);
     }
 
     req.send();
 }
 
+
+
+const sliderButtonInit = ()=>{
+    const sliderPrev = document.querySelector('.slider__control-left'),
+    sliderNext = document.querySelector('.slider__control-right');
+
+   
+    
+    const sliderButtonHandler = (isFrontInsert)=>{
+        const new_pets = []
+        for (let index = 0; index < 3; index++) {
+            const element = pets[index];
+            new_pets.push(pets.splice(Math.floor(Math.random() * pets.length) ,1)[0]);
+        }
+        createPets(new_pets, isFrontInsert);
+        pets = [...pets,...slider_pets]; 
+        slider_pets = new_pets;
+        // вернуть старые данные в список
+        // удалить данные из слайдера
+        // перелеснуть слайдер
+    }
+
+    const makeMove = (isFrontInsert)=>{
+        if (isFrontInsert){
+            
+           petsList.style = `left: calc(${petsList.offsetLeft}px - 1080px)`
+
+            //petsList.classList.add('transition')
+            
+           // setTimeout(()=>{
+                for (let index = 0; index < 3; index++) {
+               // petsList.classList.remove('transition')
+                petsList.children[petsList.children.length - 1].remove()
+                }
+                
+                petsList.style = `left: 60px`
+             //}, 2000)
+
+        }else{
+           // petsList.classList.add('transition')
+            petsList.style = `margin-left: calc(${petsList.offsetLeft}px - 1080px)`
+            
+           
+           //setTimeout(()=>{
+             //   petsList.classList.remove('transition')
+                for (let index = 0; index < 3; index++) {
+                    petsList.children[0].remove()
+                }
+                petsList.style = `margin-left: 0px`
+          //  }, 2000)
+        }
+
+        
+
+    }
+    
+    sliderPrev.addEventListener('click', ()=>{
+        sliderButtonHandler(true);
+       // makeMove(true);
+    });
+
+    sliderNext.addEventListener('click', ()=>{
+        sliderButtonHandler(false);
+       // makeMove(false);
+    });
+
+
+
+}
+
+
+
+
+const popUpInit = ()=>{
+    const popUpWrapper = document.querySelector('.popup__wrapper'),
+        popUp = document.querySelector('#about-popup'),
+        popUpClose = document.querySelector('.popup__close');
+    
+    const closePopUpHandler = () =>{
+        popUp.classList.remove('popup-visible');
+    }        
+    popUpClose.addEventListener('click', ()=>{closePopUpHandler();});
+    popUp.addEventListener('click', (evt)=>{
+        if (evt.target == popUp){
+            closePopUpHandler();
+        }
+    });
+
+}
+
+
+const popUpShow = (data)=>{
+    
+    const popUpElem = document.querySelector('#about-popup');
+    let popUp = {
+        img: document.querySelector('.popup__img-image'),
+        title: document.querySelector('.pet-info__title'),
+        subtitle: document.querySelector('.pet-info__subtitle'),
+        descr: document.querySelector('.pet-info__description'),
+        list: {
+            age: document.querySelector('.info_list__item-age > span'),
+            inoculations: document.querySelector('.info_list__item-inoculations > span'),
+            diseases: document.querySelector('.info_list__item-diseases > span'),
+            parasites: document.querySelector('.info_list__item-parasites > span'),
+        }
+    }
+        
+    
+    popUpElem.classList.add('popup-visible');
+    popUp.img.src = data.img;
+    popUp.img.alt = data.name;
+
+    popUp.title.innerHTML = data.name
+    popUp.subtitle.innerHTML = `${data.type} - ${data.name}`;
+    popUp.descr.innerHTML  = data.description;
+
+    for (const key in popUp.list) {
+        if (popUp.list.hasOwnProperty(key)) {
+            if (typeof data[key] === 'string'){
+                popUp.list[key].innerHTML = data[key]
+            }else{
+                popUp.list[key].innerHTML = data[key].join(', ')
+            }
+            
+        }
+    }
+ 
+
+}
