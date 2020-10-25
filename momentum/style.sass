@@ -66,14 +66,12 @@ body
         weight: normal    
         size: 2rem
     margin: 0
-    min-width: 32rem
-    min-height: 52rem
     position: relative
-    overflow: hidden
- 
+    overflow-x: hidden
+
+
 
 .momentum
-    min-height: 52rem
     display: flex
     flex-direction: column
     align-items: center
@@ -86,7 +84,8 @@ body
     background:
         size: cover
         position: center center
-        //image: url('./assets/images/day/01.jpg')
+    background: rgba(0,0,0,0.2) center center / cover no-repeat;
+    background-blend-mode: multiply
     transition: background-image 1s ease-in-out;
     &__name
         transition: all 0.3s
@@ -106,7 +105,7 @@ body
         font-size: 8rem
         display: flex
         flex-direction: column
-        @media( max-width: 700px)
+        @media( max-width: 768px)
             font-size: 4rem
         > p, span
             display: block
@@ -121,7 +120,7 @@ body
     .bottom
         display: flex
         flex-direction: row
-        align-items: center
+        align-items: flex-end
         justify-content: space-between
         width: 100%
         @media( max-width: 320px)
@@ -148,15 +147,18 @@ body
     &__reload
         transition: all 0.8s
         display: flex
-        @media( max-width: 700px)
+        @media( max-width: 768px)
             //transform: rotate(90deg) 
             font-size: 1.4rem
             flex-direction: column
+        @media( max-width: 320px)
+            margin-bottom: 2rem
     &__phrase
         opacity: 0.9
         max-width: 80vw
         display: flex
         cursor: pointer
+        min-height: 10rem
         @media( max-width: 700px)
             font-size: 1.4rem
             flex-direction: column
@@ -171,8 +173,15 @@ body
                 margin: 0 0 1rem 0
                 opacity: 0.7
                 transition: all 0.6s
+                // min-height: 4rem
+                // @media( max-width: 320px)
+                //     min-height: 6rem
                 &:hover
                     opacity: 1
+            > figcaption
+                // min-height: 2rem
+                // @media( max-width: 320px)
+                //     min-height: 1rem
     &__weather
         opacity: 0.8
         display: flex
@@ -220,29 +229,34 @@ svg
 
 
 .toolbar
-    position: absolute
-    display: flex
+    position: fixed
     flex-direction: row
     justify-content: center
-    height: 85px
+    height: 0
     background: rgba(0,0,0,0.4)
     color: white
     font-size: 1.6rem
     width: 100%
     align-items: baseline
     transition: all 0.8s
-    bottom: -170px
+    //bottom: -170px
+    //left: -1000px
+    bottom: -500px
     @media( max-width: 320px)
         padding-left: 1rem
     @media( max-width: 320px)
         height: 30%
-        bottom: -50%
+        //bottom: -50%
     > p
         display: block
         margin: 0
     > p:last-child
         margin-top: 5px
     &-visilbe
+        display: flex
         bottom: 0px
+        left: 0
+        height: 85px
+        position: absolute
     &__close
         margin-left: 10px

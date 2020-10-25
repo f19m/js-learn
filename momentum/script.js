@@ -168,7 +168,7 @@ const Momentum = {
         this.elements.weatherIcon.classList.add(`owf-${data.weather[0].id}`);
         this.elements.temperature.textContent = `${Math.trunc(data.main.temp)}°C`;
         this.elements.weatherDescription.textContent = data.weather[0].description;
-        this.elements.windSpeed.querySelector('span').textContent = `${Math.trunc(data.wind.speed)} м/с`
+        this.elements.windSpeed.querySelector('span').textContent = `${Math.trunc(data.wind.speed)} м/с, ${data.main.humidity}°`
         }catch(e){
             ///this.elements.city.textContent = 'Погода не доступна, укажите другой город
             this.elements.weatherDescription.textContent  = 'Погода недоступна, укажите другой город'
@@ -177,16 +177,12 @@ const Momentum = {
     },
     
     getPhrase: async function(){
-        const req = await fetch('https://api.forismatic.com/api/1.0/',
-        {
-            "headers":{"content-type":"application/x-www-form-urlencoded"},
-            "body":"method=getQuote&key=457653&format=json&lang=ru",
-            "method":"POST"
-        })
-
+        const req = await fetch("https://type.fit/api/quotes");
         const resp = await req.json();
-        this.elements.phrase.querySelector('blockquote').innerText = resp.quoteText
-        this.elements.phrase.querySelector('figcaption').innerText = resp.quoteAuthor
+        const phrase = resp[Math.floor(Math.random() * resp.length)]
+      
+        this.elements.phrase.querySelector('blockquote').innerText = phrase.text
+        this.elements.phrase.querySelector('figcaption').innerText = phrase.author
     },
 
     init(time, greeting, name, focus, weather,momentSection) {

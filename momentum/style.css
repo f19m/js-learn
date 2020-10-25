@@ -76,14 +76,11 @@ body {
   font-weight: normal;
   font-size: 2rem;
   margin: 0;
-  min-width: 32rem;
-  min-height: 52rem;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .momentum {
-  min-height: 52rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,6 +101,8 @@ body {
   padding: 2rem;
   background-size: cover;
   background-position: center center;
+  background: rgba(0, 0, 0, 0.2) center center/cover no-repeat;
+  background-blend-mode: multiply;
   -webkit-transition: background-image 1s ease-in-out;
   transition: background-image 1s ease-in-out;
 }
@@ -147,7 +146,7 @@ body {
           flex-direction: column;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .momentum__time {
     font-size: 4rem;
   }
@@ -179,9 +178,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -249,13 +248,19 @@ body {
   display: flex;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .momentum__reload {
     font-size: 1.4rem;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+  }
+}
+
+@media (max-width: 320px) {
+  .momentum__reload {
+    margin-bottom: 2rem;
   }
 }
 
@@ -266,6 +271,7 @@ body {
   display: -ms-flexbox;
   display: flex;
   cursor: pointer;
+  min-height: 10rem;
 }
 
 @media (max-width: 700px) {
@@ -387,10 +393,7 @@ svg {
 }
 
 .toolbar {
-  position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  position: fixed;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -398,7 +401,7 @@ svg {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 85px;
+  height: 0;
   background: rgba(0, 0, 0, 0.4);
   color: white;
   font-size: 1.6rem;
@@ -408,7 +411,7 @@ svg {
           align-items: baseline;
   -webkit-transition: all 0.8s;
   transition: all 0.8s;
-  bottom: -170px;
+  bottom: -500px;
 }
 
 @media (max-width: 320px) {
@@ -420,7 +423,6 @@ svg {
 @media (max-width: 320px) {
   .toolbar {
     height: 30%;
-    bottom: -50%;
   }
 }
 
@@ -434,7 +436,13 @@ svg {
 }
 
 .toolbar-visilbe {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   bottom: 0px;
+  left: 0;
+  height: 85px;
+  position: absolute;
 }
 
 .toolbar__close {
