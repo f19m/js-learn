@@ -16,6 +16,6 @@ export default class Key {
     }
 
     this.letter = create('div', 'letter', small);
-    this.key = create('div', 'keyboard__key', [this.spec, this.letter], null, [['code', this.code]]);
+    this.key = create('div', 'keyboard__key', [this.spec, this.letter], null, ['code', this.code]);
   }
 }

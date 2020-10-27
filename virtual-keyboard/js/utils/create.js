@@ -6,44 +6,40 @@
  * @param  {...array} dataAttr
  */
 
- export default function create (el, classNames, child,  parent, parent, ...dataAttr) { // dataAttr: [code, value], [code, value]
-    let element = null;
-    try{
-        element = document.createElement(el);
+// dataAttr: [code, value], [code, value]
+export default function create(el, classNames, child, parent, ...dataAttr) {
+  let element = null;
+  try {
+    element = document.createElement(el);
+  } catch (e) {
+    throw new Error('Unable to create HTMLElemebnt! Give a correct tag name');
+  }
 
+  if (classNames) element.classList.add(...classNames.split(' '));
 
-    } catch(e){
-        throw new Error("Unable to create HTMLElemebnt! Give a correct tag name");
-    }
+  if (child && Array.isArray(child)) {
+    child.forEach((childElem) => {
+      childElem && element.appendChild(childElem);
+    });
+  } else if (child && typeof child === 'object') {
+    element.appendChild(child);
+  } else if (child && typeof child === 'string') {
+    element.innerHTML = child;
+  }
 
-    if (classNames) element.classList.add(...classNames.split(' '));
-    
-    if (child && Array.isArray(child)){
-        child.forEach(childElem => {
-            chElem && element.appendChild(childElem);
-        });
-    } else if (child && typeof child === 'object'){
-        element.appendChild(child);
-    }else if (child && typeof child === 'string'){
-        element.innerHTML = child;
-    }
+  if (parent) parent.appendChild(element);
 
-    if (parent) parent.appendChild(element);
+  if (dataAttr.length) {
+    dataAttr.forEach(([attrName, attrValue]) => {
+      if (attrValue === '') {
+        element.setAttribute(attrName, '');
+      } else if (attrName.toString().match(/value|id|placeholder|cols|rows|autocorrect|spellcheck/)) {
+        element.setAttribute(attrName, attrValue);
+      } else {
+        element.dataset[attrName] = attrValue;
+      }
+    });
+  }
 
-    if (dataAttr.length){
-        dataAttr.forEach(([attrName, attrValue])=>{
-            if (attrValue ===''){
-                element.setAttribute(attrName, '')
-            } else {
-                if (attrName.match(/value|id|placeholder|cols|rows|autocorrect|spellcheck/)){
-                    element.setAttribute(attrName, attrValue);
-                } else {
-                    element.dataSet[attrName] = attrValue;
-                }
-            }
-        });
-    }
-
-    return element
-
+  return element;
 }
