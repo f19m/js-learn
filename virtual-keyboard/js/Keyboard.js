@@ -40,5 +40,25 @@ export default class Keyboard {
         }
       });
     });
+
+    document.addEventListener('keydown', this.handlerEvent);
+    document.addEventListener('keyUp', this.handlerEvent);
+
+    document.addEventListener('mousedown', this.handlerEvent);
+    document.addEventListener('mouseUp', this.handlerEvent);
+  }
+
+  handlerEvent = (evt) => {
+    if (evt.stopPropagation) evt.stopPropagation();
+
+    const { code, type } = evt;
+    const keyObj = this.keyButtons.find((key) => key.code === code);
+    if (!keyObj) return;
+
+    this.output.focus();
+    if (type.match(/keydown|mousedown/)) {
+      if (type.match(/key/)) evt.preventDefault();
+      keyObj.key.classList.add('keyboard__key-active');
+    }
   }
 }

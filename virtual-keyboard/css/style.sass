@@ -110,14 +110,14 @@ body
         vertical-align: top
         padding: 0
         position: relative
-        &--wide
+        &-wide
             width: 12%
-        &--extra-wide
+        &-extra-wide,
             width: 36%
             max-width: 500px
-        &--dark
+        &-dark
             background: rgba(0, 0, 0, 0.25)
-        &--activatable
+        &-activatable
             &::after
                 content: ''
                 top: 1rem
@@ -127,10 +127,21 @@ body
                 height: 0.8rem
                 background: rgba(0, 0, 0, 0.4)
                 border-radius: 50%
-        &--active
+        &-active
             background: rgba(255, 255, 255, 0.12)
             &::after
                 background: #08ff00;
     &__row
         display: flex
         justify-content: center
+
+
+[data-code="Backspace"], [data-code="CapsLock"], [data-code="Enter"], [data-code="ShiftLeft"], 
+[data-code="ShiftRight"]
+    width: 12%
+
+
+[data-code="Space"]
+    width: 36%
+    max-width: 500px
+
