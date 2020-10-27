@@ -133,9 +133,13 @@ body {
   font-size: 1.6rem;
   outline: none;
   cursor: pointer;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -145,6 +149,8 @@ body {
   vertical-align: top;
   padding: 0;
   position: relative;
+  -webkit-box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
 }
 
 .keyboard__key-wide {
@@ -156,11 +162,11 @@ body {
   max-width: 500px;
 }
 
-.keyboard__key-dark {
+.keyboard__key--dark {
   background: rgba(0, 0, 0, 0.25);
 }
 
-.keyboard__key-activatable::after {
+.keyboard__key--activatable::after {
   content: '';
   top: 1rem;
   right: 1rem;
@@ -171,12 +177,21 @@ body {
   border-radius: 50%;
 }
 
-.keyboard__key-active {
+.keyboard__key--active {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.keyboard__key-active::after {
+.keyboard__key--active::after {
   background: #08ff00;
+}
+
+.keyboard__key .spec {
+  color: gray;
+  color-font-size: 1.5rem;
+}
+
+.keyboard__key .letter {
+  font-size: 2rem;
 }
 
 .keyboard__row {
@@ -186,6 +201,17 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.keyboard__key:hover,
+.keyboard__key-press {
+  cursor: pointer;
+  -webkit-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateY(3px);
+          transform: translateY(3px);
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 [data-code="Backspace"], [data-code="CapsLock"], [data-code="Enter"], [data-code="ShiftLeft"],

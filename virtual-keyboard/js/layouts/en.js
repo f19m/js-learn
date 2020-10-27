@@ -68,6 +68,7 @@ export default [
     small: 'Backspace',
     shift: null,
     code: 'Backspace',
+    icon: 'backspace',
   },
   {
     small: 'Delete',
@@ -143,11 +144,13 @@ export default [
     small: 'Enter',
     shift: null,
     code: 'Enter',
+    icon: 'keyboard_return',
   },
   {
     small: 'CapsLock',
     shift: null,
     code: 'CapsLock',
+    icon: 'keyboard_capslock',
   },
   {
     small: 'a',
@@ -288,6 +291,7 @@ export default [
     small: ' ',
     shift: null,
     code: 'Space',
+    icon: 'space_bar',
   },
   {
     small: 'Alt',
@@ -323,5 +327,11 @@ export default [
     small: 'Win',
     shift: null,
     code: 'Win',
+  },
+  {
+    small: 'hide',
+    shift: null,
+    code: 'Hide',
+    icon: 'check_circle',
   },
 ];

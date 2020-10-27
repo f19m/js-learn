@@ -2,7 +2,9 @@
 import create from './utils/create.js';
 
 export default class Key {
-  constructor({ small, shift, code }) {
+  constructor({
+    small, shift, code, icon,
+  }) {
     this.small = small;
     this.shift = shift;
     this.code = code;
@@ -15,8 +17,16 @@ export default class Key {
       this.spec = create('div', 'spec', '');
     }
 
-    this.letter = create('div', 'letter', small);
+    if (icon) {
+      this.letter = create('i', 'material-icons', icon);
+    } else {
+      this.letter = create('div', 'letter', small);
+    }
+
     this.key = create('div', 'keyboard__key', [this.spec, this.letter], null, ['code', this.code],
       this.isFnKey ? ['fn', 'true'] : ['fn', 'false']);
+
+    if (code.match(/CapsLock/g)) this.key.classList.add('keyboard__key--activatable');
+    if (code.match(/Hide/g)) this.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
   }
 }
