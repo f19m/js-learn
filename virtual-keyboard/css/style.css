@@ -203,6 +203,18 @@ body {
           justify-content: center;
 }
 
+.spec:not(empty) {
+  margin-right: 50%;
+}
+
+.spec:not(empty) + .letter {
+  margin-left: 50%;
+}
+
+.spec:empty + .letter {
+  margin-left: 0;
+}
+
 .keyboard__key:hover,
 .keyboard__key-press {
   cursor: pointer;
