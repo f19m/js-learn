@@ -249,7 +249,7 @@ body
 .burger
     &__menu
         width: 100%
-        height: 100%
+        //height: 100%
         position: fixed
         top: 0
         left: calc(100vw - 320px)
@@ -258,15 +258,15 @@ body
     &__wrapper
         width: 32rem
         height: 100vh
-        min-height: 82.3rem
+        //min-height: 82.3rem
         background-color: $color-dark-3xl
         +flex-direction-justify(column,center)
     &__ul 
-        height: 32.7rem
+        //height: 32.7rem
         +flex-direction-algin-justify(column,center,space-between)
     &__overlay 
         width: 100%
-        height: 100%
+        height: 100vh
         position: fixed
         top: 0
         right: 0
@@ -527,6 +527,7 @@ body
     background: $color-light-s
     border-radius: 0.9rem
     margin: 0 4.5rem
+    cursor: pointer
     @media(max-width: $medium)
         margin: 0 2rem
     @media(max-width: $small)
@@ -880,6 +881,8 @@ body
             left: 62.1rem
         @media screen and ( max-width: $small)  
             left: 22rem
+        &:hover
+            background-color: $color-primary
     &__img
         width: 50rem
         height: 50rem
@@ -962,4 +965,8 @@ body
             padding-right: 1rem
             
 .scroll-hidden
+    overflow: hidden
+
+
+.scroll-off
     overflow: hidden

@@ -21,6 +21,8 @@ const burgerMenuInit = () => {
         header.classList.toggle('header-burger-opened');
         const logo = document.querySelector('.header__logo');
         logo.classList.toggle('logo-burger-opened');
+        document.body.classList.toggle('scroll-off');
+        burgerMenu.toggle('scroll-off');
         //document.removeEventListener('click',burgherClickHandler);
         
     }
@@ -78,7 +80,10 @@ const sliderInit = function(){
             petItem.classList.add('slider__item')
             petItem.classList.add('list-item')
             petItem.innerHTML = petsItemTemplate(item.name, item.img);
-  
+            
+            petItem.addEventListener('click', (evt)=>{
+                popUpShow(item);
+            })
             petItem.querySelector('.list-item__link').addEventListener('click', (evt)=>{
                 popUpShow(item);
             })
@@ -190,6 +195,7 @@ const popUpInit = ()=>{
     
     const closePopUpHandler = () =>{
         popUp.classList.remove('popup-visible');
+        document.body.classList.remove('scroll-off');
     }        
     popUpClose.addEventListener('click', ()=>{closePopUpHandler();});
     popUp.addEventListener('click', (evt)=>{
@@ -236,6 +242,8 @@ const popUpShow = (data)=>{
             
         }
     }
+
+    document.body.classList.add('scroll-off');
  
 
 }
