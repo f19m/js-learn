@@ -74,6 +74,7 @@ export default [
     small: 'Delete',
     shift: null,
     code: 'Delete',
+    icon: 'backspace',
   },
   {
     small: 'Tab',
@@ -333,5 +334,10 @@ export default [
     shift: null,
     code: 'Hide',
     icon: 'check_circle',
+  },
+  {
+    small: 'En',
+    shift: null,
+    code: 'Lang',
   },
 ];

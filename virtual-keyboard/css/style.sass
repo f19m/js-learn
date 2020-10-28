@@ -139,9 +139,11 @@ $keyboard-bg-color3: #004134;
                 background: #08ff00;
         .spec
             color: gray
-              font-size: 1.5rem    
+            font-size: 1.5rem    
+            transition: all 0.4s ease-in-out;
         .letter
             font-size: 2rem
+            transition: all 0.4s ease-in-out;
   
     &__row
         display: flex
@@ -149,22 +151,32 @@ $keyboard-bg-color3: #004134;
 
 .spec:not(empty)
     margin-right: 50%
-.spec:not(empty) + .letter
+
+
+
+.spec-active:not(empty)
+    margin-right: 0
+.keyboard__key .spec-active
+    color: #d3ff00
+    font-size: 2.5rem    
+
+.spec:not(empty) + .letter-spec-active
     margin-left: 50%
-.spec:empty + .letter
+    font-size: 1.5rem    
+    color: gray
+
+.spec-active:empty + .letter-spec-active
     margin-left: 0
 
 
 .keyboard__key:hover,
-.keyboard__key-press 
+.keyboard__key--active 
   cursor: pointer;
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
   transform: translateY(3px);
   transition: all 0.1s ease-in-out;
   
-[data-code="Backspace"], [data-code="CapsLock"], [data-code="Enter"], [data-code="ShiftLeft"], 
-[data-code="ShiftRight"]
-    width: 12%
+
 
 
 [data-code="Space"]

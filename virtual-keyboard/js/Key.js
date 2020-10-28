@@ -8,7 +8,7 @@ export default class Key {
     this.small = small;
     this.shift = shift;
     this.code = code;
-    this.isFnKey = Boolean(small.match(/Ctrl|Alt|Shift|Tab|Back|arr|Del|Enter|Caps|Win/));
+    this.isFnKey = Boolean(small.match(/Ctrl|Alt|Shift|Tab|Back|arr|Del|Enter|Caps|Win/) || code.match(/Lang|Hide/));
 
     if (shift && shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/)) {
       // в шифте спец-символ
@@ -26,7 +26,7 @@ export default class Key {
     this.key = create('div', 'keyboard__key', [this.spec, this.letter], null, ['code', this.code],
       this.isFnKey ? ['fn', 'true'] : ['fn', 'false']);
 
-    if (code.match(/CapsLock/g)) this.key.classList.add('keyboard__key--activatable');
+    if (code.match(/CapsLock|Shift|Control/g)) this.key.classList.add('keyboard__key--activatable');
     if (code.match(/Hide/g)) this.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
   }
 }

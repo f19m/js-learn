@@ -187,11 +187,15 @@ body {
 
 .keyboard__key .spec {
   color: gray;
-  color-font-size: 1.5rem;
+  font-size: 1.5rem;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .keyboard__key .letter {
   font-size: 2rem;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .keyboard__row {
@@ -207,16 +211,27 @@ body {
   margin-right: 50%;
 }
 
-.spec:not(empty) + .letter {
-  margin-left: 50%;
+.spec-active:not(empty) {
+  margin-right: 0;
 }
 
-.spec:empty + .letter {
+.keyboard__key .spec-active {
+  color: #d3ff00;
+  font-size: 2.5rem;
+}
+
+.spec:not(empty) + .letter-spec-active {
+  margin-left: 50%;
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.spec-active:empty + .letter-spec-active {
   margin-left: 0;
 }
 
 .keyboard__key:hover,
-.keyboard__key-press {
+.keyboard__key--active {
   cursor: pointer;
   -webkit-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
           box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
@@ -224,11 +239,6 @@ body {
           transform: translateY(3px);
   -webkit-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
-}
-
-[data-code="Backspace"], [data-code="CapsLock"], [data-code="Enter"], [data-code="ShiftLeft"],
-[data-code="ShiftRight"] {
-  width: 12%;
 }
 
 [data-code="Space"] {
