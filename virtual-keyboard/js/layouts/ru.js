@@ -80,7 +80,6 @@ export default [
     small: 'Delete',
     shift: null,
     code: 'Delete',
-    icon: 'backspace',
   },
   {
     small: 'Tab',
