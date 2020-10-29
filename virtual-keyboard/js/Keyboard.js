@@ -2,7 +2,9 @@
 import create from './utils/create.js';
 import * as storage from './storage.js';
 import lang from './layouts/index.js';
+import sounds from './sounds/index.js';
 import Key from './Key.js';
+import SoundList from './SoundList.js';
 
 const main = create('main', '');
 
@@ -30,6 +32,14 @@ export default class Keyboard {
     this.keyboard = create('div', 'keyboard keyboard-hidden', null, main,
       ['language', langCode]);
     document.body.prepend(main);
+
+    // sounds
+    // this.sound = create('div', 'keyboard__sound', null, main,
+    //   ['language', langCode]);
+    this.soundDict = sounds[langCode];
+    this.sound = new SoundList(langCode).init(this.soundDict);
+    main.appendChild(this.sound.soundList);
+
     return this;
   }
 
@@ -213,6 +223,8 @@ export default class Keyboard {
     this.keyDict = lang[langCodes[langIdx]];
     this.keyboard.dataset.language = langCodes[langIdx];
     storage.set('kbLang', langCodes[langIdx]);
+
+    this.soundDict = sounds[langCodes[langIdx]];
 
     this.keyButtons.forEach((btn) => {
       const keyObj = this.keyDict.find((key) => key.code === btn.code);
