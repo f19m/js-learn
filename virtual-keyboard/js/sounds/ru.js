@@ -12,15 +12,15 @@ export default [
     code: 'CapsLock',
   },
   {
-    url: './assets/sounds/boom.wav',
+    url: './assets/sounds/meow3.mp3',
     code: 'Backspace',
   },
   {
-    url: './assets/sounds/clap.wav',
+    url: './assets/sounds/meow.mp3',
     code: 'Enter',
   },
   {
-    url: './assets/sounds/click.wav',
+    url: './assets/sounds/moew2.mp3',
     code: 'Other',
   },
 ];
