@@ -6,6 +6,7 @@ export default class SoundList {
   constructor(langCode) {
     this.soundList = {};
     this.sounds = [];
+    this.isSoundOn = true;
 
     this.soundList = create('div', 'keyboard__sounds sounds', null, null, ['language', langCode]);
 
@@ -13,12 +14,36 @@ export default class SoundList {
   }
 
   init(soundDict) {
-    soundDict.forEach((soundObj) => {
-      const soundItem = new Sound(soundObj);
-      this.sounds.push(soundItem);
-      this.soundList.appendChild(soundItem.sound);
-    });
+    if (this.sounds.length) {
+      soundDict.forEach((soundObj) => {
+        const soundItem = this.sounds.find((item) => soundObj.code === item.code);
+        soundItem.url = soundObj.url;
+        soundItem.sound.src = soundObj.url;
+      });
+    } else {
+      soundDict.forEach((soundObj) => {
+        const soundItem = new Sound(soundObj);
+        this.sounds.push(soundItem);
+        this.soundList.appendChild(soundItem.sound);
+      });
+    }
 
     return this;
+  }
+
+  play = (code) => {
+    let soundObj = this.sounds.find((sound) => sound.code === code);
+    if (!soundObj) {
+      soundObj = this.sounds.find((sound) => sound.code === 'Other');
+    }
+
+    if (soundObj && this.isSoundOn) {
+      soundObj.sound.currentTime = 0;
+      soundObj.sound.play();
+    }
+  }
+
+  soundOff = (isSoundOn) => {
+    this.isSoundOn = !this.isSoundOn;
   }
 }

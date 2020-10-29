@@ -8,9 +8,10 @@ export default class Key {
     this.small = small;
     this.shift = shift;
     this.code = code;
-    this.isFnKey = Boolean(small.match(/Ctrl|Alt|Shift|Tab|Back|arr|Del|Enter|Caps|Win/) || code.match(/Lang|Hide/));
+    this.icon = icon;
+    this.isFnKey = Boolean(small.match(/Ctrl|Alt|Shift|Tab|Back|arr|Del|Enter|Caps|Win/) || code.match(/Lang|Hide|Volume/));
 
-    if (shift && shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/)) {
+    if (shift && shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/) & !icon) {
       // в шифте спец-символ
       this.spec = create('div', 'spec', this.shift);
     } else {
@@ -27,6 +28,9 @@ export default class Key {
       this.isFnKey ? ['fn', 'true'] : ['fn', 'false']);
 
     if (code.match(/CapsLock|Shift|Control/g)) this.key.classList.add('keyboard__key--activatable');
-    if (code.match(/Hide/g)) this.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
+    if (code.match(/Hide|Volume/g)) {
+      this.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
+      this.key.dataset.isactive = true;
+    }
   }
 }

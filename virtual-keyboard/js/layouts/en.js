@@ -339,4 +339,10 @@ export default [
     shift: null,
     code: 'Lang',
   },
+  {
+    small: 'volume',
+    shift: 'volume_off',
+    code: 'Volume',
+    icon: 'volume_up',
+  },
 ];

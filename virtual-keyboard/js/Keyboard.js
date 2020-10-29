@@ -75,8 +75,9 @@ export default class Keyboard {
     return this;
   }
 
-  hideKeyboard = () => {
+  hideKeyboard = (keyObj) => {
     this.keyboard.classList.add('keyboard-hidden');
+    keyObj.key.classList.remove('keyboard__key--active');
     return this;
   }
 
@@ -107,10 +108,13 @@ export default class Keyboard {
       if (code.match(/Shift/)) this.setStateButton(keyObj.key, 'shiftKey', true, type);
       if (code.match(/CapsLock/)) this.setStateButton(keyObj.key, 'capsKey', this.capsKey !== true, type);
       if (code.match(/Lang/)) this.switchLanguage();
+      if (code.match(/Hide/)) this.hideKeyboard(keyObj);
+      if (code.match(/Volume/)) this.soundOff(keyObj);
 
       const isUpper = ((this.capsKey && !this.shiftKey) || (!this.capsKey && this.shiftKey));
       this.setUpperCase(isUpper);
       this.printLetter(keyObj);
+      this.sound.play(code);
     } else if (type.match(/keyup|mouseup/)) {
       if (code.match(/Shift/) && type === 'keyup') this.setStateButton(keyObj.key, 'shiftKey', false);
       const isUpper = ((this.capsKey && !this.shiftKey) || (!this.capsKey && this.shiftKey));
@@ -125,6 +129,18 @@ export default class Keyboard {
       }
     }
   };
+
+  soundOff = (keyObj) => {
+    this.sound.soundOff();
+    if (this.sound.isSoundOn) {
+      keyObj.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
+      keyObj.letter.innerHTML = keyObj.icon;
+    } else {
+      keyObj.key.classList.remove('keyboard__key--dark', 'keyboard__key-press');
+      keyObj.letter.innerHTML = keyObj.shift;
+    }
+    keyObj.key.classList.remove('keyboard__key--active');
+  }
 
   printLetter = (keyObj) => {
     const outValue = this.output.value;
@@ -225,13 +241,14 @@ export default class Keyboard {
     storage.set('kbLang', langCodes[langIdx]);
 
     this.soundDict = sounds[langCodes[langIdx]];
+    this.sound.init(this.soundDict);
 
     this.keyButtons.forEach((btn) => {
       const keyObj = this.keyDict.find((key) => key.code === btn.code);
       if (!keyObj) return;
       btn.shift = keyObj.shift;
       btn.small = keyObj.small;
-      if (keyObj.shift && keyObj.shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/g)) {
+      if (!keyObj.icon && keyObj.shift && keyObj.shift.match(/[^a-zA-Zа-яА-ЯёЁ0-9]/g)) {
         btn.spec.innerHTML = keyObj.shift;
       } else {
         btn.spec.innerHTML = '';
