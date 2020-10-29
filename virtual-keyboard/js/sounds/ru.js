@@ -1,21 +1,26 @@
 export default [
   {
-    url: '',
+    url: '../../sounds/gun.mp3',
     code: 'ShiftLeft',
   },
   {
-    url: '',
+    url: '../../sounds/gun.mp3',
     code: 'ShiftRight',
   },
   {
-    url: '',
+    url: '../../sounds/gun_reload.mp3',
     code: 'CapsLock',
   },
   {
-    url: '',
+    url: '../../sounds/boom.wav',
     code: 'Backspace',
   },
   {
-    url: '',
+    url: '../../sounds/clap.wav',
     code: 'Enter',
+  },
+  {
+    url: '../../sounds/click.wav',
+    code: 'Other',
+  },
 ];

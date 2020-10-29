@@ -1,21 +1,26 @@
 export default [
   {
-    url: '',
+    url: '../../sounds/hihat.wav',
     code: 'ShiftLeft',
   },
   {
-    url: '',
+    url: '../../sounds/hihat.wav',
     code: 'ShiftRight',
   },
   {
-    url: '',
+    url: '../../sounds/kick.wav',
     code: 'CapsLock',
   },
   {
-    url: '',
+    url: '../../sounds/snare.wav',
     code: 'Backspace',
   },
   {
-    url: '',
+    url: '../../sounds/tom.wav',
     code: 'Enter',
+  },
+  {
+    url: '../../sounds/click2.wav',
+    code: 'Other',
+  },
 ];
