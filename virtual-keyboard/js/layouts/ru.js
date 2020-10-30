@@ -345,4 +345,10 @@ export default [
     code: 'Volume',
     icon: 'volume_up',
   },
+  {
+    small: 'volume',
+    shift: 'null',
+    code: 'Voice',
+    icon: 'keyboard_voice',
+  },
 ];
