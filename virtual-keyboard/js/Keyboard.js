@@ -135,9 +135,11 @@ export default class Keyboard {
     if (this.sound.isSoundOn) {
       keyObj.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
       keyObj.letter.innerHTML = keyObj.icon;
+      keyObj.letter.classList.remove('md-light', 'md-inactive');
     } else {
       keyObj.key.classList.remove('keyboard__key--dark', 'keyboard__key-press');
       keyObj.letter.innerHTML = keyObj.shift;
+      keyObj.letter.classList.add('md-light', 'md-inactive');
     }
     keyObj.key.classList.remove('keyboard__key--active');
   }
