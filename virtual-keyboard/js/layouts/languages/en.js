@@ -334,9 +334,4 @@ export default [
     code: 'Hide',
     icon: 'check_circle',
   },
-  {
-    small: 'En',
-    shift: null,
-    code: 'Lang',
-  },
 ];

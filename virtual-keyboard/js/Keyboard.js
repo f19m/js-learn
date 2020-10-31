@@ -7,6 +7,7 @@ import addButtons from './layouts/addButtons/index.js';
 import Key from './Key.js';
 import SoundList from './SoundList.js';
 import Voice from './Voice.js';
+import LanguageChange from './LanguageChange.js';
 
 const main = create('main', '');
 
@@ -37,14 +38,18 @@ export default class Keyboard {
 
     // additional func key
     this.addButtons = addButtons;
-    // sounds
-    // this.sound = create('div', 'keyboard__sound', null, main,
-    //   ['language', langCode]);
+
+    // lang change obk
+    this.language = new LanguageChange(langCode);
+
+    // sound obj
     this.sound = new SoundList(langCode).init(langCode);
     main.appendChild(this.sound.soundList);
 
-    // voice
+    // voice obj
     this.voice = new Voice(langCode, this.output);
+
+    document.addEventListener('kbLangChange', this.languageChangeHandler);
 
     return this;
   }
@@ -235,13 +240,13 @@ export default class Keyboard {
     });
   }
 
-  switchLanguage = () => {
-    const langCodes = Object.keys(lang);
-    const langIdx = (langCodes.indexOf(this.keyboard.dataset.language) + 1) % langCodes.length;
+  languageChangeHandler = (evt) => {
+    // const langCodes = Object.keys(lang);
+    // const langIdx = (langCodes.indexOf(this.keyboard.dataset.language) + 1) % langCodes.length;
+    const curLang = evt.detail.lang;
 
-    this.keyDict = lang[langCodes[langIdx]];
-    this.keyboard.dataset.language = langCodes[langIdx];
-    storage.set('kbLang', langCodes[langIdx]);
+    this.keyDict = lang[curLang];
+    this.keyboard.dataset.language = curLang;
 
     this.keyButtons.forEach((btn) => {
       const keyObj = this.keyDict.find((key) => key.code === btn.code);
@@ -255,14 +260,6 @@ export default class Keyboard {
       }
       btn.letter.innerHTML = (keyObj.icon) ? keyObj.icon : keyObj.small;
     });
-
-    const evtChangeLang = new CustomEvent('kbLangChange', {
-      detail: {
-        lang: langCodes[langIdx],
-      },
-    });
-
-    document.dispatchEvent(evtChangeLang);
 
     return this;
   };

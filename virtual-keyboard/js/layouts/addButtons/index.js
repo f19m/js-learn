@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import voice from './Voice.js';
 import sound from './Sound.js';
+import language from './Language.js';
 
-const addButtons = [];
-export default [voice, sound];
+export default [voice, sound, language];
