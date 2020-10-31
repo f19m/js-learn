@@ -35,9 +35,9 @@ export default class SoundList {
     }else if (this.sounds.length){
       //no sound for language
       this.sounds.forEach((soundObj) => {
-        soundObj.sound.src = "";
-        soundObj.url = "";
+        soundObj.sound.remove();
       });
+      this.sounds = [];
 
     }
 
@@ -74,7 +74,9 @@ export default class SoundList {
 
     if (soundObj && this.isSoundOn) {
       soundObj.sound.currentTime = 0;
-      soundObj.sound.play();
+      if (soundObj.url){
+        soundObj.sound.play();
+      }
     }
   }
 
