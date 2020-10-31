@@ -9,4 +9,6 @@ const rowsOrder = [
   ['Sound', 'Voice', 'Lang', 'Hide', /* 'AltLeft', */ 'Space'/* , 'AltRight' */, 'ArrowLeft', /* 'ArrowDown', */'ArrowRight'/* ,'ControlRight' */],
 ];
 
-new Keyboard(rowsOrder).init().generateLayout();
+document.addEventListener('DOMContentLoaded', () => {
+  new Keyboard(rowsOrder).init().generateLayout();
+});
