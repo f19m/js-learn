@@ -63,19 +63,27 @@ export default class Keyboard {
       ]);
       row.forEach((code) => {
         let keyObj;
+        let keyButton = {};
         keyObj = this.keyDict.find((key) => key.code === code);
         if (keyObj) {
-          const keyButton = new Key(keyObj);
+          keyButton = new Key(keyObj);
           this.keyButtons.push(keyButton);
           rowElem.appendChild(keyButton.key);
         } else {
           // поищем в addButtons
           keyObj = this.addButtons.find((key) => key.code === code);
           if (keyObj) {
-            if (this[keyObj.small].generateLayout) {
+            if (this[keyObj.small] && this[keyObj.small].__proto__.hasOwnProperty('generateLayout')) {
               this[keyObj.small].generateLayout(keyObj);
 
               rowElem.appendChild(this[keyObj.small][`${keyObj.small}Key`].key);
+            }else{
+              if (keyObj.code === 'Hide'){
+                keyButton = new Key(keyObj);
+                keyButton.key.addEventListener('click', this.hideKeyboardHandler);
+                this.hideButton = keyButton;
+                rowElem.appendChild(keyButton.key);
+              }
             }
           }
         }
@@ -97,18 +105,17 @@ export default class Keyboard {
     return this;
   }
 
-  hideKeyboard = (keyObj) => {
+  hideKeyboardHandler = () => {
     this.keyboard.classList.add('keyboard-hidden');
-    keyObj.key.classList.remove('keyboard__key--active');
-    return this;
+    this.hideButton.key.classList.remove('keyboard__key--active');
   }
 
-  preHandlerEvent = (e) => {
-    e.stopPropagation();
-    const keyDiv = e.target.closest('.keyboard__key');
+  preHandlerEvent = (evt) => {
+    evt.stopPropagation();
+    const keyDiv = evt.target.closest('.keyboard__key');
     if (!keyDiv) return;
     const { dataset: { code } } = keyDiv;
-    this.handlerEvent({ code, type: e.type });
+    this.handlerEvent({ code, type: evt.type });
   };
 
   handlerEvent = (evt) => {

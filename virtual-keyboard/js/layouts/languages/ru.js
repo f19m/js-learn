@@ -328,10 +328,4 @@ export default [
     shift: null,
     code: 'Win',
   },
-  {
-    small: 'hide',
-    shift: null,
-    code: 'Hide',
-    icon: 'check_circle',
-  },
 ];
