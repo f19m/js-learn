@@ -1,0 +1,301 @@
+* {
+  padding: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+html, body {
+  font-size: 10px;
+}
+
+body {
+  width: 100vw;
+  min-height: 30rem;
+}
+
+.keyboard__input {
+  display: block;
+  width: calc(100vw - 20rem);
+  height: calc(100vh/2);
+  margin: 1rem auto 0;
+  padding: 1rem;
+  -webkit-box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
+          box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
+  min-height: 10rem;
+}
+
+.keyboard__input:focus, .keyboard__input:active {
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .keyboard__input {
+    width: calc(100vw - 2rem);
+    height: calc(100vh/3);
+  }
+}
+
+.keyboard {
+  width: 100vw;
+  min-height: 20rem;
+  padding: 5px 0;
+  background: #004134;
+  -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  margin-top: 1rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: bottom 0.4s;
+  transition: bottom 0.4s;
+}
+
+.keyboard-hidden {
+  bottom: -100%;
+}
+
+.keyboard__key {
+  height: 4.5rem;
+  width: 6%;
+  max-width: 90rem;
+  margin: 0.3rem;
+  border-radius: 0.4rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1.6rem;
+  outline: none;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  vertical-align: top;
+  padding: 0;
+  position: relative;
+  -webkit-box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.keyboard__key-wide {
+  width: 12%;
+}
+
+.keyboard__key-extra-wide {
+  width: 36%;
+  max-width: 500px;
+}
+
+.keyboard__key--dark {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.keyboard__key--activatable::after {
+  content: '';
+  top: 1rem;
+  right: 1rem;
+  position: absolute;
+  width: 0.8rem;
+  height: 0.8rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.keyboard__key--active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.keyboard__key--active::after {
+  background: #08ff00;
+}
+
+.keyboard__key .spec {
+  color: gray;
+  font-size: 2rem;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+  .keyboard__key .spec {
+    font-size: 1.4rem;
+  }
+}
+
+.keyboard__key .letter {
+  font-size: 2rem;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+  .keyboard__key .letter {
+    font-size: 1.4rem;
+  }
+}
+
+.keyboard__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.spec:not(empty) {
+  margin-right: 50%;
+}
+
+.spec-active:not(empty) {
+  margin-right: 0;
+}
+
+.keyboard__key .spec-active {
+  color: #d3ff00;
+  font-size: 2.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  .keyboard__key .spec-active {
+    font-size: 1.8rem;
+  }
+}
+
+.spec:not(empty) + .letter-spec-active {
+  margin-left: 50%;
+  font-size: 2rem;
+  color: gray;
+}
+
+@media screen and (max-width: 767px) {
+  .spec:not(empty) + .letter-spec-active {
+    font-size: 1.4rem;
+  }
+}
+
+.spec-active:empty + .letter-spec-active {
+  margin-left: 0;
+}
+
+.keyboard__key:hover,
+.keyboard__key--active {
+  cursor: pointer;
+  -webkit-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translateY(3px);
+          transform: translateY(3px);
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+.keyboard__key--active {
+  background: rgba(211, 255, 0, 0.12);
+}
+
+[data-code="Space"] {
+  width: 36%;
+  max-width: 500px;
+}
+
+.material-icons.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.material-icons.md-light {
+  color: white;
+}
+
+.material-icons.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
+}
+/*# sourceMappingURL=style.css.map */
