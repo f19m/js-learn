@@ -1,6 +1,5 @@
 /* eslint-disable import/extensions */
 import create from './utils/create.js';
-import * as storage from './storage.js';
 import lang from './layouts/languages/index.js';
 import addButtons from './layouts/addButtons/index.js';
 
@@ -18,8 +17,11 @@ export default class Keyboard {
     this.isCaps = false;
   }
 
-  init(langCode) {
-    this.keyDict = lang[langCode];
+  init() {
+    // lang obj
+    this.language = new LanguageChange();
+
+    this.keyDict = lang[this.language.curLanguage];
     this.output = create(
       'textarea',
       'output keyboard__input',
@@ -33,21 +35,18 @@ export default class Keyboard {
     );
 
     this.keyboard = create('div', 'keyboard keyboard-hidden', null, main,
-      ['language', langCode]);
+      ['language', this.language.curLanguage]);
     document.body.prepend(main);
 
     // additional func key
     this.addButtons = addButtons;
 
-    // lang change obk
-    this.language = new LanguageChange(langCode);
-
     // sound obj
-    this.sound = new SoundList(langCode).init(langCode);
+    this.sound = new SoundList(this.language.curLanguage).init();
     main.appendChild(this.sound.soundList);
 
     // voice obj
-    this.voice = new Voice(langCode, this.output);
+    this.voice = new Voice(this.language.curLanguage, this.output);
 
     document.addEventListener('kbLangChange', this.languageChangeHandler);
 

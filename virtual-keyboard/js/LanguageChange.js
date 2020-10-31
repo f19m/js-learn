@@ -1,13 +1,11 @@
 /* eslint-disable import/extensions */
 import * as storage from './storage.js';
 import Key from './Key.js';
-import langDict from './layouts/voiceLanguages/index.js';
 import lang from './layouts/languages/index.js';
 
 export default class LanguageChange {
-  constructor(langCode, output) {
-    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    this.curLanguage = langCode;
+  constructor() {
+    this.curLanguage = storage.get('kbLang', '"ru"');
 
     return this;
   }

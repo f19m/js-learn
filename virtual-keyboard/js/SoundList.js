@@ -10,7 +10,7 @@ export default class SoundList {
     this.soundList = {};
     this.sounds = [];
     this.isSoundOn = storage.get('kbIsSoundOn', true);
-
+    this.langCode = langCode;
     this.soundList = create('div', 'keyboard__sounds sounds', null, null, ['language', langCode]);
 
     document.addEventListener('kbLangChange', this.languageChangeHandler);
@@ -18,8 +18,8 @@ export default class SoundList {
     return this;
   }
 
-  init(langCode) {
-    this.soundDict = sounds[langCode];
+  init() {
+    this.soundDict = sounds[this.langCode];
     if (this.sounds.length) {
       this.soundDict.forEach((soundObj) => {
         const soundItem = this.sounds.find((item) => soundObj.code === item.code);
@@ -81,6 +81,7 @@ export default class SoundList {
 
   languageChangeHandler = (evt) => {
     const { lang } = evt.detail;
+    this.langCode = lang;
     this.init(lang);
   }
 }
