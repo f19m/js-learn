@@ -136,7 +136,6 @@ export default class Keyboard {
 
       if (code.match(/Shift/)) this.setStateButton(keyObj.key, 'shiftKey', true, type);
       if (code.match(/CapsLock/)) this.setStateButton(keyObj.key, 'capsKey', this.capsKey !== true, type);
-      if (code.match(/Hide/)) this.hideKeyboard(keyObj);
 
       const isUpper = ((this.capsKey && !this.shiftKey) || (!this.capsKey && this.shiftKey));
       this.setUpperCase(isUpper);
