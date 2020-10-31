@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
 import ru from './ru.js';
-import fr from './en.js';
+import en from './en.js';
 
-export default { ru, fr };
+export default { ru, en };

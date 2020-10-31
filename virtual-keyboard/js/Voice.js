@@ -2,6 +2,7 @@
 import * as storage from './storage.js';
 import Key from './Key.js';
 import langDict from './layouts/voiceLanguages/index.js';
+import Popup from './Popup.js';
 
 export default class Voice {
   constructor(langCode, output) {
@@ -14,6 +15,7 @@ export default class Voice {
     this.recognition = new SpeechRecognition();
     this.recognition.interimResults = true;
     this.recognition.lang = this.#getLangByCode(langCode);
+    
 
     this.recognition.addEventListener('result', (e) => {
       const transcript = Array.from(e.results)
@@ -40,7 +42,14 @@ export default class Voice {
 
   #getLangByCode = (langCode) => {
     const obj = langDict.find((elem) => elem.code === langCode);
-    return (obj) ? obj.isoCode : null;
+    if (obj){
+      return obj.isoCode;
+    }else{
+      new Popup('Speech recognition is not supported for seleced language');
+      this.isActive = false;
+      storage.set('kbIsVoiceAtcive', this.isActive);
+      return null;
+    }
   }
 
   #printWord = (text) => {
@@ -52,6 +61,7 @@ export default class Voice {
     this.output.value = leftPart + text + rightPart;
     currPos += text.length;
     this.output.setSelectionRange(currPos, currPos);
+    this.output.focus();
   }
 
   generateLayout(keyObj) {
@@ -77,8 +87,17 @@ export default class Voice {
     this.isActive = !this.isActive;
 
     if (this.isActive) {
-      this.recognition.start();
-      this.recognition.addEventListener('end', this.recognition.start);
+      try{
+        this.recognition.start();
+        this.recognition.addEventListener('end', this.recognition.start);
+      }catch(e){
+          new Popup('An error occurred while trying to record voice. Please try again in a few seconds');
+          this.isActive = false;
+          this.recognition.abort();
+          this.recognition.removeEventListener('end', this.recognition.start);
+          this.updateLayout();
+          storage.set('kbIsVoiceAtcive', this.isActive);
+      }
     } else {
       this.recognition.abort();
       this.recognition.removeEventListener('end', this.recognition.start);
@@ -105,6 +124,12 @@ export default class Voice {
 
       this.recognition.stop();
       this.recognition.abort();
+    }else{
+      this.recognition.removeEventListener('end', this.recognition.start);
+      this.recognition.removeEventListener('end', stopHandler);
+      this.recognition.stop();
+      this.recognition.abort();
+      this.updateLayout();
     }
   }
 }
