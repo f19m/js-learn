@@ -1,10 +1,12 @@
 /* eslint-disable import/extensions */
 import create from './utils/create.js';
 import * as storage from './storage.js';
-import lang from './layouts/index.js';
+import lang from './layouts/languages/index.js';
+import addButtons from './layouts/addButtons/index.js';
 import sounds from './sounds/index.js';
 import Key from './Key.js';
 import SoundList from './SoundList.js';
+import Voice from './Voice.js';
 
 const main = create('main', '');
 
@@ -33,6 +35,8 @@ export default class Keyboard {
       ['language', langCode]);
     document.body.prepend(main);
 
+    // additional func key
+    this.addButtons = addButtons;
     // sounds
     // this.sound = create('div', 'keyboard__sound', null, main,
     //   ['language', langCode]);
@@ -41,11 +45,7 @@ export default class Keyboard {
     main.appendChild(this.sound.soundList);
 
     // voice
-    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    this.voice = { isActive: storage.get('kbIsVoiceAtcive', false) };
-
-    this.voice.recognition = recognition;
+    this.voice = new Voice(langCode, this.output);
 
     return this;
   }
@@ -63,12 +63,15 @@ export default class Keyboard {
           const keyButton = new Key(keyObj);
           this.keyButtons.push(keyButton);
           rowElem.appendChild(keyButton.key);
+        } else {
+          // поищем в addButtons
+          const keyObj = this.addButtons.find((key) => key.code === code);
+          if (keyObj) {
+            if (this[keyObj.small].generateLayout) {
+              this[keyObj.small].generateLayout(keyObj);
 
-          if (code.match(/Volume/)) {
-            this.sound.soundKey = keyButton;
-          }
-          if (code.match(/Voice/)) {
-            this.voice.voiceKey = keyButton;
+              rowElem.appendChild(this[keyObj.small][`${keyObj.small}Key`].key);
+            }
           }
         }
       });
@@ -81,8 +84,6 @@ export default class Keyboard {
 
     this.output.addEventListener('click', this.showKeyboard);
 
-    this.soundOffLayout();
-    this.voiceOffLayout();
     return this;
   }
 
@@ -125,14 +126,6 @@ export default class Keyboard {
       if (code.match(/CapsLock/)) this.setStateButton(keyObj.key, 'capsKey', this.capsKey !== true, type);
       if (code.match(/Lang/)) this.switchLanguage();
       if (code.match(/Hide/)) this.hideKeyboard(keyObj);
-      if (code.match(/Volume/)) {
-        this.sound.soundOff();
-        this.soundOffLayout();
-      }
-      if (code.match(/Voice/)) {
-        this.voice.isActive = !this.voice.isActive;
-        this.voiceOffLayout();
-      }
 
       const isUpper = ((this.capsKey && !this.shiftKey) || (!this.capsKey && this.shiftKey));
       this.setUpperCase(isUpper);
@@ -152,31 +145,6 @@ export default class Keyboard {
       }
     }
   };
-
-  voiceOffLayout = () => {
-    const keyObj = this.voice.voiceKey;
-    if (this.voice.isActive) {
-      keyObj.letter.classList.remove('md-light', 'md-inactive');
-      keyObj.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
-    } else {
-      keyObj.letter.classList.add('md-light', 'md-inactive');
-      keyObj.key.classList.remove('keyboard__key--dark', 'keyboard__key-press');
-    }
-  }
-
-  soundOffLayout = () => {
-    const keyObj = this.sound.soundKey;
-    if (this.sound.isSoundOn) {
-      keyObj.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
-      keyObj.letter.innerHTML = keyObj.icon;
-      keyObj.letter.classList.remove('md-light', 'md-inactive');
-    } else {
-      keyObj.key.classList.remove('keyboard__key--dark', 'keyboard__key-press');
-      keyObj.letter.innerHTML = keyObj.shift;
-      keyObj.letter.classList.add('md-light', 'md-inactive');
-    }
-    keyObj.key.classList.remove('keyboard__key--active');
-  }
 
   printLetter = (keyObj) => {
     const outValue = this.output.value;

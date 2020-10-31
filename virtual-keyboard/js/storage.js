@@ -3,7 +3,14 @@ export function set(name, value) {
 }
 
 export function get(name, subst = null) {
-  return JSON.parse(window.localStorage.getItem(name) || subst);
+  let res;
+  try {
+    res = JSON.parse(window.localStorage.getItem(name) || subst);
+  } catch (e) {
+    res = subst;
+    del(name);
+  }
+  return res;
 }
 
 export function del(name) {

@@ -71,16 +71,19 @@ $keyboard-bg-color3: #004134;
 .keyboard__input
     display: block
     width: calc(100vw - 20rem)
-    height: calc(100vh/2 - 1rem)
+    height: calc(100vh/2)
     margin: 1rem auto 0
     padding: 1rem
     box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2)
     &:focus, &:active 
         outline: none
+    @media screen and ( max-width:  768px)
+        width: calc(100vw - 2rem)
+        height: calc(100vh/3)
 
     
 .keyboard
-    width: 100%
+    width: 100vw
     min-height: 20rem
     padding: 5px 0
     background: $keyboard-bg-color3
