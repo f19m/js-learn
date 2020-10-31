@@ -1,12 +1,13 @@
 /* eslint-disable import/extensions */
 import create from './utils/create.js';
 import Sound from './Sound.js';
+import * as storage from './storage.js';
 
 export default class SoundList {
   constructor(langCode) {
     this.soundList = {};
     this.sounds = [];
-    this.isSoundOn = true;
+    this.isSoundOn = storage.get('kbIsSoundOn', true);
 
     this.soundList = create('div', 'keyboard__sounds sounds', null, null, ['language', langCode]);
 
@@ -45,5 +46,6 @@ export default class SoundList {
 
   soundOff = (isSoundOn) => {
     this.isSoundOn = !this.isSoundOn;
+    storage.set('kbIsSoundOn', this.isSoundOn);
   }
 }

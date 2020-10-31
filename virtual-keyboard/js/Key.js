@@ -28,7 +28,7 @@ export default class Key {
       this.isFnKey ? ['fn', 'true'] : ['fn', 'false']);
 
     if (code.match(/CapsLock|Shift|Control/g)) this.key.classList.add('keyboard__key--activatable');
-    if (code.match(/Hide|Volume/g)) {
+    if (code.match(/Hide|Volume|Voice/g)) {
       this.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
       this.key.dataset.isactive = true;
     }

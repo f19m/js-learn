@@ -40,6 +40,13 @@ export default class Keyboard {
     this.sound = new SoundList(langCode).init(this.soundDict);
     main.appendChild(this.sound.soundList);
 
+    // voice
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    this.voice = { isActive: storage.get('kbIsVoiceAtcive', false) };
+
+    this.voice.recognition = recognition;
+
     return this;
   }
 
@@ -56,6 +63,13 @@ export default class Keyboard {
           const keyButton = new Key(keyObj);
           this.keyButtons.push(keyButton);
           rowElem.appendChild(keyButton.key);
+
+          if (code.match(/Volume/)) {
+            this.sound.soundKey = keyButton;
+          }
+          if (code.match(/Voice/)) {
+            this.voice.voiceKey = keyButton;
+          }
         }
       });
     });
@@ -67,6 +81,8 @@ export default class Keyboard {
 
     this.output.addEventListener('click', this.showKeyboard);
 
+    this.soundOffLayout();
+    this.voiceOffLayout();
     return this;
   }
 
@@ -109,7 +125,14 @@ export default class Keyboard {
       if (code.match(/CapsLock/)) this.setStateButton(keyObj.key, 'capsKey', this.capsKey !== true, type);
       if (code.match(/Lang/)) this.switchLanguage();
       if (code.match(/Hide/)) this.hideKeyboard(keyObj);
-      if (code.match(/Volume/)) this.soundOff(keyObj);
+      if (code.match(/Volume/)) {
+        this.sound.soundOff();
+        this.soundOffLayout();
+      }
+      if (code.match(/Voice/)) {
+        this.voice.isActive = !this.voice.isActive;
+        this.voiceOffLayout();
+      }
 
       const isUpper = ((this.capsKey && !this.shiftKey) || (!this.capsKey && this.shiftKey));
       this.setUpperCase(isUpper);
@@ -130,8 +153,19 @@ export default class Keyboard {
     }
   };
 
-  soundOff = (keyObj) => {
-    this.sound.soundOff();
+  voiceOffLayout = () => {
+    const keyObj = this.voice.voiceKey;
+    if (this.voice.isActive) {
+      keyObj.letter.classList.remove('md-light', 'md-inactive');
+      keyObj.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
+    } else {
+      keyObj.letter.classList.add('md-light', 'md-inactive');
+      keyObj.key.classList.remove('keyboard__key--dark', 'keyboard__key-press');
+    }
+  }
+
+  soundOffLayout = () => {
+    const keyObj = this.sound.soundKey;
     if (this.sound.isSoundOn) {
       keyObj.key.classList.add('keyboard__key--dark', 'keyboard__key-press');
       keyObj.letter.innerHTML = keyObj.icon;
