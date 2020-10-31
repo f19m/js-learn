@@ -298,4 +298,47 @@ body {
 .material-icons.md-light.md-inactive {
   color: rgba(255, 255, 255, 0.3);
 }
+
+.popup {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 1.6rem;
+  width: 100vw;
+  -webkit-transition: all 0.8s;
+  transition: all 0.8s;
+  top: 0;
+  z-index: 5;
+}
+
+.popup__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 2rem;
+}
+
+.popup-visilbe {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: 0px;
+  left: 0;
+  height: 85px;
+  position: absolute;
+}
+
+.popup__close {
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */

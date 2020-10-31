@@ -203,3 +203,29 @@ $keyboard-bg-color3: #004134;
     color: rgba(255, 255, 255, 1)
 .material-icons.md-light.md-inactive
     color: rgba(255, 255, 255, 0.3)
+
+
+.popup
+    position: absolute;
+    //height: 0
+    background: rgba(0,0,0,0.4)
+    color: white
+    font-size: 1.6rem
+    width: 100vw
+    transition: all 0.8s
+    top: 0
+    z-index: 5
+    &__wrapper
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+        padding: 0 2rem
+    &-visilbe
+        display: flex
+        top: 0px
+        left: 0
+        height: 85px
+        position: absolute
+    &__close
+        cursor: pointer
