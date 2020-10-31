@@ -3,7 +3,7 @@ import create from './utils/create.js';
 import * as storage from './storage.js';
 import lang from './layouts/languages/index.js';
 import addButtons from './layouts/addButtons/index.js';
-import sounds from './sounds/index.js';
+
 import Key from './Key.js';
 import SoundList from './SoundList.js';
 import Voice from './Voice.js';
@@ -40,8 +40,7 @@ export default class Keyboard {
     // sounds
     // this.sound = create('div', 'keyboard__sound', null, main,
     //   ['language', langCode]);
-    this.soundDict = sounds[langCode];
-    this.sound = new SoundList(langCode).init(this.soundDict);
+    this.sound = new SoundList(langCode).init(langCode);
     main.appendChild(this.sound.soundList);
 
     // voice
@@ -244,9 +243,6 @@ export default class Keyboard {
     this.keyboard.dataset.language = langCodes[langIdx];
     storage.set('kbLang', langCodes[langIdx]);
 
-    this.soundDict = sounds[langCodes[langIdx]];
-    this.sound.init(this.soundDict);
-
     this.keyButtons.forEach((btn) => {
       const keyObj = this.keyDict.find((key) => key.code === btn.code);
       if (!keyObj) return;
@@ -259,6 +255,14 @@ export default class Keyboard {
       }
       btn.letter.innerHTML = (keyObj.icon) ? keyObj.icon : keyObj.small;
     });
+
+    const evtChangeLang = new CustomEvent('kbLangChange', {
+      detail: {
+        lang: langCodes[langIdx],
+      },
+    });
+
+    document.dispatchEvent(evtChangeLang);
 
     return this;
   };

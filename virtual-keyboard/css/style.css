@@ -72,6 +72,7 @@ html, body {
 
 body {
   width: 100vw;
+  min-height: 30rem;
 }
 
 .keyboard__input {
@@ -82,6 +83,7 @@ body {
   padding: 1rem;
   -webkit-box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
           box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
+  min-height: 10rem;
 }
 
 .keyboard__input:focus, .keyboard__input:active {
@@ -194,15 +196,27 @@ body {
 
 .keyboard__key .spec {
   color: gray;
-  font-size: 1.5rem;
+  font-size: 2rem;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+  .keyboard__key .spec {
+    font-size: 1.4rem;
+  }
 }
 
 .keyboard__key .letter {
   font-size: 2rem;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+  .keyboard__key .letter {
+    font-size: 1.4rem;
+  }
 }
 
 .keyboard__row {
@@ -227,10 +241,22 @@ body {
   font-size: 2.5rem;
 }
 
+@media screen and (max-width: 767px) {
+  .keyboard__key .spec-active {
+    font-size: 1.8rem;
+  }
+}
+
 .spec:not(empty) + .letter-spec-active {
   margin-left: 50%;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: gray;
+}
+
+@media screen and (max-width: 767px) {
+  .spec:not(empty) + .letter-spec-active {
+    font-size: 1.4rem;
+  }
 }
 
 .spec-active:empty + .letter-spec-active {

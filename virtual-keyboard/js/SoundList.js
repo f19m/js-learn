@@ -3,6 +3,7 @@ import create from './utils/create.js';
 import Sound from './Sound.js';
 import * as storage from './storage.js';
 import Key from './Key.js';
+import sounds from './sounds/index.js';
 
 export default class SoundList {
   constructor(langCode) {
@@ -12,18 +13,21 @@ export default class SoundList {
 
     this.soundList = create('div', 'keyboard__sounds sounds', null, null, ['language', langCode]);
 
+    document.addEventListener('kbLangChange', this.languageChangeHandler);
+
     return this;
   }
 
-  init(soundDict) {
+  init(langCode) {
+    this.soundDict = sounds[langCode];
     if (this.sounds.length) {
-      soundDict.forEach((soundObj) => {
+      this.soundDict.forEach((soundObj) => {
         const soundItem = this.sounds.find((item) => soundObj.code === item.code);
         soundItem.url = soundObj.url;
         soundItem.sound.src = soundObj.url;
       });
     } else {
-      soundDict.forEach((soundObj) => {
+      this.soundDict.forEach((soundObj) => {
         const soundItem = new Sound(soundObj);
         this.sounds.push(soundItem);
         this.soundList.appendChild(soundItem.sound);
@@ -68,10 +72,15 @@ export default class SoundList {
   }
 
   soundOff = () => {
-    this.play();
     this.isSoundOn = !this.isSoundOn;
+    this.play();
     this.updateLayout();
 
     storage.set('kbIsSoundOn', this.isSoundOn);
+  }
+
+  languageChangeHandler = (evt) => {
+    const { lang } = evt.detail;
+    this.init(lang);
   }
 }

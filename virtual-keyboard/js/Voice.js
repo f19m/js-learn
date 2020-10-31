@@ -32,6 +32,8 @@ export default class Voice {
       this.recognition.start();
     }
 
+    document.addEventListener('kbLangChange', this.languageChangeHandler);
+
     return this;
   }
 
@@ -86,7 +88,22 @@ export default class Voice {
     storage.set('kbIsVoiceAtcive', this.isActive);
   }
 
-  changeLanguage = (langCode) => {
-    this.recognition.lang = this.#getLangByCode(langCode);
+  languageChangeHandler = (evt) => {
+    const { lang } = evt.detail;
+    this.recognition.lang = this.#getLangByCode(lang);
+
+    const stopHandler = () => {
+      this.recognition.start();
+      this.recognition.addEventListener('end', this.recognition.start);
+      this.recognition.removeEventListener('end', stopHandler);
+    };
+
+    if (this.isActive) {
+      this.recognition.removeEventListener('end', this.recognition.start);
+      this.recognition.addEventListener('end', stopHandler);
+
+      this.recognition.stop();
+      this.recognition.abort();
+    }
   }
 }
