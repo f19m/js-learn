@@ -10,6 +10,7 @@ export default class Voice {
     this.langCode = langCode;
     this.output = output;
 
+    // eslint-disable-next-line no-undef
     this.recognition = new SpeechRecognition();
     this.recognition.interimResults = true;
     this.recognition.lang = this.#getLangByCode(langCode);
@@ -38,7 +39,7 @@ export default class Voice {
   }
 
   #getLangByCode = (langCode) => {
-    const obj = langDict.find((obj) => obj.code === langCode);
+    const obj = langDict.find((elem) => elem.code === langCode);
     return (obj) ? obj.isoCode : null;
   }
 

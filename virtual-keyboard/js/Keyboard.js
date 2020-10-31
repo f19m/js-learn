@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/extensions */
 import create from './utils/create.js';
 import lang from './layouts/languages/index.js';
@@ -61,14 +62,15 @@ export default class Keyboard {
         i + 1,
       ]);
       row.forEach((code) => {
-        const keyObj = this.keyDict.find((key) => key.code === code);
+        let keyObj;
+        keyObj = this.keyDict.find((key) => key.code === code);
         if (keyObj) {
           const keyButton = new Key(keyObj);
           this.keyButtons.push(keyButton);
           rowElem.appendChild(keyButton.key);
         } else {
           // поищем в addButtons
-          const keyObj = this.addButtons.find((key) => key.code === code);
+          keyObj = this.addButtons.find((key) => key.code === code);
           if (keyObj) {
             if (this[keyObj.small].generateLayout) {
               this[keyObj.small].generateLayout(keyObj);
@@ -127,7 +129,6 @@ export default class Keyboard {
 
       if (code.match(/Shift/)) this.setStateButton(keyObj.key, 'shiftKey', true, type);
       if (code.match(/CapsLock/)) this.setStateButton(keyObj.key, 'capsKey', this.capsKey !== true, type);
-      if (code.match(/Lang/)) this.switchLanguage();
       if (code.match(/Hide/)) this.hideKeyboard(keyObj);
 
       const isUpper = ((this.capsKey && !this.shiftKey) || (!this.capsKey && this.shiftKey));
@@ -240,10 +241,7 @@ export default class Keyboard {
   }
 
   languageChangeHandler = (evt) => {
-    // const langCodes = Object.keys(lang);
-    // const langIdx = (langCodes.indexOf(this.keyboard.dataset.language) + 1) % langCodes.length;
     const curLang = evt.detail.lang;
-
     this.keyDict = lang[curLang];
     this.keyboard.dataset.language = curLang;
 

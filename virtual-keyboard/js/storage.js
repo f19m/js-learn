@@ -1,6 +1,9 @@
 export function set(name, value) {
   window.localStorage.setItem(name, JSON.stringify(value));
 }
+export function del(name) {
+  localStorage.removeItem(name);
+}
 
 export function get(name, subst = null) {
   let res;
@@ -11,8 +14,4 @@ export function get(name, subst = null) {
     del(name);
   }
   return res;
-}
-
-export function del(name) {
-  localStorage.removeItem(name);
 }
