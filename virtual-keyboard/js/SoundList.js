@@ -20,18 +20,25 @@ export default class SoundList {
 
   init() {
     this.soundDict = sounds[this.langCode];
-    if (this.sounds.length) {
+    if (this.sounds.length && this.soundDict) {
       this.soundDict.forEach((soundObj) => {
         const soundItem = this.sounds.find((item) => soundObj.code === item.code);
         soundItem.url = soundObj.url;
         soundItem.sound.src = soundObj.url;
       });
-    } else {
+    } else if(this.soundDict){
       this.soundDict.forEach((soundObj) => {
         const soundItem = new Sound(soundObj);
         this.sounds.push(soundItem);
         this.soundList.appendChild(soundItem.sound);
       });
+    }else if (this.sounds.length){
+      //no sound for language
+      this.sounds.forEach((soundObj) => {
+        soundObj.sound.src = "";
+        soundObj.url = "";
+      });
+
     }
 
     return this;
