@@ -1,6 +1,6 @@
 *
     padding: 0
-    //margin: 0
+    margin: 0
     border: 0
 
 *, *:before, *:after
@@ -59,21 +59,23 @@ h1, h2, h3, h4,h5,h6
 html, body
     font-size: 10px
 body
-    width: 100vw
-    min-height: 30rem
+    //min-height: 30rem
     //margin: 0
-    overflow-x: hidden
+    //overflow-x: hidden
 
 $keyboard-bg-color: #00c3b3
 $keyboard-bg-color2: rgb(0, 137, 150)
 $keyboard-bg-color3: #004134;
+
+main
+    padding-top: 2rem
 
 
 .keyboard__input
     display: block
     width: calc(100vw - 20rem)
     height: calc(100vh/2)
-    margin: 1rem auto 0
+    margin: 0 auto
     padding: 1rem
     box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2)
     min-height: 10rem
@@ -86,7 +88,7 @@ $keyboard-bg-color3: #004134;
     
 .keyboard
     width: 100vw
-    min-height: 20rem
+    //min-height: 20rem
     padding: 5px 0
     background: $keyboard-bg-color3
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5)
@@ -138,6 +140,10 @@ $keyboard-bg-color3: #004134;
                 height: 0.8rem
                 background: rgba(0, 0, 0, 0.4)
                 border-radius: 50%
+                @media screen and ( max-width:  768px)
+                    top: 0.2rem
+                    right: 0.2rem
+
         &--active
             background: rgba(255, 255, 255, 0.12)
             &::after
@@ -146,12 +152,12 @@ $keyboard-bg-color3: #004134;
             color: gray
             font-size: 2rem    
             transition: all 0.4s ease-in-out;
-            @media screen and ( max-width:  767px)
+            @media screen and ( max-width:  768px)
                 font-size: 1.4rem    
         .letter
             font-size: 2rem
             transition: all 0.4s ease-in-out;
-            @media screen and ( max-width:  767px)
+            @media screen and ( max-width:  768px)
                 font-size: 1.4rem    
   
     &__row
@@ -168,13 +174,13 @@ $keyboard-bg-color3: #004134;
 .keyboard__key .spec-active
     color: #d3ff00
     font-size: 2.5rem    
-    @media screen and ( max-width:  767px)
+    @media screen and ( max-width:  768px)
         font-size: 1.8rem    
 
 .spec:not(empty) + .letter-spec-active
     margin-left: 50%
     font-size: 2rem    
-    @media screen and ( max-width:  767px)
+    @media screen and ( max-width:  768px)
         font-size: 1.4rem    
     color: gray
 
@@ -195,6 +201,12 @@ $keyboard-bg-color3: #004134;
 [data-code="Space"]
     width: 36%
     max-width: 500px
+
+[data-code="Delete"],[data-code="Backspace"],[data-code="Enter"],[data-code="ShiftLeft"],[data-code="CapsLock"]
+    min-width: 3.6rem
+
+[data-code="Sound"],[data-code="Voice"],[data-code="Hide"],[data-code="Lang"]
+    min-width: 2.6rem
 
 
 .material-icons.md-dark

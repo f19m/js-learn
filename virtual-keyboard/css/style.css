@@ -1,5 +1,6 @@
 * {
   padding: 0;
+  margin: 0;
   border: 0;
 }
 
@@ -70,17 +71,15 @@ html, body {
   font-size: 10px;
 }
 
-body {
-  width: 100vw;
-  min-height: 30rem;
-  overflow-x: hidden;
+main {
+  padding-top: 2rem;
 }
 
 .keyboard__input {
   display: block;
   width: calc(100vw - 20rem);
   height: calc(100vh/2);
-  margin: 1rem auto 0;
+  margin: 0 auto;
   padding: 1rem;
   -webkit-box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
           box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
@@ -100,7 +99,6 @@ body {
 
 .keyboard {
   width: 100vw;
-  min-height: 20rem;
   padding: 5px 0;
   background: #004134;
   -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
@@ -187,6 +185,13 @@ body {
   border-radius: 50%;
 }
 
+@media screen and (max-width: 768px) {
+  .keyboard__key--activatable::after {
+    top: 0.2rem;
+    right: 0.2rem;
+  }
+}
+
 .keyboard__key--active {
   background: rgba(255, 255, 255, 0.12);
 }
@@ -202,7 +207,7 @@ body {
   transition: all 0.4s ease-in-out;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .keyboard__key .spec {
     font-size: 1.4rem;
   }
@@ -214,7 +219,7 @@ body {
   transition: all 0.4s ease-in-out;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .keyboard__key .letter {
     font-size: 1.4rem;
   }
@@ -242,7 +247,7 @@ body {
   font-size: 2.5rem;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .keyboard__key .spec-active {
     font-size: 1.8rem;
   }
@@ -254,7 +259,7 @@ body {
   color: gray;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .spec:not(empty) + .letter-spec-active {
     font-size: 1.4rem;
   }
@@ -282,6 +287,14 @@ body {
 [data-code="Space"] {
   width: 36%;
   max-width: 500px;
+}
+
+[data-code="Delete"], [data-code="Backspace"], [data-code="Enter"], [data-code="ShiftLeft"], [data-code="CapsLock"] {
+  min-width: 3.6rem;
+}
+
+[data-code="Sound"], [data-code="Voice"], [data-code="Hide"], [data-code="Lang"] {
+  min-width: 2.6rem;
 }
 
 .material-icons.md-dark {
