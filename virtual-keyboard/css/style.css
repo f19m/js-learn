@@ -121,8 +121,8 @@ main {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  -webkit-transition: bottom 0.4s;
-  transition: bottom 0.4s;
+  -webkit-transition: bottom 0.6s;
+  transition: bottom 0.6s;
 }
 
 .keyboard-hidden {
@@ -132,7 +132,7 @@ main {
 .keyboard__key {
   height: 4.5rem;
   width: 6%;
-  max-width: 90rem;
+  max-width: 9rem;
   margin: 0.3rem;
   border-radius: 0.4rem;
   border: none;

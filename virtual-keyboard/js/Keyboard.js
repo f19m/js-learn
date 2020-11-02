@@ -8,6 +8,7 @@ import Key from './Key.js';
 import SoundList from './SoundList.js';
 import Voice from './Voice.js';
 import LanguageChange from './LanguageChange.js';
+// import Popup from './Popup.js';
 
 const main = create('main', '');
 
@@ -16,6 +17,7 @@ export default class Keyboard {
     this.rowsOrder = rowsOrder;
     this.keyPresssed = {};
     this.isCaps = false;
+    // const popup = new Popup('Hello!');
   }
 
   init() {
@@ -73,17 +75,15 @@ export default class Keyboard {
           // поищем в addButtons
           keyObj = this.addButtons.find((key) => key.code === code);
           if (keyObj) {
-            if (this[keyObj.small] && this[keyObj.small].__proto__.hasOwnProperty('generateLayout')) {
+            if (this[keyObj.small] && this[keyObj.small].generateLayout) {
               this[keyObj.small].generateLayout(keyObj);
 
               rowElem.appendChild(this[keyObj.small][`${keyObj.small}Key`].key);
-            }else{
-              if (keyObj.code === 'Hide'){
-                keyButton = new Key(keyObj);
-                keyButton.key.addEventListener('click', this.hideKeyboardHandler);
-                this.hideButton = keyButton;
-                rowElem.appendChild(keyButton.key);
-              }
+            } else if (keyObj.code === 'Hide') {
+              keyButton = new Key(keyObj);
+              keyButton.key.addEventListener('click', this.hideKeyboardHandler);
+              this.hideButton = keyButton;
+              rowElem.appendChild(keyButton.key);
             }
           }
         }

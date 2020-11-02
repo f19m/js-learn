@@ -15,7 +15,6 @@ export default class Voice {
     this.recognition = new SpeechRecognition();
     this.recognition.interimResults = true;
     this.recognition.lang = this.#getLangByCode(langCode);
-    
 
     this.recognition.addEventListener('result', (e) => {
       const transcript = Array.from(e.results)
@@ -42,14 +41,13 @@ export default class Voice {
 
   #getLangByCode = (langCode) => {
     const obj = langDict.find((elem) => elem.code === langCode);
-    if (obj){
+    if (obj) {
       return obj.isoCode;
-    }else{
-      new Popup('Speech recognition is not supported for seleced language');
-      this.isActive = false;
-      storage.set('kbIsVoiceAtcive', this.isActive);
-      return null;
     }
+    const popup = new Popup('Speech recognition is not supported for seleced language');
+    this.isActive = false;
+    storage.set('kbIsVoiceAtcive', this.isActive);
+    return null;
   }
 
   #printWord = (text) => {
@@ -87,16 +85,16 @@ export default class Voice {
     this.isActive = !this.isActive;
 
     if (this.isActive) {
-      try{
+      try {
         this.recognition.start();
         this.recognition.addEventListener('end', this.recognition.start);
-      }catch(e){
-          new Popup('An error occurred while trying to record voice. Please try again in a few seconds');
-          this.isActive = false;
-          this.recognition.abort();
-          this.recognition.removeEventListener('end', this.recognition.start);
-          this.updateLayout();
-          storage.set('kbIsVoiceAtcive', this.isActive);
+      } catch (e) {
+        const popup = new Popup('An error occurred while trying to record voice. Please try again in a few seconds');
+        this.isActive = false;
+        this.recognition.abort();
+        this.recognition.removeEventListener('end', this.recognition.start);
+        this.updateLayout();
+        storage.set('kbIsVoiceAtcive', this.isActive);
       }
     } else {
       this.recognition.abort();
@@ -124,7 +122,7 @@ export default class Voice {
 
       this.recognition.stop();
       this.recognition.abort();
-    }else{
+    } else {
       this.recognition.removeEventListener('end', this.recognition.start);
       this.recognition.removeEventListener('end', stopHandler);
       this.recognition.stop();

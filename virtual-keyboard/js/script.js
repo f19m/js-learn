@@ -6,7 +6,7 @@ const rowsOrder = [
   ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Backspace'/* , 'IntlBackslash' */],
   ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
   ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash'/* ,'ArrowUp', 'ShiftRight' */],
-  ['Sound', 'Voice', 'Lang', 'Hide', /* 'AltLeft', */ 'Space'/* , 'AltRight' */, 'ArrowLeft', /* 'ArrowDown', */'ArrowRight'/* ,'ControlRight' */],
+  ['Sound', 'Lang', /* 'AltLeft', */ 'Hide', 'Space', 'Voice', /* , 'AltRight' */ 'ArrowLeft', /* 'ArrowDown', */'ArrowRight'/* ,'ControlRight' */],
 ];
 
 document.addEventListener('DOMContentLoaded', () => {

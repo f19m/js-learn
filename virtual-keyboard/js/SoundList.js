@@ -26,19 +26,18 @@ export default class SoundList {
         soundItem.url = soundObj.url;
         soundItem.sound.src = soundObj.url;
       });
-    } else if(this.soundDict){
+    } else if (this.soundDict) {
       this.soundDict.forEach((soundObj) => {
         const soundItem = new Sound(soundObj);
         this.sounds.push(soundItem);
         this.soundList.appendChild(soundItem.sound);
       });
-    }else if (this.sounds.length){
-      //no sound for language
+    } else if (this.sounds.length) {
+      // no sound for language
       this.sounds.forEach((soundObj) => {
         soundObj.sound.remove();
       });
       this.sounds = [];
-
     }
 
     return this;
@@ -74,7 +73,7 @@ export default class SoundList {
 
     if (soundObj && this.isSoundOn) {
       soundObj.sound.currentTime = 0;
-      if (soundObj.url){
+      if (soundObj.url) {
         soundObj.sound.play();
       }
     }

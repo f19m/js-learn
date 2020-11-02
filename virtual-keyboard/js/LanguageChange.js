@@ -5,7 +5,6 @@ import lang from './layouts/languages/index.js';
 
 export default class LanguageChange {
   constructor() {
-
     this.curLanguage = storage.get('kbLang', '"ru"');
     this.curLanguage = (lang[this.curLanguage]) ? this.curLanguage : Object.keys(lang)[0];
 
