@@ -26,8 +26,18 @@ export default class Puzzle {
     // timer
 
     this.info.timer = utils.create('span', 'time', this.menu.settings.timer.toString(), null);
-    this.info.timer.value = this.menu.settings.timer.toString();
+    this.info.timer.value = this.menu.settings.timer;
     this.info.timer.holder = utils.create('div', 'info__time', this.info.timer, this.info);
+
+    this.info.timer.updateTimer = function () {
+      const addZero = function (n) {
+        return (parseInt(n, 10) < 10 ? '0' : '') + n;
+      };
+
+      const min = Math.trunc(this.value / 60);
+      const sec = this.value % 60;
+      this.textContent = `${addZero(min)}:${addZero(sec)}`;
+    };
 
     // moves
     this.info.moves = utils.create('span', 'moves', this.menu.settings.moves.toString(), null);
@@ -49,8 +59,7 @@ export default class Puzzle {
 
     document.body.prepend(main);
 
-    this.#startTimer();
-
+    this.startTimer();
   }
 
   //   getSettings = () => {
@@ -75,8 +84,10 @@ export default class Puzzle {
     }
   }
 
-  #startTimer (){
-      
+  startTimer() {
+    this.info.timer.value += 1;
+    this.info.timer.updateTimer();
 
+    setTimeout(() => this.startTimer(), 1000);
   }
 }
