@@ -27,9 +27,13 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
     element.appendChild(child);
   } else if (child && typeof child === 'string') {
     element.innerHTML = child;
+  } else if (typeof child === 'number') {
+    element.innerHTML = child.toString();
   }
 
-  if (parent) parent.appendChild(element);
+  if (parent) {
+    parent.appendChild(element);
+  }
 
   if (dataAttr.length) {
     dataAttr.forEach(([attrName, attrValue]) => {
