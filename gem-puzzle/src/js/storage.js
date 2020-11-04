@@ -1,11 +1,11 @@
-export function set(name, value) {
+function set(name, value) {
   window.localStorage.setItem(name, JSON.stringify(value));
 }
-export function del(name) {
+function del(name) {
   localStorage.removeItem(name);
 }
 
-export function get(name, subst = null) {
+function get(name, subst = null) {
   let res;
   try {
     res = JSON.parse(window.localStorage.getItem(name) || subst);
@@ -15,3 +15,5 @@ export function get(name, subst = null) {
   }
   return res;
 }
+
+export default { set, get, del };

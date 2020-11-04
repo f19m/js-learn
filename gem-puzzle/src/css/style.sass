@@ -70,6 +70,13 @@ body
     flex-direction: column
     font-family: Arial
 
+=colorizedFont
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    background-size: 200% auto;   
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent ;
+    animation: shine 5s linear infinite;
 
 
 .puzzle
@@ -197,8 +204,18 @@ body
     position: absolute
     z-index: 1000
 
+[data-cells-count="9"]
+    grid-template-columns: repeat(3, 1fr)
 [data-cells-count="16"]
     grid-template-columns: repeat(4, 1fr)
+[data-cells-count="25"]
+    grid-template-columns: repeat(5, 1fr)
+[data-cells-count="36"]
+    grid-template-columns: repeat(6, 1fr)
+[data-cells-count="49"]
+    grid-template-columns: repeat(7, 1fr)
+[data-cells-count="64"]
+    grid-template-columns: repeat(8, 1fr)
 
 .transition
     transition: all 0.4s ease-in-out;
@@ -221,10 +238,14 @@ body
         display: flex
     &__wrapper
         display: flex
-
+        flex-direction: column
+        align-items: center;
     &__nav
         display: flex
-
+        flex-grow: 1
+        transition: all 0.4s
+    &__list
+        transition: all 0.4s
     &__list
         display: flex
         align-items: center
@@ -237,15 +258,28 @@ body
         color: #FAFAFA;
         cursor: pointer
         &:hover
-            background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-            background-size: 200% auto;   
-            text-fill-color: transparent;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent ;
-            animation: shine 5s linear infinite;
+            +colorizedFont
+    &__saveGame
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.4s
+        flex-grow: 1
+        h2
+            font-size: 4rem
+            font-weight: 900
+            +colorizedFont
           
 
+.position-relative
+    position: relative
 
+.hidden
+    position: absolute;
+    margin-top: -100vh;
+    flex-grow: 0;
+    
 
 @keyframes puzzle__col
   to
@@ -258,9 +292,33 @@ body
 
 
 [data-action="menu"]:hover
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-    background-size: 200% auto;   
-    text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent ;
-    animation: shine 5s linear infinite;
+    +colorizedFont
+
+
+
+
+/////test
+
+ 
+
+.load-page
+    display: flex
+    flex-direction: column
+    align-items: center
+    flex-grow: 1
+    justify-content: space-between;
+    &__title
+        font-size: 4rem
+        font-weight: 900
+    &__btns
+
+.loads__item
+    display: flex
+    font-size: 2rem
+    display: flex
+    justify-content: space-between
+ 
+.item__holder   
+    flex-direction: column;
+    display: flex;
+    flex: 0 1 200px;

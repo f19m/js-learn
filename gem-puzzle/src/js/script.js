@@ -43,7 +43,7 @@ import Puzzle from './Puzzle.js';
 //   };
 //   elem.addEventListener('mouseup', onMouseUp);
 // });
-let puzzle = {};
+
 document.addEventListener('DOMContentLoaded', () => {
-  puzzle = new Puzzle();
+  const puzzle = new Puzzle();
 });

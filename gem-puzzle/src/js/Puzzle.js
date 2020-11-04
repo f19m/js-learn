@@ -1,13 +1,17 @@
 /* eslint-disable import/extensions */
 import utils from './utils/utils.js';
-import { get } from './storage.js';
+import storage from './storage.js';
 import defSettings from './data/settings.js';
 import Menu from './Menu.js';
 import PuzzleItem from './PuzzleItem.js';
 
 export default class Puzzle {
   constructor() {
-    const settings = get('pzlSettings', defSettings);
+    const settings = defSettings;
+    const savedSettings = storage.get('pzlSettings', {});
+    if (savedSettings && savedSettings.savedGames && savedSettings.savedGames.length > 0) {
+      settings.savedGames = savedSettings.savedGames;
+    }
 
     this.settings = settings;
     if (this.settings.items.length === 0) {
@@ -271,10 +275,35 @@ export default class Puzzle {
     return false;
   }
 
+  saveGame = () => {
+    const settings = {};
+    settings.items = this.puzzleItems.map((obj) => obj.value);
+    settings.moves = this.info.moves.value;
+    settings.timer = {
+      value: this.info.timer.value,
+      str: this.info.timer.textContent,
+    };
+
+    settings.type = {
+      size: this.settings.fieldSizes.find((obj) => obj.code === this.settings.fieldSizeCode),
+      type: this.settings.types[this.settings.currTypeIdx],
+    };
+    // to-do Доработать для картинок
+    this.settings.savedGames.unshift(settings);
+
+    storage.set('pzlSettings', { savedGames: this.settings.savedGames });
+  }
+
   showMenu = () => {
     this.isPoused = true;
+    this.main.classList.add('position-relative');
     this.menu.show();
   };
+
+  hideMenu = () => {
+    this.isPoused = false;
+    this.main.classList.remove('position-relative');
+  }
 
   preclickHandler = (evt) => {
     const { target } = evt;
@@ -290,9 +319,10 @@ export default class Puzzle {
 
   actionHandler = (action) => {
     if (action) {
-      console.log(`action= ${action}`);
+      console.log(`actionHandler1: action= ${action}`);
       if (action.match(/menu/)) this.showMenu();
-      if (action.match(/hideMenu/)) this.isPoused = false;
+      if (action.match(/hideMenu/)) this.hideMenu();
+      if (action.match(/save/)) this.saveGame();
     }
   }
 }

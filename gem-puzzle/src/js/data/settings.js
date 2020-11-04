@@ -22,7 +22,7 @@ export default {
   ],
   timer: 0,
   moves: 0,
-  types: ['number', 'picture'],
+  types: ['numberic', 'picture'],
   currTypeIdx: 0,
   savedGames: [],
   bestScores: [],

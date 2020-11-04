@@ -12,7 +12,7 @@ export default {
     text: 'Load Game',
   },
 
-  destScore: {
+  bestScore: {
     text: 'Best Score',
   },
 
@@ -24,7 +24,7 @@ export default {
     text: 'Settings',
   },
 
-  exit: {
+  hideMenu: {
     text: 'Exit',
   },
 
