@@ -100,8 +100,8 @@ export default class Puzzle {
   //   }
 
   updatePuzzle = (items) => {
-    if (this.puzzleItems.length === 0) {
-      this.settings.items.forEach((elem) => {
+    const fillField = (arr) => {
+      arr.forEach((elem) => {
         const item = new PuzzleItem(elem);
         if (elem === '0') {
           item.elem.value.innerHTML = '';
@@ -110,20 +110,25 @@ export default class Puzzle {
         this.puzzleItems.push(item);
         this.puzzle.append(item.elem);
       });
+    };
+
+    if (this.puzzleItems.length === 0) {
+      fillField(this.settings.items);
     } else {
       this.puzzle.innerHTML = '';
       this.puzzleItems.map((item) => item.elem.remove());
       this.puzzleItems = [];
 
-      items.forEach((elem) => {
-        const item = new PuzzleItem(elem);
-        if (elem === '0') {
-          item.elem.value.innerHTML = '';
-          this.zeroItem = item;
-        }
-        this.puzzleItems.push(item);
-        this.puzzle.append(item.elem);
-      });
+      if (items) {
+        // loadGame
+        fillField(items);
+      } else {
+        // new game
+        this.settings.items = utils.getNewMatrix(this.settings.fieldSizes.find(
+          (item) => item.code === this.settings.fieldSizeCode,
+        ).count);
+        fillField(this.settings.items);
+      }
     }
   }
 
@@ -358,7 +363,7 @@ t
       if (action.match(/menu/)) this.showMenu();
       if (action.match(/hideMenu/)) this.hideMenu();
       if (action.match(/save/)) this.saveGame();
-      if (action.match(/loadSelectedGame/)) this.loadGame();
+      if (action.match(/loadSelectedGame|newGame/)) this.loadGame();
     }
   }
 }

@@ -41,11 +41,22 @@ export default class Menu {
 
     this.menu.nav = create('nav', 'menu__nav', null, this.menu.wrapper);
     this.menu.nav.list = create('ul', 'menu__list', null, this.menu.nav);
+
+    const getAddParam = (key) => {
+      if (key.match(/loadGame/)) return { savedGames: this.savedGames };
+      if (key.match(/settings/)) return { gameSettimgs: this.gameSettimgs };
+      return {};
+    };
+
     Object.keys(this.menuList).forEach((key) => {
       const item = this.menuList[key];
       item.elem = create('li', 'menu__item', item.text, this.menu.nav.list, ['action', key]);
-      if (key.match(/saveGame/)) { this.menuList[key].sectionInit(key, this.menu.wrapper); }
+      /* if (key.match(/saveGame/)) { this.menuList[key].sectionInit(key, this.menu.wrapper); }
       if (key.match(/loadGame/)) { this.menuList[key].sectionInit(key, this.menu.wrapper, { savedGames: this.savedGames }); }
+      */
+      if (this.menuList[key] && this.menuList[key].sectionInit) {
+        this.menuList[key].sectionInit(key, this.menu.wrapper, getAddParam(key));
+      }
     });
 
     this.menu.addEventListener('click', this.actionHandler);
@@ -93,6 +104,7 @@ export default class Menu {
         this.hide();
       }
       if (action.match(/back/)) this.backToMenu(this.menuList[section]);
+      if (action.match(/newGame/)) this.updateGameSettings(this.menuList.settings.gameSettimgs);
       if (action.match(/loadSelectedGame/)) {
         this.updateGameSettings(this.menuList.loadGame.loadGameSettings);
         this.menuList.saveGame.sectionInit(null, null, 'Game Loaded!');

@@ -397,7 +397,7 @@ body {
           animation: shine 5s linear infinite;
 }
 
-.menu__saveGame {
+.menu__saveGame, .menu__newGame {
   height: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -415,9 +415,37 @@ body {
           flex-grow: 1;
 }
 
-.menu__saveGame h2 {
+.menu__saveGame h2, .menu__newGame h2 {
   font-size: 4rem;
   font-weight: 900;
+  background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%);
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: shine 5s linear infinite;
+          animation: shine 5s linear infinite;
+}
+
+.menu__back {
+  font-size: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+.menu__back:hover {
   background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%);
   background-size: 200% auto;
   text-fill-color: transparent;
@@ -662,5 +690,85 @@ body {
 
 .item + .item {
   margin-left: 1rem;
+}
+
+.settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.settings__title {
+  font-size: 4rem;
+  font-weight: 900;
+}
+
+.settings__sizes {
+  margin-bottom: 2rem;
+}
+
+.settings__sizes, .settings__type {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.settings__sizes select, .settings__type select {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  background: inherit;
+  color: white;
+}
+
+.settings__sizes selectselect::-ms-expand, .settings__type selectselect::-ms-expand {
+  background: inherit;
+  color: white;
+}
+
+.settings__sizes select option, .settings__type select option {
+  background: #2e2e2e;
+  color: white;
+}
+
+.rules {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.rules__title {
+  font-size: 4rem;
+  font-weight: 900;
+}
+
+.rules__info {
+  font-size: 2rem;
+  max-width: 25vw;
 }
 /*# sourceMappingURL=style.css.map */

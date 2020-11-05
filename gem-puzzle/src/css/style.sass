@@ -70,6 +70,18 @@ body
     flex-direction: column
     font-family: Arial
 
+ 
+$title-font-size: 4rem
+$subtitle-font-size: 2.5rem
+
+=title 
+    font-size: $title-font-size
+    font-weight: 900
+=subtitle
+    font-size: $subtitle-font-size
+    font-weight: 700
+
+
 =background-color
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     background-size: 200% auto;
@@ -263,7 +275,7 @@ body
         cursor: pointer
         &:hover
             +colorizedFont
-    &__saveGame
+    &__saveGame,  &__newGame
         height: 50%;
         display: flex;
         justify-content: center;
@@ -273,6 +285,15 @@ body
         h2
             font-size: 4rem
             font-weight: 900
+            +colorizedFont
+    &__back
+        font-size: $title-font-size
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        &:hover
             +colorizedFont
           
 
@@ -303,8 +324,6 @@ body
 
 /////test
 
- 
-$load-font-size: 4rem
 
 .load
     display: flex
@@ -319,7 +338,7 @@ $load-font-size: 4rem
     &__games
         margin: 2rem 0
     &__back
-        font-size: $load-font-size
+        font-size: $title-font-size
         display: flex
         flex-direction: column
         align-items: center
@@ -328,7 +347,7 @@ $load-font-size: 4rem
         &:hover
             +colorizedFont
     &__title
-        font-size: $load-font-size
+        font-size: $title-font-size
         font-weight: 900
         margin-bottom: 2rem
     &__subtitle
@@ -421,16 +440,44 @@ $load-font-size: 4rem
         //     width: var(--font)
         //     transform: rotate(180deg)
 
-
-
-
-        
-
- 
- 
-
 .item
     //min-width: 13rem
     & + &
         margin-left: 1rem
- 
+
+.settings
+    display: flex
+    flex-direction: column
+    align-items: center
+    flex-grow: 1
+    justify-content: space-between;
+    &__title
+       +title
+    &__sizes
+        margin-bottom: 2rem
+    &__sizes, &__type
+        +subtitle
+        select
+            +subtitle    
+            margin-left: 2rem
+            background: inherit
+            color: white
+            &select::-ms-expand
+                background: inherit
+                color: white
+        select option
+            background: rgb(46, 46, 46);
+            color: white;
+            
+
+.rules
+    display: flex
+    flex-direction: column
+    align-items: center
+    flex-grow: 1
+    justify-content: space-between;
+    &__title
+       +title
+    &__info
+        font-size: 2rem
+        max-width: 25vw

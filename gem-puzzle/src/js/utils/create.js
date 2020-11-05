@@ -37,12 +37,17 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
 
   if (dataAttr.length) {
     dataAttr.forEach(([attrName, attrValue]) => {
-      if (attrValue === '') {
-        element.setAttribute(attrName, '');
-      } else if (attrName.toString().match(/value|id|placeholder|cols|rows|autocorrect|spellcheck|src/)) {
-        element.setAttribute(attrName, attrValue);
-      } else {
-        element.dataset[attrName] = attrValue;
+      try {
+        if (attrValue === '') {
+          element.setAttribute(attrName, '');
+        } else if (attrName && attrName.toString().match(/value|id|placeholder|cols|rows|autocorrect|spellcheck|src/)) {
+          element.setAttribute(attrName, attrValue);
+        } else if (attrName && attrValue) {
+          element.dataset[attrName] = attrValue;
+        }
+      } catch (e) {
+        console.log(dataAttr);
+        throw new Error(`${e};    dataAttr = ${dataAttr};  attrName=${attrName}  attrValue=${attrValue};`);
       }
     });
   }

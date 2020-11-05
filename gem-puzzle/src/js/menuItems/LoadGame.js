@@ -15,7 +15,7 @@ export default class LoadGame {
     this.savedGames = savedGames;
     this.section = create('section', `menu__${name} load hidden`, null, parent, ['section', name]);
     const loadContent = create('div', 'load__content', null, this.section);
-    this.section.backBtn = create('div', 'load__back', 'Back', this.section, ['action', 'back'], ['section', 'loadGame']);
+    this.section.backBtn = create('div', 'load__back', 'Back', this.section, ['action', 'back'], ['section', name]);
 
     // content
     create('h2', 'load__title', `Saved Games: <span class="load__game-cnt">${savedGames.length}</span>`, loadContent);
