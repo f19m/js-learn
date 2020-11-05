@@ -9,6 +9,10 @@ export default class SaveGame {
   }
 
   sectionInit = (name, parent, ...add) => {
-    this.section = create('section', `menu__${name} hidden`, '<h2>Game Saved!</h2>', parent, ['section', name]);
+    if (this.section) {
+      this.section.innerHTML = `<h2>${add[0]}</h2>`;
+    } else {
+      this.section = create('section', `menu__${name} hidden`, `<h2>${(add[0]) ? add[0] : 'Game Saved!'}</h2>`, parent, ['section', name]);
+    }
   }
 }

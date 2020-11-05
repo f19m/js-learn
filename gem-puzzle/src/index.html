@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,160 +8,108 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>gem-puzzle</title>
 </head>
+
 <body>
+<!-- 
 
-    <section class="load-page">
+    <section class="menu__loadGame load" data-section="loadGame">
+        <div class="load__content">
 
-        <h2 class="load-page__title">Load Game</h2>
-        <ul class="load-page__loads" style="color: black">
-            <li>
-                <div class="loads__item">
-                    <div class="item__time">
-                        Time:
-                        <span class="time">13:01</span>
-                    </div>
-                    <div class="item__moves">
-                        Moves:
-                        <span class="moves">134</span>
-                    </div>
-                    <div class="item__size">
-                        Size:
-                        <span class="size">4x4</span>
-                    </div>
-                    <div class="item__type">
-                        Type:
-                        <span class="type">numeric</span>
-                    </div>
 
-                </div>
-            </li>
-            <li>
-                <div class="loads__item">
-                    <div class="item__time">
-                        Time:
-                        <span class="time">13:01</span>
-                    </div>
-                    <div class="item__moves">
-                        Moves:
-                        <span class="moves">134</span>
-                    </div>
-                    <div class="item__size">
-                        Size:
-                        <span class="size">4x4</span>
-                    </div>
-                    <div class="item__type">
-                        Type:
-                        <span class="type">numeric</span>
-                    </div>
+            <h2 class="load__title">Saved Games: <span class="load__game-cnt">4</span></h2>
+            <h4 class="load__subtitle">Game: <span class="load__cur-game">1</span></h4>
 
-                </div>
-            </li>
-       
-        </ul>
+            <div class="load__games game">
+                <div class="game__prev game__prev-inactive">
+                     </div>
+                <ul class="game__list">
+                    <li class="game__item" data-load-idx="0">
 
-        <div class="load-page__load">
-            Load Game
-        </div>
 
-        <div class="load-page__back">
-            Go Back
-        </div>
+                        <div class="item">
+                            Time:
+                            <span class="time">00:03</span>
+                        </div>
+                        <div class="item">
+                            Moves:
+                            <span class="moves">0</span>
+                        </div>
 
-</section>
+                        <div class="item">
+                            Size:
+                            <span class="size">4x4</span>
+                        </div>
+                        <div class="item">
+                            Type:
+                            <span class="type">numberic</span>
+                        </div>
+
+
+                    </li>
+                    <li class="game__item" data-load-idx="1">
+
+
+                        <div class="item">
+                            Time:
+                            <span class="time">00:15</span>
+                        </div>
+                        <div class="item">
+                            Moves:
+                            <span class="moves">9</span>
+                        </div>
+
+                        <div class="item">
+                            Size:
+                            <span class="size">4x4</span>
+                        </div>
+                        <div class="item">
+                            Type:
+                            <span class="type">numberic</span>
+                        </div>
 
 
 
-<!--     
-    <main class="puzzle">
-        <div class="puzzle__info info">
-            <div class="info__time"><span class="time">00:07</span></div>
-            <div class="info__moves">Moves: <span class="moves">0</span></div>
-            <div class="info__menu">Menu</div>
-        </div>
+                    </li>
+                    <li class="game__item" data-load-idx="2">
 
-        <div class="puzzle__wrapper">
-            <div class="puzzle__field" data-cells-count="16">
-                <div class="puzzle__col" data-numb="0">
-                    <div class="col"></div>
-                </div>
-                <div class="puzzle__col" data-numb="1">
-                    <div class="col">1</div>
-                </div>
-                <div class="puzzle__col" data-numb="2">
-                    <div class="col">2</div>
-                </div>
-                <div class="puzzle__col" data-numb="3">
-                    <div class="col">3</div>
-                </div>
-                <div class="puzzle__col" data-numb="4">
-                    <div class="col">4</div>
-                </div>
-                <div class="puzzle__col" data-numb="5">
-                    <div class="col">5</div>
-                </div>
-                <div class="puzzle__col" data-numb="6">
-                    <div class="col">6</div>
-                </div>
-                <div class="puzzle__col" data-numb="7">
-                    <div class="col">7</div>
-                </div>
-                <div class="puzzle__col" data-numb="8">
-                    <div class="col">8</div>
-                </div>
-                <div class="puzzle__col" data-numb="9">
-                    <div class="col">9</div>
-                </div>
-                <div class="puzzle__col" data-numb="10">
-                    <div class="col">10</div>
-                </div>
-                <div class="puzzle__col" data-numb="11">
-                    <div class="col">11</div>
-                </div>
-                <div class="puzzle__col" data-numb="12">
-                    <div class="col">12</div>
-                </div>
-                <div class="puzzle__col" data-numb="13">
-                    <div class="col">13</div>
-                </div>
-                <div class="puzzle__col" data-numb="14">
-                    <div class="col">14</div>
-                </div>
-                <div class="puzzle__col" data-numb="15">
-                    <div class="col">15</div>
-                </div>
+
+                        <div class="item">
+                            Time:
+                            <span class="time">00:09</span>
+                        </div>
+                        <div class="item">
+                            Moves:
+                            <span class="moves">3</span>
+                        </div>
+
+                        <div class="item">
+                            Size:
+                            <span class="size">4x4</span>
+                        </div>
+                        <div class="item">
+                            Type:
+                            <span class="type">numberic</span>
+                        </div>
+
+
+
+                    </li>
+                </ul>
+                <div class="game__next">
+                     </div>
             </div>
 
-            <section class="menu">
-                <div class="menu__wrapper">
-                    <nav class="menu__nav">
-                        <ul class="menu__list">
-                            <li class="menu__item">
-                                New Game
-                            </li>
-                            <li class="menu__item">Save Game</li>
-                            <li class="menu__item">Load Game</li>
-                            <li class="menu__item">Best Score</li>
-                            <li class="menu__item">Rules</li>
-                            <li class="menu__item">Game settings</li>
-                            <li class="menu__item">Exit Menu</li>
-                        </ul>
-                    </nav>
+
+            <div class="load__btb">Load Game</div>
 
 
-            </section>
         </div>
-
-        <div class="puzzle__footer">
-            <div class="puzzle__sound">Sound</div>
-        </div>
-    </main> -->
-
-
-   
-  
-
+        <div class="load__back">Back</div>
+    </section>
+ -->
 
 
     <script src="./js/script.js" type="module"></script>
 </body>
+
 </html>

@@ -70,6 +70,10 @@ body
     flex-direction: column
     font-family: Arial
 
+=background-color
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    background-size: 200% auto;
+    animation: shine 5s linear infinite;
 =colorizedFont
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     background-size: 200% auto;   
@@ -300,25 +304,133 @@ body
 /////test
 
  
+$load-font-size: 4rem
 
-.load-page
+.load
     display: flex
     flex-direction: column
     align-items: center
     flex-grow: 1
     justify-content: space-between;
+    &__content
+        display: flex
+        flex-direction: column
+        align-items: center
+    &__games
+        margin: 2rem 0
+    &__back
+        font-size: $load-font-size
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        &:hover
+            +colorizedFont
     &__title
-        font-size: 4rem
+        font-size: $load-font-size
         font-weight: 900
-    &__btns
+        margin-bottom: 2rem
+    &__subtitle
+        font-size: 2.5rem
+        font-weight: 900
+    &__btb
+        cursor: pointer
+        font-size: 2.5rem;
+        font-weight: 900;
+        &:hover
+            +colorizedFont
 
-.loads__item
-    display: flex
-    font-size: 2rem
-    display: flex
-    justify-content: space-between
+        
  
-.item__holder   
-    flex-direction: column;
-    display: flex;
-    flex: 0 1 200px;
+ 
+
+        
+
+.game
+    --font: 2rem
+    display: flex
+    flex-direction: column
+    align-items: center
+    &__prev, &__next
+        height: 4rem
+        width: 4rem
+    &__prev::before, &__next::before
+        position: absolute;
+        z-index: -1;
+        left: 0
+        content: ''
+        background: white
+        -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M8 5v14l11-7z"/></svg>') center/contain;
+        mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M8 5v14l11-7z"/></svg>') center/contain;
+        height: calc(var(--font) * 2)
+        width: calc(var(--font) * 2)
+        cursor: pointer
+    &__prev
+        transform: rotate(270deg)
+    &__next
+        transform: rotate(90deg)
+    &__prev:hover::before, &__next:hover::before
+        background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%;
+        animation: shine 5s linear infinite;
+    &__prev-inactive::before, &__next-inactive::before
+        background: gray
+    &__prev-inactive:hover::before, &__next-inactive:hover::before
+        background: gray
+    &__list
+        position: relative
+    &__item
+        --font: 2rem
+        --size: 200%
+        font-size: var(--font)
+        line-height: var( --size)
+        font-weight: 700
+        cursor: pointer
+        transition: all 0.4s
+        position: relative
+        display: flex
+        align-items: center
+        position: absolute;
+        top: -100vh
+    &__item-active
+        top: 0;
+        position: inherit
+        &:hover, &-active
+            +colorizedFont
+        // &-active::before
+        //     position: absolute;
+        //     z-index: -1;
+        //     left: calc(-1 * var(--font)
+        //     content: ''
+        //     background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%;
+        //     -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
+        //     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
+        //     animation: shine 5s linear infinite;
+        //     height: var(--font)
+        //     width: var(--font)
+        // &-active::after
+        //     position: absolute;
+        //     z-index: -1;
+        //     right: calc(-1 * var(--font)
+        //     content: ''
+        //     background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%;
+        //     -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
+        //     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
+        //     animation: shine 5s linear infinite;
+        //     height: var(--font)
+        //     width: var(--font)
+        //     transform: rotate(180deg)
+
+
+
+
+        
+
+ 
+ 
+
+.item
+    //min-width: 13rem
+    & + &
+        margin-left: 1rem
+ 

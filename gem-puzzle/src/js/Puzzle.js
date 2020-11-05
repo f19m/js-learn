@@ -99,9 +99,23 @@ export default class Puzzle {
   //     return settings;
   //   }
 
-  updatePuzzle = () => {
+  updatePuzzle = (items) => {
     if (this.puzzleItems.length === 0) {
       this.settings.items.forEach((elem) => {
+        const item = new PuzzleItem(elem);
+        if (elem === '0') {
+          item.elem.value.innerHTML = '';
+          this.zeroItem = item;
+        }
+        this.puzzleItems.push(item);
+        this.puzzle.append(item.elem);
+      });
+    } else {
+      this.puzzle.innerHTML = '';
+      this.puzzleItems.map((item) => item.elem.remove());
+      this.puzzleItems = [];
+
+      items.forEach((elem) => {
         const item = new PuzzleItem(elem);
         if (elem === '0') {
           item.elem.value.innerHTML = '';
@@ -300,6 +314,8 @@ export default class Puzzle {
     this.menu.show();
   };
 
+t
+
   hideMenu = () => {
     this.isPoused = false;
     this.main.classList.remove('position-relative');
@@ -317,12 +333,32 @@ export default class Puzzle {
     this.actionHandler(action);
   }
 
+  loadGame = () => {
+    setTimeout(() => this.menu.hide(),
+      1500);
+    const settings = this.menu.gameSettimgs;
+    this.info.timer.value = settings.timer.value;
+    this.info.timer.innerHTML = settings.timer.str;
+
+    this.info.moves.value = settings.moves;
+    this.info.moves.innerHTML = settings.moves;
+
+    this.settings.fieldSizeCode = settings.type.size.code;
+
+    this.puzzle.dataset.cellsCount = settings.type.size.count;
+    this.settings.currTypeIdx = this.settings.types.indexOf(settings.type.type);
+
+    this.updatePuzzle(settings.items);
+    this.hideMenu();
+  }
+
   actionHandler = (action) => {
     if (action) {
-      console.log(`actionHandler1: action= ${action}`);
+      console.log(`Puzzle actionHandler:    action= ${action}`);
       if (action.match(/menu/)) this.showMenu();
       if (action.match(/hideMenu/)) this.hideMenu();
       if (action.match(/save/)) this.saveGame();
+      if (action.match(/loadSelectedGame/)) this.loadGame();
     }
   }
 }
