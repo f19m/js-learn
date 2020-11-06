@@ -96,6 +96,23 @@ export default class Menu {
     this.gameSettimgs.items = settings.items;
   }
 
+  // updateMenu = () => {
+  //   const savedSettings = storage.get('pzlSettings', {});
+  //   if (savedSettings && savedSettings.savedGames && savedSettings.savedGames.length > 0) {
+  //     this.savedGames = savedSettings.savedGames;
+  //     this.menuList.loadGame.sectionUpdate(this.savedGames);
+  //   }
+  //   if (savedSettings && savedSettings.bestScore && savedSettings.bestScore.length > 0) {
+  //     this.bestScore = savedSettings.bestScore;
+  //     this.menuList.bestScore.sectionUpdate(this.bestScore);
+  //   }
+
+  //   // ['loadGame', 'bestScore'].forEach((menuItem) => {
+  //   //   this[menuItem] = savedSettings[menuItem];
+  //   //   this.menuList[menuItem].sectionUpdate(this[menuItem]);
+  //   // });
+  // }
+
   actionHandler = (evt) => {
     const { target } = evt;
     const { action, section } = target.dataset;
@@ -116,6 +133,7 @@ export default class Menu {
       }
 
       if (this.menuList[action]) {
+        if (this.menuList[action].sectionUpdate) this.menuList[action].sectionUpdate();
         this.showMenuSection(action);
       }
     }

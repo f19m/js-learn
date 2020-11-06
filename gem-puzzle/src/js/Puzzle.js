@@ -325,6 +325,7 @@ export default class Puzzle {
   showMenu = () => {
     this.isPoused = true;
     this.main.classList.add('position-relative');
+    // this.menu.updateMenu();
     this.menu.show();
   };
 

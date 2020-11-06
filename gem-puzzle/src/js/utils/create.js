@@ -42,7 +42,7 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
           element.setAttribute(attrName, '');
         } else if (attrName && attrName.toString().match(/value|id|placeholder|cols|rows|autocorrect|spellcheck|src/)) {
           element.setAttribute(attrName, attrValue);
-        } else if (attrName && attrValue) {
+        } else if (attrName) {
           element.dataset[attrName] = attrValue;
         }
       } catch (e) {
