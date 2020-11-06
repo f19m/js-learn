@@ -11,7 +11,7 @@ function get(name, subst = null) {
     res = JSON.parse(window.localStorage.getItem(name) || subst);
   } catch (e) {
     res = subst;
-    del(name);
+    // del(name);
   }
   return res;
 }

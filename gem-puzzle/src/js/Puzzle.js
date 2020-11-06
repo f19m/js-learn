@@ -12,6 +12,9 @@ export default class Puzzle {
     if (savedSettings && savedSettings.savedGames && savedSettings.savedGames.length > 0) {
       settings.savedGames = savedSettings.savedGames;
     }
+    if (savedSettings && savedSettings.bestScore && savedSettings.bestScore.length > 0) {
+      settings.bestScore = savedSettings.bestScore;
+    }
 
     this.settings = settings;
     if (this.settings.items.length === 0) {
@@ -99,7 +102,7 @@ export default class Puzzle {
   //     return settings;
   //   }
 
-  updatePuzzle = (items) => {
+  updatePuzzle = (items, action) => {
     const fillField = (arr) => {
       arr.forEach((elem) => {
         const item = new PuzzleItem(elem);
@@ -115,15 +118,19 @@ export default class Puzzle {
     if (this.puzzleItems.length === 0) {
       fillField(this.settings.items);
     } else {
-      this.puzzle.innerHTML = '';
-      this.puzzleItems.map((item) => item.elem.remove());
-      this.puzzleItems = [];
+      const clear = () => {
+        this.puzzle.innerHTML = '';
+        this.puzzleItems.map((item) => item.elem.remove());
+        this.puzzleItems = [];
+      };
 
-      if (items) {
+      if (items && action === 'loadSelectedGame') {
         // loadGame
+        clear();
         fillField(items);
-      } else {
+      } else if (action === 'newGame') {
         // new game
+        clear();
         this.settings.items = utils.getNewMatrix(this.settings.fieldSizes.find(
           (item) => item.code === this.settings.fieldSizeCode,
         ).count);
@@ -310,7 +317,9 @@ export default class Puzzle {
     // to-do Доработать для картинок
     this.settings.savedGames.unshift(settings);
 
-    storage.set('pzlSettings', { savedGames: this.settings.savedGames });
+    const currSettings = storage.get('pzlSettings', {});
+    currSettings.savedGames = this.settings.savedGames;
+    storage.set('pzlSettings', currSettings);
   }
 
   showMenu = () => {
@@ -338,10 +347,12 @@ t
     this.actionHandler(action);
   }
 
-  loadGame = () => {
+  loadGame = (action) => {
+    const settings = this.menu.gameSettimgs;
+
     setTimeout(() => this.menu.hide(),
       1500);
-    const settings = this.menu.gameSettimgs;
+
     this.info.timer.value = settings.timer.value;
     this.info.timer.innerHTML = settings.timer.str;
 
@@ -353,7 +364,7 @@ t
     this.puzzle.dataset.cellsCount = settings.type.size.count;
     this.settings.currTypeIdx = this.settings.types.indexOf(settings.type.type);
 
-    this.updatePuzzle(settings.items);
+    this.updatePuzzle(settings.items, action);
     this.hideMenu();
   }
 
@@ -363,7 +374,7 @@ t
       if (action.match(/menu/)) this.showMenu();
       if (action.match(/hideMenu/)) this.hideMenu();
       if (action.match(/save/)) this.saveGame();
-      if (action.match(/loadSelectedGame|newGame/)) this.loadGame();
+      if (action.match(/loadSelectedGame|newGame/)) this.loadGame(action);
     }
   }
 }

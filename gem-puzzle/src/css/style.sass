@@ -93,7 +93,13 @@ $subtitle-font-size: 2.5rem
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent ;
     animation: shine 5s linear infinite;
-
+    
+=colorizedFont-inactive    
+    background: radial-gradient(circle, gray 0%, gray 100%);
+    background-size: 200% auto;   
+    text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent ;
 
 .puzzle
     //position: relative
@@ -359,6 +365,11 @@ $subtitle-font-size: 2.5rem
         font-weight: 900;
         &:hover
             +colorizedFont
+    &__btb-disabled
+        +colorizedFont-inactive 
+        &:hover
+            +colorizedFont-inactive 
+ 
 
         
  
@@ -481,3 +492,43 @@ $subtitle-font-size: 2.5rem
     &__info
         font-size: 2rem
         max-width: 25vw
+
+
+.score
+    display: flex
+    flex-direction: column
+    align-items: center
+    flex-grow: 1
+    justify-content: space-between;
+    &__content
+        display: flex
+        flex-direction: column
+        align-items: center
+    &__title
+       +title
+    &__info
+        font-size: 2rem
+        max-width: 25vw
+    &__table
+        margin-top: 2rem
+        font-size: 2rem
+        display: flex
+        flex-direction: row
+    &__row
+        display: flex
+        flex-direction: row
+        &:first-child
+            font-size: 2.5rem
+            font-weight: 700
+            +colorizedFont
+    &__col
+        display: flex
+        flex-direction: column
+        min-width: 10rem
+        text-align: center
+    &__row + &__row
+        margin-top: 2rem
+    &__col + &__col
+        margin-left: 2rem
+
+

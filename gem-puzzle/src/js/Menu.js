@@ -6,6 +6,8 @@ import defSettings from './data/settings.js';
 export default class Menu {
   constructor(settings, parent) {
     this.savedGames = settings.savedGames;
+    this.bestScore = settings.bestScore;
+
     this.gameSettimgs = {
       moves: 0,
       timer: {
@@ -43,19 +45,17 @@ export default class Menu {
     this.menu.nav.list = create('ul', 'menu__list', null, this.menu.nav);
 
     const getAddParam = (key) => {
-      if (key.match(/loadGame/)) return { savedGames: this.savedGames };
-      if (key.match(/settings/)) return { gameSettimgs: this.gameSettimgs };
-      return {};
+      if (key.match(/loadGame/)) return [{ savedGames: this.savedGames }];
+      if (key.match(/settings/)) return [{ gameSettimgs: this.gameSettimgs }];
+      if (key.match(/bestScore/)) return [{ bestScore: this.bestScore }];
+      return [];
     };
 
     Object.keys(this.menuList).forEach((key) => {
       const item = this.menuList[key];
       item.elem = create('li', 'menu__item', item.text, this.menu.nav.list, ['action', key]);
-      /* if (key.match(/saveGame/)) { this.menuList[key].sectionInit(key, this.menu.wrapper); }
-      if (key.match(/loadGame/)) { this.menuList[key].sectionInit(key, this.menu.wrapper, { savedGames: this.savedGames }); }
-      */
       if (this.menuList[key] && this.menuList[key].sectionInit) {
-        this.menuList[key].sectionInit(key, this.menu.wrapper, getAddParam(key));
+        this.menuList[key].sectionInit(key, this.menu.wrapper, ...getAddParam(key));
       }
     });
 
@@ -87,6 +87,7 @@ export default class Menu {
   }
 
   updateGameSettings(settings) {
+    if (!settings) return;
     this.gameSettimgs.moves = settings.moves;
     this.gameSettimgs.timer = settings.timer;
     this.gameSettimgs.type.size = defSettings.fieldSizes
@@ -107,9 +108,11 @@ export default class Menu {
       if (action.match(/newGame/)) this.updateGameSettings(this.menuList.settings.gameSettimgs);
       if (action.match(/loadSelectedGame/)) {
         this.updateGameSettings(this.menuList.loadGame.loadGameSettings);
-        this.menuList.saveGame.sectionInit(null, null, 'Game Loaded!');
-        this.backToMenu(this.menuList.loadGame);
-        this.showMenuSection('saveGame');
+        if (this.savedGames.length > 0) {
+          this.menuList.saveGame.sectionInit(null, null, 'Game Loaded!');
+          this.backToMenu(this.menuList.loadGame);
+          this.showMenuSection('saveGame');
+        }
       }
 
       if (this.menuList[action]) {

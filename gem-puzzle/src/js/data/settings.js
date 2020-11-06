@@ -25,6 +25,6 @@ export default {
   types: ['numberic', 'picture'],
   currTypeIdx: 0,
   savedGames: [],
-  bestScores: [],
+  bestScore: [],
   items: [],
 };
