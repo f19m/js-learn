@@ -22,8 +22,10 @@ export default class Puzzle {
         (item) => item.code === this.settings.fieldSizeCode,
       ).count);
     }
+
     this.isPoused = false;
     this.menu = {};
+    this.solveArr = [];
 
     this.generateLayout();
     this.menu = new Menu(this.settings, this.main);
@@ -137,6 +139,12 @@ export default class Puzzle {
         fillField(this.settings.items);
       }
     }
+
+    for (let i = 0; i < this.puzzleItems.length; i+=+1) {
+      this.solveArr.push( (i===this.puzzleItems.length-1)?'0':(i + 1).toString());
+    }
+  
+
   }
 
   startTimer = () => {
@@ -254,6 +262,8 @@ export default class Puzzle {
         this.emptyElem.remove();
         this.emptyElem = null;
 
+        this.isFinish();
+
         // this.puzzle.insertBefore(this.movedElem, this.zeroItem.elem);
         // this.puzzle.insertBefore(this.zeroItem.elem, this.emptyElem);
       }
@@ -367,6 +377,21 @@ t
 
     this.updatePuzzle(settings.items, action);
     this.hideMenu();
+  }
+
+
+  isFinish = () => {
+    let scrArr =this.solveArr;
+    let dstArr = this.puzzleItems.map((item)=>item.value);
+
+    let isDiff = scrArr.reduce((prev, cur, idx) => (prev + ((cur===dstArr[idx])?0:1)), 0);
+    if (!isNotEq){
+      //to-do: save-score
+      //show congratulation screen
+      // block field to edit
+      console.log('thats win!') 
+    }
+
   }
 
   actionHandler = (action) => {

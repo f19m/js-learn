@@ -35,7 +35,7 @@ export default class LoadGame {
     this.loadListItems = [];
     this.fillLoadList(savedGames);
 
-    this.loadBtn = create('div', `load__btb${this.savedGames.length ? '' : ' load__btb-disabled'}`, 'Load Game', loadContent, (this.loadList.length) ? ['action', 'loadSelectedGame'] : []);
+    this.loadBtn = create('div', `load__btb${this.savedGames.length ? '' : ' load__btb-disabled'}`, 'Load Game', loadContent, (this.savedGames.length) ? ['action', 'loadSelectedGame'] : []);
     this.section.addEventListener('click', this.actionHandler);
   }
 
@@ -84,6 +84,14 @@ export default class LoadGame {
     this.curLoadNum = (savedGames.length) ? 1 : 0;
     this.currLoad.textContent = (this.curLoadNum) ? this.curLoadNum : '';
 
+    if (savedGames.length){
+      this.loadBtn.classList.remove('load__btb-disabled');
+      this.loadBtn.dataset.action = 'loadSelectedGame';
+    }else{
+      this.loadBtn.classList.add('load__btb-disabled');
+      this.loadBtn.dataset.action = null;
+    }
+  
     this.loadListItems.map((item) => item.remove());
     this.loadListItems = [];
     this.fillLoadList(savedGames);
