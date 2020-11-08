@@ -110,6 +110,8 @@ $subtitle-font-size: 2.5rem
     color: white
     &__wrapper
         width: 60vw
+        @media( max-width: 501)
+            width: 100vw
         //height: 80vh
         background-color: #00c3b3
         margin: 0.4rem
@@ -118,6 +120,8 @@ $subtitle-font-size: 2.5rem
     &__info, &__footer
         padding: 0 0.8rem
         width: 60vw
+        @media( max-width: 501)
+            width: 100vw
         display: flex
         align-items: center
         justify-content: center
@@ -308,7 +312,7 @@ $subtitle-font-size: 2.5rem
 
 .hidden
     position: absolute;
-    margin-top: -100vh;
+    margin-top: -1000vh;
     flex-grow: 0;
     
 
@@ -491,7 +495,8 @@ $subtitle-font-size: 2.5rem
        +title
     &__info
         font-size: 2rem
-        max-width: 25vw
+        min-width: 25rem
+        max-width: 50rem
 
 
 .score
@@ -514,21 +519,89 @@ $subtitle-font-size: 2.5rem
         font-size: 2rem
         display: flex
         flex-direction: row
+        background: rgba(0,0,0,0.4)
+        border-radius: 2rem
+        padding: 2rem
+        max-height: 30rem
+        overflow: auto
+        @media screen and ( max-width: 501)
+            max-height: 20rem
+    &__row + &__row
+        margin-top: 2rem
+        @media screen and ( max-width: 501)
+           margin-top: 0.5rem  
+    &__col + &__col
+        margin-left: 2rem
+        @media screen and ( max-width: 501)
+            margin-left: 0.5rem
     &__row
         display: flex
         flex-direction: row
-        &:first-child
-            font-size: 2.5rem
-            font-weight: 700
-            +colorizedFont
     &__col
         display: flex
         flex-direction: column
         min-width: 10rem
         text-align: center
-    &__row + &__row
-        margin-top: 2rem
-    &__col + &__col
-        margin-left: 2rem
+        &:nth-child(1)
+            align-items: center
+        &:nth-child(2)
+            font-weight: 700
+            +colorizedFont
+            align-items: center
+            margin-left: 0
 
 
+.popup
+    position: fixed;
+    top: -1000vh
+    background: rgba(0,0,0,0.4)
+    color: white
+    font-size: 2rem
+    width: 100vw
+    height: 100vh
+    //transition: all 0.9s
+    z-index: 5
+    display: flex
+    align-items: center
+    justify-content: center;
+    &__wrapper
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+        padding: 0 2rem
+    &-visilbe
+        top: 0px
+        left: 0
+        //height: 85px
+        position: fixed
+    &__content
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        align-items: center
+        animation-duration: 2s;
+        animation-name: show;
+        h1
+            +title
+            +colorizedFont 
+            margin-bottom: 1rem
+        h2
+            +subtitle
+    &__close
+        cursor: pointer
+    .hidding
+        animation-duration: 2s;
+        animation-name: hide;
+
+    @keyframes show
+        from  
+            transform: scale(0.1)
+        to
+             transform: scale(1)
+    
+    @keyframes hide
+        from  
+            transform: scale(1)
+        to
+             transform: scale(0)

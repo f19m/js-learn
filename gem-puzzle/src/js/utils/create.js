@@ -17,6 +17,7 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
 
   if (classNames) element.classList.add(...classNames.split(' '));
 
+  try{
   if (child && Array.isArray(child)) {
     child.forEach((childElem) => {
       if (childElem) {
@@ -29,6 +30,10 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
     element.innerHTML = child;
   } else if (typeof child === 'number') {
     element.innerHTML = child.toString();
+  }
+  }catch(e){
+    console.log(child);
+
   }
 
   if (parent) {
