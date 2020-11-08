@@ -36,6 +36,8 @@ export default class LoadGame {
 
     for (let index = 0; index < colNames.length; index += 1) {
       const colName = colNames[index];
+      if (colName==='date') continue;
+
       const colElem = create('div', 'score__col', null, this.scoreTable);
 
       let j = 0;
@@ -57,6 +59,12 @@ export default class LoadGame {
     }
     this.scoreTable.innerHTML = '';
 
-    this.fillScoreTable(bestScore);
+    bestScore = bestScore.sort((a,b) => {
+      if(a.moves>b.moves) return 1;
+      if(a.moves<b.moves) return -1;
+      if(a.moves===b.moves) return 0;
+    });
+    //this.fillScoreTable(bestScore);
+    this.fillScoreTable([...bestScore,...bestScore,...bestScore]);
   }
 }
