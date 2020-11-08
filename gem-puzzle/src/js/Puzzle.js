@@ -413,7 +413,9 @@ t
     }
     bestScore.push(score);
     savedSettings.bestScore = bestScore.slice(0,10);
-    //storage.set('pzlSettings', savedSettings);
+    
+    //to-do убрать комментарий
+    storage.set('pzlSettings', savedSettings);
     return score;
   }
 
