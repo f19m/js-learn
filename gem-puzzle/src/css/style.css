@@ -195,6 +195,20 @@ body {
   cursor: pointer;
 }
 
+.puzzle__sound {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.puzzle__sound i {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 .info__time, .info__moves, .info__menu {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;

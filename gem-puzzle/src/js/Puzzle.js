@@ -82,7 +82,12 @@ export default class Puzzle {
 
     // bottom menu
     this.footer = utils.create('div', 'puzzle__footer', null, this.main);
-    this.footer.sound = utils.create('div', 'puzzle__sound', 'Sound', this.footer, ['action', 'sound']);
+
+    //sound
+    this.isPlaySound = true;
+    const soundHolder = utils.create('div', 'puzzle__sound', 'Sound: ', this.footer);
+    this.footer.sound = utils.create('i', 'material-icons','volume_up', soundHolder, ['action', 'soundOff']);
+    this.audio = utils.create('audio', 'puzzle__audio','volume_up', soundHolder, ['src', './assets/sounds/moew2.mp3']);
 
     document.body.prepend(this.main);
 
@@ -90,6 +95,9 @@ export default class Puzzle {
     this.puzzle.addEventListener('mousedown', this.mouseDownHandler);
     this.puzzle.addEventListener('mousemove', this.mouseMoveHandler);
     this.puzzle.addEventListener('mouseup', this.mouseUpHandler);
+
+ 
+
 
     this.startTimer();
 
@@ -265,6 +273,8 @@ export default class Puzzle {
       const movedElem = evt.target.closest('.puzzle__col');
 
       if (this.makeMove(movedElem)) {
+        this.playSound();
+
         this.emptyElem = utils.create('div', 'puzzle__col-null', null, null);
         this.puzzle.insertBefore(this.emptyElem, movedElem);
         this.puzzle.replaceChild(movedElem, this.zeroItem.elem);
@@ -439,7 +449,14 @@ t
 
   }
 
+soundOff = () => {
+  this.isPlaySound = !this.isPlaySound 
+  this.footer.sound.textContent = this.isPlaySound? 'volume_up' : 'volume_off';
+}
 
+ playSound = () =>{
+  if (this.isPlaySound) this.audio.play();
+ }
 
   actionHandler = (action) => {
     if (action) {
@@ -448,6 +465,7 @@ t
       if (action.match(/hideMenu/)) this.hideMenu();
       if (action.match(/save/)) this.saveGame();
       if (action.match(/loadSelectedGame|newGame/)) this.loadGame(action);
+      if (action.match(/soundOff/)) this.soundOff();
     }
   }
 }
