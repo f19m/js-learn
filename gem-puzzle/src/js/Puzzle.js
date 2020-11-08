@@ -4,7 +4,6 @@ import storage from './storage.js';
 import defSettings from './data/settings.js';
 import Menu from './Menu.js';
 import PuzzleItem from './PuzzleItem.js';
-import Popup from './Popup.js';
 
 export default class Puzzle {
   constructor() {
@@ -27,14 +26,11 @@ export default class Puzzle {
     this.isPoused = false;
     this.menu = {};
     this.solveArr = [];
-    this.isEnd = false;
 
     this.generateLayout();
     this.menu = new Menu(this.settings, this.main);
     this.main.addEventListener('click', this.preclickHandler);
     document.addEventListener('pzlAction', this.prePlzHandler);
-    
-    utils.dateInit();
 
     return this;
   }
@@ -144,18 +140,15 @@ export default class Puzzle {
       }
     }
 
-    this.solveArr = []
     for (let i = 0; i < this.puzzleItems.length; i+=+1) {
       this.solveArr.push( (i===this.puzzleItems.length-1)?'0':(i + 1).toString());
     }
-    
-    this.isEnd = false;
   
 
   }
 
   startTimer = () => {
-    if (!this.isPoused && !this.isEnd) {
+    if (!this.isPoused) {
       this.info.timer.value += 1;
       this.info.timer.updateTimer();
     }
@@ -172,14 +165,12 @@ export default class Puzzle {
   }
 
   mouseDownHandler = (evt) => {
-
     const target = evt.target.closest('.puzzle__col');
 
     const puzzObj = this.puzzleItems.find((obj) => obj.value === target.dataset.numb);
     if (puzzObj.value === '0') {
       return;
     }
-    if (this.isEnd) return;
 
     const height = `${puzzObj.elem.offsetHeight}px`;
     const width = `${puzzObj.elem.offsetWidth}px`;
@@ -223,7 +214,6 @@ export default class Puzzle {
 
   mouseUpHandler = (evt) => {
     // console.log(`mouseUpHandler; x=${evt.clientX} y=${evt.clientY}`);
-    if (this.isEnd) return;
     if (this.isDragged) {
       // console.log(`this.isDragged=${this.isDragged}`);
 
@@ -298,8 +288,6 @@ export default class Puzzle {
   }
 
   makeMove = (item) => {
-    if (this.isEnd) return;
-
     const chunkArray = (arr, cnt) => arr.reduce((prev, cur, i, a) => (
       !(i % cnt) ? prev.concat([a.slice(i, i + cnt)]) : prev), []);
     const { size } = this.settings.fieldSizes.find(
@@ -373,9 +361,7 @@ t
   loadGame = (action) => {
     const settings = this.menu.gameSettimgs;
 
-    setTimeout(() => {
-      this.menu.hide();
-      this.hideMenu();},
+    setTimeout(() => this.menu.hide(),
       1500);
 
     this.info.timer.value = settings.timer.value;
@@ -390,54 +376,23 @@ t
     this.settings.currTypeIdx = this.settings.types.indexOf(settings.type.type);
 
     this.updatePuzzle(settings.items, action);
-    //
+    this.hideMenu();
   }
 
-  saveScore = () => {
-    const savedSettings = storage.get('pzlSettings', {});
-    let bestScore = []
-    if (savedSettings && savedSettings.bestScore) {
-      bestScore = savedSettings.bestScore;
-    }
-
-    bestScore = bestScore.sort((a,b) => {
-      if(a>b) return 1;
-      if(a<b) return -1;
-      if(a===b) return 0;
-    })
-    const score = {
-      date: (new Date).yyyymmddhhmmss(),
-      size:  this.settings.fieldSizes.find((obj) => obj.code === this.settings.fieldSizeCode).name,
-      moves: this.info.moves.value,
-      time: this.info.timer.textContent,
-    }
-    bestScore.push(score);
-    savedSettings.bestScore = bestScore.slice(0,10);
-    //storage.set('pzlSettings', savedSettings);
-    return score;
-  }
-
-  showWinMessage = (score)  =>{
-    this.isEnd = true;
-    new Popup(`<h1>Congratulations!</h1> <h2>You solved the puzzle in ${score.time} minutes and ${score.moves} moves!</h2>`)
-  }
 
   isFinish = () => {
     let scrArr =this.solveArr;
     let dstArr = this.puzzleItems.map((item)=>item.value);
 
     let isDiff = scrArr.reduce((prev, cur, idx) => (prev + ((cur===dstArr[idx])?0:1)), 0);
-    if (!isDiff){
-      this.isEnd = true;
-
-      const score = this.saveScore();
-      this.showWinMessage(score);
+    if (!isNotEq){
+      //to-do: save-score
+      //show congratulation screen
+      // block field to edit
       console.log('thats win!') 
     }
 
   }
-
-
 
   actionHandler = (action) => {
     if (action) {
