@@ -46,7 +46,7 @@ export default function getNewMatrix(cnt) {
     let zeroIdx = getPos(sourceArr.indexOf('0'));
     let movesArr = getMovesArr(sourceArr, zeroIdx);
     let itemToMove = Math.floor(Math.random() * movesArr.length);
-    [sourceArr[zeroIdx.idx], sourceArr[itemToMove]]  = [sourceArr[itemToMove], sourceArr[zeroIdx.idx] ];
+    [sourceArr[zeroIdx.idx], sourceArr[movesArr[itemToMove]]]  = [sourceArr[movesArr[itemToMove]], sourceArr[zeroIdx.idx] ];
 
   }
   return sourceArr;
