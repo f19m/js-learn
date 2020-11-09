@@ -33,7 +33,7 @@ export default class Puzzle {
     this.menu = new Menu(this.settings, this.main);
     this.main.addEventListener('click', this.preclickHandler);
     document.addEventListener('pzlAction', this.prePlzHandler);
-    
+
     utils.dateInit();
 
     return this;
@@ -83,11 +83,11 @@ export default class Puzzle {
     // bottom menu
     this.footer = utils.create('div', 'puzzle__footer', null, this.main);
 
-    //sound
+    // sound
     this.isPlaySound = true;
     const soundHolder = utils.create('div', 'puzzle__sound', 'Sound: ', this.footer);
-    this.footer.sound = utils.create('i', 'material-icons','volume_up', soundHolder, ['action', 'soundOff']);
-    this.audio = utils.create('audio', 'puzzle__audio','volume_up', soundHolder, ['src', './assets/sounds/moew2.mp3']);
+    this.footer.sound = utils.create('i', 'material-icons', 'volume_up', soundHolder, ['action', 'soundOff']);
+    this.audio = utils.create('audio', 'puzzle__audio', 'volume_up', soundHolder, ['src', './assets/sounds/moew2.mp3']);
 
     document.body.prepend(this.main);
 
@@ -95,9 +95,6 @@ export default class Puzzle {
     this.puzzle.addEventListener('mousedown', this.mouseDownHandler);
     this.puzzle.addEventListener('mousemove', this.mouseMoveHandler);
     this.puzzle.addEventListener('mouseup', this.mouseUpHandler);
-
- 
-
 
     this.startTimer();
 
@@ -152,14 +149,12 @@ export default class Puzzle {
       }
     }
 
-    this.solveArr = []
-    for (let i = 0; i < this.puzzleItems.length; i+=+1) {
-      this.solveArr.push( (i===this.puzzleItems.length-1)?'0':(i + 1).toString());
+    this.solveArr = [];
+    for (let i = 0; i < this.puzzleItems.length; i += +1) {
+      this.solveArr.push((i === this.puzzleItems.length - 1) ? '0' : (i + 1).toString());
     }
-    
-    this.isEnd = false;
-  
 
+    this.isEnd = false;
   }
 
   startTimer = () => {
@@ -180,7 +175,6 @@ export default class Puzzle {
   }
 
   mouseDownHandler = (evt) => {
-
     const target = evt.target.closest('.puzzle__col');
 
     const puzzObj = this.puzzleItems.find((obj) => obj.value === target.dataset.numb);
@@ -225,9 +219,9 @@ export default class Puzzle {
     puzzObj.elem.addEventListener('mouseup', onMouseUp);
   }
 
-  mouseMoveHandler = (evt) => {
-    // console.log(`mouseMoveHandler: x:${evt.clientX}     y: ${evt.clientY}`);
-  }
+  // mouseMoveHandler = (evt) => {
+  //   // console.log(`mouseMoveHandler: x:${evt.clientX}     y: ${evt.clientY}`);
+  // }
 
   mouseUpHandler = (evt) => {
     // console.log(`mouseUpHandler; x=${evt.clientX} y=${evt.clientY}`);
@@ -308,7 +302,7 @@ export default class Puzzle {
   }
 
   makeMove = (item) => {
-    if (this.isEnd) return;
+    if (this.isEnd) return null;
 
     const chunkArray = (arr, cnt) => arr.reduce((prev, cur, i, a) => (
       !(i % cnt) ? prev.concat([a.slice(i, i + cnt)]) : prev), []);
@@ -385,8 +379,9 @@ t
 
     setTimeout(() => {
       this.menu.hide();
-      this.hideMenu();},
-      1500);
+      this.hideMenu();
+    },
+    1500);
 
     this.info.timer.value = settings.timer.value;
     this.info.timer.innerHTML = settings.timer.str;
@@ -405,57 +400,57 @@ t
 
   saveScore = () => {
     const savedSettings = storage.get('pzlSettings', {});
-    let bestScore = []
+    let bestScore = [];
     if (savedSettings && savedSettings.bestScore) {
       bestScore = savedSettings.bestScore;
     }
 
-    bestScore = bestScore.sort((a,b) => {
-      if(a>b) return 1;
-      if(a<b) return -1;
-      if(a===b) return 0;
-    })
+    bestScore = bestScore.sort((a, b) => {
+      if (a > b) return 1;
+      if (a < b) return -1;
+      if (a === b) return 0;
+    });
     const score = {
-      date: (new Date).yyyymmddhhmmss(),
-      size:  this.settings.fieldSizes.find((obj) => obj.code === this.settings.fieldSizeCode).name,
+      date: (new Date()).yyyymmddhhmmss(),
+      size: this.settings.fieldSizes.find((obj) => obj.code === this.settings.fieldSizeCode).name,
       moves: this.info.moves.value,
       time: this.info.timer.textContent,
-    }
+    };
     bestScore.push(score);
-    savedSettings.bestScore = bestScore.slice(0,10);
-    
-    //to-do убрать комментарий
+    savedSettings.bestScore = bestScore.slice(0, 10);
+
+    // to-do убрать комментарий
     storage.set('pzlSettings', savedSettings);
     return score;
   }
 
-  showWinMessage = (score)  =>{
+  showWinMessage = (score) => {
     this.isEnd = true;
-    new Popup(`<h1>Congratulations!</h1> <h2>You solved the puzzle in ${score.time} minutes and ${score.moves} moves!</h2>`)
+    // eslint-disable-next-line no-unused-vars
+    const popup = new Popup(`<h1>Congratulations!</h1> <h2>You solved the puzzle in ${score.time} minutes and ${score.moves} moves!</h2>`);
   }
 
   isFinish = () => {
-    let scrArr =this.solveArr;
-    let dstArr = this.puzzleItems.map((item)=>item.value);
+    const scrArr = this.solveArr;
+    const dstArr = this.puzzleItems.map((item) => item.value);
 
-    let isDiff = scrArr.reduce((prev, cur, idx) => (prev + ((cur===dstArr[idx])?0:1)), 0);
-    if (!isDiff){
+    const isDiff = scrArr.reduce((prev, cur, idx) => (prev + ((cur === dstArr[idx]) ? 0 : 1)), 0);
+    if (!isDiff) {
       this.isEnd = true;
 
       const score = this.saveScore();
       this.showWinMessage(score);
-      console.log('thats win!') 
+      console.log('thats win!');
     }
-
   }
 
 soundOff = () => {
-  this.isPlaySound = !this.isPlaySound 
-  this.footer.sound.textContent = this.isPlaySound? 'volume_up' : 'volume_off';
+  this.isPlaySound = !this.isPlaySound;
+  this.footer.sound.textContent = this.isPlaySound ? 'volume_up' : 'volume_off';
 }
 
- playSound = () =>{
-  if (this.isPlaySound) this.audio.play();
+ playSound = () => {
+   if (this.isPlaySound) this.audio.play();
  }
 
   actionHandler = (action) => {

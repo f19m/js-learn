@@ -17,23 +17,23 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
 
   if (classNames) element.classList.add(...classNames.split(' '));
 
-  try{
-  if (child && Array.isArray(child)) {
-    child.forEach((childElem) => {
-      if (childElem) {
-        element.appendChild(childElem);
-      }
-    });
-  } else if (child && typeof child === 'object') {
-    element.appendChild(child);
-  } else if (child && typeof child === 'string') {
-    element.innerHTML = child;
-  } else if (typeof child === 'number') {
-    element.innerHTML = child.toString();
-  }
-  }catch(e){
+  try {
+    if (child && Array.isArray(child)) {
+      child.forEach((childElem) => {
+        if (childElem) {
+          element.appendChild(childElem);
+        }
+      });
+    } else if (child && typeof child === 'object') {
+      element.appendChild(child);
+    } else if (child && typeof child === 'string') {
+      element.innerHTML = child;
+    } else if (typeof child === 'number') {
+      element.innerHTML = child.toString();
+    }
+  } catch (e) {
     console.log(child);
-
+    throw new Error(`${e};    child = ${child};`);
   }
 
   if (parent) {

@@ -36,16 +36,16 @@ export default class LoadGame {
 
     for (let index = 0; index < colNames.length; index += 1) {
       const colName = colNames[index];
-      if (colName==='date') continue;
+      if (colName !== 'date') {
+        const colElem = create('div', 'score__col', null, this.scoreTable);
 
-      const colElem = create('div', 'score__col', null, this.scoreTable);
-
-      let j = 0;
-      bestScore.map((score) => score[colName]).forEach((item) => {
-        if (j === 0) create('div', 'score__row', colName, colElem);
-        create('div', 'score__row', item, colElem);
-        j += 1;
-      });
+        let j = 0;
+        bestScore.map((score) => score[colName]).forEach((item) => {
+          if (j === 0) create('div', 'score__row', colName, colElem);
+          create('div', 'score__row', item, colElem);
+          j += 1;
+        });
+      }
     }
   }
 
@@ -59,12 +59,12 @@ export default class LoadGame {
     }
     this.scoreTable.innerHTML = '';
 
-    bestScore = bestScore.sort((a,b) => {
-      if(a.moves>b.moves) return 1;
-      if(a.moves<b.moves) return -1;
-      if(a.moves===b.moves) return 0;
+    bestScore = bestScore.sort((a, b) => {
+      if (a.moves > b.moves) return 1;
+      if (a.moves < b.moves) return -1;
+      return 0;
     });
-    //this.fillScoreTable(bestScore);
-    this.fillScoreTable([...bestScore,...bestScore,...bestScore]);
+    // this.fillScoreTable(bestScore);
+    this.fillScoreTable([...bestScore, ...bestScore, ...bestScore]);
   }
 }

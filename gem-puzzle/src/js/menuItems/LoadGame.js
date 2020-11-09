@@ -84,14 +84,14 @@ export default class LoadGame {
     this.curLoadNum = (savedGames.length) ? 1 : 0;
     this.currLoad.textContent = (this.curLoadNum) ? this.curLoadNum : '';
 
-    if (savedGames.length){
+    if (savedGames.length) {
       this.loadBtn.classList.remove('load__btb-disabled');
       this.loadBtn.dataset.action = 'loadSelectedGame';
-    }else{
+    } else {
       this.loadBtn.classList.add('load__btb-disabled');
       this.loadBtn.dataset.action = null;
     }
-  
+
     this.loadListItems.map((item) => item.remove());
     this.loadListItems = [];
     this.fillLoadList(savedGames);
@@ -110,7 +110,7 @@ export default class LoadGame {
     if (newIdx === (this.loadListItems.length - 1)) this.nextGame.classList.add('game__next-inactive');
 
     this.loadListItems.map((item) => item.classList.remove('game__item-active'));
-    this.loadListItems.find((item) => item.dataset.loadIdx == newIdx).classList.add('game__item-active');
+    this.loadListItems.find((item) => item.dataset.loadIdx === newIdx).classList.add('game__item-active');
 
     this.curLoadNum += direction;
     this.currLoad.textContent = this.curLoadNum;
