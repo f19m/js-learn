@@ -110,7 +110,7 @@ export default class LoadGame {
     if (newIdx === (this.loadListItems.length - 1)) this.nextGame.classList.add('game__next-inactive');
 
     this.loadListItems.map((item) => item.classList.remove('game__item-active'));
-    this.loadListItems.find((item) => item.dataset.loadIdx === newIdx).classList.add('game__item-active');
+    this.loadListItems.find((item) => item.dataset.loadIdx === newIdx.toString()).classList.add('game__item-active');
 
     this.curLoadNum += direction;
     this.currLoad.textContent = this.curLoadNum;
