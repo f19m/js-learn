@@ -62,13 +62,8 @@ html, body
     
 body
     position: relative
-    width: 100vw
-    height: 100vh
-    display: flex
-    align-items: center
-    justify-content: center
-    flex-direction: column
     font-family: Arial
+    display: block
 
  
 $title-font-size: 4rem
@@ -102,16 +97,25 @@ $subtitle-font-size: 2.5rem
     -webkit-text-fill-color: transparent ;
 
 .puzzle
-    //position: relative
+    width: 100vw
+    height: 100vh
     display: flex
     align-items: center
     justify-content: center
-    flex-direction: column
-    color: white
+    min-width: 50rem
+    min-height: 51rem
     &__wrapper
+        //position: relative
+        display: flex
+        //align-items: center
+        justify-content: center
+        flex-direction: column
+        color: white
         width: 60vw
-        @media( max-width: 501)
+        @media(max-width: 730px)
             width: 100vw
+    &__gamefield
+        //width: 60vw
         //height: 80vh
         background-color: #00c3b3
         margin: 0.4rem
@@ -119,15 +123,13 @@ $subtitle-font-size: 2.5rem
         //position: relative
     &__info, &__footer
         padding: 0 0.8rem
-        width: 60vw
-        @media( max-width: 501)
-            width: 100vw
+        //width: 60vw
         display: flex
         align-items: center
         justify-content: center
         font-size: 2rem
         font-weight: 900
-        line-height: 10vh
+        line-height: 5rem
         box-shadow: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.08)
         background-color: #00c3b3
         border-radius: 10px
@@ -267,7 +269,7 @@ $subtitle-font-size: 2.5rem
 .menu
     display: none
     position: absolute
-    width: 60vw
+    width: 100%
     height: 100%
     transition: all 0.4s
     z-index: 10
@@ -275,7 +277,7 @@ $subtitle-font-size: 2.5rem
     overflow: hidden
     top: 0
     justify-content: center;
-    padding: 10vh 0
+    padding: 3rem 0
     &-show
         display: flex
     &__wrapper
@@ -322,6 +324,13 @@ $subtitle-font-size: 2.5rem
         &:hover
             +colorizedFont
           
+
+// .menu__wrapper section  h2
+//     @media screen and (max-width: 501px)
+//         font-size: 2rem
+// .menu__wrapper section  h3
+//     @media screen and (max-width: 501px)
+//         font-size: 1.6rem
 
 .position-relative
     position: relative
@@ -513,6 +522,7 @@ $subtitle-font-size: 2.5rem
         font-size: 2rem
         min-width: 25rem
         max-width: 50rem
+        text-align: center
 
 
 .score
@@ -529,26 +539,39 @@ $subtitle-font-size: 2.5rem
        +title
     &__info
         font-size: 2rem
-        max-width: 25vw
+        //max-width: 25vw
     &__table
+        @media screen and (min-width: 501px)
+            max-height: 33rem;
+        overflow: auto
+        border-radius: 2rem
         margin-top: 2rem
+        &::-webkit-scrollbar-track
+            margin: 2rem 0;
+
+    //     &::-webkit-scrollbar
+    //         width: 2rem
+    //     &::-webkit-scrollbar-track
+    //         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    //         border-radius: 1rem
+    //         margin: 2rem 0;
+    //     &::-webkit-scrollbar-thumb
+    //         border-radius: 1rem
+    //         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    &__wrapper
         font-size: 2rem
         display: flex
         flex-direction: row
         background: rgba(0,0,0,0.4)
-        border-radius: 2rem
+        border-radius: 2rem 
         padding: 2rem
-        max-height: 30rem
-        overflow: auto
-        @media screen and ( max-width: 501)
-            max-height: 20rem
     &__row + &__row
         margin-top: 2rem
-        @media screen and ( max-width: 501)
+        @media screen and (max-width: 501px)
            margin-top: 0.5rem  
     &__col + &__col
         margin-left: 2rem
-        @media screen and ( max-width: 501)
+        @media screen and (max-width: 501px)
             margin-left: 0.5rem
     &__row
         display: flex
@@ -558,14 +581,14 @@ $subtitle-font-size: 2.5rem
         flex-direction: column
         min-width: 10rem
         text-align: center
-        &:nth-child(1)
-            align-items: center
-        &:nth-child(2)
-            font-weight: 700
-            //+colorizedFont
-            align-items: center
-            margin-left: 0
-
+        
+[data-colname="size"]
+    align-items: center
+[data-colname="moves"]
+    +colorizedFont
+    font-weight: 700
+    align-items: center
+    margin-left: 0
 
 .popup
     position: fixed;

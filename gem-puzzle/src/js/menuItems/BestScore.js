@@ -20,7 +20,8 @@ export default class LoadGame {
     const content = create('div', 'score__content',
       create('h2', 'score__title', this.text, null),
       this.section);
-    this.scoreTable = create('div', 'score__table', null, content);
+    const table = create('div', 'score__table', null, content);
+    this.scoreTable = create('div', 'score__wrapper', null, table);
     this.section.backBtn = create('div', 'score_back back menu__back', 'Back', this.section, ['action', 'back'], ['section', name]);
 
     // content
@@ -37,7 +38,7 @@ export default class LoadGame {
     for (let index = 0; index < colNames.length; index += 1) {
       const colName = colNames[index];
       if (colName !== 'date') {
-        const colElem = create('div', 'score__col', null, this.scoreTable);
+        const colElem = create('div', 'score__col', null, this.scoreTable, ['colname', colName]);
 
         let j = 0;
         bestScore.map((score) => score[colName]).forEach((item) => {

@@ -41,7 +41,8 @@ export default class Puzzle {
   }
 
   generateLayout = () => {
-    this.main = utils.create('main', 'puzzle', null, null);
+    const main = utils.create('main', 'puzzle', null, null);
+    this.main = utils.create('div', 'puzzle__wrapper', null, main);
 
     this.info = utils.create('div', 'puzzle__info info', null, this.main);
     // timer
@@ -75,9 +76,9 @@ export default class Puzzle {
     this.info.menu = utils.create('div', 'info__menu', 'Menu', this.info, ['action', 'menu']);
 
     // Puzzle
-    const wrapper = utils.create('div', 'puzzle__wrapper', null, this.main);
-    this.puzzle = utils.create('div', 'puzzle__field', null, wrapper, ['cellsCount', this.settings.items.length]);
-    this.puzzle.wrapper = wrapper;
+    const gamefield = utils.create('div', 'puzzle__gamefield', null, this.main);
+    this.puzzle = utils.create('div', 'puzzle__field', null, gamefield, ['cellsCount', this.settings.items.length]);
+    this.puzzle.wrapper = gamefield;
     this.puzzleItems = [];
     this.updatePuzzle();
 
@@ -94,7 +95,7 @@ export default class Puzzle {
     utils.create('div', 'puzzle__empty', null, this.footer);
     utils.create('div', 'puzzle__solver', 'Solve this!', this.footer, ['action', 'makeSolve']);
 
-    document.body.prepend(this.main);
+    document.body.prepend(main);
 
     // events
     this.puzzle.addEventListener('mousedown', this.mouseDownHandler);
