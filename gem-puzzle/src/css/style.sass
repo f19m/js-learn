@@ -78,23 +78,23 @@ $subtitle-font-size: 2.5rem
 
 
 =background-color
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-    background-size: 200% auto;
-    animation: shine 5s linear infinite;
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)
+    background-size: 200% auto
+    animation: shine 5s linear infinite
 =colorizedFont
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-    background-size: 200% auto;   
-    text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent ;
-    animation: shine 5s linear infinite;
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)
+    background-size: 200% auto   
+    text-fill-color: transparent
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent 
+    animation: shine 5s linear infinite
     
 =colorizedFont-inactive    
-    background: radial-gradient(circle, gray 0%, gray 100%);
-    background-size: 200% auto;   
-    text-fill-color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent ;
+    background: radial-gradient(circle, gray 0%, gray 100%)
+    background-size: 200% auto   
+    text-fill-color: transparent
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent 
 
 .puzzle
     width: 100vw
@@ -111,9 +111,12 @@ $subtitle-font-size: 2.5rem
         justify-content: center
         flex-direction: column
         color: white
-        width: 60vw
-        @media(max-width: 730px)
-            width: 100vw
+        // width: 60vw
+        // @media(max-width: 730px)
+        //     width: 100vw
+        min-width: 500px
+        width: 100%
+        max-width: 800px
     &__gamefield
         //width: 60vw
         //height: 80vh
@@ -142,7 +145,7 @@ $subtitle-font-size: 2.5rem
         display: grid
         grid-gap: 2px
         max-width: 400px
-        margin: 0 auto;
+        margin: 0 auto
         grid-auto-rows: 1fr
         //box-shadow: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.08)
         padding: 0.4rem
@@ -161,7 +164,7 @@ $subtitle-font-size: 2.5rem
         background-color: #353535
         //margin: 0.4rem
         box-shadow: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.08)
-        border-radius: 15px;
+        border-radius: 15px
         cursor: pointer
     &__sound
         display: flex
@@ -194,21 +197,21 @@ $subtitle-font-size: 2.5rem
 //     width: calc(50vw / 4)
 
 .puzzle__field::before
-    content: '';
-    width: 0;
-    padding-bottom: 100%;
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
+    content: ''
+    width: 0
+    padding-bottom: 100%
+    grid-row: 1 / 1
+    grid-column: 1 / 1
 
 .puzzle__field > *:first-child
-    grid-row: 1 / 1;
-    grid-column: 1 / 1;
+    grid-row: 1 / 1
+    grid-column: 1 / 1
 
 .puzzle__col .col
     height: 90%
     width: 90%
     box-shadow: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.08)
-    border-radius: 15px;
+    border-radius: 15px
     display: flex
     align-items: center
     justify-content: center
@@ -216,8 +219,8 @@ $subtitle-font-size: 2.5rem
     font-size: 2rem
 
 .puzzle__col:hover, .puzzle__col-active
-    background: rgb(63,94,251);
-    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    background: rgb(63,94,251)
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)
     animation: puzzle__col 50s linear infinite
     //transform: rotate(155deg)
 
@@ -262,7 +265,7 @@ $subtitle-font-size: 2.5rem
     grid-template-columns: repeat(8, 1fr)
 
 .transition
-    transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out
 
 
 
@@ -276,14 +279,14 @@ $subtitle-font-size: 2.5rem
     background: rgba(41, 41, 41, 0.6)
     overflow: hidden
     top: 0
-    justify-content: center;
+    justify-content: center
     padding: 3rem 0
     &-show
         display: flex
     &__wrapper
         display: flex
         flex-direction: column
-        align-items: center;
+        align-items: center
     &__nav
         display: flex
         flex-grow: 1
@@ -297,17 +300,17 @@ $subtitle-font-size: 2.5rem
         justify-content: space-around
     &__item
         font-weight: 900
-        font-size: 3rem;
+        font-size: 3rem
         line-height: 50px
-        color: #FAFAFA;
+        color: #FAFAFA
         cursor: pointer
         &:hover
             +colorizedFont
     &__saveGame,  &__newGame
-        height: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        height: 50%
+        display: flex
+        justify-content: center
+        align-items: center
         transition: all 0.4s
         flex-grow: 1
         h2
@@ -336,9 +339,9 @@ $subtitle-font-size: 2.5rem
     position: relative
 
 .hidden
-    position: absolute;
-    margin-top: -1000vh;
-    flex-grow: 0;
+    position: absolute
+    margin-top: -1000vh
+    flex-grow: 0
     
 
 @keyframes puzzle__col
@@ -348,7 +351,7 @@ $subtitle-font-size: 2.5rem
 
 @keyframes shine
   to
-    background-position: 200% center;
+    background-position: 200% center
 
 
 [data-action="menu"]:hover
@@ -365,7 +368,7 @@ $subtitle-font-size: 2.5rem
     flex-direction: column
     align-items: center
     flex-grow: 1
-    justify-content: space-between;
+    justify-content: space-between
     &__content
         display: flex
         flex-direction: column
@@ -390,8 +393,8 @@ $subtitle-font-size: 2.5rem
         font-weight: 900
     &__btb
         cursor: pointer
-        font-size: 2.5rem;
-        font-weight: 900;
+        font-size: 2.5rem
+        font-weight: 900
         &:hover
             +colorizedFont
     &__btb-disabled
@@ -401,9 +404,6 @@ $subtitle-font-size: 2.5rem
  
 
         
- 
- 
-
         
 
 .game
@@ -415,13 +415,13 @@ $subtitle-font-size: 2.5rem
         height: 4rem
         width: 4rem
     &__prev::before, &__next::before
-        position: absolute;
-        z-index: -1;
+        position: absolute
+        z-index: -1
         left: 0
         content: ''
         background: white
-        -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M8 5v14l11-7z"/></svg>') center/contain;
-        mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M8 5v14l11-7z"/></svg>') center/contain;
+        -webkit-mask: url('data:image/svg+xmlutf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M8 5v14l11-7z"/></svg>') center/contain
+        mask: url('data:image/svg+xmlutf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M8 5v14l11-7z"/></svg>') center/contain
         height: calc(var(--font) * 2)
         width: calc(var(--font) * 2)
         cursor: pointer
@@ -430,8 +430,8 @@ $subtitle-font-size: 2.5rem
     &__next
         transform: rotate(90deg)
     &__prev:hover::before, &__next:hover::before
-        background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%;
-        animation: shine 5s linear infinite;
+        background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%
+        animation: shine 5s linear infinite
     &__prev-inactive::before, &__next-inactive::before
         background: gray
     &__prev-inactive:hover::before, &__next-inactive:hover::before
@@ -449,33 +449,33 @@ $subtitle-font-size: 2.5rem
         position: relative
         display: flex
         align-items: center
-        position: absolute;
+        position: absolute
         top: -100vh
     &__item-active
-        top: 0;
+        top: 0
         position: inherit
         &:hover, &-active
             +colorizedFont
         // &-active::before
-        //     position: absolute;
-        //     z-index: -1;
+        //     position: absolute
+        //     z-index: -1
         //     left: calc(-1 * var(--font)
         //     content: ''
-        //     background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%;
-        //     -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
-        //     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
-        //     animation: shine 5s linear infinite;
+        //     background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%
+        //     -webkit-mask: url('data:image/svg+xmlutf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain
+        //     mask: url('data:image/svg+xmlutf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain
+        //     animation: shine 5s linear infinite
         //     height: var(--font)
         //     width: var(--font)
         // &-active::after
-        //     position: absolute;
-        //     z-index: -1;
+        //     position: absolute
+        //     z-index: -1
         //     right: calc(-1 * var(--font)
         //     content: ''
-        //     background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%;
-        //     -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
-        //     mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain;
-        //     animation: shine 5s linear infinite;
+        //     background: linear-gradient(to right, rgba(63,94,251,1), rgba(252,70,107,1)) left/200% 100%
+        //     -webkit-mask: url('data:image/svg+xmlutf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain
+        //     mask: url('data:image/svg+xmlutf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18px" height="18px"> <path d="M3.5 18.99l11 .01c.67 0 1.27-.33 1.63-.84L20.5 12l-4.37-6.16c-.36-.51-.96-.84-1.63-.84l-11 .01L8.34 12 3.5 18.99z"/></svg>') center/contain
+        //     animation: shine 5s linear infinite
         //     height: var(--font)
         //     width: var(--font)
         //     transform: rotate(180deg)
@@ -490,7 +490,7 @@ $subtitle-font-size: 2.5rem
     flex-direction: column
     align-items: center
     flex-grow: 1
-    justify-content: space-between;
+    justify-content: space-between
     &__title
        +title
     &__sizes
@@ -506,8 +506,8 @@ $subtitle-font-size: 2.5rem
                 background: inherit
                 color: white
         select option
-            background: rgb(46, 46, 46);
-            color: white;
+            background: rgb(46, 46, 46)
+            color: white
             
 
 .rules
@@ -515,7 +515,7 @@ $subtitle-font-size: 2.5rem
     flex-direction: column
     align-items: center
     flex-grow: 1
-    justify-content: space-between;
+    justify-content: space-between
     &__title
        +title
     &__info
@@ -530,7 +530,7 @@ $subtitle-font-size: 2.5rem
     flex-direction: column
     align-items: center
     flex-grow: 1
-    justify-content: space-between;
+    justify-content: space-between
     &__content
         display: flex
         flex-direction: column
@@ -542,22 +542,19 @@ $subtitle-font-size: 2.5rem
         //max-width: 25vw
     &__table
         @media screen and (min-width: 501px)
-            max-height: 33rem;
+            max-height: 33rem
         overflow: auto
         border-radius: 2rem
         margin-top: 2rem
+        &::-webkit-scrollbar
+            width: 1rem
         &::-webkit-scrollbar-track
-            margin: 2rem 0;
-
-    //     &::-webkit-scrollbar
-    //         width: 2rem
-    //     &::-webkit-scrollbar-track
-    //         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    //         border-radius: 1rem
-    //         margin: 2rem 0;
-    //     &::-webkit-scrollbar-thumb
-    //         border-radius: 1rem
-    //         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3) 
+            border-radius: 1rem
+            margin: 2rem 1rem 2rem 0
+        &::-webkit-scrollbar-thumb
+            border-radius: 1rem
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5) 
     &__wrapper
         font-size: 2rem
         display: flex
@@ -591,7 +588,7 @@ $subtitle-font-size: 2.5rem
     margin-left: 0
 
 .popup
-    position: fixed;
+    position: fixed
     top: -1000vh
     background: rgba(0,0,0,0.4)
     color: white
@@ -619,8 +616,8 @@ $subtitle-font-size: 2.5rem
         flex-direction: column
         justify-content: space-between
         align-items: center
-        animation-duration: 2s;
-        animation-name: show;
+        animation-duration: 2s
+        animation-name: show
         h1
             +title
             +colorizedFont 
@@ -630,8 +627,8 @@ $subtitle-font-size: 2.5rem
     &__close
         cursor: pointer
     .hidding
-        animation-duration: 2s;
-        animation-name: hide;
+        animation-duration: 2s
+        animation-name: hide
 
     @keyframes show
         from  
