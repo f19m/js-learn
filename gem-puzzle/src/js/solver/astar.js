@@ -12,15 +12,11 @@ ida_star(root)    return either NOT_FOUND or a pair with the best path and its c
 */
 
 export default function solver(matrix) {
-  const path = [];
   const result = [];
 
   let size;
   let length;
-  let count;
 
-  const goalRow = [];
-  const goalCol = [];
   const infin = 1000;
 
   let goal = [];
@@ -153,15 +149,16 @@ export default function solver(matrix) {
   const idaStar = (root) => {
     let bound;
     bound = estimate(root);
-    // arr.push(root);
-    // console.log(`idaStar: bound:${bound} ${root}`);
-    while (true) {
+
+    // eslint-disable-next-line no-constant-condition
+    while (bound < infin) {
       const res = search([root], 0, bound);
       // const res = infin;
       if (res === 'FOUND') return 'FOUND';
       if (res === infin) return 'NOT FOUND';
       bound = res;
     }
+    return 'NOT FOUND';
   };
 
   const isSolvable = (arr) => {
@@ -189,19 +186,18 @@ export default function solver(matrix) {
 
   if (isSolvable(arr)) {
     goal = initGoal(arr);
-    console.log(arr);
 
     idaStar(arr);
-
-    console.log(result.reverse());
+    return result;
   }
+  return [];
 }
 
-const arr = [
-  [6, 5, 11, 4],
-  [10, 13, 2, 1],
-  [9, 15, 7, 3],
-  [14, 12, 8, 0],
-];
+// const arr = [
+//   [6, 5, 11, 4],
+//   [10, 13, 2, 1],
+//   [9, 15, 7, 3],
+//   [14, 12, 8, 0],
+// ];
 
-solver(arr);
+// solver(arr);
