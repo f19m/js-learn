@@ -144,33 +144,55 @@ const solver = (matrix) => {
 
   let size;
   let length;
+  let count;
 
   const goalRow = [];
   const goalCol = [];
   const infin = 1000;
-  let count = 0;
-  const goal = '_'
-    .repeat(matrix.length ** 2)
-    .split('')
-    .map((item, idx) => ((idx === (matrix.length ** 2 - 1)) ? 0 : idx + 1))
-    .join('');
 
-  const estimate = (matrix) => {
+  let goal = [];
+
+  const getPos = (idx) => {
+    const col = idx % size;
+    const row = Math.trunc(idx / size);
+    return {
+      row,
+      col,
+      idx,
+    };
+  };
+
+  const estimate = (arr) => {
     let manhattan = 0;
 
-    for (let i = 0; i < matrix.length; i += 1) {
-      for (let j = 0; j < matrix.length; j += 1) {
-        const num = matrix[i][j];
-
-        if (num !== 0) {
-          manhattan += Math.abs(i - goalRow[num - 1]) + Math.abs(j - goalCol[num - 1]);
-        }
+    for (let i = 0; i < length; i += 1) {
+      const num = arr[i];
+      if (num !== 0) {
+        const numPoz = getPos(i);
+        const goalPoz = getPos(num - 1);
+        // console.log(`num=${num};    numPoz=${numPoz.row}:${numPoz.col};    goalPoz=${goalPoz.row}:${goalPoz.col};`);
+        manhattan += Math.abs(numPoz.col - goalPoz.col) + Math.abs(numPoz.row - goalPoz.row);
       }
     }
     return manhattan;
   };
 
-  const isGoal = (matrix) => matrix.flat(1).join('') === goal;
+  const initGoal = () => {
+    const res = [];
+    for (let i = 0; i < length - 1; i += 1) {
+      res.push(i + 1);
+    }
+    res.push(0);
+
+    return res;
+  };
+
+  const isGoal = (arr) => {
+    for (let i = 0; i < length; i += 1) {
+      if (arr[i] !== goal[i]) return false;
+    }
+    return true;
+  };
 
   const isExistNode = (tArr, elem) => {
     const idx = tArr.findIndex((item) => item.flat(1).join('') === elem.flat(1).join(''));
@@ -180,23 +202,33 @@ const solver = (matrix) => {
   const getCopy = (matrix) => matrix.flat(1).reduce((prev, cur, i, a) => (
     !(i % matrix.length) ? prev.concat([a.slice(i, i + matrix.length)]) : prev), []);
 
-  const getNeighbirs = (matrix) => {
-    let zeroRow = 0;
-    let zeroCol = 0;
+  const getNeighbirs = (arr) => {
+    const zeroRow = 0;
+    const zeroCol = 0;
     const queue = [];
 
-    const swap = (tArr, row1, col1, row2, col2) => {
-      const bArr = tArr;
-      const temp = bArr[row1][col1];
+    const swap = (tArr, oldPos, newPos) => {
+      const newArr = [];
+      for (let i = 0; i < length; i += 1) {
+        if (i === oldPos) {
+          newArr.push(tArr[newPos]);
+        } else if (i === newPos) {
+          newArr.push(tArr[oldPos]);
+        } else {
+          newArr.push(tArr[i]);
+        }
+      }
+      //   const newArr = [...tArr];
 
-      // console.log(`swap row1=${row1}, col1=${col1}, row2=${row2}, col2=${col2}`);
-      bArr[row1][col1] = bArr[row2][col2];
-      bArr[row2][col2] = temp;
+      //   const tmp = newArr[i];
+      //   newArr[i] = newArr[j];
+      //   newArr[j] = tmp;
+      //   // [tArr[i], tArr[j]] = [tArr[j], tArr[i]];
+      return newArr;
     };
 
-    const zerIdx = matrix.flat(1).indexOf(0);
-    zeroRow = Math.trunc(zerIdx / matrix.length);
-    zeroCol = zerIdx % matrix.length;
+    const zerIdx = arr.indexOf(0);
+    const zeroPos = getPos(zerIdx);
 
     // console.log(`getNeighbirs zeroRow=${zeroRow}, zeroCol=${zeroCol}`);
 
@@ -210,27 +242,24 @@ const solver = (matrix) => {
     //     }
     //   }
 
-    if (zeroCol - 1 > -1) {
-      const newArr = getCopy(matrix);
-      swap(newArr, zeroRow, zeroCol, zeroRow, zeroCol - 1);
+    let newArr = [];
+    if (zeroPos.col - 1 > -1) {
+      newArr = swap(arr, zerIdx, zerIdx - 1);
       // console.log(`after swap: zeroCol-1: ${newArr}`);
       queue.push(newArr);
     }
-    if ((zeroCol + 1) < matrix.length) {
-      const newArr = getCopy(matrix);
-      swap(newArr, zeroRow, zeroCol, zeroRow, zeroCol + 1);
+    if ((zeroPos.col + 1) < size) {
+      newArr = swap(arr, zerIdx, zerIdx + 1);
       // console.log(`after swap: zeroCol + 1: ${newArr}`);
       queue.push(newArr);
     }
-    if (zeroRow - 1 > -1) {
-      const newArr = getCopy(matrix);
-      swap(newArr, zeroRow, zeroCol, zeroRow - 1, zeroCol);
+    if (zeroPos.row - 1 > -1) {
+      newArr = swap(arr, zerIdx, zerIdx - size);
       // console.log(`after swap: zeroRow - 1: ${newArr}`);
       queue.push(newArr);
     }
-    if (zeroRow + 1 < matrix.length) {
-      const newArr = getCopy(matrix);
-      swap(newArr, zeroRow, zeroCol, zeroRow + 1, zeroCol);
+    if (zeroPos.row + 1 < size) {
+      newArr = swap(arr, zerIdx, zerIdx + size);
       // console.log(`after swap: zeroRow + 1: ${newArr}`);
       queue.push(newArr);
     }
@@ -275,6 +304,7 @@ const solver = (matrix) => {
     // console.log(`idaStar: bound:${bound} ${root}`);
     while (true) {
       const res = search(root, 0, bound);
+      // const res = infin;
       if (res === 'FOUND') return 'FOUND';
       if (res === infin) return 'NOT FOUND';
       bound = res;
@@ -288,31 +318,42 @@ const solver = (matrix) => {
     }
   };
 
-  const isSolvable = (matrix) => {
+  const isSolvable = (arr) => {
     let wrongAll = 0;
-    const preparedArr = matrix.flat(1);
 
-    for (let i = 0; i < preparedArr.length; i += 1) {
+    for (let i = 0; i < length; i += 1) {
       let wrong = 0;
-      for (let j = i + 1; j < preparedArr.length; j += 1) {
-        if (preparedArr[i] > preparedArr[j]
-                && preparedArr[i] !== 0 && preparedArr[j] !== 0) {
+      for (let j = i + 1; j < length; j += 1) {
+        if (arr[i] > arr[j]
+                && arr[i] !== 0 && arr[j] !== 0) {
           wrong += 1;
         }
       }
       wrongAll += wrong;
     }
-    console.log(`wrongAll=${wrongAll}`);
-    const zerIdx = Math.trunc(preparedArr.indexOf(0) / matrix.length) + 1;
-    console.log(`zerIdx=${zerIdx}`);
+    //    console.log(`wrongAll=${wrongAll}`);
+    // const zerIdx = Math.trunc(arr.indexOf(0) / matrix.length) + 1;
+    //   console.log(`zerIdx=${zerIdx}`);
     return !(((wrongAll /* + zerIdx */) % 2));
   };
 
-  initGoalArrays(matrix.length);
+  const arr = matrix.flat(1);
+  size = matrix.length;
+  length = size ** 2;
 
-  if (isSolvable(matrix)) {
-    idaStar(matrix);
+  if (isSolvable(arr)) {
+    goal = initGoal(arr);
+    // console.log(goal);
+    // initGoalArrays(matrix.length);
+
+    const startTime = new Date();
+
+    idaStar(arr);
+
+    const endTime = new Date();
     console.log(result);
+
+    console.log(`Operation took ${endTime.getTime() - startTime.getTime()} msec`);
   } else {
     console.log('The puzzle have no solution');
     return null;
