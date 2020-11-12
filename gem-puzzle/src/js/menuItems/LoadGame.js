@@ -124,7 +124,7 @@ export default class LoadGame {
   actionHandler = (evt) => {
     const { target } = evt;
     const { action } = target.dataset;
-    console.log(`LodaGame actionHandler:    ${action}`);
+    // console.log(`LodaGame actionHandler:    ${action}`);
     if (action) {
       if (action.match(/loadPrev/)) this.showLoad(-1);
       if (action.match(/loadNext/)) this.showLoad(1);

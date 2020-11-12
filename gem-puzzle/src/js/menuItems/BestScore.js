@@ -65,6 +65,6 @@ export default class LoadGame {
       return 0;
     });
     // this.fillScoreTable(bestScore);
-    this.fillScoreTable([...bestScore, ...bestScore, ...bestScore]);
+    this.fillScoreTable(bestScore);
   }
 }

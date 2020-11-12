@@ -14,6 +14,7 @@ export default class IdaStar {
   constructor(arr) {
     this.goal = [];
     this.sourceArr = arr;
+    return this;
   }
 
     #initGoal = () => {
@@ -46,6 +47,8 @@ export default class IdaStar {
       this.infinity = 1000;
       this.result = [];
       this.#initGoal();
+
+      return this;
     }
 
     #estimate = (arr) => {

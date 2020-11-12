@@ -167,6 +167,15 @@ $subtitle-font-size: 2.5rem
         i
             margin-left: 1rem
             cursor: pointer
+            &:hover
+                +colorizedFont
+    &__footer
+        justify-content: space-around
+    &__solver
+        cursor: pointer
+        &:hover
+            +colorizedFont
+            
            
 
 .info
@@ -202,8 +211,9 @@ $subtitle-font-size: 2.5rem
     align-items: center
     justify-content: center
     background-color: #353535
+    font-size: 2rem
 
-.puzzle__col:hover
+.puzzle__col:hover, .puzzle__col-active
     background: rgb(63,94,251);
     background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
     animation: puzzle__col 50s linear infinite
@@ -552,7 +562,7 @@ $subtitle-font-size: 2.5rem
             align-items: center
         &:nth-child(2)
             font-weight: 700
-            +colorizedFont
+            //+colorizedFont
             align-items: center
             margin-left: 0
 

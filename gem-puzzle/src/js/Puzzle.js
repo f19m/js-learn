@@ -5,6 +5,7 @@ import defSettings from './data/settings.js';
 import Menu from './Menu.js';
 import PuzzleItem from './PuzzleItem.js';
 import Popup from './Popup.js';
+import Solver from './solver/IdaStar.js';
 
 export default class Puzzle {
   constructor() {
@@ -88,6 +89,10 @@ export default class Puzzle {
     const soundHolder = utils.create('div', 'puzzle__sound', 'Sound: ', this.footer);
     this.footer.sound = utils.create('i', 'material-icons', 'volume_up', soundHolder, ['action', 'soundOff']);
     this.audio = utils.create('audio', 'puzzle__audio', 'volume_up', soundHolder, ['src', './assets/sounds/moew2.mp3']);
+
+    // ADD solve button
+    utils.create('div', 'puzzle__empty', null, this.footer);
+    utils.create('div', 'puzzle__solver', 'Solve this!', this.footer, ['action', 'makeSolve']);
 
     document.body.prepend(this.main);
 
@@ -405,11 +410,6 @@ t
       bestScore = savedSettings.bestScore;
     }
 
-    bestScore = bestScore.sort((a, b) => {
-      if (a > b) return 1;
-      if (a < b) return -1;
-      if (a === b) return 0;
-    });
     const score = {
       date: (new Date()).yyyymmddhhmmss(),
       size: this.settings.fieldSizes.find((obj) => obj.code === this.settings.fieldSizeCode).name,
@@ -417,6 +417,11 @@ t
       time: this.info.timer.textContent,
     };
     bestScore.push(score);
+    bestScore.sort((a, b) => {
+      if (a.moves > b.moves) return 1;
+      if (a.moves < b.moves) return -1;
+      return 0;
+    });
     savedSettings.bestScore = bestScore.slice(0, 10);
 
     // to-do убрать комментарий
@@ -440,7 +445,7 @@ t
 
       const score = this.saveScore();
       this.showWinMessage(score);
-      console.log('thats win!');
+      // console.log('thats win!');
     }
   }
 
@@ -453,14 +458,53 @@ soundOff = () => {
    if (this.isPlaySound) this.audio.play();
  }
 
+ makeMoveByNum = (numToMove, mooveSpeed) => {
+   const puzzleObj = this.puzzleItems.find((item) => item.value === numToMove.toString());
+   const movedElem = puzzleObj.elem;
+
+   movedElem.classList.add('puzzle__col-active');
+   setTimeout(() => {
+     if (this.makeMove(movedElem)) {
+       this.emptyElem = utils.create('div', 'puzzle__col-null', null, null);
+       this.puzzle.insertBefore(this.emptyElem, movedElem);
+       this.puzzle.replaceChild(movedElem, this.zeroItem.elem);
+       this.puzzle.insertBefore(this.zeroItem.elem, this.emptyElem);
+       this.emptyElem.remove();
+       this.emptyElem = null;
+     }
+     this.puzzleItems.map((obj) => obj.elem.classList.remove('puzzle__col-active'));
+   }, mooveSpeed - 100);
+ };
+
+ makeSolve=() => {
+   const arrToSolve = this.puzzleItems.map((item) => parseInt(item.value, 10));
+   const solver = new Solver(arrToSolve).init();
+   const res = solver.solve();
+   const mooveSpeed = 750;
+   let i = 0;
+   res.forEach((numToMove) => {
+     setTimeout(() => this.makeMoveByNum(numToMove, mooveSpeed), i * mooveSpeed);
+     i += 1;
+   });
+
+   i += 1;
+   setTimeout(() => {
+     this.puzzleItems.map((obj) => obj.elem.classList.remove('puzzle__col-active'));
+     this.isFinish();
+   }, i * mooveSpeed);
+
+   // console.log(res);
+ }
+
   actionHandler = (action) => {
     if (action) {
-      console.log(`Puzzle actionHandler:    action= ${action}`);
+      // console.log(`Puzzle actionHandler:    action= ${action}`);
       if (action.match(/menu/)) this.showMenu();
       if (action.match(/hideMenu/)) this.hideMenu();
       if (action.match(/save/)) this.saveGame();
       if (action.match(/loadSelectedGame|newGame/)) this.loadGame(action);
       if (action.match(/soundOff/)) this.soundOff();
+      if (action.match(/makeSolve/)) this.makeSolve();
     }
   }
 }

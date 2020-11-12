@@ -209,6 +209,35 @@ body {
   cursor: pointer;
 }
 
+.puzzle__sound i:hover {
+  background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%);
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: shine 5s linear infinite;
+          animation: shine 5s linear infinite;
+}
+
+.puzzle__footer {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.puzzle__solver {
+  cursor: pointer;
+}
+
+.puzzle__solver:hover {
+  background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%);
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: shine 5s linear infinite;
+          animation: shine 5s linear infinite;
+}
+
 .info__time, .info__moves, .info__menu {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -253,9 +282,10 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   background-color: #353535;
+  font-size: 2rem;
 }
 
-.puzzle__col:hover {
+.puzzle__col:hover, .puzzle__col-active {
   background: #3f5efb;
   background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%);
   -webkit-animation: puzzle__col 50s linear infinite;
@@ -930,13 +960,6 @@ body {
 
 .score__col:nth-child(2) {
   font-weight: 700;
-  background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%);
-  background-size: 200% auto;
-  text-fill-color: transparent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-animation: shine 5s linear infinite;
-          animation: shine 5s linear infinite;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
