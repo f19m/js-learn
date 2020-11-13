@@ -116,7 +116,7 @@ export default class Menu {
   actionHandler = (evt) => {
     const { target } = evt;
     const { action, section } = target.dataset;
-    console.log(`Menu actionHandler:    action=${action}`);
+    // console.log(`Menu actionHandler:    action=${action}`);
     if (action) {
       if (action.match(/hideMenu/)) {
         this.hide();
