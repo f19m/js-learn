@@ -1114,4 +1114,23 @@ body {
             transform: scale(0);
   }
 }
+
+.show_picture {
+  cursor: pointer;
+}
+
+.show_picture:hover {
+  background: radial-gradient(circle, #3f5efb 0%, #fc466b 100%);
+  background-size: 200% auto;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: shine 5s linear infinite;
+          animation: shine 5s linear infinite;
+}
+
+.showed__picture {
+  width: 80%;
+  height: 80%;
+}
 /*# sourceMappingURL=style.css.map */
