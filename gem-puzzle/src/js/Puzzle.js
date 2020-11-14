@@ -92,7 +92,8 @@ export default class Puzzle {
     this.audio = utils.create('audio', 'puzzle__audio', 'volume_up', soundHolder, ['src', './assets/sounds/moew2.mp3']);
 
     // ADD solve button
-    utils.create('div', 'puzzle__empty', null, this.footer);
+    this.picture = {};
+    this.picture.item = utils.create('div', 'puzzle__picture', null, this.footer);
     utils.create('div', 'puzzle__solver', 'Solve this!', this.footer, ['action', 'makeSolve']);
 
     document.body.prepend(main);
@@ -118,6 +119,34 @@ export default class Puzzle {
   //     settings.fieldSizes = this.fieldSizes;
   //     return settings;
   //   }
+
+
+  getCurGameType = () => {
+    return this.settings.types[this.settings.currTypeIdx];
+  }
+
+  drowPicture = () => {
+    const getPos = (idx) => {
+      const size = this.puzzleItems.length ** 0.5;
+      const col = idx % size;
+      const row = Math.trunc(idx / size);
+      return {row, col, idx, };
+    };
+
+    const rndImg = Math.floor(Math.random() * 150) + 1; //150
+    const size = 400 / this.puzzleItems.length ** 0.5 ;
+    this.picture.url = `https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg`;
+    this.puzzleItems.forEach(obj => {
+      const elem = obj.elem.value;
+      const idx = parseInt(obj.value);
+      if (idx){
+        const pos = getPos(idx)
+        elem.style.background = `url(https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg)`;
+        elem.style.backgroundSize='400px';
+        elem.style.backgroundPosition=`left -${pos.col * size}px top -${pos.row * size}px`
+      }
+    });
+  }
 
   updatePuzzle = (items, action) => {
     const fillField = (arr) => {
@@ -155,6 +184,9 @@ export default class Puzzle {
       }
     }
 
+    if (this.getCurGameType()==='picture') this.drowPicture();
+    
+
     this.solveArr = [];
     for (let i = 0; i < this.puzzleItems.length; i += +1) {
       this.solveArr.push((i === this.puzzleItems.length - 1) ? '0' : (i + 1).toString());
@@ -182,8 +214,11 @@ export default class Puzzle {
 
   mouseDownHandler = (evt) => {
     const target = evt.target.closest('.puzzle__col');
+    if (!target) return;
 
     const puzzObj = this.puzzleItems.find((obj) => obj.value === target.dataset.numb);
+    if (!puzzObj) return;
+    
     if (puzzObj.value === '0') {
       return;
     }
@@ -295,7 +330,12 @@ export default class Puzzle {
     let j = 0;
     for (i = 0; i < matrix.length; i += 1) {
       const rows = matrix[i];
+      try{
       j = rows.findIndex((obj) => obj.value === elem.dataset.numb);
+    }catch(e){
+      return false;
+      //console.log(e);
+    }
       if (j >= 0) break;
     }
 
@@ -308,7 +348,8 @@ export default class Puzzle {
   }
 
   makeMove = (item) => {
-    if (this.isEnd) return null;
+    if (this.isEnd) return false;
+    if (!item) return false;
 
     const chunkArray = (arr, cnt) => arr.reduce((prev, cur, i, a) => (
       !(i % cnt) ? prev.concat([a.slice(i, i + cnt)]) : prev), []);
@@ -401,6 +442,7 @@ t
     this.settings.currTypeIdx = this.settings.types.indexOf(settings.type.type);
 
     this.updatePuzzle(settings.items, action);
+    this.initPictureBtn();
     //
   }
 
@@ -497,15 +539,30 @@ soundOff = () => {
    // console.log(res);
  }
 
+
+ showPicture = () => {
+  const popup = new Popup(`<img class="showed__picture" src='${this.picture.url}' alt="puzzle-picture">`);
+ }
+ initPictureBtn = () => {
+  if (this.getCurGameType()==='picture') {
+    utils.create('div', 'show_picture', 'Show original picture', this.picture.item, ['action', 'showPicture']);
+  }else{
+    this.picture.item.innerHTML = '';
+    this.picture.url = null;
+  }
+
+ }
+
   actionHandler = (action) => {
     if (action) {
-      // console.log(`Puzzle actionHandler:    action= ${action}`);
+       console.log(`Puzzle actionHandler:    action= ${action}`);
       if (action.match(/menu/)) this.showMenu();
       if (action.match(/hideMenu/)) this.hideMenu();
       if (action.match(/save/)) this.saveGame();
       if (action.match(/loadSelectedGame|newGame/)) this.loadGame(action);
       if (action.match(/soundOff/)) this.soundOff();
       if (action.match(/makeSolve/)) this.makeSolve();
+      if (action.match(/showPicture/)) this.showPicture();
     }
   }
 }
