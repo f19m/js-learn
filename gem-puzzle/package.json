@@ -5,10 +5,11 @@
   "main": "script.js",
   "scripts": {
     "clean": "shx rm -rf dst",
-    "webpack": "webpack",
+    "webpack": "webpack --config config/webpack.config.production.js",
     "sass": "node-sass src/css/style.sass dst/style.css --output-style compressed",
-    "build": "npm run clean && npm run sass && npm run webpack",
-    "lint": "eslint src",
+    "build": "set NODE_ENV=prod npm run clean && npm run sass && npm run webpack",
+    "lint": "eslint src config",
+    "dev": "set NODE_ENV=dev && webpack-dashboard -- webpack-dev-server --config config/webpack.config.dev.js",
     "start": "serve -s dst"
   },
   "keywords": [],
@@ -39,7 +40,9 @@
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.4.0",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.2.0",
+    "webpack-dashboard": "^3.2.1",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {}
 }
