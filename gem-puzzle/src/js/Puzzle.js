@@ -120,30 +120,27 @@ export default class Puzzle {
   //     return settings;
   //   }
 
-
-  getCurGameType = () => {
-    return this.settings.types[this.settings.currTypeIdx];
-  }
+  getCurGameType = () => this.settings.types[this.settings.currTypeIdx]
 
   drowPicture = () => {
     const getPos = (idx) => {
       const size = this.puzzleItems.length ** 0.5;
       const col = idx % size;
       const row = Math.trunc(idx / size);
-      return {row, col, idx, };
+      return { row, col, idx };
     };
 
-    const rndImg = Math.floor(Math.random() * 150) + 1; //150
-    const size = 400 / this.puzzleItems.length ** 0.5 ;
+    const rndImg = Math.floor(Math.random() * 150) + 1; // 150
+    const size = 400 / this.puzzleItems.length ** 0.5;
     this.picture.url = `https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg`;
-    this.puzzleItems.forEach(obj => {
+    this.puzzleItems.forEach((obj) => {
       const elem = obj.elem.value;
-      const idx = parseInt(obj.value);
-      if (idx){
-        const pos = getPos(idx)
+      const idx = parseInt(obj.value, 10);
+      if (idx) {
+        const pos = getPos(idx);
         elem.style.background = `url(https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg)`;
-        elem.style.backgroundSize='400px';
-        elem.style.backgroundPosition=`left -${pos.col * size}px top -${pos.row * size}px`
+        elem.style.backgroundSize = '400px';
+        elem.style.backgroundPosition = `left -${pos.col * size}px top -${pos.row * size}px`;
       }
     });
   }
@@ -184,8 +181,7 @@ export default class Puzzle {
       }
     }
 
-    if (this.getCurGameType()==='picture') this.drowPicture();
-    
+    if (this.getCurGameType() === 'picture') this.drowPicture();
 
     this.solveArr = [];
     for (let i = 0; i < this.puzzleItems.length; i += +1) {
@@ -218,7 +214,7 @@ export default class Puzzle {
 
     const puzzObj = this.puzzleItems.find((obj) => obj.value === target.dataset.numb);
     if (!puzzObj) return;
-    
+
     if (puzzObj.value === '0') {
       return;
     }
@@ -330,12 +326,12 @@ export default class Puzzle {
     let j = 0;
     for (i = 0; i < matrix.length; i += 1) {
       const rows = matrix[i];
-      try{
-      j = rows.findIndex((obj) => obj.value === elem.dataset.numb);
-    }catch(e){
-      return false;
-      //console.log(e);
-    }
+      try {
+        j = rows.findIndex((obj) => obj.value === elem.dataset.numb);
+      } catch (e) {
+        return false;
+      // console.log(e);
+      }
       if (j >= 0) break;
     }
 
@@ -539,23 +535,25 @@ soundOff = () => {
    // console.log(res);
  }
 
-
  showPicture = () => {
-  const popup = new Popup(`<img class="showed__picture" src='${this.picture.url}' alt="puzzle-picture">`);
+   // eslint-disable-next-line no-unused-vars
+   const popup = new Popup(`<img class="showed__picture" src='${this.picture.url}' alt="puzzle-picture">`);
  }
- initPictureBtn = () => {
-  if (this.getCurGameType()==='picture') {
-    utils.create('div', 'show_picture', 'Show original picture', this.picture.item, ['action', 'showPicture']);
-  }else{
-    this.picture.item.innerHTML = '';
-    this.picture.url = null;
-  }
 
+ initPictureBtn = () => {
+   if (this.getCurGameType() === 'picture') {
+     if (!this.picture.btn) {
+       this.picture.btn = utils.create('div', 'show_picture', 'Show original picture', this.picture.item, ['action', 'showPicture']);
+     }
+   } else {
+     this.picture.item.innerHTML = '';
+     this.picture.url = null;
+   }
  }
 
   actionHandler = (action) => {
     if (action) {
-       console.log(`Puzzle actionHandler:    action= ${action}`);
+      // console.log(`Puzzle actionHandler:    action= ${action}`);
       if (action.match(/menu/)) this.showMenu();
       if (action.match(/hideMenu/)) this.hideMenu();
       if (action.match(/save/)) this.saveGame();

@@ -1,34 +1,17 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
+    es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'standard',
+    'airbnb-base',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
+  parser: 'babel-eslint',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  settings: {
-    react: {
-      pragma: 'React',
-      version: '16.12.0',
-    },
-  },
-  plugins: [
-    'react',
-  ],
   rules: {
-    // disable rule of space before function parentheses
-    // "space-before-function-paren": 0
+    'linebreak-style': ['error', 'windows'],
   },
 };
