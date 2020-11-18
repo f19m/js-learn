@@ -102,7 +102,7 @@ $subtitle-font-size: 2.5rem
     display: flex
     align-items: center
     justify-content: center
-    min-width: 50rem
+    min-width: 32rem
     min-height: 51rem
     &__wrapper
         //position: relative
@@ -114,9 +114,9 @@ $subtitle-font-size: 2.5rem
         // width: 60vw
         // @media(max-width: 730px)
         //     width: 100vw
-        min-width: 500px
+        min-width: 32rem
         width: 100%
-        max-width: 800px
+        max-width: 80rem
     &__gamefield
         //width: 60vw
         //height: 80vh
@@ -136,6 +136,9 @@ $subtitle-font-size: 2.5rem
         box-shadow: inset 0 2px 4px 0 hsla(0, 0%, 0%, 0.08)
         background-color: #00c3b3
         border-radius: 10px
+        @media screen and (max-width: 501px)
+             font-size: 1.6rem
+             font-weight: 600
     &__field
         // display: flex
         // flex-direction: column
@@ -177,6 +180,8 @@ $subtitle-font-size: 2.5rem
     &__footer
         justify-content: space-around
     &__solver
+        @media screen and (max-width: 501px)
+            line-height: 2rem
         cursor: pointer
         &:hover
             +colorizedFont
@@ -521,7 +526,7 @@ $subtitle-font-size: 2.5rem
     &__info
         font-size: 2rem
         min-width: 25rem
-        max-width: 50rem
+        max-width: 32rem
         text-align: center
 
 
@@ -643,9 +648,12 @@ $subtitle-font-size: 2.5rem
              transform: scale(0)
 
 .show_picture
+    @media screen and (max-width: 501px)
+        line-height: 2rem
     cursor: pointer
     &:hover
          +colorizedFont 
+
 
 .showed__picture
     width: 80%
