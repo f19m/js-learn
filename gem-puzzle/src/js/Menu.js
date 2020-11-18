@@ -94,6 +94,7 @@ export default class Menu {
       .find((size) => size.code === settings.type.size.code);
     this.gameSettimgs.type.type = settings.type.type;
     this.gameSettimgs.items = settings.items;
+    this.gameSettimgs.pictureUrl = settings.pictureUrl;
   }
 
   // updateMenu = () => {

@@ -122,7 +122,7 @@ export default class Puzzle {
 
   getCurGameType = () => this.settings.types[this.settings.currTypeIdx]
 
-  drowPicture = () => {
+  drowPicture = (isLoad) => {
     const getPos = (idx) => {
       const size = this.puzzleItems.length ** 0.5;
       const col = idx % size;
@@ -132,13 +132,13 @@ export default class Puzzle {
 
     const rndImg = Math.floor(Math.random() * 150) + 1; // 150
     const size = 400 / this.puzzleItems.length ** 0.5;
-    this.picture.url = `https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg`;
+    this.picture.url = isLoad ? this.picture.url : `https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg`;
     this.puzzleItems.forEach((obj) => {
       const elem = obj.elem.value;
       const idx = parseInt(obj.value, 10);
       if (idx) {
         const pos = getPos(idx);
-        elem.style.background = `url(https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg)`;
+        elem.style.background = `url('${this.picture.url}')`;
         elem.style.backgroundSize = '400px';
         elem.style.backgroundPosition = `left -${pos.col * size}px top -${pos.row * size}px`;
       }
@@ -158,6 +158,7 @@ export default class Puzzle {
       });
     };
 
+    let isLoad = false;
     if (this.puzzleItems.length === 0) {
       fillField(this.settings.items);
     } else {
@@ -171,6 +172,7 @@ export default class Puzzle {
         // loadGame
         clear();
         fillField(items);
+        isLoad = true;
       } else if (action === 'newGame') {
         // new game
         clear();
@@ -181,7 +183,7 @@ export default class Puzzle {
       }
     }
 
-    if (this.getCurGameType() === 'picture') this.drowPicture();
+    if (this.getCurGameType() === 'picture') this.drowPicture(isLoad);
 
     this.solveArr = [];
     for (let i = 0; i < this.puzzleItems.length; i += +1) {
@@ -384,6 +386,8 @@ export default class Puzzle {
       type: this.settings.types[this.settings.currTypeIdx],
     };
     // to-do Доработать для картинок
+    settings.pictureUrl = this.picture.url;
+
     this.settings.savedGames.unshift(settings);
 
     const currSettings = storage.get('pzlSettings', {});
@@ -436,6 +440,7 @@ t
 
     this.puzzle.dataset.cellsCount = settings.type.size.count;
     this.settings.currTypeIdx = this.settings.types.indexOf(settings.type.type);
+    this.picture.url = settings.pictureUrl;
 
     this.updatePuzzle(settings.items, action);
     this.initPictureBtn();
