@@ -1,0 +1,21 @@
+{
+  "name": "english-for-kids",
+  "version": "1.0.0",
+  "description": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/rslang/english-for-kids.md",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rsshool",
+    "english-for-kids",
+    "stage#2"
+  ],
+  "author": "f19m",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1"
+  }
+}
