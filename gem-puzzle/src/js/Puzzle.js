@@ -100,7 +100,7 @@ export default class Puzzle {
 
     // events
     this.puzzle.addEventListener('mousedown', this.mouseDownHandler);
-    this.puzzle.addEventListener('mousemove', this.mouseMoveHandler);
+    // this.puzzle.addEventListener('mousemove', this.mouseMoveHandler);
     this.puzzle.addEventListener('mouseup', this.mouseUpHandler);
 
     this.startTimer();
@@ -131,15 +131,16 @@ export default class Puzzle {
     };
 
     const rndImg = Math.floor(Math.random() * 150) + 1; // 150
-    const size = 400 / this.puzzleItems.length ** 0.5;
+    const size = this.puzzle.clientWidth / this.puzzleItems.length ** 0.5;
     this.picture.url = isLoad ? this.picture.url : `https://raw.githubusercontent.com/irinainina/image-data/master/box/${rndImg}.jpg`;
     this.puzzleItems.forEach((obj) => {
       const elem = obj.elem.value;
       const idx = parseInt(obj.value, 10);
       if (idx) {
         const pos = getPos(idx);
+
         elem.style.background = `url('${this.picture.url}')`;
-        elem.style.backgroundSize = '400px';
+        elem.style.backgroundSize = `${this.puzzle.clientWidth}px`;
         elem.style.backgroundPosition = `left -${pos.col * size}px top -${pos.row * size}px`;
       }
     });
@@ -158,6 +159,7 @@ export default class Puzzle {
       });
     };
 
+    this.isOnSolve = false;
     let isLoad = false;
     if (this.puzzleItems.length === 0) {
       fillField(this.settings.items);
@@ -211,6 +213,7 @@ export default class Puzzle {
   }
 
   mouseDownHandler = (evt) => {
+    if (this.isOnSolve) return;
     const target = evt.target.closest('.puzzle__col');
     if (!target) return;
 
@@ -263,6 +266,7 @@ export default class Puzzle {
   // }
 
   mouseUpHandler = (evt) => {
+    if (this.isOnSolve) return;
     // console.log(`mouseUpHandler; x=${evt.clientX} y=${evt.clientY}`);
     if (this.isEnd) return;
     if (this.isDragged) {
@@ -521,6 +525,7 @@ soundOff = () => {
  };
 
  makeSolve=() => {
+   this.isOnSolve = true;
    const arrToSolve = this.puzzleItems.map((item) => parseInt(item.value, 10));
    const solver = new Solver(arrToSolve).init();
    const res = solver.solve();
