@@ -1,4 +1,4 @@
-/**
+/*
  * @param {String} el
  * @param {String} classNames
  * @param {HTMLElement} child
@@ -6,7 +6,6 @@
  * @param  {...array} dataAttr
  */
 
-// dataAttr: [code, value], [code, value]
 export default function create(el, classNames, child, parent, ...dataAttr) {
   let element = null;
   try {

@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
-import create from './create.js';
+import create from './create';
 
-export default { create};
+export default { create };
