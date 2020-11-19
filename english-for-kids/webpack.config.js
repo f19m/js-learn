@@ -18,6 +18,11 @@ module.exports = {
   devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dst'),
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+    },
+    host: '127.0.0.1',
     port: 9000,
     watchContentBase: true,
     hot: true
