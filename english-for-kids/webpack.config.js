@@ -1,38 +1,45 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-
-const ROOT_DIRECTORY = __dirname
-const SRC_DIRECTORY = path.join(ROOT_DIRECTORY, 'src')
+const ROOT_DIRECTORY = __dirname;
+const SRC_DIRECTORY = path.join(ROOT_DIRECTORY, 'src');
 
 module.exports = {
   entry: [
-    './src/app/app.js'
+    './src/app/app.js',
   ],
   output: {
     path: path.join(__dirname, 'dst'),
-    filename: 'script.js'
+    filename: 'script.js',
   },
   devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dst'),
     headers: {
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     },
     host: '127.0.0.1',
     port: 9000,
     watchContentBase: true,
-    hot: true
+    hot: true,
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css'
+      filename: 'style.css',
     }),
+    new CopyWebpackPlugin(
+      {
+        patterns: [
+          { from: path.join(SRC_DIRECTORY, 'app/bootstrap.min.css'), to: path.join(ROOT_DIRECTORY, 'dst') },
+          { from: path.join(SRC_DIRECTORY, 'app/reset.css'), to: path.join(ROOT_DIRECTORY, 'dst') },
+        ],
+      },
+    ),
     new HtmlWebpackPlugin({
-      template: path.join(SRC_DIRECTORY, 'index.html')
+      template: path.join(SRC_DIRECTORY, 'index.html'),
     }),
   //   new CopyWebpackPlugin(
   //     {patterns:  [
@@ -44,10 +51,10 @@ module.exports = {
       {
         test: /\.js$/,
         include: [
-          path.join(__dirname, 'src')
+          path.join(__dirname, 'src'),
         ],
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.sass$/,
@@ -66,21 +73,15 @@ module.exports = {
         //   },
         //   'sass-loader',
         // ],
-        use: [{
-          loader: MiniCssExtractPlugin.loader,
-        }, {
-          loader: "css-loader",
-        }, {
-          loader: "sass-loader",
-          options: {
-            implementation: require("sass"),
-            //fiber: Fiber
-          }
-        }]
-      }
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
     ],
   },
   optimization: {
-    minimize: true
-  }
+    minimize: true,
+  },
 };
