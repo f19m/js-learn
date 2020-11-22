@@ -1,65 +1,132 @@
 @import  '../../var.sass'
  
+$toggle-width: 32rem
+
+.header
+    +flex-algin-justify(center, space-between)
+    +main-block
+    height: 6rem
+    padding-top: 4rem
 
 
-.header__burger
-    width: 3rem
-    height: 3rem
-    position: absolute
-    left: 5.3rem
-    z-index: 4
-    visibility: visible
-    display: flex
-    align-items: center
-    opacity: 1
-    top: 3.6rem
-    transition: all 0.6s
-    &-icon 
-        pointer-events: none
-       
-
-.rotate
-    transform: rotate(90deg)
-
-.logo-burger-opened
-    z-index:  5
-.burger
-    &__menu
-        width: 100%
-        //height: 100%
-        position: fixed
-        top: 0
-        left: 0
-        z-index: 3
-        transition: all 0.6s
-    &__wrapper
-        width: 32rem
-        height: 100vh
-        //min-height: 82.3rem
-        background-color: $color-dark-3xl
-        +flex-direction-justify(column,center)
-    &__ul 
-        //height: 32.7rem
+.nav
+    &__toggle
+    &__list 
         +flex-direction-algin-justify(column,center,space-between)
-    &__overlay 
-        width: 100%
+        position: absolute
+        background: linear-gradient(45deg, #6fffcf, #7033FF)
+        z-index: 20
+        left: -100%
+        transition: 0.5s ease
         height: 100vh
+        padding: 2.5rem 0
+        top: 0
+        width: $toggle-width
+        .item__link 
+            +paragraph-mobile-menu
+            color: $happy-color-thwo
+            &_:hover 
+                color: $happy-color
+            &-active, &:active 
+                color: $happy-color
+        &-visible
+            left: 0
+    
+.toggle
+    position: relative
+    z-index: 30
+    left: 0
+    transition: 0.2s ease-in-out
+    &__lines, &__lines::before, &__lines::after
+        position: absolute
+        width: 3rem
+        height: 0.3rem
+        background-color: $happy-color
+        transition: 0.4s ease-in-out
+    &__lines
+        background-color: $happy-color-thwo
+    &__lines
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+    &__lines:before
+        content: ''
+        top: -1.2rem
+    &__lines:after
+        content: ''
+        top: 1.2rem
+    &-open
+        left: $toggle-width/2
+    &-open &__lines
+        background-color: transparent
+    &-open &__lines::before
+        top: 0
+        transform: rotate(45deg)
+    &-open &__lines::after
+        top: 0
+        transform: rotate(-45deg)
+
+.overlay
+    display: none
+    transition: 0.3s ease
+    &-active
+        background: #00000035
         position: fixed
+        z-index: 10
         top: 0
         left: 0
-        background-color: rgba(0, 0, 0, .3)
-        transition: .6s all
-        z-index: 2
-    &__link 
-        +paragraph-mobile-menu
-        color: $color-dark-s
-        &_:hover 
-            color: $color-light-s
-        &-active, &:active 
-            color: $color-light-s
+        display: block
+        width: 100%
+        height: 100%
 
-.unvisible
-    transition: all 0.6s
-    //opacity: 0
-    //left: -100%
-    transform: translateX(-100%);
+
+.switch
+    position: relative
+    width: 121px
+    height: 40px
+    border-radius: 25px
+    top: 16px
+    &__check
+        visibility: hidden
+    &__label
+        display: block
+        z-index: 1
+        position: absolute
+        width: 38px
+        height: 38px
+        top: 1px
+        right: 1px
+        background: white
+        border-radius: 50%
+        border: 1px solid #F6F5FA
+        box-sizing: border-box
+        box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.38)
+        transition: all 0.2s ease
+        cursor: pointer
+    &__check:checked + &__label
+        right: 82px
+    &-off
+        display: none
+    &__play, &__train
+        font-size: 14px
+        line-height: 17px
+        color: white
+        position: absolute
+        z-index: 10
+        text-transform: uppercase
+        top: 12px
+    &__play
+        right: 20px
+    &__bg
+        position: absolute
+        top: 0
+        right: 0
+        width: 100%
+        height: 100%
+        background: $happy-color
+        box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 0.28), inset 0px 1px 2px rgba(0, 0, 0, 0.25)
+        border-radius: 25px
+    &__check:checked  ~ &__bg
+        background: $happy-color-thwo
+
+

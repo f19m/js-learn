@@ -3,36 +3,40 @@ import utils from '../../utils/utils';
 
 export default class Header {
   constructor() {
-    this.burgerMenuInit();
+    this.menuInit();
+    this.initSwitch();
     return this;
   }
 
-  burgerMenuInit() {
-    const burgerMenuIcon = document.querySelector('.header__burger');
-    const burgherClickHandler = function () {
-      burgerMenuIcon.classList.toggle('rotate');
-      const burgerMenu = document.querySelector('.burger__menu');
-      burgerMenu.classList.toggle('unvisible');
-      // const burgerOverlay = document.querySelector('.burger__overlay');
-      // burgerOverlay.classList.toggle('unvisible');
-      const header = document.querySelector('.header');
-      header.classList.toggle('header-burger-opened');
+  menuInit() {
+    this.toggle = document.querySelector('.toggle');
+    const toggleClickHandler = () => {
+      this.toggle.classList.toggle('toggle-open');
+      const menu = document.querySelector('.nav__list');
+      menu.classList.toggle('nav__list-visible');
+      const overlay = document.querySelector('.overlay');
+      overlay.classList.toggle('overlay-active');
 
       // document.removeEventListener('click',burgherClickHandler);
     };
 
-    burgerMenuIcon.addEventListener('click', (event) => {
-      burgherClickHandler();
+    this.toggle.addEventListener('click', () => {
+      toggleClickHandler();
     });
+  }
 
-    // const burgerOverlay = document.querySelector('.burger__overlay');
-    // burgerOverlay.addEventListener('click', (event) => {
-    //   burgherClickHandler();
-    // });
+  initSwitch() {
+    this.switch = document.querySelector('.switch__check');
+    const train = document.querySelector('.switch__train');
+    const play = document.querySelector('.switch__play');
 
-    // const burgerLinks = document.querySelectorAll('.burger__link');
-    // burgerLinks.forEach(element => element.addEventListener('click', event => {
-    //   burgerMenuIcon.click();
-    // }));
+    const switchClickHandler = () => {
+      train.classList.toggle('switch-off');
+      play.classList.toggle('switch-off');
+    };
+
+    this.switch.addEventListener('change', () => {
+      switchClickHandler();
+    });
   }
 }
