@@ -20,7 +20,8 @@ export default class Main {
     // статистика
     this.stat = new Statistic();
 
-    document.body.prepend(this.main);
+    // document.body.prepend(this.main);
+
     return this;
   }
 }

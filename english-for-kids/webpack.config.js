@@ -35,6 +35,7 @@ module.exports = {
         patterns: [
           { from: path.join(SRC_DIRECTORY, 'app/bootstrap.min.css'), to: path.join(ROOT_DIRECTORY, 'dst') },
           { from: path.join(SRC_DIRECTORY, 'app/reset.css'), to: path.join(ROOT_DIRECTORY, 'dst') },
+          { from: path.join(SRC_DIRECTORY, 'assets'), to: path.join(ROOT_DIRECTORY, 'dst/assets') },
         ],
       },
     ),
@@ -57,22 +58,15 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
+        test: /\.(svg|png|jp(e*)g|gif)$/,
+        loader: 'file-loader',
+        // include: path.join(__dirname, 'src/assets'),
+        options: {
+          name: '[name].[ext]',
+        },
+      },
+      {
         test: /\.sass$/,
-        // use: [
-        //   MiniCssExtractPlugin.loader,
-        //   'css-loader',
-        //   {
-        //     loader: 'postcss-loader',
-        //     options: {
-        //       ident: 'postcss',
-        //       plugins: [
-        //         require('autoprefixer'),
-        //         require('cssnano')
-        //       ]
-        //     }
-        //   },
-        //   'sass-loader',
-        // ],
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',

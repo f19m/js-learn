@@ -1,0 +1,147 @@
+$color-primary: #F1CDB3
+$color-primary-light: #FDDCC4
+
+$color-light-s: #FAFAFA
+$color-light-l: #F6F6F6
+$color-light-xl: #FFFFFF
+
+$color-dark-s: #CDCDCD
+$color-dark-m: #B2B2B2
+$color-dark-l: #545454
+$color-dark-xl: #4C4C4C
+$color-dark-2xl: #444444
+$color-dark-3xl: #292929
+
+
+=flex
+    display: flex
+
+=flex-direction($direction) 
+    +flex
+    flex-direction: $direction
+
+=flex-justify($justify-content) 
+    +flex
+    justify-content: $justify-content
+
+=flex-algin-justify($align-items, $justify-content) 
+    +flex
+    align-items: $align-items
+    justify-content: $justify-content
+
+=flex-direction-justify($direction, $justify-content) 
+    +flex
+    flex-direction: $direction
+    justify-content: $justify-content
+
+=flex-direction-algin-justify($direction, $align-items, $justify-content) 
+    +flex-direction-justify($direction, $justify-content) 
+    align-items: $align-items
+
+=flex-direction-algin($direction, $align-items)    
+    +flex-direction($direction) 
+    align-items: $align-items
+
+
+=h2
+    font:
+        family: Georgia
+        style: normal
+        weight: normal    
+        size: 4.4rem        
+    line-height: 130%
+
+=h3
+    font:
+        family: Georgia
+        style: normal
+        weight: normal    
+        size: 3.5rem
+    line-height: 130%
+    letter-spacing: 0.2rem
+
+=h3-mobile
+    font: 
+        family: Georgia
+        style: normal
+        weight: normal    
+        size: 2.5rem
+    line-height: 130%
+    letter-spacing: 0.15rem  
+ 
+=h4
+    font: 
+        family: Georgia
+        style: normal
+        weight: normal    
+        size: 2rem
+    line-height: 115%
+    letter-spacing: 0.12rem
+
+=h5
+    font: 
+        family: Georgia
+        style: normal
+        weight: normal    
+        size: 1.5rem
+    line-height: 110%
+    letter-spacing: 0.09rem
+
+=paragraph-l
+    font: 
+        family: Arial
+        style: normal
+        weight: normal
+        size: 1.5rem
+    line-height: 160%
+
+=paragraph-s
+    font: 
+        family: Arial
+        style: italic
+        weight: normal
+        size: 1.2rem
+    line-height: 150%
+    
+=paragraph-mobile-menu
+    font: 
+        family: Arial
+        style: normal
+        weight: normal
+        size: 3.2rem
+    line-height: 160%
+
+=logo_title
+    font: 
+        family: Georgia
+        style: normal
+        weight: normal
+        size: 3.2rem
+    line-height: 110%
+    letter-spacing: 0.2rem
+
+=logo_subtitle
+    font: 
+        family: Arial
+        style: normal
+        weight: normal
+        size: 1.3rem
+    line-height: 110%
+    letter-spacing: 0.13rem
+
+=button($bg-color, $bg-color-hover)
+    padding: 1.5rem 4.5rem
+    border-radius: 6.28rem
+    background-color: $bg-color
+    cursor: pointer
+    &:hover
+        background-color: $bg-color-hover
+
+=button-link($color)
+    font-family: Georgia
+    font-size: 1.7rem
+    line-height: 130%
+    letter-spacing: 0.06rem
+    color: $color
+    max-height: 5.2rem
+    +flex-algin-justify(center, center)
