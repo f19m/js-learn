@@ -9,6 +9,8 @@ import Solver from './solver/IdaStar.js';
 
 export default class Puzzle {
   constructor() {
+    utils.dateInit();
+
     const settings = defSettings;
     const savedSettings = storage.get('pzlSettings', {});
     if (savedSettings && savedSettings.savedGames && savedSettings.savedGames.length > 0) {
@@ -34,8 +36,6 @@ export default class Puzzle {
     this.menu = new Menu(this.settings, this.main);
     this.main.addEventListener('click', this.preclickHandler);
     document.addEventListener('pzlAction', this.prePlzHandler);
-
-    utils.dateInit();
 
     return this;
   }
