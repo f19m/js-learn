@@ -1,4 +1,5 @@
-﻿import utils from '../../utils/utils';
+﻿import './categories.sass';
+import utils from '../../utils/utils';
 
 export default class Categories {
   constructor() {

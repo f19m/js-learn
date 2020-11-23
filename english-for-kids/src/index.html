@@ -17,45 +17,86 @@
 
 <body>
 
-    <!-- <header class='header'>
-       
+    <section class="game">
 
-        <nav class="nav">
-            <div class="nav__toggle toggle">
-                <span class="toggle__lines"></span>
+        <div class="game__cards cards">
+            <div class="cards__wrapper">
+                <div class="cards__content">
+                    <div class="cards__item card">
+                        <div class="card__front">
+                            <div class="card__img"
+                                style='background-image: url("./assets/images/main/animals/alpaca.jpg")'></div>
+                            <div class="card__info">
+                                <div class="card__sound">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"
+                                        width="18px" height="18px">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                                        </svg>
+                                </div>
+                                <div class="card__title">
+                                    Alpaca
+                                </div>
+                                <div class="card__rotate">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"
+                                        width="18px" height="18px">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
+                                        </svg>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="card__back">
+                            <div class="card__img" style='background-image: url("./assets/images/main/animals/alpaca.jpg")'></div>
+                       
+                            <div class="card__info">
+                                <div class="card__title">
+                                    Альпака
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+
+
             </div>
-            
-            <ul class="nav__list">
-                <li class="list__item list__item-selected"><a class="item__link item__link-active" href="javascript:void(0)">Main</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Animals</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Animals II</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Food</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Fruit</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Job</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Music</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Space</a></li>
-                <li class="list__item"><a class="item__link" href="javascript:void(0)">Sport</a></li>
-            </ul> 
-        </nav>
-
-        <h1 class="header__title">English For Kids</h1>
-
-
-        <div class="header__switch switch">
-            <input class="switch__check" type="checkbox" id="checkbox">
-            <label class="switch__label" for="checkbox"></label>
-            <span class="switch__train">Train</span>
-            <span class="switch__play switch-off">Play</span>
-            <span class="switch__bg"></span>
         </div>
-        
-    
-    </header>
+        </div>
 
 
-    <div class="overlay">
+    </section>
+
+
+    <script>
+        let cRot = document.querySelector('.card__rotate'),
+            cFront = document.querySelector('.card__front'),
+            cBack = document.querySelector('.card__back'),
+            cCard = document.querySelector('.card');
         
-    </div> -->
+        cRot.addEventListener('click', ()=>{
+           // cCard.classList.add('is-switched')
+
+           
+           cFront.classList.add('card__front-rotate');
+           cBack.classList.add('card__back-rotate');          
+           
+                
+        });
+
+        cCard.addEventListener('mouseleave', ()=>{
+            //cCard.classList.remove('is-switched')
+            cFront.classList.remove('card__front-rotate');
+            cBack.classList.remove('card__back-rotate');
+        })
+    </script>
 
 
 </body>
