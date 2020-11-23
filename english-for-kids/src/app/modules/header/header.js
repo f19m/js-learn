@@ -1,11 +1,100 @@
 ﻿import './header.sass';
-import utils from '../../utils/utils';
+import create from '../../utils/create';
 
 export default class Header {
-  constructor() {
-    this.menuInit();
-    this.initSwitch();
+  constructor(data) {
+    const header = create('header', 'header', null, null);
+
+    const nav = create('nav', 'nav header__nav', null, header);
+    // menu
+    // togle
+    this.toggle = create('div', 'nav__toggle toggle', '<span class="toggle__lines"></span>', nav);
+    this.toggle.addEventListener('click', () => this.navToggleHandler());
+    // list
+    this.menu = {};
+    this.menu.elem = create('ul', 'nav__list', null, nav);
+    this.menu.items = [];
+    this.navListInit(data, this.menu.elem);
+
+    // title
+    create('h1', 'header__title', 'English For Kids', header);
+
+    // SwitchButton
+    const switchGame = create('div', 'header__switch switch', null, header);
+    this.switch = {};
+    this.switchInit(switchGame);
+
+    // owerlay
+    this.overlay = create('div', 'overlay', '', header);
+
+    // select main menu
+    this.menuItemSelect(this.menu.items[0].code);
+
+    document.body.prepend(header);
+
     return this;
+  }
+
+  navToggleHandler() {
+    this.toggle.classList.toggle('toggle-open');
+    this.menu.elem.classList.toggle('nav__list-visible');
+    this.overlay.classList.toggle('overlay-active');
+  }
+
+  navListInit(data, parent) {
+    const addItem = (text) => {
+      const item = {};
+      item.name = text;
+      item.code = text.toLowerCase();
+      item.elem = create('li', 'list__item', null, parent, ['menuAcion', text.toLowerCase()]);
+      item.link = create('a', 'item__link', text, item.elem, ['menuAcion', text.toLowerCase()]);
+      item.isActive = false;
+      item.setActive = (isActive) => {
+        item.isActive = isActive;
+      };
+      return item;
+    };
+
+    this.menu.items.push(addItem('Main'));
+
+    data.pages.categories.forEach((cat) => {
+      this.menu.items.push(addItem(cat.name));
+    });
+
+    this.menu.items.push(addItem(data.statistic.name));
+
+    this.menu.items.forEach((obj) => {
+      obj.elem.addEventListener('click', (evt) => {
+        const menuItemName = evt.target.dataset.menuAcion;
+        this.menuItemSelect(menuItemName);
+      });
+    });
+  }
+
+  menuItemSelect(menuItemName) {
+    const obj = this.menu.items.find((elem) => elem.code === menuItemName);
+    if (obj.isActive) return;
+
+    obj.setActive(!obj.isActive);
+
+    this.menu.items.forEach((menuObj) => {
+      if (menuObj.name !== obj.name) {
+        menuObj.setActive(false);
+        menuObj.elem.classList.remove('list__item-selected');
+        menuObj.link.classList.remove('item__link-active');
+      }
+    });
+
+    obj.elem.classList.add('list__item-selected');
+    obj.link.classList.add('item__link-active');
+
+    const customEvt = new CustomEvent('menuItemChange', {
+      detail: {
+        item: obj,
+      },
+    });
+
+    document.dispatchEvent(customEvt);
   }
 
   menuInit() {
@@ -25,18 +114,45 @@ export default class Header {
     });
   }
 
-  initSwitch() {
-    this.switch = document.querySelector('.switch__check');
-    const train = document.querySelector('.switch__train');
-    const play = document.querySelector('.switch__play');
+  switchGameModeHanlder() {
+    this.switch.isTrain = !this.switch.isTrain;
+    this.switch.train.classList.toggle('switch-off');
+    this.switch.play.classList.toggle('switch-off');
 
-    const switchClickHandler = () => {
-      train.classList.toggle('switch-off');
-      play.classList.toggle('switch-off');
-    };
+    const customEvt = new CustomEvent('gameModeChange', {
+      detail: {
+        isTrain: this.switch.isTrain,
+      },
+    });
 
-    this.switch.addEventListener('change', () => {
-      switchClickHandler();
+    document.dispatchEvent(customEvt);
+  }
+
+  switchInit(parent) {
+    this.switch.isTrain = true;
+    this.switch.check = create('input', 'switch__check', null, parent, ['type', 'checkbox'], ['id', 'checkbox']);
+    create('label', 'switch__label', null, parent, ['for', 'checkbox']);
+    this.switch.train = create('span', 'switch__train', 'Train', parent);
+    this.switch.play = create('span', 'switch__play switch-off', 'Play', parent);
+    create('span', 'switch__bg', null, parent);
+
+    this.switch.check.addEventListener('change', () => {
+      this.switchGameModeHanlder();
     });
   }
+
+  // initSwitch() {
+  //   this.switch = document.querySelector('.switch__check');
+  //   const train = document.querySelector('.switch__train');
+  //   const play = document.querySelector('.switch__play');
+
+  //   const switchClickHandler = () => {
+  //     train.classList.toggle('switch-off');
+  //     play.classList.toggle('switch-off');
+  //   };
+
+  //   this.switch.addEventListener('change', () => {
+  //     switchClickHandler();
+  //   });
+  // }
 }

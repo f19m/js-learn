@@ -1,9 +1,9 @@
 export default {
 
-  Pages: {
+  pages: {
     categories: [
       {
-        Name: 'Animals',
+        name: 'Animals',
         img: './assets/images/main/animals.jpg',
         words: [
           {
@@ -57,7 +57,7 @@ export default {
         ],
       },
       {
-        Name: 'Animals II',
+        name: 'Animals II',
         img: './assets/images/main/animals2.jpg',
         words: [
           {
@@ -111,7 +111,7 @@ export default {
         ],
       },
       {
-        Name: 'Food',
+        name: 'Food',
         img: './assets/images/main/food.jpg',
         words: [
           {
@@ -165,7 +165,7 @@ export default {
         ],
       },
       {
-        Name: 'fruit',
+        name: 'Fruit',
         img: './assets/images/main/fruit.jpg',
         words: [
           {
@@ -219,7 +219,7 @@ export default {
         ],
       },
       {
-        Name: 'job',
+        name: 'Job',
         img: './assets/images/main/job.jpg',
         words: [
           {
@@ -273,7 +273,7 @@ export default {
         ],
       },
       {
-        Name: 'music',
+        name: 'Music',
         img: './assets/images/main/music.jpg',
         words: [
           {
@@ -328,7 +328,7 @@ export default {
         ],
       },
       {
-        Name: 'space',
+        name: 'Space',
         img: './assets/images/main/space.jpg',
         words: [
           {
@@ -383,7 +383,7 @@ export default {
         ],
       },
       {
-        Name: 'sport',
+        name: 'Sport',
         img: './assets/images/main/sport.jpg',
         words: [
           {
@@ -442,7 +442,8 @@ export default {
   },
 
   statistic: {
-
+    name: 'Statistic',
+    data: [],
   },
 
 };

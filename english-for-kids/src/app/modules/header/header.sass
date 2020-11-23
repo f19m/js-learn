@@ -1,48 +1,77 @@
 @import  '../../var.sass'
  
 $toggle-width: 32rem
+$line-toggle-width: 3rem
+
 
 .header
     +flex-algin-justify(center, space-between)
     +main-block
-    height: 6rem
+    height: 10rem
     padding-top: 4rem
+    &__title
+        +h2
+        color: $color-light-s
+        text-shadow: 0px 4px 4px $happy-color-dark
+        
 
 
 .nav
     &__toggle
+        left: $line-toggle-width/2
+
     &__list 
         +flex-direction-algin-justify(column,center,space-between)
         position: absolute
-        background: linear-gradient(45deg, #6fffcf, #7033FF)
+        background: linear-gradient(216deg, $happy-color-light, $happy-color-thwo, $happy-color-dark)
         z-index: 20
         left: -100%
         transition: 0.5s ease
-        height: 100vh
-        padding: 2.5rem 0
+        height: 100%
+        padding: 4.4rem 0
         top: 0
         width: $toggle-width
+        border-radius: 12rem 12rem 20rem 6rem
+        overflow-y: hidden
+        &:hover
+            overflow-y: overlay
+        &::-webkit-scrollbar
+            width: 1rem
+        &::-webkit-scrollbar-track
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3) 
+            border-radius: 1rem
+            margin: 2rem 1rem 2rem 0
+        &::-webkit-scrollbar-thumb
+            border-radius: 1rem
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5) 
         .item__link 
             +paragraph-mobile-menu
-            color: $happy-color-thwo
-            &_:hover 
-                color: $happy-color
+            color: $color-light-s
+            text-shadow: 0px 4px 4px $happy-color-dark
+            cursor: pointer
+            &:hover 
+                color: $happy-color-y
+                text-shadow: 0px 8px 8px $happy-color-dark
             &-active, &:active 
-                color: $happy-color
+                color: $happy-color-y
         &-visible
             left: 0
     
 .toggle
     position: relative
     z-index: 30
-    left: 0
     transition: 0.2s ease-in-out
+    height: $line-toggle-width 
+    width: $line-toggle-width
+    cursor: pointer
     &__lines, &__lines::before, &__lines::after
         position: absolute
-        width: 3rem
+        width: $line-toggle-width
         height: 0.3rem
-        background-color: $happy-color
+        background-color: $happy-color-y
         transition: 0.4s ease-in-out
+    &__lines:hover, &__lines:hover::before, &__lines:hover::after
+        background-color: $happy-color-y-light
     &__lines
         background-color: $happy-color-thwo
     &__lines
@@ -56,7 +85,7 @@ $toggle-width: 32rem
         content: ''
         top: 1.2rem
     &-open
-        left: $toggle-width/2
+        transform: translate(10rem, 0)
     &-open &__lines
         background-color: transparent
     &-open &__lines::before
@@ -82,50 +111,49 @@ $toggle-width: 32rem
 
 .switch
     position: relative
-    width: 121px
-    height: 40px
+    width: 12rem
+    height: 4rem
     border-radius: 25px
-    top: 16px
     &__check
         visibility: hidden
     &__label
         display: block
         z-index: 1
         position: absolute
-        width: 38px
-        height: 38px
-        top: 1px
-        right: 1px
+        width: 4rem
+        height: 4rem
+        top: 0rem
+        right: 0rem
         background: white
         border-radius: 50%
-        border: 1px solid #F6F5FA
+        border: 0.1rem solid #F6F5FA
         box-sizing: border-box
-        box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.38)
-        transition: all 0.2s ease
+        box-shadow: 0 0.2rem 0.7rem rgba(0, 0, 0, 0.48)
+        transition: all 0.3s ease
         cursor: pointer
     &__check:checked + &__label
-        right: 82px
+        right: 8.2rem
     &-off
         display: none
     &__play, &__train
-        font-size: 14px
-        line-height: 17px
+        +paragraph-l
+        font-weight: bold
         color: white
         position: absolute
         z-index: 10
         text-transform: uppercase
-        top: 12px
+        top: 0.9rem
     &__play
-        right: 20px
+        right: 2rem
     &__bg
         position: absolute
         top: 0
         right: 0
         width: 100%
         height: 100%
-        background: $happy-color
-        box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 0.28), inset 0px 1px 2px rgba(0, 0, 0, 0.25)
-        border-radius: 25px
+        background: $happy-color-y
+        box-shadow: inset 0 -0.1rem 0.1rem rgba(255, 255, 255, 0.28), inset 0 0.1rem 0.2rem rgba(0, 0, 0, 0.25)
+        border-radius: 2.5rem
     &__check:checked  ~ &__bg
         background: $happy-color-thwo
 
