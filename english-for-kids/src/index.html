@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./reset.css">
     <!--link rel="stylesheet" href="./bootstrap.min.css"-->
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/favicon.png">
 
     <title>english-for-kids</title>
 </head>
@@ -16,12 +17,13 @@
 
 
 <body>
-
+<!-- 
     <section class="game">
 
         <div class="game__cards cards">
             <div class="cards__wrapper">
                 <div class="cards__content">
+
                     <div class="cards__item card">
                         <div class="card__front">
                             <div class="card__img"
@@ -49,9 +51,9 @@
                                 </div>
                             </div>
 
-
-
                         </div>
+
+
                         <div class="card__back">
                             <div class="card__img" style='background-image: url("./assets/images/main/animals/alpaca.jpg")'></div>
                        
@@ -79,7 +81,8 @@
         let cRot = document.querySelector('.card__rotate'),
             cFront = document.querySelector('.card__front'),
             cBack = document.querySelector('.card__back'),
-            cCard = document.querySelector('.card');
+            cCard = document.querySelector('.card'),
+            cContent = document.querySelector('.cards__content');
         
         cRot.addEventListener('click', ()=>{
            // cCard.classList.add('is-switched')
@@ -96,7 +99,17 @@
             cFront.classList.remove('card__front-rotate');
             cBack.classList.remove('card__back-rotate');
         })
-    </script>
+
+        const fragment = document.createDocumentFragment();
+        for (let index = 0; index < 7; index++) {
+            const element = document.createElement('div');
+            element.innerHTML = cCard.innerHTML;
+            element.classList.add('cards__item','card');
+            fragment.appendChild(element);
+        }
+        cContent.appendChild(fragment);
+
+    </script> -->
 
 
 </body>

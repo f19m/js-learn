@@ -1,0 +1,63 @@
+﻿import './card.sass';
+import create from '../../../utils/create';
+
+export default class Categories {
+  constructor(info) {
+    this.code = info.code ? info.code : info.name.toLowerCase();
+    this.name = info.name;
+    this.translate = info.translate ? info.translate : null;
+    this.img = info.img;
+
+    if (info.audio) {
+      this.sound = {};
+      this.sound.elem = create('audio', 'sounds__audio', null, null, ['src', `${info.audio}`]);
+      this.sound.play = () => this.sound.elem.play();
+    }
+
+    this.cardRender();
+
+    return this;
+  }
+
+  createCardSize(isFrontSide) {
+    const title = create('div', 'card__title', isFrontSide ? this.name : this.translate, null);
+
+    const cardFront = create('div', isFrontSide ? 'card__front' : 'card__back',
+      [create('div', 'card__img', null, null, ['style', `background-image: url("${this.img}")`]),
+        create('div', 'card__info', (this.sound && isFrontSide) ? [title,
+          this.cardSound, this.cardRotate,
+        ] : title, null),
+      ],
+      this.elem);
+
+    return cardFront;
+  }
+
+  cardRender() {
+    this.elem = create('div', 'cards__item card', null, null, ['cardCode', this.code]);
+
+    if (this.sound) {
+      const svgPlay = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"'
+      + 'width="18px" height="18px"><path d="M0 0h24v24H0z" fill="none" /><path d="M3 9v6h4l5 5V4L7'
+      + ' 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 '
+      + '5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" /></svg>';
+      this.cardSound = create('div', 'card__sound', svgPlay, null);
+      this.cardSound.addEventListener('click', this.sound.play);
+
+      const svgRotate = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"'
+      + ' width="18px" height="18px"> <path d="M0 0h24v24H0z" fill="none" /> <path d="M12 5V1L7 6l5 5V7c3.31'
+      + ' 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" /></svg>';
+      this.cardRotate = create('div', 'card__rotate', svgRotate, null);
+      this.cardRotate.addEventListener('click', () => { this.rotateCardHandler(); });
+      this.elem.addEventListener('mouseleave', () => { this.rotateCardHandler(); });
+    }
+
+    this.frontSide = this.createCardSize(true);
+    this.backSide = this.createCardSize(false);
+  }
+
+  rotateCardHandler() {
+    this.frontSide.classList.toggle('card__front-rotate');
+    this.backSide.classList.toggle('card__back-rotate');
+  }
+}

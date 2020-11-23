@@ -26,13 +26,18 @@ export default class Header {
 
     // owerlay
     this.overlay = create('div', 'overlay', '', header);
+    this.overlay.addEventListener('click', () => { this.navToggleHandler(); });
 
     // select main menu
     this.menuItemSelect(this.menu.items[0].code);
 
     document.body.prepend(header);
-
+    document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
     return this;
+  }
+
+  catchEvent(eventName, data) {
+    if (eventName.match(/menuChange/)) this.menuItemSelect(data.item.code, data.isFromMenu);
   }
 
   navToggleHandler() {
@@ -71,7 +76,7 @@ export default class Header {
     });
   }
 
-  menuItemSelect(menuItemName) {
+  menuItemSelect(menuItemName, isFromMenu = true) {
     const obj = this.menu.items.find((elem) => elem.code === menuItemName);
     if (obj.isActive) return;
 
@@ -88,13 +93,16 @@ export default class Header {
     obj.elem.classList.add('list__item-selected');
     obj.link.classList.add('item__link-active');
 
-    const customEvt = new CustomEvent('menuItemChange', {
-      detail: {
-        item: obj,
-      },
-    });
+    if (isFromMenu) {
+      const customEvt = new CustomEvent('menuItemChange', {
+        detail: {
+          item: obj,
+          isFromMenu: false,
+        },
+      });
 
-    document.dispatchEvent(customEvt);
+      document.dispatchEvent(customEvt);
+    }
   }
 
   menuInit() {
