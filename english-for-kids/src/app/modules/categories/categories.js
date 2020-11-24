@@ -35,12 +35,9 @@ export default class Categories {
 
     document.body.appendChild(game);
 
-    document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail.item));
-    this.content.addEventListener('click', (evt) => {
-      const elem = evt.target.closest('.card');
-      const obj = this.cards.find((crd) => crd.code === elem.dataset.cardCode);
-      this.cardClickHadle(obj, false);
-    });
+    document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
+    document.addEventListener('cardClickEvent', (evt) => this.catchEvent('cardClickEvent', evt.detail));
+    document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
 
     return this;
   }
@@ -59,10 +56,6 @@ export default class Categories {
     this.content.appendChild(fragmant);
   }
 
-  catchEvent(eventName, data) {
-    if (eventName.match(/menuChange/)) this.cardClickHadle(data, true);
-  }
-
   cardClickHadle(item, isFromMenu) {
     if (isFromMenu || this.isMainPage) {
       const newCat = this[`items${item.name.replace(' ', '')}`];
@@ -77,6 +70,19 @@ export default class Categories {
       });
 
       document.dispatchEvent(customEvt);
+    } else if (!this.isGameStarted && !this.isPlayMode) {
+      item.sound.play();
+      // to-do: SaveStatistic trainClick
     }
+  }
+
+  gameModeChange(isTrainMode) {
+    this.isPlayMode = !isTrainMode;
+  }
+
+  catchEvent(eventName, detail) {
+    if (eventName.match(/menuChange/)) this.cardClickHadle(detail.item, true);
+    if (eventName.match(/cardClickEvent/)) this.cardClickHadle(detail.item, false);
+    if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
   }
 }

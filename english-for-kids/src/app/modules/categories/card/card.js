@@ -1,20 +1,24 @@
 ﻿import './card.sass';
 import create from '../../../utils/create';
 
-export default class Categories {
+export default class Card {
   constructor(info) {
     this.code = info.code ? info.code : info.name.toLowerCase();
     this.name = info.name;
     this.translate = info.translate ? info.translate : null;
     this.img = info.img;
+    this.isFront = true;
+    this.isTrain = true;
 
     if (info.audio) {
       this.sound = {};
       this.sound.elem = create('audio', 'sounds__audio', null, null, ['src', `${info.audio}`]);
-      this.sound.play = () => this.sound.elem.play();
+      this.sound.play = () => (this.isTrain ? this.sound.elem.play() : null);
     }
 
     this.cardRender();
+
+    document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
 
     return this;
   }
@@ -35,6 +39,21 @@ export default class Categories {
 
   cardRender() {
     this.elem = create('div', 'cards__item card', null, null, ['cardCode', this.code]);
+    const mouseLeaveHandler = () => {
+      if (!this.isFront) {
+        this.frontSide.classList.remove('card__front-rotate');
+        this.backSide.classList.remove('card__back-rotate');
+        this.isFront = true;
+        this.elem.removeEventListener('mouseleave', mouseLeaveHandler);
+      }
+    };
+
+    const rotateCardHandler = () => {
+      this.isFront = false;
+      this.frontSide.classList.add('card__front-rotate');
+      this.backSide.classList.add('card__back-rotate');
+      this.elem.addEventListener('mouseleave', mouseLeaveHandler);
+    };
 
     if (this.sound) {
       const svgPlay = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"'
@@ -48,16 +67,35 @@ export default class Categories {
       + ' width="18px" height="18px"> <path d="M0 0h24v24H0z" fill="none" /> <path d="M12 5V1L7 6l5 5V7c3.31'
       + ' 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" /></svg>';
       this.cardRotate = create('div', 'card__rotate', svgRotate, null);
-      this.cardRotate.addEventListener('click', () => { this.rotateCardHandler(); });
-      this.elem.addEventListener('mouseleave', () => { this.rotateCardHandler(); });
+      this.cardRotate.addEventListener('click', rotateCardHandler);
     }
 
     this.frontSide = this.createCardSize(true);
     this.backSide = this.createCardSize(false);
+
+    this.elem.addEventListener('click', () => { this.cardClickHandler(); });
   }
 
-  rotateCardHandler() {
-    this.frontSide.classList.toggle('card__front-rotate');
-    this.backSide.classList.toggle('card__back-rotate');
+  cardClickHandler() {
+    const customEvt = new CustomEvent('cardClickEvent', {
+      detail: {
+        item: this,
+      },
+    });
+
+    document.dispatchEvent(customEvt);
+  }
+
+  catchEvent(eventName, detail) {
+    if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
+  }
+
+  gameModeChange(isTrainMode) {
+    this.isTrain = isTrainMode;
+    if (isTrainMode) {
+      this.elem.classList.remove('card-play-mode');
+    } else {
+      this.elem.classList.add('card-play-mode');
+    }
   }
 }

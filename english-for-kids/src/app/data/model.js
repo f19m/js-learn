@@ -303,9 +303,8 @@ export default {
           {
             name: 'Maraca',
             translate: 'Маракасы',
-            img: './assets/images/main/music/police.jpg',
-            maraca: '',
-            audio: './assets/sounds/main/music/police.mp3',
+            img: './assets/images/main/music/maraca.jpg',
+            audio: './assets/sounds/main/music/maraca.mp3',
           },
           {
             name: 'Microphone',
@@ -432,8 +431,8 @@ export default {
           {
             name: 'Volleyball',
             translate: 'Волейбол',
-            img: './assets/images/main/sport/volley.jpg',
-            audio: './assets/sounds/main/sport/volley.mp3',
+            img: './assets/images/main/sport/volleyball.jpg',
+            audio: './assets/sounds/main/sport/volleyball.mp3',
           },
         ],
       },
