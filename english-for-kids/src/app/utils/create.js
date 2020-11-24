@@ -31,7 +31,6 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
       element.innerHTML = child.toString();
     }
   } catch (e) {
-    console.log(child);
     throw new Error(`${e};    child = ${child};`);
   }
 
@@ -50,7 +49,6 @@ export default function create(el, classNames, child, parent, ...dataAttr) {
           element.dataset[attrName] = attrValue;
         }
       } catch (e) {
-        console.log(dataAttr);
         throw new Error(`${e};    dataAttr = ${dataAttr};  attrName=${attrName}  attrValue=${attrValue};`);
       }
     });
