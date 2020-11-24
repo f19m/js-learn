@@ -1,45 +1,66 @@
 ﻿import './categories.sass';
 import Card from './card/card';
+import Game from './game/game';
 import create from '../../utils/create';
 
 export default class Categories {
   constructor(data) {
     this.isPlayMode = false;
     this.isGameStarted = false;
-    this.isMainPage = true;
 
-    this.itemsMain = {
-      name: 'Main',
-      code: 'main',
-      words: data.pages.categories.map((obj) => ({
-        name: obj.name,
-        img: obj.img,
-        code: obj.name.toLowerCase(),
-      })),
-    };
+    this.pages = [];
 
-    data.pages.categories.forEach((cat) => {
-      this[`items${cat.name.replace(' ', '')}`] = cat;
-      this[`items${cat.name.replace(' ', '')}`].code = cat.name.toLowerCase();
-    });
+    this.initMainPage(data);
+    this.initOtherPages(data);
 
-    const game = create('section', 'game', null, null);
+    this.mainElem = create('section', 'game', null, null, ['isMainPage', 'true']);
 
     this.content = create('div', 'cards__content', null,
       create('div', 'cards__wrapper', null,
         create('div', 'game__cards cards', null,
-          game)));
+          this.mainElem)));
 
     this.cards = [];
-    this.cardsInit(this.itemsMain.words);
+    this.cardsInit(this.pages.find((pg) => pg.id === 0).words);
 
-    document.body.appendChild(game);
+    this.game = new Game(this.mainElem);
+
+    document.body.appendChild(this.mainElem);
 
     document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
     document.addEventListener('cardClickEvent', (evt) => this.catchEvent('cardClickEvent', evt.detail));
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
 
     return this;
+  }
+
+  initMainPage(data) {
+    const item = {
+      id: 0,
+      name: 'Main',
+      code: 'main',
+      isCurrent: true,
+      words: data.pages.categories.map((obj) => ({
+        name: obj.name,
+        img: obj.img,
+        code: obj.name.toLowerCase(),
+      })),
+    };
+    this.pages.push(item);
+  }
+
+  initOtherPages(data) {
+    let idx = 1;
+
+    data.pages.categories.forEach((cat) => {
+      const item = cat;
+      item.id = idx;
+      item.code = cat.name.toLowerCase();
+      item.isCurrent = false;
+
+      this.pages.push(item);
+      idx += 1;
+    });
   }
 
   cardsInit(data) {
@@ -57,10 +78,18 @@ export default class Categories {
   }
 
   cardClickHadle(item, isFromMenu) {
-    if (isFromMenu || this.isMainPage) {
-      const newCat = this[`items${item.name.replace(' ', '')}`];
-      this.isMainPage = newCat.code === 'main';
+    if (isFromMenu || this.pages.find((pg) => pg.id === 0).isCurrent) {
+      // если мы были на главной станице
+      this.mainElem.dataset.isMainPage = 'false';
+      const newCat = this.pages.find((pg) => pg.code === item.code);
+      this.pages.forEach((pg) => {
+        const page = pg;
+        page.isCurrent = false;
+      });
+
+      newCat.isCurrent = true;
       this.cardsInit(newCat.words);
+      this.game.setCards(this.cards);
 
       const customEvt = new CustomEvent('changeMenuSelection', {
         detail: {
@@ -71,13 +100,14 @@ export default class Categories {
 
       document.dispatchEvent(customEvt);
     } else if (!this.isGameStarted && !this.isPlayMode) {
-      item.sound.play();
+      item.play();
       // to-do: SaveStatistic trainClick
     }
   }
 
   gameModeChange(isTrainMode) {
     this.isPlayMode = !isTrainMode;
+    this.game.setCards(this.cards);
   }
 
   catchEvent(eventName, detail) {

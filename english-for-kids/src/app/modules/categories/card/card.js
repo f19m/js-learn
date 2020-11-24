@@ -13,7 +13,7 @@ export default class Card {
     if (info.audio) {
       this.sound = {};
       this.sound.elem = create('audio', 'sounds__audio', null, null, ['src', `${info.audio}`]);
-      this.sound.play = () => (this.isTrain ? this.sound.elem.play() : null);
+      this.sound.play = () => this.sound.elem.play();
     }
 
     this.cardRender();
@@ -21,6 +21,10 @@ export default class Card {
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
 
     return this;
+  }
+
+  play() {
+    if (this.isTrain) this.sound.play();
   }
 
   createCardSize(isFrontSide) {
@@ -61,7 +65,7 @@ export default class Card {
       + ' 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 '
       + '5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" /></svg>';
       this.cardSound = create('div', 'card__sound', svgPlay, null);
-      this.cardSound.addEventListener('click', this.sound.play);
+      this.cardSound.addEventListener('click', () => this.play());
 
       const svgRotate = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"'
       + ' width="18px" height="18px"> <path d="M0 0h24v24H0z" fill="none" /> <path d="M12 5V1L7 6l5 5V7c3.31'
@@ -92,6 +96,7 @@ export default class Card {
 
   gameModeChange(isTrainMode) {
     this.isTrain = isTrainMode;
+    if (!this.sound) return;
     if (isTrainMode) {
       this.elem.classList.remove('card-play-mode');
     } else {

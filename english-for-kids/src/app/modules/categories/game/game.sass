@@ -1,0 +1,56 @@
+@import  '../../../var.sass'
+
+    
+.game__start
+    position: absolute
+    top: 2rem
+    left: 9rem
+    
+.start
+    width: 12rem
+    height: 4rem
+    cursor: pointer
+    background: $happy-color-y
+    border-radius: 2.5rem
+    padding-left: 1rem
+    &__title
+        +title-button
+    &__circle
+        +flex-direction-algin-justify(column, center, center)
+        position: absolute
+        width: 4rem
+        height: 4rem
+        top: 0rem
+        right: 1rem
+        border-radius: 50%
+        background: white
+        transform: rotate(90deg)
+        transition: 0.5s ease
+        &:hover
+            right: 0
+        svg
+            fill: $happy-color-y
+        
+.repeat
+    +flex-direction-algin-justify(column, center, center)
+    position: absolute
+    top: 2rem
+    left: 9rem
+    width: 6rem
+    height: 6rem
+    cursor: pointer
+    background: $happy-color-y
+    border-radius: 50%
+    &__btn
+        +flex-direction-algin-justify(column, center, center)
+        background: white
+        transition: 0.5s ease
+        width: 5rem
+        height: 5rem
+        border-radius: 50%
+        &:hover
+            transform: rotate(355deg)
+        svg
+            fill: $happy-color-y
+            width: 5rem
+            height: 5rem
