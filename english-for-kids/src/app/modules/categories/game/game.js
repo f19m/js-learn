@@ -6,6 +6,7 @@ export default class Card {
   constructor(parentElem) {
     this.isPlayMode = false;
     this.isGameStarted = false;
+
     this.cards = [];
     this.parentElem = parentElem;
     this.result = [];
@@ -132,7 +133,7 @@ export default class Card {
   gameModeChange(isTrainMode) {
     this.isPlayMode = !isTrainMode;
 
-    if (this.isPlayMode) {
+    if (this.isPlayMode && !this.parentElem.dataset.isMainPage === 'true') {
       this.playBtnInit();
     } else {
       this.destroy();
@@ -153,6 +154,8 @@ export default class Card {
       });
 
       document.dispatchEvent(customEvt);
+    } else if (this.isPlayMode && !this.playButton) {
+      this.playBtnInit();
     }
   }
 

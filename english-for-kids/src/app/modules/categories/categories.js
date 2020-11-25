@@ -48,6 +48,7 @@ export default class Categories {
       })),
     };
     this.pages.push(item);
+    this.mainPage = item;
   }
 
   initOtherPages(data) {
@@ -79,9 +80,9 @@ export default class Categories {
   }
 
   cardClickHadle(item, isFromMenu) {
-    if (isFromMenu || this.pages.find((pg) => pg.id === 0).isCurrent) {
+    if (isFromMenu || this.mainPage.isCurrent) {
       // если мы были на главной станице
-      this.mainElem.dataset.isMainPage = 'false';
+      this.mainElem.dataset.isMainPage = this.mainPage.isCurrent ? 'true' : 'false';
       this.isGameStarted = false;
 
       const newCat = this.pages.find((pg) => pg.code === item.code);
