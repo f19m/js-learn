@@ -23,6 +23,12 @@ const repeat = '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 '
 const rightSound = './assets/sounds/game/right.mp3';
 const wrongSound = './assets/sounds/game/wrong.mp3';
 
+const winSound = './assets/sounds/game/win.mp3';
+const looseSound = './assets/sounds/game/loose.mp3';
+
+const winImg = './assets/images/game/win.jpg';
+const looseImg = './assets/images/game/loose.jpg';
+
 export default {
-  arrow, answer, repeat, rightSound, wrongSound,
+  arrow, answer, repeat, rightSound, wrongSound, winSound, looseSound, winImg, looseImg,
 };

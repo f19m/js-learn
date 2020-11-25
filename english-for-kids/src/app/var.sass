@@ -24,6 +24,8 @@ $happy-color-light: #9162ff
 $happy-color-dark-op: #2411502f
 $happy-color-dark-xl-op: #09021a2f
 
+$loose-game-color:#37dbff
+$win-game-color: #e791fe
 
 $body-background: #00cad4
 $body-background-dark: #0b787e
@@ -59,8 +61,11 @@ $shadow-in-the-dark: rgba(0, 0, 0, 0.05)
     +flex-direction($direction) 
     align-items: $align-items
 
+
+$maxWidth: 140rem
+
 =main-block
-    width: 86vw
+    max-width: $maxWidth
     margin: 0 auto
 
 =h2

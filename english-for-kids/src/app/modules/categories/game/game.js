@@ -1,4 +1,5 @@
 ﻿import './game.sass';
+import PopUp from '../../popup/popup';
 import create from '../../../utils/create';
 import gameData from '../../../utils/var';
 
@@ -16,6 +17,8 @@ export default class Card {
     this.sound = {};
     this.sound.right = create('audio', 'sound-right', null, null, ['src', `${gameData.rightSound}`]);
     this.sound.wrong = create('audio', 'sound-right', null, null, ['src', `${gameData.wrongSound}`]);
+    this.sound.win = create('audio', 'sound-right', null, null, ['src', `${gameData.winSound}`]);
+    this.sound.loose = create('audio', 'sound-right', null, null, ['src', `${gameData.looseSound}`]);
 
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
@@ -109,6 +112,9 @@ export default class Card {
   }
 
   startGame() {
+    this.showResult();
+    return;
+
     this.isGameStarted = true;
     this.deleteButton('playButton');
     this.repeatBtnInit();
@@ -174,6 +180,19 @@ export default class Card {
     } else if (this.isPlayMode && !this.playButton) {
       this.playBtnInit();
     }
+  }
+
+  showResult() {
+    const errCnt = this.result.arr.reduce((cur, prev) => (prev + cur.isGuessed ? 0 : 1), 0);
+    const result = {
+      errCnt,
+      isWin: errCnt === 0,
+      winImg: gameData.winImg,
+      looseImg: gameData.looseImg,
+    };
+
+    this.resultWindow = new PopUp(result);
+    this.resultWindow = null;
   }
 
   catchEvent(eventName, detail) {
