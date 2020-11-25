@@ -82,7 +82,6 @@ export default class Categories {
   cardClickHadle(item, isFromMenu) {
     if (isFromMenu || this.mainPage.isCurrent) {
       // если мы были на главной станице
-      this.mainElem.dataset.isMainPage = this.mainPage.isCurrent ? 'true' : 'false';
       this.isGameStarted = false;
 
       const newCat = this.pages.find((pg) => pg.code === item.code);
@@ -93,6 +92,7 @@ export default class Categories {
       });
       newCat.isCurrent = true;
 
+      this.mainElem.dataset.isMainPage = this.mainPage.isCurrent ? 'true' : 'false';
       this.cardsInit(newCat.words);
       // this.game.setCards(this.cards);
 
@@ -108,6 +108,13 @@ export default class Categories {
     } else if (!this.isGameStarted && !this.isPlayMode) {
       item.play();
       // to-do: SaveStatistic trainClick
+    } else if (this.isGameStarted && this.isPlayMode) {
+      const customEvt = new CustomEvent('cardGuesing', {
+        detail: {
+          card: item,
+        },
+      });
+      document.dispatchEvent(customEvt);
     }
   }
 
