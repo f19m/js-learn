@@ -9,7 +9,9 @@ export default class Card {
 
     this.cards = [];
     this.parentElem = parentElem;
-    this.result = [];
+    this.result = {};
+    this.result.elem = create('div', 'game__result result', null, this.parentElem);
+    this.result.arr = [];
 
     this.sound = {};
     this.sound.right = create('audio', 'sound-right', null, null, ['src', `${gameData.rightSound}`]);
@@ -17,6 +19,7 @@ export default class Card {
 
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
+    document.addEventListener('cardGuesing', (evt) => this.catchEvent('cardGuesing', evt.detail));
     return this;
   }
 
@@ -53,12 +56,6 @@ export default class Card {
         }
       }
     }
-
-    // const delElem = this.parentElem.removeChild(btn);
-    // console.log(delElem);
-    // delElem.remove();
-    // console.log(delElem);
-    // this.repeat();
   }
 
   repeat() {
@@ -66,7 +63,15 @@ export default class Card {
   }
 
   addStar(isGuessed) {
-    this.result.push(isGuessed);
+    const starObj = {};
+    starObj.isGuessed = isGuessed;
+    starObj.elem = create('div', 'result__answer', gameData.answer, this.result.elem);
+    if (isGuessed) {
+      starObj.elem.classList.add('result__answer-right');
+    } else {
+      starObj.elem.classList.add('result__answer-wrong');
+    }
+    this.result.arr.push(starObj);
 
     // to-do: добавить инфу по статистике
     const statCard = this.cards[0];
@@ -84,25 +89,28 @@ export default class Card {
 
   cardNotGuessed() {
     this.addStar(false);
+    this.sound.wrong.play();
   }
 
   cardGuessed() {
     this.addStar(true);
     this.cards.shift();
-
+    this.sound.right.play();
     // to-do: доделать завершение игры если length=0
-    this.repeat();
+    setTimeout(() => this.repeat(), 1000);
   }
 
   cardGuesing(card) {
-    this.guesingCard = card;
+    if (card.code === this.cards[0].code) {
+      this.cardGuessed();
+    } else {
+      this.cardNotGuessed();
+    }
   }
 
   startGame() {
     this.isGameStarted = true;
-
     this.deleteButton('playButton');
-
     this.repeatBtnInit();
 
     const customEvt = new CustomEvent('newGameBefore', {
@@ -135,7 +143,8 @@ export default class Card {
       const card = newCards.splice(Math.floor(Math.random() * newCards.length), 1);
       this.cards.push(card[0]);
     }
-    this.repeat();
+
+    setTimeout(() => this.repeat(), 500);
   }
 
   gameModeChange(isTrainMode) {
@@ -170,6 +179,6 @@ export default class Card {
   catchEvent(eventName, detail) {
     if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
     if (eventName.match(/menuChange/)) this.menuItemChange();
-    if (eventName.match(/cardGuesing/)) this.menuItemChange(detail.card);
+    if (eventName.match(/cardGuesing/)) this.cardGuesing(detail.card);
   }
 }

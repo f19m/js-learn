@@ -119,7 +119,7 @@ export default class Categories {
   }
 
   newGameBefore() {
-    this.isGameStarted = false;
+    this.isGameStarted = true;
     this.game.setCards(this.cards);
   }
 

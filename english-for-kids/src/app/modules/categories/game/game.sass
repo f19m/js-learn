@@ -54,3 +54,22 @@
             fill: $happy-color-y
             width: 5rem
             height: 5rem
+
+.result
+    +flex-direction(row-reverse)
+    position: absolute
+    top: 2rem
+    right: 9rem
+    height: 3rem
+    &__answer
+        height: 3rem
+        width: 3rem
+        svg
+            width: 3rem
+            height: 3rem
+        &-right
+            svg
+                fill: $happy-color-y
+        &-wrong
+            svg
+                fill: $happy-color-dark
