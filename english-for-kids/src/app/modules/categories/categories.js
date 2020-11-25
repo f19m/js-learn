@@ -30,6 +30,7 @@ export default class Categories {
     document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
     document.addEventListener('cardClickEvent', (evt) => this.catchEvent('cardClickEvent', evt.detail));
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
+    document.addEventListener('newGameBefore', (evt) => this.catchEvent('newGameBefore', evt.detail));
 
     return this;
   }
@@ -81,20 +82,24 @@ export default class Categories {
     if (isFromMenu || this.pages.find((pg) => pg.id === 0).isCurrent) {
       // если мы были на главной станице
       this.mainElem.dataset.isMainPage = 'false';
+      this.isGameStarted = false;
+
       const newCat = this.pages.find((pg) => pg.code === item.code);
+
       this.pages.forEach((pg) => {
         const page = pg;
         page.isCurrent = false;
       });
-
       newCat.isCurrent = true;
+
       this.cardsInit(newCat.words);
-      this.game.setCards(this.cards);
+      // this.game.setCards(this.cards);
 
       const customEvt = new CustomEvent('changeMenuSelection', {
         detail: {
           item: newCat,
           isFromMenu: false,
+          isTrain: !this.isPlayMode,
         },
       });
 
@@ -105,14 +110,15 @@ export default class Categories {
     }
   }
 
-  gameModeChange(isTrainMode) {
-    this.isPlayMode = !isTrainMode;
+  newGameBefore() {
+    this.isGameStarted = false;
     this.game.setCards(this.cards);
   }
 
   catchEvent(eventName, detail) {
     if (eventName.match(/menuChange/)) this.cardClickHadle(detail.item, true);
     if (eventName.match(/cardClickEvent/)) this.cardClickHadle(detail.item, false);
-    if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
+    if (eventName.match(/gameModeChange/)) this.isPlayMode = !detail.isTrain;
+    if (eventName.match(/newGameBefore/)) this.newGameBefore();
   }
 }

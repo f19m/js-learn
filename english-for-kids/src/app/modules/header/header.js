@@ -33,11 +33,9 @@ export default class Header {
 
     document.body.prepend(header);
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
-    return this;
-  }
+    document.addEventListener('breakGame', (evt) => this.catchEvent('breakGame', evt.detail));
 
-  catchEvent(eventName, data) {
-    if (eventName.match(/menuChange/)) this.menuItemSelect(data.item.code, data.isFromMenu);
+    return this;
   }
 
   navToggleHandler() {
@@ -98,11 +96,14 @@ export default class Header {
         detail: {
           item: obj,
           isFromMenu: false,
+          isTrain: this.switch.isTrain,
         },
       });
 
       document.dispatchEvent(customEvt);
     }
+
+    this.switchGameModeHanlder(this.switch.isTrain);
   }
 
   menuInit() {
@@ -113,7 +114,6 @@ export default class Header {
       menu.classList.toggle('nav__list-visible');
       const overlay = document.querySelector('.overlay');
       overlay.classList.toggle('overlay-active');
-
       // document.removeEventListener('click',burgherClickHandler);
     };
 
@@ -122,11 +122,20 @@ export default class Header {
     });
   }
 
-  switchGameModeHanlder() {
-    this.switch.isTrain = !this.switch.isTrain;
-    this.switch.train.classList.toggle('switch-off');
-    this.switch.play.classList.toggle('switch-off');
-
+  switchGameModeHanlder(isTrain) {
+    if (isTrain === true) {
+      this.switch.isTrain = isTrain;
+      this.switch.train.classList.remove('switch-off');
+      this.switch.play.classList.add('switch-off');
+    } else if (isTrain === false) {
+      this.switch.isTrain = isTrain;
+      this.switch.train.classList.add('switch-off');
+      this.switch.play.classList.remove('switch-off');
+    } else {
+      this.switch.isTrain = !this.switch.isTrain;
+      this.switch.train.classList.toggle('switch-off');
+      this.switch.play.classList.toggle('switch-off');
+    }
     const customEvt = new CustomEvent('gameModeChange', {
       detail: {
         isTrain: this.switch.isTrain,
@@ -149,18 +158,8 @@ export default class Header {
     });
   }
 
-  // initSwitch() {
-  //   this.switch = document.querySelector('.switch__check');
-  //   const train = document.querySelector('.switch__train');
-  //   const play = document.querySelector('.switch__play');
-
-  //   const switchClickHandler = () => {
-  //     train.classList.toggle('switch-off');
-  //     play.classList.toggle('switch-off');
-  //   };
-
-  //   this.switch.addEventListener('change', () => {
-  //     switchClickHandler();
-  //   });
-  // }
+  catchEvent(eventName, data) {
+    if (eventName.match(/menuChange/)) this.menuItemSelect(data.item.code, data.isFromMenu);
+    if (eventName.match(/breakGame/)) this.switchGameModeHanlder(false);
+  }
 }

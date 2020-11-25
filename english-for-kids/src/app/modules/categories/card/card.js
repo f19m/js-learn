@@ -19,7 +19,8 @@ export default class Card {
     this.cardRender();
 
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
-
+    document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuItemChange', evt.detail));
+    // document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
     return this;
   }
 
@@ -90,10 +91,6 @@ export default class Card {
     document.dispatchEvent(customEvt);
   }
 
-  catchEvent(eventName, detail) {
-    if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
-  }
-
   gameModeChange(isTrainMode) {
     this.isTrain = isTrainMode;
     if (!this.sound) return;
@@ -102,5 +99,10 @@ export default class Card {
     } else {
       this.elem.classList.add('card-play-mode');
     }
+  }
+
+  catchEvent(eventName, detail) {
+    if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
+    if (eventName.match(/menuItemChange|changeMenuSelection/)) this.gameModeChange(detail.isTrain);
   }
 }

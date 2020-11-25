@@ -11,25 +11,49 @@ export default class Card {
     this.result = [];
 
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
+    document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
     return this;
   }
 
-  init() {
+  playBtnInit() {
     this.playButton = create('div', 'game__start start',
       [create('div', 'start__circle', svg.arrow, null),
         create('span', 'start__title', 'Start', null),
       ],
-      this.parentElem);
+      this.parentElem, ['code', 'playButton']);
 
     this.playButton.addEventListener('click', () => this.startGame());
   }
 
-  repeatInit() {
+  repeatBtnInit() {
     this.repeatButton = create('div', 'repeat',
       create('div', 'repeat__btn', svg.repeat, null),
-      this.parentElem);
+      this.parentElem, ['code', 'repeatButton']);
 
     this.repeatButton.addEventListener('click', () => this.repeat());
+    this.deleteButton('playButton');
+  }
+
+  deleteButton(btnName) {
+    const elem = this[btnName];
+    if (elem) {
+      this[btnName] = null;
+      elem.remove();
+    } else {
+      for (let i = 0; i < this.parentElem.children.length; i += 1) {
+        const el = this.parentElem.children[i];
+        if (el.dataset.code === btnName) {
+          el.remove();
+          return;
+        }
+      }
+    }
+
+    // const delElem = this.parentElem.removeChild(btn);
+    // console.log(delElem);
+    // delElem.remove();
+    // console.log(delElem);
+    // this.repeat();
   }
 
   repeat() {
@@ -67,25 +91,31 @@ export default class Card {
 
   startGame() {
     this.isGameStarted = true;
-    this.playButton.remove();
-    this.repeatInit();
 
-    const customEvt = new CustomEvent('newGameStarted', {
+    this.deleteButton('playButton');
+
+    this.repeatBtnInit();
+
+    const customEvt = new CustomEvent('newGameBefore', {
       detail: {
         isGameStarted: true,
-        guessCard: this.cards[0],
       },
     });
 
     document.dispatchEvent(customEvt);
-
-    this.repeat();
   }
 
   destroy() {
     // this.cards.length = 0;
-    if (this.playButton) this.playButton.remove();
-    if (this.repeatButton) this.repeatButton.remove();
+    if (this.playButton) {
+      this.deleteButton('playButton');
+      this.playButton = null;
+    }
+
+    if (this.repeatButton) {
+      this.deleteButton('repeatButton');
+      this.repeatButton = null;
+    }
   }
 
   setCards(cards) {
@@ -96,19 +126,38 @@ export default class Card {
       const card = newCards.splice(Math.floor(Math.random() * newCards.length), 1);
       this.cards.push(card[0]);
     }
+    this.repeat();
   }
 
   gameModeChange(isTrainMode) {
     this.isPlayMode = !isTrainMode;
 
     if (this.isPlayMode) {
-      this.init();
+      this.playBtnInit();
     } else {
       this.destroy();
     }
   }
 
+  // если из меню сменили страницу => игру выключаем
+  menuItemChange() {
+    if (this.isGameStarted) {
+      this.isGameStarted = false;
+      this.isPlayMode = false;
+
+      this.destroy();
+      const customEvt = new CustomEvent('breakGame', {
+        detail: {
+          isGameStarted: false,
+        },
+      });
+
+      document.dispatchEvent(customEvt);
+    }
+  }
+
   catchEvent(eventName, detail) {
     if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
+    if (eventName.match(/menuChange/)) this.menuItemChange();
   }
 }
