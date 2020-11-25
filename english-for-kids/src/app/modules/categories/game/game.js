@@ -1,6 +1,6 @@
 ﻿import './game.sass';
 import create from '../../../utils/create';
-import svg from '../../../utils/var';
+import gameData from '../../../utils/var';
 
 export default class Card {
   constructor(parentElem) {
@@ -11,6 +11,10 @@ export default class Card {
     this.parentElem = parentElem;
     this.result = [];
 
+    this.sound = {};
+    this.sound.right = create('audio', 'sound-right', null, null, ['src', `${gameData.rightSound}`]);
+    this.sound.wrong = create('audio', 'sound-right', null, null, ['src', `${gameData.wrongSound}`]);
+
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
     return this;
@@ -18,7 +22,7 @@ export default class Card {
 
   playBtnInit() {
     this.playButton = create('div', 'game__start start',
-      [create('div', 'start__circle', svg.arrow, null),
+      [create('div', 'start__circle', gameData.arrow, null),
         create('span', 'start__title', 'Start', null),
       ],
       this.parentElem, ['code', 'playButton']);
@@ -28,7 +32,7 @@ export default class Card {
 
   repeatBtnInit() {
     this.repeatButton = create('div', 'repeat',
-      create('div', 'repeat__btn', svg.repeat, null),
+      create('div', 'repeat__btn', gameData.repeat, null),
       this.parentElem, ['code', 'repeatButton']);
 
     this.repeatButton.addEventListener('click', () => this.repeat());
@@ -90,6 +94,10 @@ export default class Card {
     this.repeat();
   }
 
+  cardGuesing(card) {
+    this.guesingCard = card;
+  }
+
   startGame() {
     this.isGameStarted = true;
 
@@ -133,7 +141,7 @@ export default class Card {
   gameModeChange(isTrainMode) {
     this.isPlayMode = !isTrainMode;
 
-    if (this.isPlayMode && !this.parentElem.dataset.isMainPage === 'true') {
+    if (this.isPlayMode && !(this.parentElem.dataset.isMainPage === 'true')) {
       this.playBtnInit();
     } else {
       this.destroy();
@@ -162,5 +170,6 @@ export default class Card {
   catchEvent(eventName, detail) {
     if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
     if (eventName.match(/menuChange/)) this.menuItemChange();
+    if (eventName.match(/cardGuesing/)) this.menuItemChange(detail.card);
   }
 }
