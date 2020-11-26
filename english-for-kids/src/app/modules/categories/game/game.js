@@ -203,7 +203,7 @@ export default class Card {
   }
 
   showResult() {
-    const errCnt = this.result.arr.reduce((accum, cur) => (accum + cur.isGuessed), 0);
+    const errCnt = this.result.arr.reduce((accum, cur) => (accum + !cur.isGuessed), 0);
     const result = {
       errCnt,
       isWin: errCnt === 0,
