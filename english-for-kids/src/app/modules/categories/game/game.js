@@ -11,7 +11,7 @@ export default class Card {
     this.cards = [];
     this.parentElem = parentElem;
     this.result = {};
-    this.result.elem = create('div', 'game__result result', null, this.parentElem);
+    this.result.elem = create('div', 'game__result result result-hide', null, this.parentElem);
     this.result.arr = [];
 
     this.sound = {};
@@ -74,8 +74,11 @@ export default class Card {
     starObj.isGuessed = isGuessed;
 
     const childCount = this.result.elem.children.length;
-    if (childCount >= 16) {
-      this.result.elem.children[0].remove();
+    const maxChildCount = (this.parentElem.clientWidth <= 500) ? 10 : 16;
+    if (childCount >= maxChildCount) {
+      while (this.result.elem.children.length >= maxChildCount) {
+        this.result.elem.children[0].remove();
+      }
     }
     starObj.elem = create('div', 'result__answer', gameData.answer, this.result.elem);
     if (isGuessed) {
@@ -99,7 +102,7 @@ export default class Card {
     document.dispatchEvent(customEvt);
   }
 
-  cardNotGuessed(card) {
+  cardNotGuessed(/* card */) {
     this.addStar(false);
     this.sound.wrong.play();
   }
@@ -128,6 +131,7 @@ export default class Card {
     this.isGameStarted = true;
     this.deleteButton('playButton');
     this.repeatBtnInit();
+    this.result.elem.classList.remove('result-hide');
 
     const customEvt = new CustomEvent('newGameBefore', {
       detail: {
@@ -149,6 +153,7 @@ export default class Card {
       this.deleteButton('repeatButton');
       this.repeatButton = null;
     }
+    this.result.elem.classList.add('result-hide');
 
     this.result.elem.innerHTML = '';
     this.result.arr.length = 0;

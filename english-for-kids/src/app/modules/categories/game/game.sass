@@ -4,6 +4,11 @@
 .game__start
     position: absolute
     top: 2rem
+    @media screen and ( max-width: 570px )
+        position: fixed
+        z-index: 10
+        top: 8rem
+        left: 0
     
     
 .start
@@ -41,6 +46,12 @@
     cursor: pointer
     background: $happy-color-y
     border-radius: 50%
+    @media screen and ( max-width: 570px )
+        @media screen and ( max-width: 570px )
+            position: fixed
+            z-index: 10
+            top: 8rem
+            left: 0
     &__btn
         +flex-direction-algin-justify(column, center, center)
         background: white
@@ -61,6 +72,14 @@
     top: 2rem
     right: 0rem
     height: 3rem
+    @media screen and ( max-width: 570px )
+        position: fixed
+        flex-direction: column
+        z-index: 10
+        left: calc(100vw - 4rem)
+        top: 12.6rem
+        box-shadow: 1px 1px 8px #ffffff75
+        border-radius: 2rem
     &__answer
         height: 3rem
         width: 3rem
@@ -73,6 +92,8 @@
         &-wrong
             svg
                 fill: $happy-color-dark
+    &-hide
+        display: none
 
 
         

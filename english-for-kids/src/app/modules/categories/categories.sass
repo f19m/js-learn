@@ -7,6 +7,8 @@ $card-transition-time: 0.5s
     +flex
     position: relative
     padding-top: 5rem
+    @media screen and ( max-width: 570px )
+        padding-top: 2rem
     &__cards
         +flex
         width: inherit
@@ -18,5 +20,6 @@ $card-transition-time: 0.5s
         //padding: 2rem
         padding-top: 2rem
     &__content
-        +flex-algin-justify(center, space-between)
+        +flex-algin-justify(center, center)
         flex-wrap: wrap
+        transition: 0.5s ease

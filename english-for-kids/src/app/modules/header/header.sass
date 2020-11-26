@@ -11,18 +11,30 @@ $line-toggle-width: 3rem
     +main-block
     height: 10rem
     padding-top: 4rem
+    @media screen and ( max-width: 570px )
+        +flex-direction-algin-justify (column, baseline, center)   
+        height: 12rem
+        padding-top: 0rem
     &__title
         +h2
         color: $color-light-s
         text-shadow: 0 0.4rem 0.4rem $happy-color-dark
         cursor: pointer
+        @media screen and ( max-width: 570px )
+            margin: auto
+            margin-top: -2rem
+        @media screen and ( max-width: 400px )
+            font-weight: bold
+            font-size: 2.5rem
+             margin-top: -1rem
         
 
 
 .nav
     &__toggle
-        left: $line-toggle-width/2
-
+        left: 2rem
+        @media screen and ( max-width: 570px )
+            top: 2rem
     &__list 
         +flex-direction-algin-justify(column,center,space-between)
         position: absolute
@@ -79,7 +91,7 @@ $line-toggle-width: 3rem
         background-color: $happy-color-thwo
     &__lines
         top: 50%
-        left: 50%
+        left: 0
         transform: translate(-50%, -50%)
     &__lines:before
         content: ''
@@ -88,7 +100,10 @@ $line-toggle-width: 3rem
         content: ''
         top: 1.2rem
     &-open
-        transform: translate(10rem, 0)
+        left: calc( ((100vw - 140rem)/-2) + 26rem)
+        @media screen and ( max-width: 1400px )
+            left: 26rem
+        //@media screen and ( max-width: 570px )       
     &-open &__lines
         background-color: transparent
     &-open &__lines::before
@@ -117,6 +132,8 @@ $line-toggle-width: 3rem
     width: 12rem
     height: 4rem
     border-radius: 2.5rem
+    @media screen and ( max-width: 570px )
+        margin-left: auto
     &__check
         visibility: hidden
     &__label

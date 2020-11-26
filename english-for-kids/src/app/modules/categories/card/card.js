@@ -21,7 +21,8 @@ export default class Card {
 
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuItemChange', evt.detail));
-    // document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
+    // document.addEventListener('changeMenuSelection', (evt) =>
+    // this.catchEvent('menuChange', evt.detail));
     return this;
   }
 
