@@ -80,6 +80,7 @@ export default class Categories {
   }
 
   cardClickHadle(item, isFromMenu) {
+    if (item.code === 'statistic') return;
     if (isFromMenu || this.mainPage.isCurrent) {
       // если мы были на главной станице
       this.isGameStarted = false;
