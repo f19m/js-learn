@@ -107,9 +107,12 @@ export default class Categories {
 
       document.dispatchEvent(customEvt);
     } else if (!this.isGameStarted && !this.isPlayMode) {
-      // item.play();
-      console.log('aa');
-      // to-do: SaveStatistic trainClick
+      const customEvt = new CustomEvent('updateStat', {
+        detail: {
+          card: item.getStatObj(false),
+        },
+      });
+      document.dispatchEvent(customEvt);
     } else if (this.isGameStarted && this.isPlayMode && item.isActive) {
       const customEvt = new CustomEvent('cardGuesing', {
         detail: {

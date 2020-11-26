@@ -31,7 +31,7 @@ export default class Main {
     this.categories = new Categories(this.appModel);
 
     // статистика
-    this.stat = new Statistic();
+    this.stat = new Statistic(this.appModel);
 
     // document.body.prepend(this.main);
   }

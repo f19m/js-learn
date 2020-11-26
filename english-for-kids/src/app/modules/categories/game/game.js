@@ -91,13 +91,9 @@ export default class Card {
     this.result.arr.push(starObj);
 
     // to-do: добавить инфу по статистике
-    const statCard = this.cards[0];
-    statCard.isTrain = false;
-    statCard.isGuessed = isGuessed;
-
     const customEvt = new CustomEvent('updateStat', {
       detail: {
-        card: statCard,
+        card: this.cards[0].getStatObj(false, isGuessed),
       },
     });
 

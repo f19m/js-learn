@@ -113,6 +113,18 @@ export default class Card {
     }
   }
 
+  getStatObj(isTrain, isGuessed) {
+    const res = {};
+
+    res.name = this.name;
+    res.code = this.code;
+    res.translate = this.translate;
+    if (isTrain !== undefined) res.isTrain = isTrain;
+    if (isGuessed !== undefined) res.isGuessed = isGuessed;
+
+    return res;
+  }
+
   catchEvent(eventName, detail) {
     if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
     if (eventName.match(/menuItemChange|changeMenuSelection/)) this.gameModeChange(detail.isTrain);
