@@ -124,10 +124,18 @@ export default class Categories {
     this.game.setCards(this.cards);
   }
 
+  gameModeChange(isTrain) {
+    this.isPlayMode = !isTrain;
+    this.isGameStarted = false;
+    this.cards.forEach((crd) => {
+      crd.setActive(true);
+    });
+  }
+
   catchEvent(eventName, detail) {
     if (eventName.match(/menuChange/)) this.cardClickHadle(detail.item, true);
     if (eventName.match(/cardClickEvent/)) this.cardClickHadle(detail.item, false);
-    if (eventName.match(/gameModeChange/)) this.isPlayMode = !detail.isTrain;
+    if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
     if (eventName.match(/newGameBefore/)) this.newGameBefore();
   }
 }

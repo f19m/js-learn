@@ -4,11 +4,13 @@
 .game__start
     position: absolute
     top: 2rem
+    @media screen and ( max-width: 1400px )
+        left: 2rem
     @media screen and ( max-width: 570px )
         position: fixed
         z-index: 10
         top: 8rem
-        left: 0
+        left: 1rem
     
     
 .start
@@ -46,12 +48,13 @@
     cursor: pointer
     background: $happy-color-y
     border-radius: 50%
+    @media screen and ( max-width: 1400px )
+        left: 2rem
     @media screen and ( max-width: 570px )
-        @media screen and ( max-width: 570px )
-            position: fixed
-            z-index: 10
-            top: 8rem
-            left: 0
+        position: fixed
+        z-index: 10
+        top: 8rem
+         left: 1rem
     &__btn
         +flex-direction-algin-justify(column, center, center)
         background: white
