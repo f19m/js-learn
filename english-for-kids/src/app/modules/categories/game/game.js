@@ -62,12 +62,21 @@ export default class Card {
   }
 
   repeat() {
-    if (this.cards.length) this.cards[0].sound.play();
+    if (this.cards.length) {
+      this.cards[0].sound.play();
+    } else {
+      this.showResult();
+    }
   }
 
   addStar(isGuessed) {
     const starObj = {};
     starObj.isGuessed = isGuessed;
+
+    const childCount = this.result.elem.children.length;
+    if (childCount >= 16) {
+      this.result.elem.children[0].remove();
+    }
     starObj.elem = create('div', 'result__answer', gameData.answer, this.result.elem);
     if (isGuessed) {
       starObj.elem.classList.add('result__answer-right');
@@ -90,30 +99,31 @@ export default class Card {
     document.dispatchEvent(customEvt);
   }
 
-  cardNotGuessed() {
+  cardNotGuessed(card) {
     this.addStar(false);
     this.sound.wrong.play();
   }
 
-  cardGuessed() {
+  cardGuessed(card) {
     this.addStar(true);
     this.cards.shift();
     this.sound.right.play();
     // to-do: доделать завершение игры если length=0
+    card.setActive(false);
     setTimeout(() => this.repeat(), 1000);
   }
 
   cardGuesing(card) {
     if (card.code === this.cards[0].code) {
-      this.cardGuessed();
+      this.cardGuessed(card);
     } else {
-      this.cardNotGuessed();
+      this.cardNotGuessed(card);
     }
   }
 
   startGame() {
-    this.showResult();
-    return;
+    // this.showResult();
+    // return;
 
     this.isGameStarted = true;
     this.deleteButton('playButton');
@@ -139,6 +149,9 @@ export default class Card {
       this.deleteButton('repeatButton');
       this.repeatButton = null;
     }
+
+    this.result.elem.innerHTML = '';
+    this.result.arr.length = 0;
   }
 
   setCards(cards) {
@@ -183,7 +196,7 @@ export default class Card {
   }
 
   showResult() {
-    const errCnt = this.result.arr.reduce((cur, prev) => (prev + cur.isGuessed ? 0 : 1), 0);
+    const errCnt = this.result.arr.reduce((accum, cur) => (accum + cur.isGuessed), 0);
     const result = {
       errCnt,
       isWin: errCnt === 0,
@@ -193,6 +206,20 @@ export default class Card {
 
     this.resultWindow = new PopUp(result);
     this.resultWindow = null;
+
+    if (result.isWin) {
+      this.sound.win.play();
+    } else {
+      this.sound.loose.play();
+    }
+
+    const customEvt = new CustomEvent('gameOver', {
+      detail: {
+        isGameStarted: false,
+      },
+    });
+
+    setTimeout(() => document.dispatchEvent(customEvt), 6000);
   }
 
   catchEvent(eventName, detail) {

@@ -6,10 +6,11 @@ export default class Header {
     const header = create('header', 'header', null, null);
 
     const nav = create('nav', 'nav header__nav', null, header);
-    // menu
+
     // togle
     this.toggle = create('div', 'nav__toggle toggle', '<span class="toggle__lines"></span>', nav);
     this.toggle.addEventListener('click', () => this.navToggleHandler());
+
     // list
     this.menu = {};
     this.menu.elem = create('ul', 'nav__list', null, nav);
@@ -17,7 +18,8 @@ export default class Header {
     this.navListInit(data, this.menu.elem);
 
     // title
-    create('h1', 'header__title', 'English For Kids', header);
+    const logo = create('h1', 'header__title', 'English For Kids', header);
+    logo.addEventListener('click', () => this.showMainPage());
 
     // SwitchButton
     const switchGame = create('div', 'header__switch switch', null, header);
@@ -34,8 +36,13 @@ export default class Header {
     document.body.prepend(header);
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
     document.addEventListener('breakGame', (evt) => this.catchEvent('breakGame', evt.detail));
+    document.addEventListener('gameOver', (evt) => this.catchEvent('gameOver', evt.detail));
 
     return this;
+  }
+
+  showMainPage() {
+    this.menuItemSelect(this.main.code, true);
   }
 
   navToggleHandler() {
@@ -58,7 +65,8 @@ export default class Header {
       return item;
     };
 
-    this.menu.items.push(addItem('Main'));
+    this.main = addItem('Main');
+    this.menu.items.push(this.main);
 
     data.pages.categories.forEach((cat) => {
       this.menu.items.push(addItem(cat.name));
@@ -127,10 +135,12 @@ export default class Header {
       this.switch.isTrain = isTrain;
       this.switch.train.classList.remove('switch-off');
       this.switch.play.classList.add('switch-off');
+      this.switch.check.checked = !isTrain;
     } else if (isTrain === false) {
       this.switch.isTrain = isTrain;
       this.switch.train.classList.add('switch-off');
       this.switch.play.classList.remove('switch-off');
+      this.switch.check.checked = !isTrain;
     } else {
       this.switch.isTrain = !this.switch.isTrain;
       this.switch.train.classList.toggle('switch-off');
@@ -160,6 +170,10 @@ export default class Header {
 
   catchEvent(eventName, data) {
     if (eventName.match(/menuChange/)) this.menuItemSelect(data.item.code, data.isFromMenu);
-    if (eventName.match(/breakGame/)) this.switchGameModeHanlder(false);
+    if (eventName.match(/breakGame/)) this.switchGameModeHanlder(true);
+    if (eventName.match(/gameOver/)) {
+      this.showMainPage();
+      this.switchGameModeHanlder(true);
+    }
   }
 }

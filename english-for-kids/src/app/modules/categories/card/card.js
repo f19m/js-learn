@@ -9,6 +9,7 @@ export default class Card {
     this.img = info.img;
     this.isFront = true;
     this.isTrain = true;
+    this.isActive = true;
 
     if (info.audio) {
       this.sound = {};
@@ -40,6 +41,13 @@ export default class Card {
       this.elem);
 
     return cardFront;
+  }
+
+  setActive(isActive) {
+    this.isActive = isActive;
+
+    if (isActive) this.elem.classList.remove('card-inactive');
+    else this.elem.classList.add('card-inactive');
   }
 
   cardRender() {

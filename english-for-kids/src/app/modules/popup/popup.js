@@ -12,17 +12,18 @@ export default class Popup {
       childArray.push(create('h1', 'result-message__title', `Congratulations!`, null));
       childArray.push(create('h2', 'result-message__subtitle', `You are awesome!`, null));
     } else {
-      childArray.push(create('h1', 'result-message__title', `You made ${result.errCnt} ${result.errCnt === 1 ? 'mistake' : 'mistakes'}`, null));
+      childArray.push(create('h1', 'result-message__title', `Game Over!`, null));
+      childArray.push(create('h2', 'result-message__subtitle', `You made ${result.errCnt} ${result.errCnt === 1 ? 'mistake' : 'mistakes'}`, null));
     }
 
     this.popup = create('div', `result-message ${result.isWin ? 'result-message_win' : 'result-message_loose'}`, childArray, document.body);
 
     document.body.prepend(this.popup);
     setTimeout(() => this.popupShow(), 1);
-    // setTimeout(() => {
-    //   this.popopupWrapper.classList.add('hidding');
-    // }, 4500);
-    //   setTimeout(() => this.popupClose(), 6000);
+    setTimeout(() => {
+      this.popup.classList.add('result-message-hide');
+    }, 4000);
+    setTimeout(() => this.popupClose(), 6000);
 
     return this;
   }

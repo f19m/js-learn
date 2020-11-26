@@ -9,14 +9,11 @@
     left: 0
     color: white
     z-index: 200
-    transform: scale(0.1)
-    transition: all 0.9s
     &_win
          background-color: $win-game-color
     &_loose
         background-color: $loose-game-color
     &__img
-       
         height: 32rem
         width: 32rem
         background:
@@ -31,17 +28,29 @@
         font-family: 'Satisfy', cursive
 
 @keyframes show
-    0%  
+    from
         transform: scale(0.1)
-        border-radius: 50%
-    90%
-        transform: scale(0.9)
-        border-radius: 50%
-    100%
+    to
         transform: scale(1)
-        border-radius: 0
+
+@keyframes hide
+    from
+        transform: scale(1)
+    to
+        transform: scale(0.1)
+
 
 
 .result-message-show
-    animation-duration: 3s
-    animation-name: show
+    .result-message__img,  
+    .result-message__title, 
+    .result-message__subtitle
+        animation-duration: 2s
+        animation-name: show
+
+.result-message-hide
+    .result-message__img,  
+    .result-message__title, 
+    .result-message__subtitle
+        animation-duration: 2s
+        animation-name: hide

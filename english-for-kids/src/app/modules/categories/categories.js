@@ -108,7 +108,7 @@ export default class Categories {
     } else if (!this.isGameStarted && !this.isPlayMode) {
       item.play();
       // to-do: SaveStatistic trainClick
-    } else if (this.isGameStarted && this.isPlayMode) {
+    } else if (this.isGameStarted && this.isPlayMode && item.isActive) {
       const customEvt = new CustomEvent('cardGuesing', {
         detail: {
           card: item,
