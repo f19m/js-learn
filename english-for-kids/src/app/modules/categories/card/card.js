@@ -27,7 +27,7 @@ export default class Card {
   }
 
   play() {
-    if (this.isTrain) this.sound.play();
+    if (this.isTrain && this.sound && this.isFront) this.sound.play();
   }
 
   createCardSize(isFrontSide) {
@@ -87,7 +87,10 @@ export default class Card {
     this.frontSide = this.createCardSize(true);
     this.backSide = this.createCardSize(false);
 
-    this.elem.addEventListener('click', () => { this.cardClickHandler(); });
+    this.elem.addEventListener('click', () => {
+      this.play();
+      this.cardClickHandler();
+    });
   }
 
   cardClickHandler() {

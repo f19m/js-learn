@@ -91,14 +91,15 @@ $line-toggle-width: 3rem
         height: 0.3rem
         background-color: $happy-color-y
         transition: 0.4s ease-in-out
-    &__lines:hover, &__lines:hover::before, &__lines:hover::after
-        background-color: $happy-color-y-light
-        box-shadow: 0px 0px 21px 0px $happy-color-y
+    &:hover
+        .toggle__lines, .toggle__lines::before, .toggle__lines::after
+            background-color: $happy-color-y-light
+            box-shadow: 0px 0px 21px 0px $happy-color-y
     &__lines
         background-color: $happy-color-thwo
+        border-radius: 0.4rem
     &__lines
         top: 50%
-        transform: translate(-50%, -50%)
         @media screen and ( max-width: 1400px )
             left: 2rem
         @media screen and ( max-width: 570px )
@@ -114,7 +115,7 @@ $line-toggle-width: 3rem
         @media screen and ( max-width: 1400px )
             left: 26rem
         //@media screen and ( max-width: 570px )       
-    &-open &__lines
+    &-open &__lines, &-open:hover &__lines
         background-color: transparent
     &-open &__lines::before
         top: 0
