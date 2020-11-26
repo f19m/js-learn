@@ -23,7 +23,7 @@ export default class Categories {
     this.cards = [];
     this.cardsInit(this.pages.find((pg) => pg.id === 0).words);
 
-    this.game = new Game(this.mainElem);
+    this.game = new Game(this.mainElem, data.gameData);
 
     document.body.appendChild(this.mainElem);
 

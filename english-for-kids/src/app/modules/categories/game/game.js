@@ -4,9 +4,11 @@ import create from '../../../utils/create';
 import gameData from '../../../utils/var';
 
 export default class Card {
-  constructor(parentElem) {
+  constructor(parentElem, data) {
     this.isPlayMode = false;
     this.isGameStarted = false;
+
+    this.data = data;
 
     this.cards = [];
     this.parentElem = parentElem;
@@ -15,10 +17,10 @@ export default class Card {
     this.result.arr = [];
 
     this.sound = {};
-    this.sound.right = create('audio', 'sound-right', null, null, ['src', `${gameData.rightSound}`]);
-    this.sound.wrong = create('audio', 'sound-right', null, null, ['src', `${gameData.wrongSound}`]);
-    this.sound.win = create('audio', 'sound-right', null, null, ['src', `${gameData.winSound}`]);
-    this.sound.loose = create('audio', 'sound-right', null, null, ['src', `${gameData.looseSound}`]);
+    this.sound.right = create('audio', 'sound-right', null, null, ['src', `${this.data.rightSound}`]);
+    this.sound.wrong = create('audio', 'sound-right', null, null, ['src', `${this.data.wrongSound}`]);
+    this.sound.win = create('audio', 'sound-right', null, null, ['src', `${this.data.winSound}`]);
+    this.sound.loose = create('audio', 'sound-right', null, null, ['src', `${this.data.looseSound}`]);
 
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
@@ -205,8 +207,8 @@ export default class Card {
     const result = {
       errCnt,
       isWin: errCnt === 0,
-      winImg: gameData.winImg,
-      looseImg: gameData.looseImg,
+      winImg: this.data.winImg,
+      looseImg: this.data.looseImg,
     };
 
     this.resultWindow = new PopUp(result);

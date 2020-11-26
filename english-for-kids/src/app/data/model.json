@@ -359,5 +359,13 @@
   "statistic": {
       "name": "Statistic",
       "data": []
+  },
+  "gameData": {
+    "rightSound" :"./assets/sounds/game/right.mp3",
+    "wrongSound" : "./assets/sounds/game/wrong.mp3",
+    "winSound" : "./assets/sounds/game/win.mp3",
+    "looseSound" : "./assets/sounds/game/loose.mp3",
+    "winImg" : "./assets/images/result/win.jpg",
+    "looseImg" : "./assets/images/result/loose.jpg"
   }
 }

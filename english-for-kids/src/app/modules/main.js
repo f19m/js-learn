@@ -1,6 +1,5 @@
 import './main.sass';
 
-import appModel from '../data/model';
 import Headers from './header/header';
 import Categories from './categories/categories';
 import Statistic from './statistic/statistic';
