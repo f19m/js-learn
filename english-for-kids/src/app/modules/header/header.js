@@ -49,6 +49,7 @@ export default class Header {
     this.toggle.classList.toggle('toggle-open');
     this.menu.elem.classList.toggle('nav__list-visible');
     this.overlay.classList.toggle('overlay-active');
+    document.body.classList.toggle('scroll-off');
   }
 
   navListInit(data, parent) {
