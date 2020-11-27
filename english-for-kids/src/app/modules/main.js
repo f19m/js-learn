@@ -1,5 +1,3 @@
-import './main.sass';
-
 import Headers from './header/header';
 import Categories from './categories/categories';
 import Statistic from './statistic/statistic';

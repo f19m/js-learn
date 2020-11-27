@@ -1,6 +1,4 @@
-﻿import './statistic.sass';
-
-import utils from '../../utils/utils';
+﻿import utils from '../../utils/utils';
 
 export default class Statistic {
   constructor(data) {
@@ -14,6 +12,7 @@ export default class Statistic {
       const headerData = JSON.parse(req.response);
       this.headerInit(headerData);
       this.generageLayout();
+      document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
     };
     req.send();
 
@@ -56,7 +55,7 @@ export default class Statistic {
   generageLayout() {
     this.cells = [];
 
-    this.mainElem = utils.create('section', 'stat', null, null);
+    this.mainElem = utils.create('section', 'stat section-inactive', null, null);
 
     const header = utils.create('div', 'stat__header', null, this.mainElem);
     this.repeatBtn = utils.create('div', 'stat__repeat stat__btn', 'Repeat difficult words', header);
@@ -74,16 +73,17 @@ export default class Statistic {
 
     const firstRow = utils.create('tr', 'table__tr', null, this.table);
     this.header.forEach((headerObj) => {
-      if (headerObj.isVisible) {
+      const tmpObj = headerObj;
+      if (tmpObj.isVisible) {
         const header = utils.create('th', 'table__th',
           utils.create('div', 'th-wrapper',
             [
-              utils.create('span', null, `${headerObj.name}`),
+              utils.create('span', null, `${tmpObj.name}`),
               utils.create('i', 'material-icons table__order', 'arrow_drop_up'),
             ]),
-          firstRow, ['colcode', headerObj.code]);
+          firstRow, ['colcode', tmpObj.code]);
         header.addEventListener('click', (evt) => { this.sortHandler(evt); });
-        headerObj.elem = header;
+        tmpObj.elem = header;
       }
     });
 
@@ -140,5 +140,17 @@ export default class Statistic {
     headerObj.elem.dataset.order = headerObj.isUpOrder ? 'up' : 'down';
     this.data.sort((a, b) => comparator(a, b, headerObj));
     this.updateTableCells();
+  }
+
+  menuChange(item) {
+    if (item.code === 'statistic') {
+      this.mainElem.classList.remove('section-inactive');
+      return;
+    }
+    this.mainElem.classList.add('section-inactive');
+  }
+
+  catchEvent(eventName, detail) {
+    if (eventName.match(/menuChange/)) this.menuChange(detail.item);
   }
 }

@@ -1,5 +1,4 @@
-﻿import './header.sass';
-import create from '../../utils/create';
+﻿import create from '../../utils/create';
 
 export default class Header {
   constructor(data) {

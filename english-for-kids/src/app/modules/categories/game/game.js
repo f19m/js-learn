@@ -1,5 +1,4 @@
-﻿import './game.sass';
-import PopUp from '../../popup/popup';
+﻿import PopUp from '../../popup/popup';
 import create from '../../../utils/create';
 import gameData from '../../../utils/var';
 

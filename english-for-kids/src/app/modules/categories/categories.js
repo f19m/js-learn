@@ -1,5 +1,4 @@
-﻿import './categories.sass';
-import Card from './card/card';
+﻿import Card from './card/card';
 import Game from './game/game';
 import create from '../../utils/create';
 
@@ -13,7 +12,7 @@ export default class Categories {
     this.initMainPage(data);
     this.initOtherPages(data);
 
-    this.mainElem = create('section', 'game game-inactive', null, null, ['isMainPage', 'true']);
+    this.mainElem = create('section', 'game', null, null, ['isMainPage', 'true']);
 
     this.content = create('div', 'cards__content', null,
       create('div', 'cards__wrapper', null,
@@ -80,7 +79,11 @@ export default class Categories {
   }
 
   cardClickHadle(item, isFromMenu) {
-    if (item.code === 'statistic') return;
+    if (item.code === 'statistic') {
+      this.mainElem.classList.add('section-inactive');
+      return;
+    }
+    this.mainElem.classList.remove('section-inactive');
     if (isFromMenu || this.mainPage.isCurrent) {
       // если мы были на главной станице
       this.isGameStarted = false;

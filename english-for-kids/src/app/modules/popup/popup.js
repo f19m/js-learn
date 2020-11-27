@@ -1,4 +1,3 @@
-import './popup.sass';
 import create from '../../utils/create';
 
 export default class Popup {
