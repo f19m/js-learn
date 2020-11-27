@@ -1,1 +1,55 @@
-$var: #F1CDB3
+@import '../../var.sass'
+
+
+
+.stat
+    +main-block
+    +flex-direction-algin-justify(column, space-between, inherit)
+    &__header
+        +flex-direction-algin-justify(row, center, end)
+    &__table
+        width: 100%
+
+
+.table
+    border-spacing: 0
+    color: $color-light-xl
+    &__caption
+        +h3
+        color: $color-light-xl
+        text-shadow: 0 0.4rem 0.4rem $happy-color-dark
+    &__tr
+        background-color: #FFBC29 
+    &__tr:nth-child(2n + 1)
+        background-color: #7033FF 
+    &__th
+        padding-left: 2rem
+        text-align: start
+        cursor: pointer
+        &:hover
+            text-shadow: 0 0.4rem 0.4rem $happy-color-dark
+    &__td, &__th
+        height: 4rem
+        font-size: 2rem
+        font-style: normal
+        text-align: center
+        vertical-align: middle
+    &__td:first-child, &__th:first-child
+        padding-left: 2rem
+    &__order
+        transition: 0.4s ease-in-out
+        display: none
+
+
+.th-wrapper
+    +flex-direction-algin-justify(row, center, center)    
+.order-wrapper
+    +flex-direction-algin-justify(column, center, center)    
+
+.table__th[data-order="up"], .table__th[data-order="down"]
+    .table__order
+        display: block
+
+.table__th[data-order="down"]
+    .table__order
+        transform: rotate(180deg)

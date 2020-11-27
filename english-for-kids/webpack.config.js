@@ -36,7 +36,7 @@ module.exports = {
           { from: path.join(SRC_DIRECTORY, 'app/bootstrap.min.css'), to: path.join(ROOT_DIRECTORY, 'dst') },
           { from: path.join(SRC_DIRECTORY, 'app/reset.css'), to: path.join(ROOT_DIRECTORY, 'dst') },
           { from: path.join(SRC_DIRECTORY, 'assets'), to: path.join(ROOT_DIRECTORY, 'dst/assets') },
-          { from: path.join(SRC_DIRECTORY, 'app/data/model.json'), to: path.join(ROOT_DIRECTORY, 'dst/data') },
+          { from: path.join(SRC_DIRECTORY, 'app/data'), to: path.join(ROOT_DIRECTORY, 'dst/data') },
         ],
       },
     ),

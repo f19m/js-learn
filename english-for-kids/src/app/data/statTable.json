@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Category",
+        "code": "category",
+        "isVisible": "true"
+    },
+
+    {
+        "name": "Word",
+        "code": "word",
+        "isVisible": "true"
+    },
+    {
+        "name": "Code",
+        "code": "Code",
+        "isVisible": "false"
+    },
+    {
+        "name": "Translation",
+        "code": "translate",
+        "isVisible": "true"
+    },
+
+    {
+        "name": "Clicks",
+        "code": "train",
+        "isVisible": "true"
+    },
+    {
+        "name": "Guessed",
+        "code": "guessed",
+        "isVisible": "true"
+    },
+    {
+        "name": "Mistake",
+        "code": "unGuessed",
+        "isVisible": "true"
+    },
+    {
+        "name": "% Guessed",
+        "code": "prc",
+        "isVisible": "true"
+    }
+]

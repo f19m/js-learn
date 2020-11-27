@@ -13,7 +13,7 @@ export default class Categories {
     this.initMainPage(data);
     this.initOtherPages(data);
 
-    this.mainElem = create('section', 'game', null, null, ['isMainPage', 'true']);
+    this.mainElem = create('section', 'game game-inactive', null, null, ['isMainPage', 'true']);
 
     this.content = create('div', 'cards__content', null,
       create('div', 'cards__wrapper', null,
