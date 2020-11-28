@@ -165,6 +165,6 @@ export default class Categories {
     if (eventName.match(/cardClickEvent/)) this.cardClickHadle(detail.item, false);
     if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
     if (eventName.match(/newGameBefore/)) this.newGameBefore();
-    if (eventName.match(/playHardMode/)) this.cardClickHadle({ code: 'hardmode', arr: detail.arr });
+    if (eventName.match(/playHardMode/)) this.cardClickHadle({ code: 'hardmode', arr: detail.arr }, true);
   }
 }

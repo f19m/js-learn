@@ -83,7 +83,14 @@ export default class Header {
   }
 
   menuItemSelect(menuItemName, isFromMenu = true) {
-    if (!menuItemName) return;
+    if (!menuItemName) {
+      this.menu.items.forEach((menuObj) => {
+        menuObj.setActive(false);
+        menuObj.elem.classList.remove('list__item-selected');
+        menuObj.link.classList.remove('item__link-active');
+      });
+      return;
+    }
     const obj = this.menu.items.find((elem) => elem.code === menuItemName);
     if (obj.isActive) return;
 
