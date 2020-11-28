@@ -1,10 +1,25 @@
 ﻿import utils from '../../utils/utils';
+import Abstract from '../abstract/abstract';
 
-export default class Statistic {
+export default class Statistic extends Abstract {
   constructor(data) {
+    super();
     this.storageName = 'f19m-efk-data';
     const saveData = utils.storage.get(this.storageName, null);
     this.data = saveData;
+
+    this.data.map((cell) => {
+      const tmpCell = cell;
+      Object.keys(tmpCell).forEach((key) => {
+        if (key.match(/unGuessed|guessed|train/)) {
+          tmpCell[key] = parseInt(tmpCell[key], 10);
+        } else if (key.match(/prc/)) {
+          tmpCell[key] = parseFloat(tmpCell[key], 10);
+        }
+      });
+      return tmpCell;
+    });
+
     this.srcData = data;
     if (!saveData) this.preareData(data);
 
@@ -15,7 +30,8 @@ export default class Statistic {
       this.headerInit(headerData);
       this.generageLayout();
       document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
-      document.addEventListener('updateStat', (evt) => this.catchEvent('updateStat', evt.detail));
+      // document.addEventListener('updateStat',
+      // (evt) => this.catchEvent('updateStat', evt.detail));
     };
     req.send();
 
@@ -77,13 +93,17 @@ export default class Statistic {
     this.showSectionState(false);
     const hardArr = this.data.filter((dt) => dt.prc > 0).slice(0, 8);
 
-    const customEvt = new CustomEvent('playHardMode', {
-      detail: {
-        arr: hardArr,
-      },
-    });
+    // const customEvt = new CustomEvent('playHardMode', {
+    //   detail: {
+    //     arr: hardArr,
+    //   },
+    // });
 
-    document.dispatchEvent(customEvt);
+    // document.dispatchEvent(customEvt);
+
+    this.createCunstomEvent('playHardMode', {
+      arr: hardArr,
+    });
   }
 
   resetHandler() {
@@ -125,7 +145,8 @@ export default class Statistic {
       const row = utils.create('tr', 'table__tr', null, fragment, ['rowcode', dataElem.code]);
       this.header.forEach((headerElem) => {
         if (headerElem.isVisible) {
-          const cell = utils.create('td', 'table__td', `${dataElem[headerElem.code]}`,
+          const cell = utils.create('td', 'table__td',
+            `${headerElem.code === 'prc' ? dataElem[headerElem.code].toFixed(2) : dataElem[headerElem.code]}`,
             row, ['colcode', headerElem.code], ['rowcode', dataElem.code]);
           cells.push(cell);
         }
@@ -158,11 +179,13 @@ export default class Statistic {
 
     const comparator = (colObjA, colObjB, headerCell) => {
       const sortyedCol = headerObj.code;
+      const aVal = colObjA[sortyedCol];
+      const bVal = colObjB[sortyedCol];
 
-      if (colObjA[sortyedCol] > colObjB[sortyedCol]) {
+      if (aVal > bVal) {
         return (headerCell.isUpOrder) ? 1 : -1;
       }
-      if (colObjA[sortyedCol] < colObjB[sortyedCol]) {
+      if (aVal < bVal) {
         return (headerCell.isUpOrder) ? -1 : 1;
       }
       return 0;

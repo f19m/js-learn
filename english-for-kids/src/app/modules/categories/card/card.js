@@ -1,7 +1,10 @@
 ﻿import create from '../../../utils/create';
+import Abstract from '../../abstract/abstract';
 
-export default class Card {
+export default class Card extends Abstract {
   constructor(info) {
+    super();
+
     this.code = info.code ? info.code : info.name.toLowerCase();
     this.name = info.name;
     this.translate = info.translate ? info.translate : null;
@@ -18,8 +21,11 @@ export default class Card {
 
     this.cardRender();
 
-    document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
-    document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuItemChange', evt.detail));
+    // document.addEventListener('gameModeChange',
+    // (evt) => this.catchEvent('gameModeChange', evt.detail));
+    // document.addEventListener('menuItemChange',
+    // (evt) => this.catchEvent('menuItemChange', evt.detail));
+
     // document.addEventListener('changeMenuSelection', (evt) =>
     // this.catchEvent('menuChange', evt.detail));
     return this;
@@ -91,7 +97,7 @@ export default class Card {
     });
 
     loadImage(this.img)
-      .then((img) => {
+      .then(() => {
         this.frontSide = this.createCardSide(true);
         this.backSide = this.createCardSide(false);
       });
@@ -103,13 +109,17 @@ export default class Card {
   }
 
   cardClickHandler() {
-    const customEvt = new CustomEvent('cardClickEvent', {
-      detail: {
-        item: this,
-      },
-    });
+    // const customEvt = new CustomEvent('cardClickEvent', {
+    //   detail: {
+    //     item: this,
+    //   },
+    // });
 
-    document.dispatchEvent(customEvt);
+    // document.dispatchEvent(customEvt);
+
+    this.createCunstomEvent('cardClickEvent', {
+      item: this,
+    });
   }
 
   gameModeChange(isTrainMode) {

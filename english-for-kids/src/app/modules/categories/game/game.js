@@ -1,9 +1,12 @@
 ﻿import PopUp from '../../popup/popup';
 import create from '../../../utils/create';
 import gameData from '../../../utils/var';
+import Abstract from '../../abstract/abstract';
 
-export default class Card {
+export default class Card extends Abstract {
   constructor(parentElem, data) {
+    super();
+
     this.isPlayMode = false;
     this.isGameStarted = false;
 
@@ -21,9 +24,11 @@ export default class Card {
     this.sound.win = create('audio', 'sound-right', null, null, ['src', `${this.data.winSound}`]);
     this.sound.loose = create('audio', 'sound-right', null, null, ['src', `${this.data.looseSound}`]);
 
-    document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
+    // document.addEventListener('gameModeChange',
+    // (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
-    document.addEventListener('cardGuesing', (evt) => this.catchEvent('cardGuesing', evt.detail));
+    // document.addEventListener('cardGuesing',
+    // (evt) => this.catchEvent('cardGuesing', evt.detail));
     return this;
   }
 
@@ -89,14 +94,17 @@ export default class Card {
     }
     this.result.arr.push(starObj);
 
-    // to-do: добавить инфу по статистике
-    const customEvt = new CustomEvent('updateStat', {
-      detail: {
-        card: card.getStatObj(false, isGuessed),
-      },
-    });
+    // const customEvt = new CustomEvent('updateStat', {
+    //   detail: {
+    //     card: card.getStatObj(false, isGuessed),
+    //   },
+    // });
 
-    document.dispatchEvent(customEvt);
+    // document.dispatchEvent(customEvt);
+
+    this.createCunstomEvent('updateStat', {
+      card: card.getStatObj(false, isGuessed),
+    });
   }
 
   cardNotGuessed(card) {
@@ -130,13 +138,17 @@ export default class Card {
     this.repeatBtnInit();
     this.result.elem.classList.remove('result-hide');
 
-    const customEvt = new CustomEvent('newGameBefore', {
-      detail: {
-        isGameStarted: true,
-      },
-    });
+    // const customEvt = new CustomEvent('newGameBefore', {
+    //   detail: {
+    //     isGameStarted: true,
+    //   },
+    // });
 
-    document.dispatchEvent(customEvt);
+    // document.dispatchEvent(customEvt);
+
+    this.createCunstomEvent('newGameBefore', {
+      isGameStarted: true,
+    });
   }
 
   destroy() {
@@ -185,13 +197,17 @@ export default class Card {
       this.isPlayMode = false;
 
       this.destroy();
-      const customEvt = new CustomEvent('breakGame', {
-        detail: {
-          isGameStarted: false,
-        },
-      });
+      // const customEvt = new CustomEvent('breakGame', {
+      //   detail: {
+      //     isGameStarted: false,
+      //   },
+      // });
 
-      document.dispatchEvent(customEvt);
+      // document.dispatchEvent(customEvt);
+
+      this.createCunstomEvent('breakGame', {
+        isGameStarted: false,
+      });
     } else if (this.isPlayMode && !this.playButton) {
       this.playBtnInit();
     }
@@ -215,13 +231,16 @@ export default class Card {
       this.sound.loose.play();
     }
 
-    const customEvt = new CustomEvent('gameOver', {
-      detail: {
-        isGameStarted: false,
-      },
-    });
+    // const customEvt = new CustomEvent('gameOver', {
+    //   detail: {
+    //     isGameStarted: false,
+    //   },
+    // });
+    // setTimeout(() => document.dispatchEvent(customEvt), 6000);
 
-    setTimeout(() => document.dispatchEvent(customEvt), 6000);
+    this.createCunstomEvent('gameOver', {
+      isGameStarted: false,
+    }, 6000);
   }
 
   catchEvent(eventName, detail) {

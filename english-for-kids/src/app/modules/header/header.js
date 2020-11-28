@@ -1,7 +1,10 @@
 ﻿import create from '../../utils/create';
+import Abstract from '../abstract/abstract';
 
-export default class Header {
+export default class Header extends Abstract {
   constructor(data) {
+    super();
+
     const header = create('header', 'header', null, null);
 
     const nav = create('nav', 'nav header__nav', null, header);
@@ -33,9 +36,10 @@ export default class Header {
     this.menuItemSelect(this.menu.items[0].code);
 
     document.body.prepend(header);
+
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
-    document.addEventListener('breakGame', (evt) => this.catchEvent('breakGame', evt.detail));
-    document.addEventListener('gameOver', (evt) => this.catchEvent('gameOver', evt.detail));
+    // document.addEventListener('breakGame', (evt) => this.catchEvent('breakGame', evt.detail));
+    // document.addEventListener('gameOver', (evt) => this.catchEvent('gameOver', evt.detail));
 
     return this;
   }
@@ -108,15 +112,21 @@ export default class Header {
     obj.link.classList.add('item__link-active');
 
     if (isFromMenu) {
-      const customEvt = new CustomEvent('menuItemChange', {
-        detail: {
-          item: obj,
-          isFromMenu: false,
-          isTrain: this.switch.isTrain,
-        },
-      });
+      // const customEvt = new CustomEvent('menuItemChange', {
+      //   detail: {
+      //     item: obj,
+      //     isFromMenu: false,
+      //     isTrain: this.switch.isTrain,
+      //   },
+      // });
 
-      document.dispatchEvent(customEvt);
+      // document.dispatchEvent(customEvt);
+
+      this.createCunstomEvent('menuItemChange', {
+        item: obj,
+        isFromMenu: false,
+        isTrain: this.switch.isTrain,
+      });
     }
 
     this.switchGameModeHanlder(this.switch.isTrain);
@@ -154,13 +164,17 @@ export default class Header {
       this.switch.train.classList.toggle('switch-off');
       this.switch.play.classList.toggle('switch-off');
     }
-    const customEvt = new CustomEvent('gameModeChange', {
-      detail: {
-        isTrain: this.switch.isTrain,
-      },
-    });
+    // const customEvt = new CustomEvent('gameModeChange', {
+    //   detail: {
+    //     isTrain: this.switch.isTrain,
+    //   },
+    // });
 
-    document.dispatchEvent(customEvt);
+    // document.dispatchEvent(customEvt);
+
+    this.createCunstomEvent('gameModeChange', {
+      isTrain: this.switch.isTrain,
+    });
   }
 
   switchInit(parent) {

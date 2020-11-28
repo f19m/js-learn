@@ -1,9 +1,12 @@
 ﻿import Card from './card/card';
 import Game from './game/game';
 import create from '../../utils/create';
+import Abstract from '../abstract/abstract';
 
-export default class Categories {
+export default class Categories extends Abstract {
   constructor(data) {
+    super();
+
     this.isPlayMode = false;
     this.isGameStarted = false;
 
@@ -27,10 +30,14 @@ export default class Categories {
     document.body.appendChild(this.mainElem);
 
     document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
-    document.addEventListener('cardClickEvent', (evt) => this.catchEvent('cardClickEvent', evt.detail));
-    document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
-    document.addEventListener('newGameBefore', (evt) => this.catchEvent('newGameBefore', evt.detail));
-    document.addEventListener('playHardMode', (evt) => this.catchEvent('playHardMode', evt.detail));
+    // document.addEventListener('cardClickEvent',
+    // (evt) => this.catchEvent('cardClickEvent', evt.detail));
+    // document.addEventListener('gameModeChange',
+    // (evt) => this.catchEvent('gameModeChange', evt.detail));
+    // document.addEventListener('newGameBefore',
+    // (evt) => this.catchEvent('newGameBefore', evt.detail));
+    // document.addEventListener('playHardMode',
+    // (evt) => this.catchEvent('playHardMode', evt.detail));
 
     return this;
   }
@@ -131,19 +138,26 @@ export default class Categories {
 
       document.dispatchEvent(customEvt);
     } else if (!this.isGameStarted && !this.isPlayMode) {
-      const customEvt = new CustomEvent('updateStat', {
-        detail: {
-          card: item.getStatObj(true),
-        },
+      // const customEvt = new CustomEvent('updateStat', {
+      //   detail: {
+      //     card: item.getStatObj(true),
+      //   },
+      // });
+      // document.dispatchEvent(customEvt);
+
+      this.createCunstomEvent('updateStat', {
+        card: item.getStatObj(true),
       });
-      document.dispatchEvent(customEvt);
     } else if (this.isGameStarted && this.isPlayMode && item.isActive) {
-      const customEvt = new CustomEvent('cardGuesing', {
-        detail: {
-          card: item,
-        },
+      // const customEvt = new CustomEvent('cardGuesing', {
+      //   detail: {
+      //     card: item,
+      //   },
+      // });
+      // document.dispatchEvent(customEvt);
+      this.createCunstomEvent('cardGuesing', {
+        card: item,
       });
-      document.dispatchEvent(customEvt);
     }
   }
 
