@@ -70,7 +70,7 @@ export default class Card {
     }
   }
 
-  addStar(isGuessed) {
+  addStar(isGuessed, card) {
     const starObj = {};
     starObj.isGuessed = isGuessed;
 
@@ -92,20 +92,20 @@ export default class Card {
     // to-do: добавить инфу по статистике
     const customEvt = new CustomEvent('updateStat', {
       detail: {
-        card: this.cards[0].getStatObj(false, isGuessed),
+        card: card.getStatObj(false, isGuessed),
       },
     });
 
     document.dispatchEvent(customEvt);
   }
 
-  cardNotGuessed(/* card */) {
-    this.addStar(false);
+  cardNotGuessed(card) {
+    this.addStar(false, card);
     this.sound.wrong.play();
   }
 
   cardGuessed(card) {
-    this.addStar(true);
+    this.addStar(true, card);
     this.cards.shift();
     this.sound.right.play();
     // to-do: доделать завершение игры если length=0

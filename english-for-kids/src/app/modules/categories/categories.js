@@ -30,6 +30,7 @@ export default class Categories {
     document.addEventListener('cardClickEvent', (evt) => this.catchEvent('cardClickEvent', evt.detail));
     document.addEventListener('gameModeChange', (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('newGameBefore', (evt) => this.catchEvent('newGameBefore', evt.detail));
+    document.addEventListener('playHardMode', (evt) => this.catchEvent('playHardMode', evt.detail));
 
     return this;
   }
@@ -78,23 +79,43 @@ export default class Categories {
     this.content.appendChild(fragmant);
   }
 
+  showSectionState(isShow) {
+    if (isShow) {
+      this.mainElem.classList.remove('section-inactive');
+    } else {
+      this.mainElem.classList.add('section-inactive');
+    }
+  }
+
   cardClickHadle(item, isFromMenu) {
     if (item.code === 'statistic') {
-      this.mainElem.classList.add('section-inactive');
+      this.showSectionState(false);
       return;
     }
-    this.mainElem.classList.remove('section-inactive');
+    this.showSectionState(true);
     if (isFromMenu || this.mainPage.isCurrent) {
       // если мы были на главной станице
       this.isGameStarted = false;
-
-      const newCat = this.pages.find((pg) => pg.code === item.code);
 
       this.pages.forEach((pg) => {
         const page = pg;
         page.isCurrent = false;
       });
-      newCat.isCurrent = true;
+
+      let newCat;
+      if (item.code === 'hardmode') {
+        const words = [];
+        this.pages.forEach((pg) => {
+          pg.words.forEach((wrd) => {
+            if (item.arr.findIndex((hrd) => hrd.word === wrd.name) >= 0) { words.push(wrd); }
+          });
+        });
+
+        newCat = { name: 'hardGame', words };
+      } else {
+        newCat = this.pages.find((pg) => pg.code === item.code);
+        newCat.isCurrent = true;
+      }
 
       this.mainElem.dataset.isMainPage = this.mainPage.isCurrent ? 'true' : 'false';
       this.cardsInit(newCat.words);
@@ -112,7 +133,7 @@ export default class Categories {
     } else if (!this.isGameStarted && !this.isPlayMode) {
       const customEvt = new CustomEvent('updateStat', {
         detail: {
-          card: item.getStatObj(false),
+          card: item.getStatObj(true),
         },
       });
       document.dispatchEvent(customEvt);
@@ -144,5 +165,6 @@ export default class Categories {
     if (eventName.match(/cardClickEvent/)) this.cardClickHadle(detail.item, false);
     if (eventName.match(/gameModeChange/)) this.gameModeChange(detail.isTrain);
     if (eventName.match(/newGameBefore/)) this.newGameBefore();
+    if (eventName.match(/playHardMode/)) this.cardClickHadle({ code: 'hardmode', arr: detail.arr });
   }
 }

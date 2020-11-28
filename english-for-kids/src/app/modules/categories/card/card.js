@@ -118,6 +118,15 @@ export default class Card {
     res.name = this.name;
     res.code = this.code;
     res.translate = this.translate;
+    res.poprValue = 1;
+
+    if (isTrain === true) {
+      res.propName = 'train';
+    } else {
+      if (isGuessed === true) res.propName = 'guessed';
+      if (isGuessed === false) res.propName = 'unGuessed';
+    }
+
     if (isTrain !== undefined) res.isTrain = isTrain;
     if (isGuessed !== undefined) res.isGuessed = isGuessed;
 

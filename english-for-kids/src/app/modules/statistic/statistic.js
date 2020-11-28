@@ -2,8 +2,10 @@
 
 export default class Statistic {
   constructor(data) {
-    const saveData = utils.storage.get('f19m-efk-data', null);
+    this.storageName = 'f19m-efk-data';
+    const saveData = utils.storage.get(this.storageName, null);
     this.data = saveData;
+    this.srcData = data;
     if (!saveData) this.preareData(data);
 
     const req = new XMLHttpRequest();
@@ -13,6 +15,7 @@ export default class Statistic {
       this.headerInit(headerData);
       this.generageLayout();
       document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
+      document.addEventListener('updateStat', (evt) => this.catchEvent('updateStat', evt.detail));
     };
     req.send();
 
@@ -54,16 +57,40 @@ export default class Statistic {
 
   generageLayout() {
     this.cells = [];
+    this.rows = [];
 
     this.mainElem = utils.create('section', 'stat section-inactive', null, null);
 
     const header = utils.create('div', 'stat__header', null, this.mainElem);
     this.repeatBtn = utils.create('div', 'stat__repeat stat__btn', 'Repeat difficult words', header);
+    this.repeatBtn.addEventListener('click', () => { this.repeatHandler(); });
+
     this.resetBtn = utils.create('div', 'stat__reset stat__btn', 'Reset', header);
+    this.resetBtn.addEventListener('click', () => { this.resetHandler(); });
 
     this.generageTableLayout();
 
     document.body.appendChild(this.mainElem);
+  }
+
+  repeatHandler() {
+    this.showSectionState(false);
+    const hardArr = this.data.filter((dt) => dt.prc > 0).slice(0, 8);
+
+    const customEvt = new CustomEvent('playHardMode', {
+      detail: {
+        arr: hardArr,
+      },
+    });
+
+    document.dispatchEvent(customEvt);
+  }
+
+  resetHandler() {
+    utils.storage.del(this.storageName);
+    this.preareData(this.srcData);
+    this.updateTableCells();
+    utils.storage.set(this.storageName, this.data);
   }
 
   generageTableLayout() {
@@ -92,19 +119,24 @@ export default class Statistic {
 
   updateTableCells() {
     const cells = [];
+    const rows = [];
     const fragment = document.createDocumentFragment();
     this.data.forEach((dataElem) => {
       const row = utils.create('tr', 'table__tr', null, fragment, ['rowcode', dataElem.code]);
       this.header.forEach((headerElem) => {
         if (headerElem.isVisible) {
-          const cell = utils.create('td', 'table__td', `${dataElem[headerElem.code]}`, row, ['colcode', headerElem.code]);
+          const cell = utils.create('td', 'table__td', `${dataElem[headerElem.code]}`,
+            row, ['colcode', headerElem.code], ['rowcode', dataElem.code]);
           cells.push(cell);
         }
       });
+      rows.push(row);
     });
 
     this.cells.map((el) => el.remove());
+    this.rows.map((el) => el.remove());
     this.cells = [...cells];
+    this.rows = [...rows];
     this.table.appendChild(fragment);
   }
 
@@ -133,7 +165,6 @@ export default class Statistic {
       if (colObjA[sortyedCol] < colObjB[sortyedCol]) {
         return (headerCell.isUpOrder) ? -1 : 1;
       }
-      // a должно быть равным b
       return 0;
     };
 
@@ -144,13 +175,45 @@ export default class Statistic {
 
   menuChange(item) {
     if (item.code === 'statistic') {
-      this.mainElem.classList.remove('section-inactive');
+      this.showSectionState(true);
       return;
     }
-    this.mainElem.classList.add('section-inactive');
+    this.showSectionState(false);
+  }
+
+  updateStat(card) {
+    const dataObj = this.data.find((word) => word.code === card.code);
+    dataObj[card.propName] += card.poprValue;
+
+    const cell = this.cells.find((cl) => (cl.dataset.colcode === card.propName
+      && cl.dataset.rowcode === card.code));
+    cell.innerHTML = dataObj[card.propName];
+
+    if (card.propName.match(/guessed|unGuessed/)) {
+      const propPrc = 'prc';
+      const cellPrc = this.cells.find((cl) => cl.dataset.colcode === propPrc
+        && cl.dataset.rowcode === card.code);
+
+      const allClicks = dataObj.guessed + dataObj.unGuessed;
+      if (allClicks) {
+        dataObj[propPrc] = ((dataObj.unGuessed / (allClicks)) * 100).toFixed(2);
+        cellPrc.innerHTML = dataObj[propPrc];
+      }
+    }
+
+    utils.storage.set(this.storageName, this.data);
+  }
+
+  showSectionState(isShow) {
+    if (isShow) {
+      this.mainElem.classList.remove('section-inactive');
+    } else {
+      this.mainElem.classList.add('section-inactive');
+    }
   }
 
   catchEvent(eventName, detail) {
     if (eventName.match(/menuChange/)) this.menuChange(detail.item);
+    if (eventName.match(/updateStat/)) this.updateStat(detail.card);
   }
 }

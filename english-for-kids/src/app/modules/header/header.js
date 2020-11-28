@@ -83,6 +83,7 @@ export default class Header {
   }
 
   menuItemSelect(menuItemName, isFromMenu = true) {
+    if (!menuItemName) return;
     const obj = this.menu.items.find((elem) => elem.code === menuItemName);
     if (obj.isActive) return;
 

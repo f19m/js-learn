@@ -5,23 +5,51 @@
 .stat
     +main-block
     +flex-direction-algin-justify(column, space-between, inherit)
+    @media screen and ( max-width: 570px )
+        max-width: calc(100vw - 2rem)
     &__header
         +flex-direction-algin-justify(row, center, end)
+        transition: 0.4s ease-in-out
+        margin-top: 2rem
+        @media screen and ( max-width: 570px )
+            +flex-direction-algin-justify(column, flex-end, space-between)
+    &__wrapper
+        overflow: auto
     &__table
         width: 100%
+    &__btn
+        +title-button-basic
+        padding: 0 2.5rem
+        height: 4rem
+        border-radius: 2.5rem
+        +flex-direction-algin-justify(column, center, center)
+        background-color: $happy-color-thwo
+        cursor: pointer
+        box-shadow: 0 0.4rem 0.4rem $happy-color-y-c7
+        transition: 0.4s ease-in-out
+        &:hover
+            box-shadow: 0 0.8rem 0.8rem $happy-color-y-c7
+    &__btn:first-child
+        margin-right: 1rem
+        @media screen and ( max-width: 570px )
+            margin-right: 0rem
+            margin-bottom: 1rem
+        
 
 
 .table
     border-spacing: 0
     color: $color-light-xl
+    text-shadow: 1px 1px 1px $color-dark-3xl
     &__caption
         +h3
         color: $color-light-xl
         text-shadow: 0 0.4rem 0.4rem $happy-color-dark
+        margin-bottom: 1rem
     &__tr
-        background-color: #FFBC29 
+        background-color: $happy-color-y 
     &__tr:nth-child(2n + 1)
-        background-color: #7033FF 
+        background-color: $happy-color-thwo
     &__th
         padding-left: 2rem
         text-align: start
