@@ -30,15 +30,6 @@ export default class Categories extends Abstract {
     document.body.appendChild(this.mainElem);
 
     document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
-    // document.addEventListener('cardClickEvent',
-    // (evt) => this.catchEvent('cardClickEvent', evt.detail));
-    // document.addEventListener('gameModeChange',
-    // (evt) => this.catchEvent('gameModeChange', evt.detail));
-    // document.addEventListener('newGameBefore',
-    // (evt) => this.catchEvent('newGameBefore', evt.detail));
-    // document.addEventListener('playHardMode',
-    // (evt) => this.catchEvent('playHardMode', evt.detail));
-
     return this;
   }
 
@@ -126,7 +117,6 @@ export default class Categories extends Abstract {
 
       this.mainElem.dataset.isMainPage = this.mainPage.isCurrent ? 'true' : 'false';
       this.cardsInit(newCat.words);
-      // this.game.setCards(this.cards);
 
       const customEvt = new CustomEvent('changeMenuSelection', {
         detail: {
@@ -138,23 +128,10 @@ export default class Categories extends Abstract {
 
       document.dispatchEvent(customEvt);
     } else if (!this.isGameStarted && !this.isPlayMode) {
-      // const customEvt = new CustomEvent('updateStat', {
-      //   detail: {
-      //     card: item.getStatObj(true),
-      //   },
-      // });
-      // document.dispatchEvent(customEvt);
-
       this.createCunstomEvent('updateStat', {
         card: item.getStatObj(true),
       });
     } else if (this.isGameStarted && this.isPlayMode && item.isActive) {
-      // const customEvt = new CustomEvent('cardGuesing', {
-      //   detail: {
-      //     card: item,
-      //   },
-      // });
-      // document.dispatchEvent(customEvt);
       this.createCunstomEvent('cardGuesing', {
         card: item,
       });

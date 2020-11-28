@@ -30,8 +30,6 @@ export default class Statistic extends Abstract {
       this.headerInit(headerData);
       this.generageLayout();
       document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
-      // document.addEventListener('updateStat',
-      // (evt) => this.catchEvent('updateStat', evt.detail));
     };
     req.send();
 
@@ -92,14 +90,6 @@ export default class Statistic extends Abstract {
   repeatHandler() {
     this.showSectionState(false);
     const hardArr = this.data.filter((dt) => dt.prc > 0).slice(0, 8);
-
-    // const customEvt = new CustomEvent('playHardMode', {
-    //   detail: {
-    //     arr: hardArr,
-    //   },
-    // });
-
-    // document.dispatchEvent(customEvt);
 
     this.createCunstomEvent('playHardMode', {
       arr: hardArr,

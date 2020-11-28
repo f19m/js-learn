@@ -21,13 +21,6 @@ export default class Card extends Abstract {
 
     this.cardRender();
 
-    // document.addEventListener('gameModeChange',
-    // (evt) => this.catchEvent('gameModeChange', evt.detail));
-    // document.addEventListener('menuItemChange',
-    // (evt) => this.catchEvent('menuItemChange', evt.detail));
-
-    // document.addEventListener('changeMenuSelection', (evt) =>
-    // this.catchEvent('menuChange', evt.detail));
     return this;
   }
 
@@ -109,14 +102,6 @@ export default class Card extends Abstract {
   }
 
   cardClickHandler() {
-    // const customEvt = new CustomEvent('cardClickEvent', {
-    //   detail: {
-    //     item: this,
-    //   },
-    // });
-
-    // document.dispatchEvent(customEvt);
-
     this.createCunstomEvent('cardClickEvent', {
       item: this,
     });

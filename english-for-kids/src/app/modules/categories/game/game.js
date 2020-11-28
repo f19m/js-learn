@@ -24,11 +24,7 @@ export default class Card extends Abstract {
     this.sound.win = create('audio', 'sound-right', null, null, ['src', `${this.data.winSound}`]);
     this.sound.loose = create('audio', 'sound-right', null, null, ['src', `${this.data.looseSound}`]);
 
-    // document.addEventListener('gameModeChange',
-    // (evt) => this.catchEvent('gameModeChange', evt.detail));
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
-    // document.addEventListener('cardGuesing',
-    // (evt) => this.catchEvent('cardGuesing', evt.detail));
     return this;
   }
 
@@ -94,14 +90,6 @@ export default class Card extends Abstract {
     }
     this.result.arr.push(starObj);
 
-    // const customEvt = new CustomEvent('updateStat', {
-    //   detail: {
-    //     card: card.getStatObj(false, isGuessed),
-    //   },
-    // });
-
-    // document.dispatchEvent(customEvt);
-
     this.createCunstomEvent('updateStat', {
       card: card.getStatObj(false, isGuessed),
     });
@@ -130,21 +118,10 @@ export default class Card extends Abstract {
   }
 
   startGame() {
-    // this.showResult();
-    // return;
-
     this.isGameStarted = true;
     this.deleteButton('playButton');
     this.repeatBtnInit();
     this.result.elem.classList.remove('result-hide');
-
-    // const customEvt = new CustomEvent('newGameBefore', {
-    //   detail: {
-    //     isGameStarted: true,
-    //   },
-    // });
-
-    // document.dispatchEvent(customEvt);
 
     this.createCunstomEvent('newGameBefore', {
       isGameStarted: true,
@@ -197,13 +174,6 @@ export default class Card extends Abstract {
       this.isPlayMode = false;
 
       this.destroy();
-      // const customEvt = new CustomEvent('breakGame', {
-      //   detail: {
-      //     isGameStarted: false,
-      //   },
-      // });
-
-      // document.dispatchEvent(customEvt);
 
       this.createCunstomEvent('breakGame', {
         isGameStarted: false,
@@ -231,16 +201,9 @@ export default class Card extends Abstract {
       this.sound.loose.play();
     }
 
-    // const customEvt = new CustomEvent('gameOver', {
-    //   detail: {
-    //     isGameStarted: false,
-    //   },
-    // });
-    // setTimeout(() => document.dispatchEvent(customEvt), 6000);
-
     this.createCunstomEvent('gameOver', {
       isGameStarted: false,
-    }, 6000);
+    }, 5500);
   }
 
   catchEvent(eventName, detail) {

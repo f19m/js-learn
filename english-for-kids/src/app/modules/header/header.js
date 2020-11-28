@@ -38,8 +38,6 @@ export default class Header extends Abstract {
     document.body.prepend(header);
 
     document.addEventListener('changeMenuSelection', (evt) => this.catchEvent('menuChange', evt.detail));
-    // document.addEventListener('breakGame', (evt) => this.catchEvent('breakGame', evt.detail));
-    // document.addEventListener('gameOver', (evt) => this.catchEvent('gameOver', evt.detail));
 
     return this;
   }
@@ -112,16 +110,6 @@ export default class Header extends Abstract {
     obj.link.classList.add('item__link-active');
 
     if (isFromMenu) {
-      // const customEvt = new CustomEvent('menuItemChange', {
-      //   detail: {
-      //     item: obj,
-      //     isFromMenu: false,
-      //     isTrain: this.switch.isTrain,
-      //   },
-      // });
-
-      // document.dispatchEvent(customEvt);
-
       this.createCunstomEvent('menuItemChange', {
         item: obj,
         isFromMenu: false,
@@ -140,7 +128,6 @@ export default class Header extends Abstract {
       menu.classList.toggle('nav__list-visible');
       const overlay = document.querySelector('.overlay');
       overlay.classList.toggle('overlay-active');
-      // document.removeEventListener('click',burgherClickHandler);
     };
 
     this.toggle.addEventListener('click', () => {
@@ -164,13 +151,6 @@ export default class Header extends Abstract {
       this.switch.train.classList.toggle('switch-off');
       this.switch.play.classList.toggle('switch-off');
     }
-    // const customEvt = new CustomEvent('gameModeChange', {
-    //   detail: {
-    //     isTrain: this.switch.isTrain,
-    //   },
-    // });
-
-    // document.dispatchEvent(customEvt);
 
     this.createCunstomEvent('gameModeChange', {
       isTrain: this.switch.isTrain,
