@@ -1,4 +1,5 @@
 node_modules
 webpack.config.js
 dst
+config/webpack.config.js
 .eslintrc.js
