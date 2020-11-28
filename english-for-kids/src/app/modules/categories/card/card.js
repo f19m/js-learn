@@ -29,7 +29,7 @@ export default class Card {
     if (this.isTrain && this.sound && this.isFront) this.sound.play();
   }
 
-  createCardSize(isFrontSide) {
+  createCardSide(isFrontSide) {
     const title = create('div', 'card__title', isFrontSide ? this.name : this.translate, null);
 
     const cardFront = create('div', isFrontSide ? 'card__front' : 'card__back',
@@ -83,8 +83,18 @@ export default class Card {
       this.cardRotate.addEventListener('click', rotateCardHandler);
     }
 
-    this.frontSide = this.createCardSize(true);
-    this.backSide = this.createCardSize(false);
+    const loadImage = (url) => new Promise((resolve, reject) => {
+      const img = new Image();
+      img.addEventListener('load', () => resolve(img));
+      img.addEventListener('error', (err) => reject(err));
+      img.src = url;
+    });
+
+    loadImage(this.img)
+      .then((img) => {
+        this.frontSide = this.createCardSide(true);
+        this.backSide = this.createCardSide(false);
+      });
 
     this.elem.addEventListener('click', () => {
       this.play();
