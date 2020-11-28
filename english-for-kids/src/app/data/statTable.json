@@ -37,7 +37,7 @@
         "isVisible": "true"
     },
     {
-        "name": "% Guessed",
+        "name": "% Mistake",
         "code": "prc",
         "isVisible": "true"
     }
