@@ -8,6 +8,8 @@ export default class Statistic extends Abstract {
     const saveData = utils.storage.get(this.storageName, null);
     this.data = saveData;
 
+    if (!saveData) this.preareData(data);
+
     this.data.map((cell) => {
       const tmpCell = cell;
       Object.keys(tmpCell).forEach((key) => {
@@ -21,7 +23,6 @@ export default class Statistic extends Abstract {
     });
 
     this.srcData = data;
-    if (!saveData) this.preareData(data);
 
     const req = new XMLHttpRequest();
     req.open('GET', './data/statTable.json');
