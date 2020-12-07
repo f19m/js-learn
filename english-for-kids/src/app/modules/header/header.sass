@@ -11,10 +11,12 @@ $line-toggle-width: 3rem
     +main-block
     height: 10rem
     padding-top: 4rem
+    @media screen and ( max-width: 1461px )
+        padding: 4rem 3rem 0 3rem
     @media screen and ( max-width: 570px )
         +flex-direction-algin-justify (column, baseline, center)   
         height: 12rem
-        padding-top: 0rem
+        padding-top: 2rem
     &__title
         +h2
         color: $color-light-s
@@ -31,15 +33,15 @@ $line-toggle-width: 3rem
         @media screen and ( max-width: 400px )
             font-weight: bold
             font-size: 2.5rem
-             margin-top: -1rem
+            margin-top: -1rem
         
 
 
 .nav
     &__toggle
-        left: 2rem
+        //left: 2rem
         @media screen and ( max-width: 570px )
-            top: 2rem
+            top: 3rem
     &__list 
         +flex-direction-algin-justify(column,center,space-between)
         position: absolute
@@ -86,6 +88,11 @@ $line-toggle-width: 3rem
     height: $line-toggle-width 
     width: $line-toggle-width
     cursor: pointer
+    animation: 0.4s linear
+    &-close
+        animation-name: toggleMaxClose
+    @media screen and ( max-width: 1400px )
+        animation-name: toggleMiniClose
     &__lines, &__lines::before, &__lines::after
         position: absolute
         width: $line-toggle-width
@@ -99,12 +106,11 @@ $line-toggle-width: 3rem
     &__lines
         background-color: $happy-color-thwo
         border-radius: 0.4rem
-    &__lines
-        top: 50%
-        @media screen and ( max-width: 1400px )
-            left: 2rem
-        @media screen and ( max-width: 570px )
-            left: 1rem
+    //&__lines
+        // @media screen and ( max-width: 1400px )
+        //     left: 2rem
+        // @media screen and ( max-width: 570px )
+        //     left: 1rem
     &__lines:before
         content: ''
         top: -1.2rem
@@ -113,9 +119,14 @@ $line-toggle-width: 3rem
         top: 1.2rem
     &-open
         left: calc( ((100vw - 140rem)/-2) + 26rem)
+        top: 0
+        animation: 0.4s linear
+        animation-name: toggleMaxOpen
         @media screen and ( max-width: 1400px )
-            left: 26rem
-        //@media screen and ( max-width: 570px )       
+            left: 21rem
+            animation-name: toggleMiniOpen 
+        @media screen and ( max-width: 570px )  
+            top: 2rem
     &-open &__lines, &-open:hover &__lines
         background-color: transparent
     &-open &__lines::before
@@ -124,6 +135,34 @@ $line-toggle-width: 3rem
     &-open &__lines::after
         top: 0
         transform: rotate(-45deg)
+
+
+@keyframes toggleMaxOpen
+    from
+        left: 0
+    to
+        left: calc( ((100vw - 140rem)/-2) + 26rem)
+
+@keyframes toggleMiniOpen
+    from
+        left: 0
+    to
+        left: 21rem
+
+@keyframes toggleMiniClose
+    from
+        left: 21rem
+    to
+        left: 0
+        
+
+@keyframes toggleMaxClose
+    from
+        left: calc( ((100vw - 140rem)/-2) + 26rem)
+    to
+        left: 0
+        
+
 
 .overlay
     display: none

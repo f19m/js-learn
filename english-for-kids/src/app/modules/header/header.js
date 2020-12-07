@@ -125,6 +125,13 @@ export default class Header extends Abstract {
     this.toggle = document.querySelector('.toggle');
     const toggleClickHandler = () => {
       this.toggle.classList.toggle('toggle-open');
+
+      if (this.toggle.classList.contains('toggle-open')) {
+        this.toggle.classList.remove('toggle-close');
+      } else {
+        this.toggle.classList.add('toggle-close');
+      }
+
       const menu = document.querySelector('.nav__list');
       menu.classList.toggle('nav__list-visible');
       const overlay = document.querySelector('.overlay');
