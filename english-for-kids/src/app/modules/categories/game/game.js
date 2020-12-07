@@ -118,6 +118,9 @@ export default class Card extends Abstract {
   }
 
   startGame() {
+    // if (this.cards.length === 0) {
+    //   return;
+    // }
     this.isGameStarted = true;
     this.deleteButton('playButton');
     this.repeatBtnInit();
@@ -146,6 +149,14 @@ export default class Card extends Abstract {
   }
 
   setCards(cards) {
+    if (cards.length === 0) {
+      this.destroy();
+      this.createCunstomEvent('breakGame', {
+        isGameStarted: false,
+      });
+      return;
+    }
+
     const newCards = cards.slice();
     this.cards.length = 0;
     const { length } = newCards;

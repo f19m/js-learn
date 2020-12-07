@@ -173,13 +173,10 @@ export default class Statistic extends Abstract {
       const aVal = colObjA[sortyedCol];
       const bVal = colObjB[sortyedCol];
 
-      if (aVal > bVal) {
-        return (headerCell.isUpOrder) ? 1 : -1;
-      }
-      if (aVal < bVal) {
-        return (headerCell.isUpOrder) ? -1 : 1;
-      }
-      return 0;
+      const collator = new Intl.Collator();
+      const res = collator.compare(aVal, bVal);
+
+      return headerCell.isUpOrder ? -res : res;
     };
 
     headerObj.elem.dataset.order = headerObj.isUpOrder ? 'up' : 'down';

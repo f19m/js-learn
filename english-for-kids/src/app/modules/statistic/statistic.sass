@@ -6,7 +6,7 @@
     +main-block
     +flex-direction-algin-justify(column, space-between, inherit)
     @media screen and ( max-width: 1461px )
-        padding: 0 3rem
+        padding: 0 3rem 3rem
     @media screen and ( max-width: 570px )
         max-width: calc(100vw - 2rem)
     &__header
@@ -68,7 +68,7 @@
         padding-left: 2rem
     &__order
         transition: 0.4s ease-in-out
-        display: none
+        opacity: 0
 
 
 .th-wrapper
@@ -78,7 +78,7 @@
 
 .table__th[data-order="up"], .table__th[data-order="down"]
     .table__order
-        display: block
+        opacity: 1
 
 .table__th[data-order="down"]
     .table__order

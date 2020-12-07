@@ -75,6 +75,9 @@ export default class Categories extends Abstract {
 
     this.content.innerHTML = '';
     this.content.appendChild(fragmant);
+    if (this.cards.length === 0) {
+      create('h2', 'cards__message', 'Difficult words are missing', this.content);
+    }
   }
 
   showSectionState(isShow) {
