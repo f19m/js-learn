@@ -80,6 +80,7 @@ export default class Header extends Abstract {
       obj.elem.addEventListener('click', (evt) => {
         const menuItemName = evt.target.dataset.menuAcion;
         this.menuItemSelect(menuItemName);
+        this.navToggleHandler();
       });
     });
   }
