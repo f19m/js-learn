@@ -14,3 +14,15 @@ body
 
 .section-inactive
     display: none
+
+.footer
+    +main-block
+    +flex-algin-justify(center, space-between)
+    @media screen and ( max-width: 1401px )
+        padding: 0 3rem
+    height: 4rem
+    &__author, &__year
+        +paragraph-l
+        color: $color-light-xl
+    &__logo
+        height: 2rem

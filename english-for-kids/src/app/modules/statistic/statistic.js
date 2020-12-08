@@ -32,6 +32,8 @@ export default class Statistic extends Abstract {
       this.generageLayout();
       document.addEventListener('menuItemChange', (evt) => this.catchEvent('menuChange', evt.detail));
     };
+
+    this.mainElem = utils.create('section', 'stat section-inactive', null, document.body);
     req.send();
 
     return this;
@@ -74,8 +76,6 @@ export default class Statistic extends Abstract {
     this.cells = [];
     this.rows = [];
 
-    this.mainElem = utils.create('section', 'stat section-inactive', null, null);
-
     const header = utils.create('div', 'stat__header', null, this.mainElem);
     this.repeatBtn = utils.create('div', 'stat__repeat stat__btn', 'Repeat difficult words', header);
     this.repeatBtn.addEventListener('click', () => { this.repeatHandler(); });
@@ -84,8 +84,6 @@ export default class Statistic extends Abstract {
     this.resetBtn.addEventListener('click', () => { this.resetHandler(); });
 
     this.generageTableLayout();
-
-    document.body.appendChild(this.mainElem);
   }
 
   repeatHandler() {
