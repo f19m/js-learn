@@ -135,7 +135,7 @@ export default class Statistic extends Abstract {
       this.header.forEach((headerElem) => {
         if (headerElem.isVisible) {
           const cell = utils.create('td', 'table__td',
-            `${headerElem.code === 'prc' ? dataElem[headerElem.code].toFixed(2) : dataElem[headerElem.code]}`,
+            `${headerElem.code === 'prc' && typeof dataElem[headerElem.code] === 'number' ? dataElem[headerElem.code].toFixed(2) : dataElem[headerElem.code]}`,
             row, ['colcode', headerElem.code], ['rowcode', dataElem.code]);
           cells.push(cell);
         }
