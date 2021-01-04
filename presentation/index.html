@@ -66,7 +66,7 @@
 
 
 				<section>
-					<h2>user.js</h2>
+					<h2>AuthService.js</h2>
 						<pre>
 						<code data-trim data-noescape>
 							class AuthService {
@@ -80,7 +80,7 @@
 				</section>
 
 				<section>
-					<h2>user.js</h2>
+					<h2>AuthService.js</h2>
 						<pre>
 						<code data-trim data-noescape>			
 								/**
@@ -123,17 +123,16 @@
 						<pre>
 						<code data-trim data-noescape>
 							/**
-							* User class descripton
+							* AuthService class descripton
 							* @example
 							*   AuthService.login(req.body.email, req.body.password)
 									.then((data) => {
 											console.log('RES OK');
 											return res.status(200).json(data);
 							})
-							* @see https://github.com/f19m/rsclone-back/blob/master/src/server/models/User.js
-							* @todo add remove user function
+							* @see https://github.com/f19m/rsclone-back/blob/master/src/server/middleware/AuthService.js
+							* @todo add logout function
 							*/
-							class User {
 					</code>
 					</pre>
 				</section>
@@ -149,9 +148,10 @@
 						<code data-trim data-noescape>
 						class AuthService {
 							/**
-							* method for user authorization with token generation and user information
-							* @param {*} email
-							* @param {*} password
+							* method for user authorization
+							* @param {Object} loginData object with data for authorization
+							* @param {String} loginData.email user email
+							* @param {String} loginData.password user password
 							* @return {loginUserData{}} object with user information data
 							*/
 							static async login(email, password) {
