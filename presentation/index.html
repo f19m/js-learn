@@ -206,7 +206,29 @@
 
 
 				<section>
-					<img src="./assests/jsdoc7.jpg" alt="jsdoc7">
+					<!--img src="./assests/jsdoc7.jpg" alt="jsdoc7"-->
+					<pre     style="font-size: 0.45em;">
+						<p style="margin:0px; line-height: 1.0">./tutorials/first-guide.md</p>
+						<code data-trim data-noescape>
+							### Example first-guide
+
+							This is an example tutorial file. File will be shown on the sidebar<br>
+							in tutrials section. You can add here whatever you like. You link<br>
+							link other parts of the documentation like that {@link AuthService}
+							```javascript
+							AuthService.login(req.body.email, req.body.password)
+							```
+					</code>
+
+					<p style="margin:0px; line-height: 1.0">./jsdoc.json</p>
+					<code data-trim data-noescape>
+						{
+							"first-guide": {
+							  "title": "some external tutorial"
+							}
+						  }			
+				</code>
+					</pre>
 				</section>
 			
 				<section>
