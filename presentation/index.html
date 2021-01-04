@@ -16,8 +16,204 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h2>@use JSDoc</h2>
+					<h2>to make your code friendly</h2>
+
+				</section>
+				<section>
+					<pre>
+						<code data-trim data-noescape>
+					 		npm i -D jsdoc
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<img src="./assests/packagejson.jpg" alt="packagejson">
+					<pre>
+						<code data-trim data-noescape>
+							"scripts": {
+								"doc": "jsdoc -c jsdoc.json"
+							},
+					</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>jsdoc.json</h2>
+						<pre>
+						<code data-trim data-noescape>
+							{ "source": {
+								  "include": ["src"],
+								  "includePattern": ".js$",
+								  "excludePattern": "(node_modules/|docs)"
+								},
+								"plugins": ["plugins/markdown"],
+								"templates": {
+								  "cleverLinks": true,
+								  "monospaceLinks": true
+								},
+								"opts": {
+								  "recurse": true,
+								  "destination": "./docs/",
+								  "readme": "./readme/readme.md"
+								}}
+							
+					</code>
+					</pre>
+				</section>
+
+
+				<section>
+					<h2>user.js</h2>
+						<pre>
+						<code data-trim data-noescape>
+							class AuthService {
+								static async login({ email, password }) {
+									const userRecord = await UserModel.findOne(email);
+							
+									if (!userRecord) {
+										throw new Err('User or password incorrect', 400);
+					</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>user.js</h2>
+						<pre>
+						<code data-trim data-noescape>			
+								/**
+								* AuthService class
+								*/
+
+								class AuthService {
+								/**
+								* method for user authorization
+								* @param {Object} loginData object with data for authorization
+								* @param {String} loginData.email user email
+								* @param {String} loginData.password user password
+								*/
+								static async login({ email, password }) {
+									const userRecord = await UserModel.findOne(email);
+					</code>
+					</pre>
+				</section>
+
+
+
+				<section>
+					<pre>
+						<code data-trim data-noescape>
+					 		npm run doc
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<img src="./assests/jsdoc1.jpg" alt="jsdoc1">
+				</section>
+				<section>
+					<img src="./assests/jsdoc3.jpg" alt="jsdoc2">
+				</section>
+
+
+				<section>
+					<h2>user.js</h2>
+						<pre>
+						<code data-trim data-noescape>
+							/**
+							* User class descripton
+							* @example
+							*   AuthService.login(req.body.email, req.body.password)
+									.then((data) => {
+											console.log('RES OK');
+											return res.status(200).json(data);
+							})
+							* @see https://github.com/f19m/rsclone-back/blob/master/src/server/models/User.js
+							* @todo add remove user function
+							*/
+							class User {
+					</code>
+					</pre>
+				</section>
+
+				<section>
+					<img src="./assests/jsdoc4.jpg" alt="jsdoc3">
+				</section>
+
+
+				<section>
+					<h2>user.js</h2>
+						<pre>
+						<code data-trim data-noescape>
+						class AuthService {
+							/**
+							* method for user authorization with token generation and user information
+							* @param {*} email
+							* @param {*} password
+							* @return {loginUserData{}} object with user information data
+							*/
+							static async login(email, password) {
+					</code>
+					</pre>
+				</section>
+
+				<section>
+					<h2>user.js</h2>
+						<pre>
+						<code data-trim data-noescape>
+							/**
+							* @typedef {loginUserData} loginUserData
+							* @property {Object} data object with all info
+							* @property {Object} data.user object with user info
+							* @property {String} data.user.email user email
+							* @property {String} data.user.name user name
+							* @property {Object[]} data.user.categories array of user categories object
+							* @property {String} data.token JWT token for requests requiring authorization
+							*
+							*
+							*/
+					</code>
+					</pre>
+				</section>
+
+				<section>
+					<img src="./assests/jsdoc5.jpg" alt="jsdoc3">
+				</section>
+			
+				<section>
+					<img src="./assests/jsdoc6.jpg" alt="jsdoc3">
+				</section>
+				  
+				<section>
+					<h2>jsdoc.json</h2>
+						<pre>
+						<code data-trim data-noescape>
+						
+							"opts": {
+								"encoding": "utf8",
+								"readme": "./readme.md",
+								"destination": "docs/",
+								"recurse": true,
+								"verbose": true,
+								"tutorials": "./tutorials"
+							}
+							
+					</code>
+					</pre>
+				</section>
+
+
+				<section>
+					<img src="./assests/jsdoc7.jpg" alt="jsdoc7">
+				</section>
+			
+				<section>
+					<img src="./assests/jsdoc8.jpg" alt="jsdoc8">
+				</section>
+
+ 
 			</div>
 		</div>
 
